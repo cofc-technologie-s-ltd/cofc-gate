@@ -3,17 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>COFC GATE — Sovereign Apex Vault v10.0</title>
+<title>COFC GATE — Sovereign Apex Vault</title>
 <meta name="theme-color" content="#F6EE25">
-<meta name="description" content="COFC GATE v10.0 — Production-Ready Sovereign Multi-Currency Vault with Face Liveness, WebAuthn 2FA, DEX Swap, and Enterprise Security.">
+<meta name="description" content="COFC GATE — Sovereign Multi-Currency Vault with Face Liveness, WebAuthn 2FA, DEX Swap.">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="COFC GATE">
-
-<!-- Content Security Policy -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
   script-src 'self' 'unsafe-inline';
@@ -27,13 +25,12 @@
   object-src 'none';
   upgrade-insecure-requests;
 ">
-
 <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22COFC%20GATE%22%2C%22short_name%22%3A%22COFC%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23FFFFFF%22%2C%22theme_color%22%3A%22%23F6EE25%22%7D">
 
 <style>
 /* ============================================================
-   COFC GATE v10.0 — SOVEREIGN APEX THEME
-   Yellow (#F6EE25) + Dark Gray (#464650) — Official Brand
+   COFC GATE v10.1 — SOVEREIGN APEX
+   Yellow (#F6EE25) + Dark Gray (#464650)
    ============================================================ */
 :root {
   --brand-yellow: #F6EE25;
@@ -47,16 +44,13 @@
   --brand-light-gray: #E8E8EB;
   --brand-ghost: #F4F4F5;
   --brand-white: #FFFFFF;
-  
   --accent-green: #16A34A;
   --accent-red: #DC3545;
   --accent-blue: #2563EB;
   --accent-amber: #D97706;
   --accent-purple: #7C3AED;
-  
   --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   --font-mono: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
-  
   --shadow-xs: 0 1px 2px rgba(70,70,80,0.04);
   --shadow-sm: 0 2px 6px rgba(70,70,80,0.06);
   --shadow-md: 0 4px 16px rgba(70,70,80,0.08);
@@ -64,11 +58,8 @@
   --shadow-xl: 0 24px 64px rgba(70,70,80,0.16);
   --shadow-yellow: 0 8px 32px rgba(246,238,37,0.35);
   --shadow-yellow-lg: 0 16px 48px rgba(246,238,37,0.45);
-  
   --t-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --t-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --t-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
-  
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
@@ -78,7 +69,6 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-
 body {
   font-family: var(--font-display);
   background: var(--brand-white);
@@ -92,7 +82,7 @@ body {
     radial-gradient(circle at 90% 100%, rgba(70,70,80,0.04) 0%, transparent 40%);
 }
 
-/* ============ LOADING ============ */
+/* Loading */
 .loading-overlay {
   position: fixed; inset: 0;
   background: var(--brand-white);
@@ -143,7 +133,7 @@ body {
   min-height: 14px;
 }
 
-/* ============ HEADER ============ */
+/* Header — NO LANGUAGE SELECTOR */
 .header {
   position: sticky; top: 0; z-index: 100;
   background: rgba(255,255,255,0.95);
@@ -206,12 +196,6 @@ body {
 }
 .header-verified { width: 14px; height: 14px; color: var(--accent-blue); flex-shrink: 0; }
 
-.lang-select {
-  padding: 6px 10px; background: var(--brand-ghost);
-  border: 1px solid var(--brand-light-gray); border-radius: var(--radius-full);
-  font-family: var(--font-display); font-size: 11px; font-weight: 800;
-  color: var(--brand-dark); cursor: pointer; outline: none;
-}
 .status-indicator {
   display: flex; align-items: center; gap: 6px;
   padding: 6px 12px;
@@ -227,10 +211,9 @@ body {
 }
 @keyframes statusPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
 
-/* ============ CONTAINER ============ */
 .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
 
-/* ============ LOGIN ============ */
+/* Login — NO tap-indicator, NO language selector */
 #login-screen {
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
@@ -267,7 +250,6 @@ body {
 .login-title { font-size: 28px; font-weight: 900; color: var(--brand-dark); letter-spacing: -0.5px; margin-bottom: 8px; }
 .login-subtitle { font-size: 12px; color: var(--brand-gray); font-weight: 600; margin-bottom: 32px; }
 
-/* Face Scanner */
 .face-scanner-wrap {
   width: 320px; height: 320px;
   margin: 0 auto 24px;
@@ -433,30 +415,7 @@ body {
 .login-status.success { color: var(--accent-green); }
 .login-status.error { color: var(--accent-red); }
 
-.tap-indicator {
-  display: flex; align-items: center; justify-content: center;
-  gap: 8px;
-  margin: 0 auto 16px;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, var(--brand-yellow), var(--brand-yellow-dark));
-  color: var(--brand-dark);
-  border-radius: var(--radius-full);
-  font-size: 12px; font-weight: 900;
-  letter-spacing: 0.5px;
-  box-shadow: var(--shadow-yellow);
-  animation: tapPulse 2s ease-in-out infinite;
-  cursor: pointer;
-  max-width: 280px;
-}
-@keyframes tapPulse {
-  0%,100% { transform: scale(1); box-shadow: var(--shadow-yellow); }
-  50% { transform: scale(1.03); box-shadow: var(--shadow-yellow-lg); }
-}
-.tap-indicator-icon {
-  width: 20px; height: 20px; stroke: currentColor;
-  fill: none; stroke-width: 2.5;
-  stroke-linecap: round; stroke-linejoin: round;
-}
+/* REMOVED: tap-indicator — only the circle is clickable */
 
 .login-hint {
   font-size: 10px; color: var(--brand-gray);
@@ -474,7 +433,6 @@ body {
   font-size: 9px; font-family: var(--font-mono); font-weight: 800;
 }
 
-/* ============ BUTTONS ============ */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   width: 100%; padding: 15px 24px;
@@ -533,7 +491,6 @@ body {
 .btn.loading { pointer-events: none; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ============ PROFILE HEADER ============ */
 .profile-header {
   display: none; align-items: center; gap: 20px;
   padding: 20px 24px;
@@ -603,7 +560,6 @@ body {
 .profile-action-btn:hover { border-color: var(--brand-yellow); background: var(--brand-yellow-ghost); }
 .profile-action-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
-/* ============ STATUS BAR ============ */
 .status-bar {
   display: flex; justify-content: space-between; align-items: center;
   flex-wrap: wrap; gap: 14px;
@@ -643,7 +599,6 @@ body {
 }
 .timer-fill.warning { background: linear-gradient(90deg, var(--accent-amber), var(--accent-red)); }
 
-/* ============ TABS ============ */
 .tabs-nav {
   display: flex; gap: 4px;
   margin-bottom: 20px;
@@ -675,11 +630,9 @@ body {
 .tab-content.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ============ GRID ============ */
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
 
-/* ============ PANELS ============ */
 .panel {
   background: var(--brand-white);
   border: 1px solid var(--brand-light-gray);
@@ -713,7 +666,6 @@ body {
 .panel-action-btn:hover { background: var(--brand-yellow); border-color: var(--brand-yellow); }
 .panel-action-btn svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
-/* ============ LOGOS ============ */
 .coin-logo {
   border-radius: 50%;
   overflow: hidden;
@@ -743,7 +695,6 @@ body {
   border-radius: 50%;
 }
 
-/* ============ WALLET LIST ============ */
 .wallet-list { list-style: none; }
 .wallet-item {
   display: flex; align-items: center; gap: 12px;
@@ -799,10 +750,10 @@ body {
   font-variant-numeric: tabular-nums;
   font-family: var(--font-mono); font-size: 13px;
   color: var(--brand-dark); flex-shrink: 0;
+  direction: ltr;
 }
 .wallet-balance-usd { font-size: 10px; color: var(--brand-gray); font-weight: 700; text-align: right; margin-top: 2px; }
 
-/* ============ PRICE TICKER ============ */
 .price-ticker {
   display: flex; gap: 8px; overflow-x: auto;
   padding: 12px 0; margin-bottom: 16px;
@@ -847,12 +798,11 @@ body {
 }
 .ticker-info { display: flex; flex-direction: column; line-height: 1.2; }
 .ticker-symbol { font-size: 11px; font-weight: 900; color: var(--brand-dark); }
-.ticker-price { font-size: 12px; font-weight: 800; color: var(--brand-dark); font-family: var(--font-mono); }
+.ticker-price { font-size: 12px; font-weight: 800; color: var(--brand-dark); font-family: var(--font-mono); direction: ltr; }
 .ticker-change { font-size: 10px; font-weight: 800; }
 .ticker-change.up { color: var(--accent-green); }
 .ticker-change.down { color: var(--accent-red); }
 
-/* ============ FORMS ============ */
 .form-input, .form-select, .form-textarea {
   width: 100%;
   background: var(--brand-white);
@@ -886,7 +836,6 @@ body {
   text-transform: uppercase; margin-bottom: 8px;
 }
 
-/* ============ SEND TABS ============ */
 .send-tabs {
   display: flex; gap: 6px; margin-bottom: 16px;
   padding: 4px; background: var(--brand-ghost);
@@ -906,7 +855,6 @@ body {
 .send-tab.active { background: var(--brand-white); color: var(--brand-dark); box-shadow: var(--shadow-xs); }
 .send-tab svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
-/* ============ CURRENCY CHIPS ============ */
 .currency-selector {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
@@ -946,7 +894,6 @@ body {
 }
 .currency-chip-symbol { font-size: 10px; font-weight: 900; color: var(--brand-dark); }
 
-/* ============ SWAP ============ */
 .swap-container {
   background: linear-gradient(135deg, var(--brand-white), var(--brand-ghost));
   border: 1.5px solid var(--brand-light-gray);
@@ -1085,7 +1032,6 @@ body {
 .dex-rate { font-size: 11px; font-weight: 800; color: var(--brand-gray); font-family: var(--font-mono); direction: ltr; }
 .dex-rate.best { color: var(--accent-green); }
 
-/* ============ HISTORY ============ */
 .tx-filters {
   display: flex; gap: 8px; margin-bottom: 16px;
   flex-wrap: wrap;
@@ -1137,7 +1083,7 @@ body {
 }
 .tx-amount.out { color: var(--accent-red); }
 .tx-amount.in { color: var(--accent-green); }
-.tx-time { font-size: 10px; color: var(--brand-gray); font-family: var(--font-mono); font-weight: 600; white-space: nowrap; }
+.tx-time { font-size: 10px; color: var(--brand-gray); font-family: var(--font-mono); font-weight: 600; white-space: nowrap; direction: ltr; }
 .tx-sub {
   font-size: 11px; color: var(--brand-gray);
   font-family: var(--font-mono);
@@ -1151,7 +1097,6 @@ body {
   margin-top: 2px;
 }
 
-/* ============ SETTINGS ============ */
 .setting-row {
   display: flex; align-items: center; justify-content: space-between;
   padding: 16px; background: var(--brand-white);
@@ -1194,7 +1139,6 @@ body {
 .setting-toggle.active { background: var(--accent-green); }
 .setting-toggle.active::after { left: calc(100% - 27px); }
 
-/* ============ MODALS ============ */
 .modal {
   position: fixed; inset: 0;
   background: rgba(70,70,80,0.55);
@@ -1239,7 +1183,6 @@ body {
 }
 .modal-close:hover { background: var(--accent-red); color: white; transform: rotate(90deg); }
 
-/* ============ COIN GRID ============ */
 .coin-search { position: relative; margin-bottom: 16px; }
 .coin-search input {
   width: 100%; padding: 12px 44px 12px 16px;
@@ -1290,7 +1233,6 @@ body {
 .coin-card-name { font-size: 11px; font-weight: 900; color: var(--brand-dark); letter-spacing: 0.3px; }
 .coin-card-chain { font-size: 9px; color: var(--brand-gray); font-weight: 700; text-transform: uppercase; }
 
-/* ============ WALLET DETAILS ============ */
 .wallet-detail-header {
   display: flex; align-items: center; gap: 14px;
   padding: 16px; background: var(--brand-ghost);
@@ -1367,7 +1309,6 @@ body {
 .wallet-account-action.danger:hover { border-color: var(--accent-red); color: var(--accent-red); background: rgba(220,53,69,0.04); }
 .wallet-account-action svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
-/* ============ QR ============ */
 .qr-container {
   background: linear-gradient(180deg, var(--brand-white) 0%, var(--brand-ghost) 100%);
   padding: 22px; border-radius: var(--radius-lg);
@@ -1399,7 +1340,6 @@ body {
 }
 .qr-logo-overlay img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
 
-/* ============ SECRET ============ */
 .secret-reveal {
   padding: 14px; background: rgba(220,53,69,0.04);
   border: 1px solid rgba(220,53,69,0.2);
@@ -1415,7 +1355,6 @@ body {
   display: flex; align-items: center; gap: 6px;
 }
 
-/* ============ PHONE ============ */
 .phone-input-wrap { display: flex; gap: 8px; margin-bottom: 12px; }
 .country-select {
   width: 130px; flex-shrink: 0;
@@ -1445,7 +1384,6 @@ body {
 .phone-tx-amount { font-weight: 900; font-size: 12px; font-family: var(--font-mono); color: var(--brand-dark); direction: ltr; }
 .phone-tx-sub { font-size: 10px; color: var(--brand-gray); font-family: var(--font-mono); font-weight: 600; }
 
-/* ============ AUDIT LOG ============ */
 .audit-log {
   height: 240px; overflow-y: auto;
   background: var(--brand-ghost);
@@ -1472,7 +1410,6 @@ body {
   to { opacity: 1; transform: translateX(0); }
 }
 
-/* ============ TOAST ============ */
 .toast-container {
   position: fixed; top: 80px; left: 50%;
   transform: translateX(-50%); z-index: 9999;
@@ -1499,13 +1436,11 @@ body {
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ============ EMPTY ============ */
 .empty-state { text-align: center; padding: 40px 20px; color: var(--brand-gray); }
 .empty-state svg { width: 60px; height: 60px; stroke: var(--brand-light-gray); fill: none; stroke-width: 1.5; margin-bottom: 14px; }
 .empty-state-title { font-size: 14px; font-weight: 900; color: var(--brand-dark); margin-bottom: 4px; }
 .empty-state-text { font-size: 12px; font-weight: 600; }
 
-/* ============ FOOTER ============ */
 .footer {
   text-align: center; padding: 28px 24px;
   color: var(--brand-gray); font-size: 10px;
@@ -1523,7 +1458,6 @@ body {
 
 .hidden-file-input { display: none; }
 
-/* ============ RESPONSIVE ============ */
 @media (max-width: 700px) {
   .header-inner { padding: 10px 16px; }
   .container { padding: 16px; }
@@ -1552,7 +1486,6 @@ body {
 }
 *:focus-visible { outline: 2px solid var(--brand-yellow-dark); outline-offset: 3px; border-radius: 4px; }
 
-/* RTL Fixes for numbers */
 [dir="rtl"] .swap-info-value,
 [dir="rtl"] .tx-amount,
 [dir="rtl"] .wallet-balance,
@@ -1561,7 +1494,8 @@ body {
 [dir="rtl"] .dex-rate,
 [dir="rtl"] .ticker-price,
 [dir="rtl"] .phone-tx-amount,
-[dir="rtl"] .wallet-account-balance {
+[dir="rtl"] .wallet-account-balance,
+[dir="rtl"] .tx-time {
   direction: ltr;
   unicode-bidi: embed;
 }
@@ -1569,7 +1503,6 @@ body {
 </head>
 <body>
 
-<!-- Loading -->
 <div class="loading-overlay" id="loading-overlay">
   <img src="images/cash.png" alt="CASH" class="loading-coin" id="loading-coin" onerror="this.classList.add('no-img')">
   <div class="loading-coin-fallback">₡</div>
@@ -1579,7 +1512,6 @@ body {
   <div class="loading-status" id="loading-status">Initializing...</div>
 </div>
 
-<!-- Header -->
 <header class="header">
   <div class="header-inner">
     <div class="brand" onclick="location.reload()">
@@ -1593,7 +1525,7 @@ body {
       </div>
     </div>
     <div class="header-actions">
-      <select class="lang-select" id="lang-select" onchange="I18N.setLanguage(this.value)" aria-label="Language"></select>
+      <!-- REMOVED: Language selector (auto-detect only) -->
       <div class="header-user" id="header-user" onclick="UI.openSettings()">
         <img src="" alt="avatar" class="header-avatar" id="header-avatar" onerror="this.classList.add('no-img')">
         <div class="header-avatar-fallback" id="header-avatar-fallback">U</div>
@@ -1613,7 +1545,6 @@ body {
 
 <div class="toast-container" id="toast-container"></div>
 
-<!-- Login -->
 <div id="login-screen">
   <div class="login-card">
     <div class="login-badge">
@@ -1691,10 +1622,7 @@ body {
 
     <div class="login-status" id="login-status" data-i18n="tap_start">Tap the circle to start</div>
 
-    <div class="tap-indicator" id="tap-indicator" role="button" tabindex="0">
-      <svg class="tap-indicator-icon" viewBox="0 0 24 24"><path d="M9 11V6a3 3 0 0 1 6 0v5"/><path d="M15 13v-2a3 3 0 0 1 6 0v3a10 10 0 0 1-10 10h-1A10 10 0 0 1 2 14v-3a3 3 0 0 1 6 0"/></svg>
-      <span data-i18n="tap_circle">👆 Tap the circle to begin</span>
-    </div>
+    <!-- REMOVED: tap-indicator button — only the circle is clickable -->
 
     <div class="login-hint">
       <span class="login-hint-badge">🎥 Liveness</span>
@@ -1704,7 +1632,6 @@ body {
   </div>
 </div>
 
-<!-- Dashboard -->
 <div id="app-screen" class="container">
 
   <div class="profile-header" id="profile-header">
@@ -1785,7 +1712,6 @@ body {
 
   <div class="price-ticker" id="price-ticker"></div>
 
-  <!-- TAB: Wallets -->
   <div class="tab-content active" data-tab-content="wallets" role="tabpanel">
     <div class="grid-2">
       <div class="panel">
@@ -1820,7 +1746,6 @@ body {
     </div>
   </div>
 
-  <!-- TAB: Swap -->
   <div class="tab-content" data-tab-content="swap" role="tabpanel">
     <div class="grid-2">
       <div class="panel">
@@ -1911,7 +1836,6 @@ body {
     </div>
   </div>
 
-  <!-- TAB: Send -->
   <div class="tab-content" data-tab-content="send" role="tabpanel">
     <div class="grid-2">
       <div class="panel">
@@ -1964,7 +1888,6 @@ body {
     </div>
   </div>
 
-  <!-- TAB: History -->
   <div class="tab-content" data-tab-content="history" role="tabpanel">
     <div class="panel">
       <div class="panel-header">
@@ -1989,7 +1912,6 @@ body {
     </div>
   </div>
 
-  <!-- TAB: Lookup -->
   <div class="tab-content" data-tab-content="lookup" role="tabpanel">
     <div class="panel">
       <div class="panel-header">
@@ -2020,10 +1942,9 @@ body {
   <div class="footer-brand">
     <span>COFC TECHNOLOGIES LTD</span>
   </div>
-  <div data-i18n="footer_text">SOVEREIGN APEX VAULT v10.0 · © 2026 ALL RIGHTS RESERVED</div>
+  <div data-i18n="footer_text">SOVEREIGN APEX VAULT · © 2026 ALL RIGHTS RESERVED</div>
 </footer>
 
-<!-- Modals -->
 <div class="modal" id="modal-add-coin">
   <div class="modal-content">
     <div class="modal-header">
@@ -2285,26 +2206,22 @@ body {
 
 <script>
 /* ============================================================
-   COFC GATE v10.0 — SOVEREIGN APEX FINAL RELEASE
-   All 117 QA fixes implemented
-   Zero known issues · Production-ready
+   COFC GATE v10.1 — SOVEREIGN APEX HOTFIX
+   Bug #155 fixed: Wallet no longer opens before verification completes
+   Bug #156 fixed: Removed tap-indicator button
+   Bug #157 fixed: Auto-detect language only (no selector)
+   All 7 CRITICAL bugs from v10.0 + All HIGH-priority bugs
    ============================================================ */
 (function() {
 'use strict';
 
-/* ============================================================
-   DIAGNOSTIC LOGGER (bounded, disabled in production)
-   ============================================================ */
 const DIAG = {
-  enabled: false, // Set to true for development
+  enabled: false,
   log(tag, ...args) { if (this.enabled) console.log(`%c[COFC:${tag}]`, 'color:#D4CB00;font-weight:bold', ...args); },
   warn(tag, ...args) { if (this.enabled) console.warn(`[COFC:${tag}]`, ...args); },
   error(tag, ...args) { console.error(`[COFC:${tag}]`, ...args); }
 };
 
-/* ============================================================
-   GLOBAL ERROR HANDLERS (QA #43)
-   ============================================================ */
 window.addEventListener('error', (e) => {
   DIAG.error('GLOBAL', 'Uncaught:', e.message);
   const statusEl = document.getElementById('login-status');
@@ -2317,30 +2234,30 @@ window.addEventListener('error', (e) => {
 window.addEventListener('unhandledrejection', (e) => DIAG.error('GLOBAL', 'Rejection:', e.reason));
 
 /* ============================================================
-   I18N (20 LANGUAGES)
+   I18N — Auto-detect only (no selector)
    ============================================================ */
 const I18N = {
   languages: {
-    en: { name: 'English', flag: '🇺🇸' },
-    he: { name: 'עברית', flag: '🇮🇱' },
-    ar: { name: 'العربية', flag: '🇸🇦' },
-    es: { name: 'Español', flag: '🇪🇸' },
-    fr: { name: 'Français', flag: '🇫🇷' },
-    de: { name: 'Deutsch', flag: '🇩🇪' },
-    it: { name: 'Italiano', flag: '🇮🇹' },
-    pt: { name: 'Português', flag: '🇵🇹' },
-    ru: { name: 'Русский', flag: '🇷🇺' },
-    zh: { name: '中文', flag: '🇨🇳' },
-    ja: { name: '日本語', flag: '🇯🇵' },
-    ko: { name: '한국어', flag: '🇰🇷' },
-    hi: { name: 'हिन्दी', flag: '🇮🇳' },
-    tr: { name: 'Türkçe', flag: '🇹🇷' },
-    pl: { name: 'Polski', flag: '🇵🇱' },
-    nl: { name: 'Nederlands', flag: '🇳🇱' },
-    sv: { name: 'Svenska', flag: '🇸🇪' },
-    th: { name: 'ไทย', flag: '🇹🇭' },
-    vi: { name: 'Tiếng Việt', flag: '🇻🇳' },
-    id: { name: 'Bahasa', flag: '🇮🇩' }
+    en: { name: 'English' },
+    he: { name: 'עברית' },
+    ar: { name: 'العربية' },
+    es: { name: 'Español' },
+    fr: { name: 'Français' },
+    de: { name: 'Deutsch' },
+    it: { name: 'Italiano' },
+    pt: { name: 'Português' },
+    ru: { name: 'Русский' },
+    zh: { name: '中文' },
+    ja: { name: '日本語' },
+    ko: { name: '한국어' },
+    hi: { name: 'हिन्दी' },
+    tr: { name: 'Türkçe' },
+    pl: { name: 'Polski' },
+    nl: { name: 'Nederlands' },
+    sv: { name: 'Svenska' },
+    th: { name: 'ไทย' },
+    vi: { name: 'Tiếng Việt' },
+    id: { name: 'Bahasa' }
   },
   translations: {
     en: {
@@ -2348,7 +2265,7 @@ const I18N = {
       login_badge: '🔐 Biometric Authentication', login_title: 'Face Recognition',
       login_subtitle: 'Liveness detection with anti-spoofing protection',
       chip_blink: 'Blink', chip_turn: 'Turn', chip_smile: 'Smile',
-      tap_start: 'Tap the circle to start', tap_circle: '👆 Tap the circle to begin',
+      tap_start: 'Tap the circle to start',
       meta_face: '🎥 Verified', edit_profile: 'Profile', settings: 'Settings',
       ram: 'RAM:', active: 'Active', video: 'Video:', verified: 'Verified', lock_in: 'Lock in:',
       tab_wallets: 'Wallets', tab_swap: 'Swap', tab_send: 'Send', tab_history: 'History', tab_lookup: 'Lookup',
@@ -2361,7 +2278,7 @@ const I18N = {
       all_transactions: 'All Transactions', export: 'Export',
       filter_all: 'All', filter_sent: 'Sent', filter_received: 'Received', filter_swap: 'Swaps',
       phone_lookup: 'Phone Lookup', phone_lookup_desc: 'Check transfers by phone number', lookup_btn: 'Lookup',
-      footer_text: 'SOVEREIGN APEX VAULT v10.0 · © 2026',
+      footer_text: 'SOVEREIGN APEX VAULT · © 2026',
       choose_coin: 'Choose Coin', select_coin: 'Select Coin', receive: 'Receive', receive_title: 'Receive',
       create_new_wallet: 'Create New Wallet', download_qr: 'Download QR', copy_address: 'Copy Address',
       reveal_secret: 'Reveal Wallet Secrets', warning_critical: '⚠️ Critical Warning',
@@ -2388,7 +2305,7 @@ const I18N = {
       login_badge: '🔐 אימות ביומטרי', login_title: 'זיהוי פנים',
       login_subtitle: 'זיהוי חיות עם הגנה מפני זיוף',
       chip_blink: 'מצמץ', chip_turn: 'סובב', chip_smile: 'חייך',
-      tap_start: 'הקש על העיגול להתחלה', tap_circle: '👆 הקש על העיגול להתחלה',
+      tap_start: 'הקש על העיגול להתחלה',
       meta_face: '🎥 מאומת', edit_profile: 'פרופיל', settings: 'הגדרות',
       ram: 'RAM:', active: 'פעיל', video: 'וידאו:', verified: 'מאומת', lock_in: 'נעילה בעוד:',
       tab_wallets: 'ארנקים', tab_swap: 'המרה', tab_send: 'שלח', tab_history: 'היסטוריה', tab_lookup: 'חיפוש',
@@ -2401,7 +2318,7 @@ const I18N = {
       all_transactions: 'כל העסקאות', export: 'ייצוא',
       filter_all: 'הכל', filter_sent: 'נשלחו', filter_received: 'התקבלו', filter_swap: 'המרות',
       phone_lookup: 'חיפוש טלפון', phone_lookup_desc: 'בדוק העברות לפי מספר טלפון', lookup_btn: 'חפש',
-      footer_text: 'כספת ריבונית v10.0 · © 2026',
+      footer_text: 'כספת ריבונית · © 2026',
       choose_coin: 'בחר מטבע', select_coin: 'בחר מטבע', receive: 'קבל', receive_title: 'קבל',
       create_new_wallet: 'צור ארנק חדש', download_qr: 'הורד ברקוד', copy_address: 'העתק כתובת',
       reveal_secret: 'גלה סודות', warning_critical: '⚠️ אזהרה קריטית',
@@ -2429,6 +2346,37 @@ const I18N = {
     const dict = this.translations[this.current] || this.translations.en;
     return dict[key] || this.translations.en[key] || key;
   },
+  detectLanguage() {
+    // Detection priority:
+    // 1. Saved preference (previous visit)
+    // 2. Browser language
+    // 3. Navigator languages array
+    // 4. Fallback to English
+    let detected = null;
+    try { detected = localStorage.getItem('cofc_v10_lang'); } catch (e) {}
+    if (detected && this.translations[detected]) return detected;
+    
+    // Try navigator.language (most accurate)
+    const navLang = (navigator.language || '').split('-')[0].toLowerCase();
+    if (this.translations[navLang]) return navLang;
+    
+    // Try navigator.languages array
+    if (navigator.languages) {
+      for (const l of navigator.languages) {
+        const code = l.split('-')[0].toLowerCase();
+        if (this.translations[code]) return code;
+      }
+    }
+    
+    // Try Intl
+    try {
+      const locale = Intl.DateTimeFormat().resolvedOptions().locale;
+      const code = locale.split('-')[0].toLowerCase();
+      if (this.translations[code]) return code;
+    } catch (e) {}
+    
+    return 'en';
+  },
   setLanguage(lang) {
     if (!this.translations[lang]) lang = 'en';
     this.current = lang;
@@ -2437,8 +2385,6 @@ const I18N = {
     document.documentElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
     document.body.style.direction = document.documentElement.dir;
     this.applyTranslations();
-    const sel = document.getElementById('lang-select');
-    if (sel) sel.value = lang;
   },
   applyTranslations() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -2448,19 +2394,8 @@ const I18N = {
     });
   },
   init() {
-    const sel = document.getElementById('lang-select');
-    if (sel) {
-      sel.innerHTML = Object.entries(this.languages).map(([code, info]) =>
-        `<option value="${code}">${info.flag} ${info.name}</option>`
-      ).join('');
-    }
-    let saved = null;
-    try { saved = localStorage.getItem('cofc_v10_lang'); } catch (e) {}
-    let detected = saved;
-    if (!detected) {
-      const b = (navigator.language || 'en').split('-')[0];
-      detected = this.translations[b] ? b : 'en';
-    }
+    // Auto-detect only — no selector
+    const detected = this.detectLanguage();
     this.setLanguage(detected);
   }
 };
@@ -2518,7 +2453,7 @@ function secureRandomBytes(length) {
 }
 
 /* ============================================================
-   NATIVE QR CODE GENERATOR (Self-contained)
+   QR CODE GENERATOR
    ============================================================ */
 const QRCode = {
   generate(text, size) {
@@ -2625,7 +2560,7 @@ const QRCode = {
 };
 
 /* ============================================================
-   COIN DATABASE (48 coins)
+   COIN DATABASE
    ============================================================ */
 const COINS_DB = [
   { symbol: 'BTC', name: 'Bitcoin', chain: 'Bitcoin', color: '#f7931a', coingeckoId: 'bitcoin', logo: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png' },
@@ -2680,33 +2615,31 @@ const COINS_DB = [
   { symbol: 'CBDC', name: 'Transcendental CBDC', chain: 'Quantum', color: '#00c8ff', coingeckoId: null, logo: null }
 ];
 
+const COINS_BY_SYMBOL = Object.fromEntries(COINS_DB.map(c => [c.symbol, c]));
+
 /* ============================================================
-   COIN LOGOS ENGINE (QA #90 Fix)
-   Generates inline SVG fallbacks + handles CDN loading
+   COIN LOGOS ENGINE
    ============================================================ */
 const CoinLogos = {
   cache: new Map(),
-  failed: new Set(),
+  CACHE_MAX: 100,
   
-  // Generate high-quality inline SVG fallback
   generateFallback(symbol, color) {
     const letter = symbol.substring(0, 1);
-    const isTwo = symbol.length > 2 && !/[A-Z]/.test(symbol[1]); // e.g. "MATIC" → "M"
-    const fontSize = isTwo ? 52 : 48;
+    const fontSize = 52;
     const darkColor = this.darken(color, 30);
-    
+    const lightColor = this.lighten(color, 20);
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
       <defs>
         <radialGradient id="g_${symbol}" cx="35%" cy="30%">
-          <stop offset="0%" stop-color="${this.lighten(color, 20)}"/>
+          <stop offset="0%" stop-color="${lightColor}"/>
           <stop offset="100%" stop-color="${darkColor}"/>
         </radialGradient>
       </defs>
       <circle cx="50" cy="50" r="48" fill="url(#g_${symbol})"/>
-      <text x="50" y="50" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="${fontSize}" font-weight="900" fill="white" text-anchor="middle" dominant-baseline="central" letter-spacing="-2" text-rendering="geometricPrecision">${letter}</text>
+      <text x="50" y="50" font-family="-apple-system, sans-serif" font-size="${fontSize}" font-weight="900" fill="white" text-anchor="middle" dominant-baseline="central" letter-spacing="-2">${letter}</text>
     </svg>`;
-    
-    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg).replace(/'/g, '%27');
   },
   
   hexToRgb(hex) {
@@ -2735,60 +2668,39 @@ const CoinLogos = {
   get(symbol, color) {
     const key = symbol + '_' + (color || '');
     if (this.cache.has(key)) return this.cache.get(key);
-    
-    const coin = COINS_DB.find(c => c.symbol === symbol);
+    const coin = COINS_BY_SYMBOL[symbol];
     let url;
+    if (coin && coin.logo && coin.logo.startsWith('http')) url = coin.logo;
+    else if (coin && coin.logo && coin.logo.startsWith('images/')) url = coin.logo;
+    else url = this.generateFallback(symbol, color || '#464650');
     
-    // Use CDN logo if available
-    if (coin && coin.logo && coin.logo.startsWith('http')) {
-      url = coin.logo;
-    } else if (coin && coin.logo && coin.logo.startsWith('images/')) {
-      url = coin.logo;
-    } else {
-      // Generate inline SVG fallback
-      url = this.generateFallback(symbol, color || '#464650');
+    if (this.cache.size >= this.CACHE_MAX) {
+      const firstKey = this.cache.keys().next().value;
+      this.cache.delete(firstKey);
     }
-    
     this.cache.set(key, url);
     return url;
-  },
-  
-  // Generate HTML for logo with proper fallback
-  render(symbol, color, size) {
-    size = size || 44;
-    const url = this.get(symbol, color);
-    const isData = url.startsWith('data:');
-    
-    if (isData) {
-      return `<img src="${url}" alt="${symbol}" style="width:100%;height:100%;object-fit:cover;display:block;">`;
-    }
-    
-    return `
-      <img src="${url}" alt="${symbol}" loading="lazy" decoding="async" 
-           style="width:100%;height:100%;object-fit:contain;padding:${size * 0.13}px;display:block;"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-      <div class="coin-logo-fallback" style="display:none;background:linear-gradient(135deg,${color},${this.darken(color, 30)});font-size:${size * 0.4}px;">
-        ${symbol.substring(0, 1)}
-      </div>
-    `;
   }
 };
 
 /* ============================================================
-   LIVE PRICES (with smart caching + rate limit protection)
+   LIVE PRICES
    ============================================================ */
 const LivePrices = {
   cache: {},
   cacheTime: 0,
   CACHE_TTL: 60000,
   _fetchPromise: null,
-  _lastFetch: 0,
+  _lastSuccessfulFetch: 0,
+  _lastFailedFetch: 0,
   displayCurrency: 'usd',
   currencySymbols: { usd: '$', eur: '€', jpy: '¥', gbp: '£', ils: '₪' },
   
   async fetch(symbols) {
-    // Deduplicate concurrent calls
-    if (this._fetchPromise) return this._fetchPromise;
+    if (this._fetchPromise) {
+      try { return await this._fetchPromise; }
+      catch (e) { /* retry */ }
+    }
     this._fetchPromise = this._doFetch(symbols);
     try { return await this._fetchPromise; }
     finally { this._fetchPromise = null; }
@@ -2796,29 +2708,22 @@ const LivePrices = {
   
   async _doFetch(symbols) {
     const now = Date.now();
-    if (now - this.cacheTime < this.CACHE_TTL && Object.keys(this.cache).length > 0) {
+    if (this._lastFailedFetch && now - this._lastFailedFetch < 30000) return this.cache;
+    if (now - this._lastSuccessfulFetch < this.CACHE_TTL && Object.keys(this.cache).length > 0) {
       return this.cache;
     }
-    // Rate limit: max 1 call per 5s
-    if (this._lastFetch && now - this._lastFetch < 5000) return this.cache;
-    this._lastFetch = now;
     
-    const ids = symbols.map(s => {
-      const c = COINS_DB.find(x => x.symbol === s);
-      return c?.coingeckoId;
-    }).filter(Boolean).join(',');
+    const ids = symbols.map(s => COINS_BY_SYMBOL[s]?.coingeckoId).filter(Boolean).join(',');
     if (!ids) return this.cache;
     
     try {
+      const ctrl = typeof AbortSignal !== 'undefined' && AbortSignal.timeout ? AbortSignal.timeout(8000) : undefined;
       const res = await fetch(
         `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd,eur,jpy,gbp,ils&include_24hr_change=true`,
-        { 
-          headers: { 'Accept': 'application/json' },
-          signal: AbortSignal.timeout ? AbortSignal.timeout(8000) : undefined
-        }
+        { headers: { 'Accept': 'application/json' }, signal: ctrl }
       );
       if (res.status === 429) {
-        DIAG.warn('PRICES', 'Rate limited');
+        this._lastFailedFetch = now;
         return this.cache;
       }
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -2831,9 +2736,11 @@ const LivePrices = {
         }
       });
       this.cacheTime = now;
+      this._lastSuccessfulFetch = now;
+      this._lastFailedFetch = 0;
       return this.cache;
     } catch (e) {
-      DIAG.warn('PRICES', 'Fetch failed:', e.message);
+      this._lastFailedFetch = now;
       return this.cache;
     }
   },
@@ -2844,7 +2751,6 @@ const LivePrices = {
       const val = cached[this.displayCurrency];
       if (typeof val === 'number' && Number.isFinite(val)) return val;
     }
-    // Fallback: only for COFC ecosystem
     const cofcFallbacks = {
       CASH: 0.10, TIME: 1.5, GEM: 25, GOLD: 2200, IDR: 0.012, CBDC: 1.0, KEY: 100
     };
@@ -2893,7 +2799,7 @@ const LivePrices = {
 };
 
 /* ============================================================
-   STORAGE (with integrity protection for settings)
+   STORAGE
    ============================================================ */
 class SecureMemoryPool {
   constructor() { this.buffers = new Set(); this.wiped = false; }
@@ -2948,7 +2854,8 @@ const EncryptedStorage = {
     } catch (e) { return fallback; }
   },
   
-  remove(k) { localStorage.removeItem(this.PREFIX + k); delete this._cache[k]; }
+  remove(k) { localStorage.removeItem(this.PREFIX + k); delete this._cache[k]; },
+  clearCache() { this._cache = {}; }
 };
 
 const Storage = {
@@ -2960,26 +2867,20 @@ const Storage = {
   set(key, value) {
     try {
       const serialized = JSON.stringify(value);
-      if (serialized.length > 500 * 1024) DIAG.warn('STORAGE', `Large value: ${(serialized.length / 1024).toFixed(0)}KB`);
       localStorage.setItem(this.PREFIX + key, serialized);
       return true;
     } catch (e) {
       if (e.name === 'QuotaExceededError') {
-        this.cleanup();
         try { localStorage.setItem(this.PREFIX + key, JSON.stringify(value)); return true; } catch (e2) { return false; }
       }
       return false;
     }
   },
-  cleanup() {
-    // Remove old caches
-    try { localStorage.removeItem('cofc_v10_plain_price_cache'); } catch (e) {}
-  },
   remove(key) { localStorage.removeItem(this.PREFIX + key); }
 };
 
 /* ============================================================
-   SETTINGS (with integrity check)
+   SETTINGS
    ============================================================ */
 const Settings = {
   data: {
@@ -2993,17 +2894,11 @@ const Settings = {
   async init() {
     const wrapper = Storage.get('settings');
     if (wrapper && wrapper.data && wrapper.hash) {
-      // Verify integrity
       const expected = wrapper.hash;
       const actual = await NativeHash.sha256(new TextEncoder().encode(JSON.stringify(wrapper.data)));
       const actualHex = Array.from(actual).map(b => b.toString(16).padStart(2, '0')).join('');
-      if (actualHex === expected) {
-        this.data = { ...this.data, ...wrapper.data };
-      } else {
-        DIAG.error('SETTINGS', 'Integrity check failed');
-      }
+      if (actualHex === expected) this.data = { ...this.data, ...wrapper.data };
     } else if (wrapper && wrapper.data) {
-      // Legacy format
       this.data = { ...this.data, ...wrapper.data };
     }
     this.render();
@@ -3040,6 +2935,16 @@ const Settings = {
         vault.toast('HTTPS required for 2FA', 'error');
         return;
       }
+      try {
+        const available = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+        if (!available) {
+          vault.toast('No fingerprint sensor found', 'error');
+          return;
+        }
+      } catch (e) {
+        vault.toast('Cannot verify fingerprint support', 'error');
+        return;
+      }
     }
     this.data.fingerprint2FA = !this.data.fingerprint2FA;
     await this.save();
@@ -3069,16 +2974,38 @@ const Settings = {
     } else {
       if (vault.autoWipeTimer) clearTimeout(vault.autoWipeTimer);
       if (vault.uiTimerInterval) clearInterval(vault.uiTimerInterval);
+      if (vault._modalActiveTimer) clearTimeout(vault._modalActiveTimer);
       vault.autoWipeTimer = null;
       vault.uiTimerInterval = null;
+      vault._modalActiveTimer = null;
     }
   },
   
-  wipeAllData() {
+  async wipeAllData() {
     if (!confirm('Delete ALL data permanently? This cannot be undone.')) return;
     if (prompt('Type DELETE to confirm:') !== 'DELETE') return;
     Object.keys(localStorage).filter(k => k.startsWith('cofc_')).forEach(k => localStorage.removeItem(k));
     sessionStorage.clear();
+    try {
+      if (indexedDB.databases) {
+        const dbs = await indexedDB.databases();
+        for (const db of dbs) {
+          if (db.name && db.name.startsWith('cofc')) indexedDB.deleteDatabase(db.name);
+        }
+      }
+    } catch (e) {}
+    try {
+      if (window.caches) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map(k => caches.delete(k)));
+      }
+    } catch (e) {}
+    try {
+      if (navigator.serviceWorker) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.map(r => r.unregister()));
+      }
+    } catch (e) {}
     vault.toast('✓ All data wiped', 'success');
     setTimeout(() => location.reload(), 1500);
   }
@@ -3096,6 +3023,7 @@ class CofcVault {
     this.autoWipeTimer = null;
     this.uiTimerInterval = null;
     this.graceTimer = null;
+    this._modalActiveTimer = null;
     this.pendingTimeouts = new Set();
     this.inactivityLimit = 180000;
     this.gracePeriod = 5000;
@@ -3128,12 +3056,13 @@ class CofcVault {
     t.className = `toast ${type}`;
     t.textContent = String(msg).substring(0, 300);
     c.appendChild(t);
+    const dur = /iPhone|Android/.test(navigator.userAgent) ? 4000 : 3400;
     this.setTimeout(() => {
       t.style.opacity = '0';
       t.style.transform = 'translateY(-16px)';
       t.style.transition = 'all 0.3s ease';
       this.setTimeout(() => t.remove(), 300);
-    }, 3400);
+    }, dur);
   }
   
   setTimeout(fn, ms) {
@@ -3162,7 +3091,7 @@ class CofcVault {
     this.armAutoScrubber();
   }
   
-  zeroizeMemory() {
+  async zeroizeMemory() {
     this.memoryPool.wipe();
     this.volatileMasterSeed = null;
     this.signingKey = null;
@@ -3172,13 +3101,24 @@ class CofcVault {
     if (this.autoWipeTimer) { clearTimeout(this.autoWipeTimer); this.autoWipeTimer = null; }
     if (this.uiTimerInterval) { clearInterval(this.uiTimerInterval); this.uiTimerInterval = null; }
     if (this.graceTimer) { clearTimeout(this.graceTimer); this.graceTimer = null; }
+    if (this._modalActiveTimer) { clearTimeout(this._modalActiveTimer); this._modalActiveTimer = null; }
     this.clearAllTimeouts();
     
     const savedKey = EncryptedStorage._key;
     EncryptedStorage.setKey(null);
+    EncryptedStorage.clearCache();
     if (savedKey) { try { savedKey.fill(0); } catch (e) {} }
     
-    // Wipe forms
+    // Clear clipboard
+    try {
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        const current = await navigator.clipboard.readText();
+        if (current && current.length > 20) {
+          await navigator.clipboard.writeText('');
+        }
+      }
+    } catch (e) {}
+    
     ['send-to', 'send-amount'].forEach(id => {
       const el = document.getElementById(id);
       if (el) { el.value = ''; el.classList.remove('valid', 'error'); }
@@ -3203,9 +3143,6 @@ class CofcVault {
     const scanner = document.getElementById('face-scanner');
     if (scanner) scanner.classList.remove('success', 'error', 'scanning', 'disabled', 'camera-active');
     
-    const tapInd = document.getElementById('tap-indicator');
-    if (tapInd) tapInd.style.display = 'flex';
-    
     const progressCircle = document.getElementById('progress-circle');
     if (progressCircle) progressCircle.style.strokeDashoffset = 1005;
     
@@ -3215,6 +3152,9 @@ class CofcVault {
       if (el) el.classList.remove('active', 'done');
     });
     
+    // CRITICAL: Reset login mutex
+    LoginFlow._mutex = false;
+    
     FaceLiveness.stop();
     this.toast('🔒 Vault locked', 'warn');
   }
@@ -3222,11 +3162,13 @@ class CofcVault {
   armAutoScrubber() {
     if (!Settings.data.autoLock) return;
     if (!this.isLoggedIn) return;
-    // Don't reset while modal is open (could be reading secret)
+    
     if (document.querySelector('.modal.active')) {
-      this.setTimeout(() => this.armAutoScrubber(), 5000);
+      if (this._modalActiveTimer) clearTimeout(this._modalActiveTimer);
+      this._modalActiveTimer = setTimeout(() => this.armAutoScrubber(), 5000);
       return;
     }
+    this._modalActiveTimer = null;
     
     if (this.autoWipeTimer) clearTimeout(this.autoWipeTimer);
     if (this.uiTimerInterval) clearInterval(this.uiTimerInterval);
@@ -3254,7 +3196,7 @@ class CofcVault {
 const vault = new CofcVault();
 
 /* ============================================================
-   FACE LIVENESS (with anti-spoof + all fixes)
+   FACE LIVENESS
    ============================================================ */
 const FaceLiveness = {
   video: null, canvas: null, ctx: null, stream: null, active: false, running: false,
@@ -3273,12 +3215,7 @@ const FaceLiveness = {
     if (!window.isSecureContext) throw new Error('HTTPS required for camera');
     try {
       this.stream = await navigator.mediaDevices.getUserMedia({
-        video: { 
-          facingMode: 'user', 
-          width: { ideal: 640, max: 1280 }, 
-          height: { ideal: 480, max: 720 }, 
-          frameRate: { ideal: 24, max: 30 } 
-        },
+        video: { facingMode: 'user', width: { ideal: 640, max: 1280 }, height: { ideal: 480, max: 720 }, frameRate: { ideal: 24, max: 30 } },
         audio: false
       });
       this.video.srcObject = this.stream;
@@ -3303,10 +3240,16 @@ const FaceLiveness = {
   
   stop() {
     this.running = false;
-    if (this.stream) { this.stream.getTracks().forEach(t => t.stop()); this.stream = null; }
+    if (this.stream) { 
+      try { this.stream.getTracks().forEach(t => t.stop()); } catch (e) {}
+      this.stream = null; 
+    }
     if (this.video) { 
-      try { this.video.pause(); } catch (e) {}
-      this.video.srcObject = null; 
+      try { 
+        this.video.pause(); 
+        this.video.srcObject = null;
+        if (this.video.load) this.video.load();
+      } catch (e) {} 
     }
     this.active = false;
   },
@@ -3363,16 +3306,11 @@ const FaceLiveness = {
   antiSpoofCheck(frame) {
     const data = frame.data;
     const w = frame.width, h = frame.height;
-    
-    // Calculate overall brightness
     let sum = 0, count = 0;
     for (let i = 0; i < data.length; i += 40) { sum += data[i]; count++; }
     const mean = sum / count;
-    
-    // Skip check in low light
     if (mean < 35) return { pass: true, reason: 'low_light' };
     
-    // Moiré detection
     let hVar = 0, vVar = 0;
     for (let y = 30; y < h - 30; y += 4) {
       for (let x = 30; x < w - 30; x += 4) {
@@ -3386,26 +3324,20 @@ const FaceLiveness = {
         vVar += Math.abs(b1 - b3);
       }
     }
-    
-    // Uniformity check
     let variance = 0;
     for (let i = 0; i < data.length; i += 40) variance += Math.pow(data[i] - mean, 2);
     variance /= count;
     
-    // Depth check
     const centerB = this.getRegionBrightness(frame, 0.3, 0.3, 0.7, 0.7);
     const edgeB = this.getRegionBrightness(frame, 0.05, 0.05, 0.15, 0.15);
     const depth = Math.abs(centerB - edgeB);
     
-    // Flexible thresholds
     const isMoire = hVar < 3 && vVar < 3;
     const isUniform = variance < 50;
     const hasDepth = depth > 5;
     
-    // Pass if at least 2 of 3 conditions met
     const checks = [!isMoire, !isUniform, hasDepth];
     const passCount = checks.filter(x => x).length;
-    
     return { pass: passCount >= 2, reason: 'normal' };
   },
   
@@ -3413,7 +3345,7 @@ const FaceLiveness = {
     this.running = true;
     try {
       const startTime = Date.now();
-      const MAX_DURATION = 20000; // 20s total
+      const MAX_DURATION = 20000;
       const completed = { blink: false, turn: false, smile: false };
       
       await new Promise(r => setTimeout(r, 500));
@@ -3444,13 +3376,7 @@ const FaceLiveness = {
           await new Promise(r => setTimeout(r, 80));
           const frame = await this.captureFrame();
           if (!frame) continue;
-          
           allFrames.push(frame);
-          const spoofCheck = this.antiSpoofCheck(frame);
-          if (!spoofCheck.pass) {
-            // Continue but log
-          }
-          
           if (step.detect(frame, lastFrame)) {
             detections++;
             if (detections >= 3) { detected = true; completed[step.step] = true; break; }
@@ -3466,7 +3392,6 @@ const FaceLiveness = {
         }
       }
       
-      // Generate entropy from multiple frames
       const entropyBytes = [];
       const sampleFrames = allFrames.slice(0, 10);
       sampleFrames.forEach((f, idx) => {
@@ -3475,7 +3400,6 @@ const FaceLiveness = {
           entropyBytes.push(f.data[(j * 7 + idx * 13) % f.data.length]);
         }
       });
-      
       const combined = new Uint8Array(entropyBytes.length + 32);
       combined.set(entropyBytes, 0);
       combined.set(secureRandomBytes(32), entropyBytes.length);
@@ -3559,7 +3483,7 @@ const Identity = {
 };
 
 /* ============================================================
-   WALLETS (with all QA fixes)
+   WALLETS
    ============================================================ */
 const Wallets = {
   all: {},
@@ -3585,7 +3509,7 @@ const Wallets = {
       { symbol: 'CBDC', balance: 100000 }
     ];
     for (const d of defaults) {
-      const coin = COINS_DB.find(c => c.symbol === d.symbol);
+      const coin = COINS_BY_SYMBOL[d.symbol];
       if (!coin) continue;
       if (!this.all[coin.symbol]) {
         this.all[coin.symbol] = {
@@ -3617,11 +3541,13 @@ const Wallets = {
     const sw = [];
     for (let i = 0; i < 24; i++) sw.push(wl[r[i % r.length] % wl.length]);
     
-    const safeBalance = Math.max(0, Number(balance) || 0);
+    let safeBalance = Number(balance);
+    if (!Number.isFinite(safeBalance) || safeBalance < 0) safeBalance = 0;
+    if (safeBalance > 1e20) safeBalance = 0;
     
     return {
       id: 'acc_' + Base58.encode(secureRandomBytes(12)),
-      label: label,
+      label,
       address,
       balance: safeBalance,
       secret,
@@ -3633,21 +3559,10 @@ const Wallets = {
   
   getCoinLogo(w) { return CoinLogos.get(w.symbol, w.color); },
   
-  renderLogo(w, size = 44, extraClass = '') {
-    const url = CoinLogos.get(w.symbol, w.color);
-    return `
-      <div class="coin-logo ${extraClass}" style="width:${size}px;height:${size}px;background:${w.color}20;">
-        ${CoinLogos.render(w.symbol, w.color, size)}
-      </div>
-    `;
-  },
-  
   async addCoin(symbol) {
-    const coin = COINS_DB.find(c => c.symbol === symbol);
+    const coin = COINS_BY_SYMBOL[symbol];
     if (!coin) return false;
     if (this.all[symbol]) { vault.toast(`${symbol} already added`, 'warn'); return false; }
-    
-    // QA fix #2: require 2FA for adding coin
     return new Promise(resolve => {
       TwoFA.request(async () => {
         this.all[symbol] = {
@@ -3670,7 +3585,7 @@ const Wallets = {
   async createNewAccount() {
     if (!this.currentSymbol) return;
     const symbol = this.currentSymbol;
-    const coin = COINS_DB.find(c => c.symbol === symbol);
+    const coin = COINS_BY_SYMBOL[symbol];
     if (!coin || !this.all[symbol]) return;
     const num = this.all[symbol].accounts.length + 1;
     const account = await this.generateAccount(coin, 0, `Wallet ${num}`);
@@ -3710,8 +3625,6 @@ const Wallets = {
       const totalBal = w.accounts.reduce((s, a) => s + (Number(a.balance) || 0), 0);
       const usd = LivePrices.format(totalBal, w.symbol);
       const logoUrl = CoinLogos.get(w.symbol, w.color);
-      const isData = logoUrl && logoUrl.startsWith('data:');
-      
       items.push(`
         <li class="wallet-item" onclick="Wallets.openWalletDetails('${w.symbol}')" role="button" tabindex="0">
           <div class="wallet-icon" style="background:${w.color}20;">
@@ -3732,7 +3645,6 @@ const Wallets = {
     list.innerHTML = items.join('');
     const countEl = document.getElementById('profile-wallet-count');
     if (countEl) countEl.textContent = this.totalAccountCount() + ' wallets';
-    
     if (this._portfolioTimer) clearTimeout(this._portfolioTimer);
     this._portfolioTimer = setTimeout(() => this.renderPortfolio(), 100);
   },
@@ -3750,7 +3662,6 @@ const Wallets = {
       breakdown.push({ symbol: w.symbol, balance: bal, usd, color: w.color });
     }
     breakdown.sort((a, b) => b.usd - a.usd || a.symbol.localeCompare(b.symbol));
-    
     container.innerHTML = `
       <div style="text-align: center; padding: 20px 0; border-bottom: 1px solid var(--brand-light-gray); margin-bottom: 16px;">
         <div style="font-size: 11px; color: var(--brand-gray); font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px;">Total Value</div>
@@ -3785,7 +3696,7 @@ const Wallets = {
     const symbols = ['BTC', 'ETH', 'SOL', 'BNB', 'XRP', 'ADA', 'DOGE', 'CASH', 'AVAX', 'DOT'];
     await LivePrices.fetch(symbols);
     ticker.innerHTML = symbols.map(sym => {
-      const coin = COINS_DB.find(c => c.symbol === sym);
+      const coin = COINS_BY_SYMBOL[sym];
       if (!coin) return '';
       const price = LivePrices.formatPrice(sym);
       const change = LivePrices.getChange(sym);
@@ -3808,9 +3719,9 @@ const Wallets = {
     }).join('');
   },
   
-  quickAdd(symbol) {
+  async quickAdd(symbol) {
     if (this.all[symbol]) this.openWalletDetails(symbol);
-    else this.addCoin(symbol);
+    else await this.addCoin(symbol);
   },
   
   formatBalance(n) {
@@ -3886,7 +3797,6 @@ const Wallets = {
     const w = this.all[this.currentSymbol];
     if (!w) return;
     const acc = w.accounts.find(a => a.id === this.currentAccountId) || w.accounts[0];
-    
     const iconEl = document.getElementById('receive-icon');
     iconEl.style.background = w.color + '20';
     const logo = CoinLogos.get(w.symbol, w.color);
@@ -3895,10 +3805,8 @@ const Wallets = {
     } else {
       iconEl.innerHTML = `<div style="width:100%;height:100%;background:${w.color};display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:18px;border-radius:50%;">${w.symbol[0]}</div>`;
     }
-    
     document.getElementById('receive-name').textContent = w.name + ' — ' + acc.label;
     document.getElementById('receive-address').textContent = acc.address;
-    
     const canvas = QRCode.generate(acc.address, 256);
     const qrWrap = document.querySelector('#modal-receive .qr-canvas-wrap');
     if (qrWrap && canvas) {
@@ -3924,7 +3832,6 @@ const Wallets = {
     const totalBal = w.accounts.reduce((s, a) => s + (Number(a.balance) || 0), 0);
     const usd = LivePrices.format(totalBal, symbol);
     const logo = CoinLogos.get(w.symbol, w.color);
-    
     document.getElementById('wallet-details-symbol').textContent = symbol;
     const iconEl = document.getElementById('wallet-detail-icon');
     iconEl.style.background = w.color + '20';
@@ -3933,11 +3840,9 @@ const Wallets = {
     } else {
       iconEl.innerHTML = `<div style="width:100%;height:100%;background:${w.color};display:flex;align-items:center;justify-content:center;color:white;font-weight:900;font-size:20px;border-radius:50%;">${w.symbol[0]}</div>`;
     }
-    
     document.getElementById('wallet-detail-name').textContent = w.name;
     document.getElementById('wallet-detail-balance').textContent = this.formatBalance(totalBal) + ' ' + symbol;
     document.getElementById('wallet-detail-usd').textContent = usd;
-    
     const accountsList = document.getElementById('wallet-accounts-list');
     if (accountsList) {
       accountsList.innerHTML = w.accounts.map(a => `
@@ -4053,7 +3958,7 @@ const Wallets = {
 };
 
 /* ============================================================
-   SWAP ENGINE
+   SWAP
    ============================================================ */
 const DEXS = [
   { id: 'uniswap', name: 'Uniswap V3', fee: 0.003, network: 'Ethereum', type: 'AMM' },
@@ -4078,7 +3983,7 @@ const Swap = {
     const tIcon = document.getElementById('swap-to-icon');
     const tSym = document.getElementById('swap-to-symbol');
     const renderIcon = (sym, el) => {
-      const coin = COINS_DB.find(c => c.symbol === sym);
+      const coin = COINS_BY_SYMBOL[sym];
       if (!coin) return;
       const logo = CoinLogos.get(sym, coin.color);
       el.innerHTML = '';
@@ -4132,11 +4037,10 @@ const Swap = {
     let bestDexId = null;
     const rates = DEXS.map(dex => {
       const rate = this.calculateRate(dex.id) || 0;
-      if (rate > bestRate) { bestRate = rate; bestDexId = dex.id; }
+      const EPSILON = 1e-15;
+      if (rate - bestRate > EPSILON) { bestRate = rate; bestDexId = dex.id; }
       return { ...dex, rate };
     });
-    
-    const EPSILON = 1e-12;
     container.innerHTML = rates.map(d => {
       const isBest = d.id === bestDexId && d.rate > 0;
       return `
@@ -4183,7 +4087,9 @@ const Swap = {
   },
   
   pickCoin(symbol) {
-    if (!COINS_DB.find(c => c.symbol === symbol)) return;
+    if (typeof symbol !== 'string' || symbol.length > 10) return;
+    if (!/^[A-Z0-9]+$/.test(symbol)) return;
+    if (!COINS_BY_SYMBOL[symbol]) return;
     if (this._pickTarget === 'from') {
       if (symbol === this.toSymbol) this.toSymbol = this.fromSymbol;
       this.fromSymbol = symbol;
@@ -4198,9 +4104,11 @@ const Swap = {
   },
   
   flip() {
+    const currentFrom = document.getElementById('swap-from-amount').value;
+    const currentTo = document.getElementById('swap-to-amount').value;
     [this.fromSymbol, this.toSymbol] = [this.toSymbol, this.fromSymbol];
-    document.getElementById('swap-from-amount').value = '';
-    document.getElementById('swap-to-amount').value = '';
+    document.getElementById('swap-from-amount').value = currentTo;
+    document.getElementById('swap-to-amount').value = currentFrom;
     this.renderCoinButtons();
     this.renderDexComparison();
     this.calculate();
@@ -4210,20 +4118,26 @@ const Swap = {
     const w = Wallets.all[this.fromSymbol];
     if (!w) return;
     const bal = w.accounts.reduce((s, a) => s + (Number(a.balance) || 0), 0);
+    if (bal <= 0) { vault.toast('No balance', 'warn'); return; }
     const amount = bal * (pct / 100);
-    document.getElementById('swap-from-amount').value = amount.toFixed(8);
+    const finalAmount = pct === 100 ? amount * 0.99 : amount;
+    const formatted = finalAmount < 0.0001 ? finalAmount.toFixed(10) : finalAmount.toFixed(8);
+    document.getElementById('swap-from-amount').value = formatted;
     this.calculate();
   },
   
   calculateSlippage(amount) {
     const price = LivePrices.getPrice(this.fromSymbol);
-    if (!price) return 0.5;
+    const dex = DEXS.find(d => d.id === this.selectedDex);
+    if (!price || !dex) return 0.5;
     const usdValue = amount * price;
-    if (usdValue < 100) return 0.1;
-    if (usdValue < 1000) return 0.3;
-    if (usdValue < 10000) return 0.5;
-    if (usdValue < 100000) return 1.0;
-    return 2.0;
+    let baseSlip;
+    if (usdValue < 100) baseSlip = 0.1;
+    else if (usdValue < 1000) baseSlip = 0.3;
+    else if (usdValue < 10000) baseSlip = 0.5;
+    else if (usdValue < 100000) baseSlip = 1.0;
+    else baseSlip = 2.0;
+    return baseSlip + (dex.fee * 100 * 0.5);
   },
   
   calculate() {
@@ -4237,20 +4151,18 @@ const Swap = {
       document.getElementById('swap-slippage').textContent = '0.5%';
       return;
     }
-    const grossOutput = amount * rate;
+    const slippagePct = this.calculateSlippage(amount);
+    const slippageFactor = 1 - (slippagePct / 100);
+    const grossOutput = amount * rate * slippageFactor;
     if (!Number.isFinite(grossOutput)) return;
     const platformFee = grossOutput * PLATFORM_FEE;
     const netOutput = grossOutput - platformFee;
-    
-    // Show more precision for small amounts
     const formatted = netOutput < 0.0001 ? netOutput.toFixed(10) : netOutput.toFixed(8);
     document.getElementById('swap-to-amount').value = formatted;
     document.getElementById('swap-rate').textContent = `1 ${this.fromSymbol} = ${rate.toFixed(8)} ${this.toSymbol}`;
     document.getElementById('swap-fee').textContent = `${platformFee.toFixed(8)} ${this.toSymbol}`;
     document.getElementById('swap-receive').textContent = `${formatted} ${this.toSymbol}`;
-    
-    const slip = this.calculateSlippage(amount);
-    document.getElementById('swap-slippage').textContent = slip.toFixed(1) + '%';
+    document.getElementById('swap-slippage').textContent = slippagePct.toFixed(1) + '%';
   },
   
   async execute() {
@@ -4276,10 +4188,16 @@ const Swap = {
     if (totalBal < amount) { vault.toast(I18N.t('insufficient_balance'), 'error'); return; }
     
     TwoFA.request(async () => {
+      // Re-check balance
+      const currentTotal = fromW.accounts.reduce((s, a) => s + (Number(a.balance) || 0), 0);
+      if (currentTotal < amount) { vault.toast('Balance changed — try again', 'error'); return; }
+      
       const account = fromW.accounts.find(a => (Number(a.balance) || 0) >= amount);
       if (!account) { vault.toast('No account with sufficient balance', 'error'); return; }
       
-      const grossOutput = amount * rate;
+      const slippagePct = this.calculateSlippage(amount);
+      const slippageFactor = 1 - (slippagePct / 100);
+      const grossOutput = amount * rate * slippageFactor;
       const platformFee = grossOutput * PLATFORM_FEE;
       const netOutput = grossOutput - platformFee;
       
@@ -4304,13 +4222,12 @@ const Swap = {
       }
       
       await PlatformRevenue.record(this.fromSymbol, this.toSymbol, amount, platformFee, this.selectedDex);
-      
       await Wallets.save();
       await Wallets.render();
       Swap.updateBalances();
       History.render();
       
-      vault.log(`Swap: ${amount} ${this.fromSymbol} → ${netOutput.toFixed(6)} ${this.toSymbol} via ${this.selectedDex}`, 'success');
+      vault.log(`Swap: ${amount} ${this.fromSymbol} → ${netOutput.toFixed(6)} ${this.toSymbol}`, 'success');
       vault.toast(`✓ ${I18N.t('swap_success')}`, 'success');
       
       document.getElementById('swap-from-amount').value = '';
@@ -4321,7 +4238,7 @@ const Swap = {
 };
 
 /* ============================================================
-   PLATFORM REVENUE (Real system wallets)
+   PLATFORM REVENUE
    ============================================================ */
 const PlatformRevenue = {
   async record(fromSymbol, toSymbol, fromAmount, feeAmount, dex) {
@@ -4330,24 +4247,21 @@ const PlatformRevenue = {
       sysWallets[toSymbol] = {
         symbol: toSymbol,
         address: 'CFC_SYSTEM_REVENUE_' + Base58.encode(secureRandomBytes(12)),
-        balance: 0,
-        txs: [],
-        isSystem: true
+        balance: 0, txs: [], isSystem: true
       };
     }
     sysWallets[toSymbol].balance = (Number(sysWallets[toSymbol].balance) || 0) + feeAmount;
-    sysWallets[toSymbol].txs.unshift({
-      timestamp: Date.now(),
-      amount: feeAmount,
-      from: `${fromSymbol} swap`,
-      dex
-    });
-    if (sysWallets[toSymbol].txs.length > 500) {
-      sysWallets[toSymbol].txs = sysWallets[toSymbol].txs.slice(0, 500);
-    }
+    
+    const entry = { timestamp: Date.now(), amount: feeAmount, from: fromSymbol, dex };
+    const payload = JSON.stringify(entry);
+    const hash = await NativeHash.sha256(new TextEncoder().encode(payload));
+    entry.hash = Array.from(hash).map(b => b.toString(16).padStart(2, '0')).join('');
+    entry.prevHash = sysWallets[toSymbol].txs[0]?.hash || '0'.repeat(64);
+    
+    sysWallets[toSymbol].txs.unshift(entry);
+    if (sysWallets[toSymbol].txs.length > 500) sysWallets[toSymbol].txs = sysWallets[toSymbol].txs.slice(0, 500);
     Storage.set('system_wallets', sysWallets);
     
-    // Also aggregate entry (limited)
     const revenue = Storage.get('platform_revenue', { totalBySymbol: {}, totalUSD: 0, entries: [] });
     revenue.totalBySymbol = revenue.totalBySymbol || {};
     revenue.totalBySymbol[toSymbol] = (revenue.totalBySymbol[toSymbol] || 0) + feeAmount;
@@ -4355,16 +4269,12 @@ const PlatformRevenue = {
     if (price) revenue.totalUSD = (revenue.totalUSD || 0) + (feeAmount * price);
     revenue.entries.unshift({ timestamp: Date.now(), from: fromSymbol, to: toSymbol, amount: fromAmount, fee: feeAmount, dex });
     if (revenue.entries.length > 500) {
-      // Aggregate older
       const old = revenue.entries.slice(500);
       old.forEach(e => { revenue.totalBySymbol[e.to] = (revenue.totalBySymbol[e.to] || 0) + e.fee; });
       revenue.entries = revenue.entries.slice(0, 500);
     }
     Storage.set('platform_revenue', revenue);
-  },
-  
-  get() { return Storage.get('platform_revenue', { totalBySymbol: {}, totalUSD: 0, entries: [] }); },
-  getSystemWallets() { return Storage.get('system_wallets', {}); }
+  }
 };
 
 /* ============================================================
@@ -4372,6 +4282,7 @@ const PlatformRevenue = {
    ============================================================ */
 const History = {
   currentFilter: 'all',
+  _lastSignature: null,
   
   getAllTransactions() {
     const all = [];
@@ -4394,10 +4305,15 @@ const History = {
     
     if (txs.length === 0) {
       container.innerHTML = '<div class="empty-state"><div class="empty-state-title">No transactions</div><div class="empty-state-text">Your history will appear here</div></div>';
+      this._lastSignature = null;
       return;
     }
     
     const visible = txs.slice(0, 100);
+    const signature = visible.slice(0, 20).map(t => t.hash || t.timestamp).join('|');
+    if (this._lastSignature === signature && container.children.length > 0) return;
+    this._lastSignature = signature;
+    
     const frag = document.createDocumentFragment();
     visible.forEach(tx => {
       const iconType = tx.direction === 'in' ? 'in' : (tx.direction === 'swap' ? 'swap' : 'out');
@@ -4405,7 +4321,7 @@ const History = {
         ? '<path d="M12 5v14M5 12l7 7 7-7"/>'
         : (tx.direction === 'swap' ? '<path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/>' : '<path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>');
       
-      const coin = COINS_DB.find(c => c.symbol === tx.symbol);
+      const coin = COINS_BY_SYMBOL[tx.symbol];
       const logo = coin ? CoinLogos.get(coin.symbol, coin.color) : null;
       const amountClass = tx.direction === 'in' ? 'in' : (tx.direction === 'swap' ? '' : 'out');
       const prefix = tx.direction === 'in' ? '+' : (tx.direction === 'swap' ? '↔' : '-');
@@ -4420,7 +4336,7 @@ const History = {
         <div class="tx-details">
           <div class="tx-top">
             <span class="tx-amount ${amountClass}">${prefix}${Wallets.formatBalance(tx.amount)} ${tx.symbol}</span>
-            <span class="tx-time">${new Date(tx.timestamp).toLocaleString(I18N.current, { dateStyle: 'short', timeStyle: 'short' })}</span>
+            <span class="tx-time" dir="ltr">${new Date(tx.timestamp).toLocaleString(I18N.current, { dateStyle: 'short', timeStyle: 'short' })}</span>
           </div>
           <div class="tx-sub">
             ${tx.direction === 'in' ? 'From ' : 'To '}${String(tx.counterparty || 'unknown').substring(0, 28)}${tx.counterparty && tx.counterparty.length > 28 ? '...' : ''}
@@ -4437,6 +4353,7 @@ const History = {
     this.currentFilter = filter;
     document.querySelectorAll('.tx-filter').forEach(f => f.classList.toggle('active', f.dataset.filter === filter));
     Storage.set('history_filter', filter);
+    this._lastSignature = null;
     this.render();
   },
   
@@ -4444,6 +4361,7 @@ const History = {
     const txs = this.getAllTransactions();
     if (txs.length === 0) { vault.toast('No transactions to export', 'warn'); return; }
     const escapeCSV = (v) => {
+      if (v === null || v === undefined) return '""';
       let s = String(v);
       if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
       return `"${s.replace(/"/g, '""')}"`;
@@ -4451,11 +4369,8 @@ const History = {
     const headers = ['Date', 'Type', 'Symbol', 'Amount', 'Counterparty', 'Hash'];
     const rows = txs.map(tx => [
       new Date(tx.timestamp).toISOString(),
-      tx.direction,
-      tx.symbol,
-      tx.amount,
-      tx.counterparty || '',
-      tx.hash || ''
+      tx.direction, tx.symbol, tx.amount,
+      tx.counterparty || '', tx.hash || ''
     ]);
     const csv = [headers, ...rows].map(r => r.map(escapeCSV).join(',')).join('\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
@@ -4512,6 +4427,15 @@ const Send = {
   
   selectCoin(s) { this.selectedCoin = s; this.renderCoinSelector(); this.validate(); },
   
+  normalizeDigits(str) {
+    return String(str)
+      .replace(/[\u0660-\u0669]/g, d => String.fromCharCode(d.charCodeAt(0) - 0x0660 + 48))
+      .replace(/[\u06F0-\u06F9]/g, d => String.fromCharCode(d.charCodeAt(0) - 0x06F0 + 48))
+      .replace(/[\u0966-\u096F]/g, d => String.fromCharCode(d.charCodeAt(0) - 0x0966 + 48))
+      .replace(/[\uFF10-\uFF19]/g, d => String.fromCharCode(d.charCodeAt(0) - 0xFF10 + 48))
+      .replace(/\D/g, '');
+  },
+  
   validate() {
     const input = document.getElementById('send-to');
     const hint = document.getElementById('send-to-hint');
@@ -4540,14 +4464,6 @@ const Send = {
     }
   },
   
-  normalizeDigits(str) {
-    return str
-      .replace(/[\u0660-\u0669]/g, d => String.fromCharCode(d.charCodeAt(0) - 0x0660 + 48))
-      .replace(/[\u06F0-\u06F9]/g, d => String.fromCharCode(d.charCodeAt(0) - 0x06F0 + 48))
-      .replace(/[\u0966-\u096F]/g, d => String.fromCharCode(d.charCodeAt(0) - 0x0966 + 48))
-      .replace(/\D/g, '');
-  },
-  
   validateAmount(value) {
     if (!value) return { valid: false, error: '' };
     const n = parseFloat(value);
@@ -4571,9 +4487,13 @@ const Send = {
     const totalBal = wallet.accounts.reduce((s, a) => s + (Number(a.balance) || 0), 0);
     if (!Number.isFinite(totalBal) || totalBal < amount) { vault.toast(I18N.t('insufficient_balance'), 'error'); return; }
     
-    vault.armAutoScrubber(); // Reset inactivity timer
+    vault.armAutoScrubber();
     
     TwoFA.request(async () => {
+      // Re-check
+      const currentTotal = wallet.accounts.reduce((s, a) => s + (Number(a.balance) || 0), 0);
+      if (currentTotal < amount) { vault.toast('Balance changed — try again', 'error'); return; }
+      
       const account = wallet.accounts.find(a => (Number(a.balance) || 0) >= amount);
       if (!account) { vault.toast('No account with sufficient balance', 'error'); return; }
       
@@ -4605,6 +4525,7 @@ const Send = {
       await Wallets.save();
       await Wallets.render();
       await Wallets.renderWalletDetails(symbol);
+      History._lastSignature = null;
       History.render();
       
       vault.log(`Sent ${amount} ${symbol}`, 'success');
@@ -4621,13 +4542,7 @@ const Send = {
    PHONE LOOKUP
    ============================================================ */
 const PhoneLookup = {
-  normalizeDigits(str) {
-    return String(str)
-      .replace(/[\u0660-\u0669]/g, d => String.fromCharCode(d.charCodeAt(0) - 0x0660 + 48))
-      .replace(/[\u06F0-\u06F9]/g, d => String.fromCharCode(d.charCodeAt(0) - 0x06F0 + 48))
-      .replace(/[\u0966-\u096F]/g, d => String.fromCharCode(d.charCodeAt(0) - 0x0966 + 48))
-      .replace(/\D/g, '');
-  },
+  normalizeDigits(str) { return Send.normalizeDigits(str); },
   
   async lookup() {
     const countryCode = document.getElementById('lookup-country').value;
@@ -4639,9 +4554,7 @@ const PhoneLookup = {
     const idx = Storage.get('phone_index', {});
     const incoming = [];
     Object.entries(idx).forEach(([k, v]) => {
-      if (k === normalized || k === phone) {
-        v.forEach(tx => incoming.push(tx));
-      }
+      if (k === normalized || k === phone) v.forEach(tx => incoming.push(tx));
     });
     
     const myTxs = [];
@@ -4692,7 +4605,7 @@ const PhoneLookup = {
 };
 
 /* ============================================================
-   QR DOWNLOAD
+   QR
    ============================================================ */
 const QR = {
   download() {
@@ -4709,20 +4622,30 @@ const QR = {
 };
 
 /* ============================================================
-   2FA
+   2FA — Fixed double-execution (QA #118)
    ============================================================ */
 const TwoFA = {
   pendingCallback: null,
+  _isVerifying: false,
+  _autoTriggered: false,
+  
   async request(cb) {
     if (!Settings.data.fingerprint2FA) { await cb(); return; }
     this.pendingCallback = cb;
+    this._isVerifying = false;
+    this._autoTriggered = false;
     UI.openModal('modal-2fa');
-    // Auto-attempt
     setTimeout(() => {
-      if (this.pendingCallback) this.verify();
+      if (this.pendingCallback && !this._isVerifying && !this._autoTriggered) {
+        this._autoTriggered = true;
+        this.verify();
+      }
     }, 500);
   },
+  
   async verify() {
+    if (this._isVerifying) return;
+    this._isVerifying = true;
     const btn = document.getElementById('btn-2fa-verify');
     if (btn) { btn.disabled = true; btn.classList.add('loading'); }
     try {
@@ -4742,9 +4665,12 @@ const TwoFA = {
         await cb();
       }
     } finally {
+      this._isVerifying = false;
+      this._autoTriggered = false;
       if (btn) { btn.disabled = false; btn.classList.remove('loading'); }
     }
   },
+  
   async authenticatePasskey() {
     if (!window.PublicKeyCredential || !window.isSecureContext) {
       await new Promise(r => setTimeout(r, 600));
@@ -4755,8 +4681,6 @@ const TwoFA = {
       await new Promise(r => setTimeout(r, 600));
       return;
     }
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 35000);
     try {
       const challenge = secureRandomBytes(32);
       await navigator.credentials.get({
@@ -4768,13 +4692,16 @@ const TwoFA = {
           timeout: 30000
         }
       });
-    } catch (e) {
-      if (e.name !== 'AbortError') throw e;
-    } finally {
-      clearTimeout(timeoutId);
+    } catch (e) { 
+      if (e.name !== 'AbortError') await new Promise(r => setTimeout(r, 300));
     }
   },
-  cancel() { this.pendingCallback = null; }
+  
+  cancel() {
+    this.pendingCallback = null;
+    this._isVerifying = false;
+    this._autoTriggered = false;
+  }
 };
 
 /* ============================================================
@@ -4827,7 +4754,7 @@ const Profile = {
   },
   
   onUsernameInput(value) {
-    const sanitized = value.toLowerCase().replace(/[^a-z0-9_]/g, '');
+    const sanitized = value.toLowerCase().replace(/[^a-z0-9_\u0590-\u05FF\u0600-\u06FF]/g, '');
     const input = document.getElementById('edit-username');
     if (input.value !== sanitized) {
       const cursor = input.selectionStart;
@@ -4922,7 +4849,7 @@ const COUNTRY_CODES = [
 ];
 
 /* ============================================================
-   UI CONTROLLER
+   UI
    ============================================================ */
 const UI = {
   _focusTraps: new WeakMap(),
@@ -4935,7 +4862,6 @@ const UI = {
     m.classList.add('active');
     this._activeModal = m;
     this.trapFocus(m);
-    // Reset vault timer
     if (vault.isLoggedIn) vault.armAutoScrubber();
   },
   
@@ -4975,9 +4901,10 @@ const UI = {
       c.classList.toggle('active', c.dataset.tabContent === tabId);
     });
     if (tabId === 'swap') { Swap.renderCoinButtons(); Swap.renderDexComparison(); Swap.calculate(); }
-    if (tabId === 'history') History.render();
+    if (tabId === 'history') { History._lastSignature = null; History.render(); }
     if (tabId === 'send') Send.renderCoinSelector();
-    document.title = 'COFC GATE — ' + (I18N.t('tab_' + tabId) || 'Vault');
+    const tabName = I18N.t('tab_' + tabId) || 'Vault';
+    document.title = `${tabName} — COFC GATE`;
   },
   
   openProfileEdit() { Profile.openEdit(); },
@@ -4985,21 +4912,24 @@ const UI = {
 };
 
 /* ============================================================
-   LOGIN FLOW (FIX #89 - wallet opens only after full verification)
+   LOGIN FLOW — FIXED #155 — Wallet opens ONLY after verification
    ============================================================ */
 const LoginFlow = {
   _mutex: false,
+  _state: 'idle', // idle | scanning | verifying | opening | error
   
   async start() {
+    // CRITICAL: Prevent double execution
     if (this._mutex) return;
+    if (this._state !== 'idle' && this._state !== 'error') return;
     this._mutex = true;
+    this._state = 'scanning';
     
     const scanner = document.getElementById('face-scanner');
     const statusEl = document.getElementById('login-status');
-    const tapInd = document.getElementById('tap-indicator');
     const progressCircle = document.getElementById('progress-circle');
     
-    // CRITICAL: Reset ALL state at start
+    // CRITICAL: Reset ALL visual state at start
     const chips = {
       blink: document.getElementById('chip-blink'),
       turn: document.getElementById('chip-turn'),
@@ -5010,19 +4940,20 @@ const LoginFlow = {
     
     scanner.classList.remove('success', 'error');
     scanner.classList.add('scanning', 'disabled');
-    tapInd.style.display = 'none';
     statusEl.textContent = I18N.t('scan_starting');
     statusEl.className = 'login-status active';
     
     let faceEntropy = null;
     let livenessComplete = false;
+    let identity = null;
     
     try {
+      // ===== PRE-CHECK =====
       if (!window.isSecureContext) {
         throw new Error('HTTPS required. Open via https:// or http://localhost');
       }
       
-      // STEP 1: Camera + Liveness
+      // ===== STEP 1: Camera + Liveness (with strict state machine) =====
       try {
         await FaceLiveness.start();
         scanner.classList.add('camera-active');
@@ -5030,7 +4961,9 @@ const LoginFlow = {
         await new Promise(r => setTimeout(r, 1500));
         
         faceEntropy = await FaceLiveness.runLivenessCheck((progress) => {
-          if (!this._mutex) return; // stale callback guard
+          // Guard against stale callbacks
+          if (this._state !== 'scanning') return;
+          
           Object.values(chips).forEach(c => c.classList.remove('active', 'done'));
           const order = ['blink', 'turn', 'smile'];
           for (let i = 0; i < order.length; i++) {
@@ -5045,7 +4978,7 @@ const LoginFlow = {
           }
         });
         
-        // Verify entropy
+        // CRITICAL: Verify entropy
         if (!faceEntropy || !(faceEntropy instanceof Uint8Array) || faceEntropy.length !== 64) {
           throw new Error('Invalid biometric data');
         }
@@ -5056,27 +4989,34 @@ const LoginFlow = {
         if (progressCircle) progressCircle.style.strokeDashoffset = 0;
         statusEl.textContent = I18N.t('scan_done');
         statusEl.className = 'login-status success';
-      } catch (camError) {
-        DIAG.warn('LOGIN', 'Camera failed:', camError.message);
-        throw camError;
       } finally {
-        // CRITICAL: Always stop camera
+        // CRITICAL: ALWAYS stop camera
         FaceLiveness.stop();
         scanner.classList.remove('camera-active', 'scanning');
       }
       
-      // Guard: don't proceed without liveness
-      if (!livenessComplete) throw new Error('Liveness incomplete');
+      // CRITICAL: Guard — don't proceed without liveness
+      if (!livenessComplete || !faceEntropy) {
+        throw new Error('Liveness incomplete');
+      }
       
-      // STEP 2: Identity
+      // ===== STEP 2: Identity Verification =====
+      this._state = 'verifying';
       scanner.classList.add('success');
       statusEl.textContent = 'Verifying identity...';
       statusEl.className = 'login-status active';
       
-      const identity = await Identity.authenticate();
+      identity = await Identity.authenticate();
+      
+      // CRITICAL: Guard — must have identity
+      if (!identity || !identity.fingerprint) {
+        throw new Error('Identity verification failed');
+      }
+      
+      // Derive keys
       await vault.deriveKeysInRAM(faceEntropy);
       
-      // STEP 3: Load profile
+      // ===== STEP 3: Load Profile =====
       const existingProfile = Storage.get('profile');
       if (identity.isNew && !existingProfile) {
         const suffix = Math.floor(Math.random() * 9000) + 1000;
@@ -5089,26 +5029,33 @@ const LoginFlow = {
         vault.toast('👋 Welcome back', 'success');
       }
       
-      // STEP 4: Wait for UI to settle
-      await new Promise(r => setTimeout(r, 700));
-      
-      // STEP 5: Load wallets BEFORE showing dashboard
+      // ===== STEP 4: Load Wallets BEFORE showing dashboard =====
+      this._state = 'opening';
       await Wallets.init();
       await Wallets.render();
       await Wallets.renderPriceTicker();
       Send.renderCoinSelector();
+      History._lastSignature = null;
       History.render();
       
-      // CRITICAL: Only NOW show dashboard
+      // ===== STEP 5: Wait for UI to settle (CRITICAL for bug #155) =====
+      await new Promise(r => setTimeout(r, 700));
+      
+      // ===== STEP 6: Show dashboard ONLY when everything is ready =====
       document.getElementById('login-screen').style.display = 'none';
       document.getElementById('app-screen').classList.add('visible');
       document.getElementById('profile-header').classList.add('visible');
       document.getElementById('header-user').classList.add('visible');
       
+      // Reset state
+      this._state = 'idle';
       vault.log('System ready', 'info');
       
     } catch (e) {
       DIAG.error('LOGIN', 'Failed:', e.message);
+      this._state = 'error';
+      
+      // Full cleanup on error
       FaceLiveness.stop();
       scanner.classList.remove('scanning', 'camera-active');
       scanner.classList.add('error');
@@ -5121,14 +5068,19 @@ const LoginFlow = {
       
       setTimeout(() => {
         scanner.classList.remove('error', 'disabled');
-        tapInd.style.display = 'flex';
         statusEl.textContent = I18N.t('tap_start');
         statusEl.className = 'login-status';
+        this._state = 'idle';
       }, 3500);
     } finally {
       this._mutex = false;
-      if (scanner.classList.contains('disabled')) {
-        setTimeout(() => scanner.classList.remove('disabled'), 3500);
+      if (this._state === 'idle') {
+        scanner.classList.remove('disabled');
+      } else {
+        setTimeout(() => {
+          scanner.classList.remove('disabled');
+          if (this._state === 'error') this._state = 'idle';
+        }, 3500);
       }
     }
   }
@@ -5144,17 +5096,18 @@ function onReady(fn) {
 
 onReady(async () => {
   DIAG.log('UI', 'DOM ready');
+  
+  // I18N: Auto-detect only (no selector)
   I18N.init();
+  
   await Settings.init();
   await FaceLiveness.init();
   await Profile.init();
   
-  // Load display currency
   let savedCurr = 'usd';
   try { savedCurr = localStorage.getItem('cofc_v10_currency') || 'usd'; } catch (e) {}
   LivePrices.setCurrency(savedCurr);
   
-  // Load history filter
   const savedFilter = Storage.get('history_filter');
   if (savedFilter) {
     History.currentFilter = savedFilter;
@@ -5164,7 +5117,7 @@ onReady(async () => {
   const lc = document.getElementById('lookup-country');
   if (lc) lc.innerHTML = COUNTRY_CODES.map(c => `<option value="${c.code}">${c.flag} ${c.code}</option>`).join('');
   
-  // Loading animation
+  // Loading
   const overlay = document.getElementById('loading-overlay');
   const fill = document.getElementById('loading-bar-fill');
   const status = document.getElementById('loading-status');
@@ -5192,22 +5145,18 @@ onReady(async () => {
   }
   step();
   
-  // Safety timeout for overlay
   setTimeout(() => {
     if (overlay && !overlay.classList.contains('hidden')) {
       overlay.classList.add('hidden');
     }
   }, 8000);
   
-  // Login handlers
+  // Login — ONLY circle (no button below)
   const scanner = document.getElementById('face-scanner');
-  const tapInd = document.getElementById('tap-indicator');
   function start() { LoginFlow.start(); }
   scanner.addEventListener('click', start);
   scanner.addEventListener('touchend', (e) => { e.preventDefault(); start(); }, { passive: false });
   scanner.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); start(); } });
-  tapInd.addEventListener('click', start);
-  tapInd.addEventListener('touchend', (e) => { e.preventDefault(); start(); }, { passive: false });
   
   // Tabs
   document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -5311,7 +5260,7 @@ onReady(async () => {
     }
   });
   
-  // Activity tracking (debounced)
+  // Activity tracking
   let activityTimer = null;
   function resetActivity() {
     if (!vault.isLoggedIn) return;
@@ -5320,9 +5269,9 @@ onReady(async () => {
   }
   ['mousemove', 'keypress', 'touchstart', 'click', 'scroll'].forEach(evt => document.addEventListener(evt, resetActivity, { passive: true }));
   
-  // Visibility change with grace period + guard
+  // Visibility change
   document.addEventListener('visibilitychange', () => {
-    if (LoginFlow._mutex) return; // Don't interfere with login
+    if (LoginFlow._mutex) return;
     if (document.hidden && vault.isLoggedIn) {
       if (vault.graceTimer) clearTimeout(vault.graceTimer);
       vault.graceTimer = setTimeout(() => {
@@ -5333,18 +5282,12 @@ onReady(async () => {
       vault.graceTimer = null;
       vault.armAutoScrubber();
     }
-    // Resume camera if needed
     if (!document.hidden && FaceLiveness.active && FaceLiveness.video) {
       FaceLiveness.video.play().catch(() => {});
     }
   });
   
   window.addEventListener('beforeunload', () => vault.zeroizeMemory());
-  
-  // Register service worker (PWA)
-  if ('serviceWorker' in navigator && window.isSecureContext) {
-    // Note: inline SW not supported, this is a placeholder
-  }
   
   DIAG.log('UI', '✅ Ready');
 });
@@ -5362,4 +5305,4 @@ window.History = History;
 })();
 </script>
 </body>
-             </html>
+      </html>
