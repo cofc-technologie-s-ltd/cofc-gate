@@ -3,16 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>COFC GATE — Sovereign Vault</title>
+<title>COFC GATE v1.0 — Sovereign Quantum Vault</title>
 <meta name="theme-color" content="#F6EE25">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="description" content="COFC GATE — Sovereign Quantum Wallet · Post-Quantum Ready · Zero-Dependency">
+<meta name="description" content="COFC GATE v1.0 — Sovereign Quantum Vault · 256-Round Quantum Signatures · SHA3-512 · Post-Quantum Ready">
+<meta name="author" content="Aleksey Daniel Danilovich · COFC TECHNOLOGIES LTD">
+<meta name="copyright" content="© 2026 COFC TECHNOLOGIES LTD">
 
 <style>
 /* ============================================================
-   COFC GATE v16.0 — APEX STYLES
+   COFC GATE v1.0 — GENESIS SOVEREIGN STYLES
    ============================================================ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
@@ -33,7 +35,7 @@
   --t-base:250ms cubic-bezier(.4,0,.2,1);
   --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:24px;--r-full:9999px;
 }
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-size-adjust:100%}
 body{font-family:var(--font);background:var(--white);color:var(--dark);min-height:100vh;overflow-x:hidden;font-size:15px;line-height:1.5;background-image:radial-gradient(circle at 10% 0%,rgba(246,238,37,.06) 0%,transparent 40%),radial-gradient(circle at 90% 100%,rgba(70,70,80,.03) 0%,transparent 40%)}
 
 #app-screen{display:none}
@@ -140,7 +142,6 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 .btn-danger{background:transparent;color:var(--red);border:1.5px solid rgba(220,53,69,.3);box-shadow:none}
 .btn-danger:hover:not(:disabled){background:rgba(220,53,69,.05);border-color:var(--red)}
 .btn-sm{padding:10px 16px;font-size:12px}
-.btn-icon{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 .btn-spinner{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.25);border-top-color:var(--white);animation:spin .7s linear infinite;display:none}
 .btn-yellow .btn-spinner{border-color:rgba(70,70,80,.2);border-top-color:var(--dark)}
 .btn.loading .btn-spinner{display:inline-block}
@@ -269,6 +270,14 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 .warning-box svg{color:var(--red);flex-shrink:0;margin-top:2px;width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.5}
 .warning-box p{font-size:12px;color:var(--red);font-weight:700;line-height:1.5}
 
+.info-box{background:rgba(37,99,235,.05);padding:14px 16px;border-radius:var(--r-md);margin-bottom:18px;border:1px solid rgba(37,99,235,.2);display:flex;gap:10px;align-items:flex-start}
+.info-box svg{color:var(--blue);flex-shrink:0;margin-top:2px;width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.5}
+.info-box p{font-size:12px;color:var(--blue);font-weight:700;line-height:1.5}
+
+.quantum-box{background:linear-gradient(135deg,rgba(124,58,237,.05),rgba(37,99,235,.05));padding:14px 16px;border-radius:var(--r-md);margin-bottom:18px;border:1px solid rgba(124,58,237,.25);display:flex;gap:10px;align-items:flex-start}
+.quantum-box svg{color:var(--purple);flex-shrink:0;margin-top:2px;width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.5}
+.quantum-box p{font-size:12px;color:var(--purple);font-weight:700;line-height:1.5}
+
 .secret-reveal{padding:14px;background:rgba(220,53,69,.04);border:1px solid rgba(220,53,69,.2);border-radius:var(--r-sm);margin-top:10px;font-family:var(--mono);font-size:11px;word-break:break-all;line-height:1.7;font-weight:600}
 .secret-label{font-size:9px;color:var(--red);font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
 
@@ -333,6 +342,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 
 /* FOOTER */
 .footer{text-align:center;padding:28px 24px;color:var(--gray);font-size:10px;letter-spacing:1.5px;border-top:1px solid var(--gray-light);margin-top:48px;font-weight:800;text-transform:uppercase}
+.footer-sovereign{font-size:10px;color:var(--dark);font-weight:900;letter-spacing:.5px;line-height:1.7;margin-top:12px;font-family:var(--mono);white-space:pre-line}
 
 /* RESPONSIVE */
 @media(max-width:700px){
@@ -368,9 +378,9 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 <div class="loading-overlay" id="loading-overlay">
   <div class="loading-coin">₡</div>
   <div class="loading-title">COFC GATE</div>
-  <div class="loading-subtitle">Sovereign Apex v16</div>
+  <div class="loading-subtitle">Sovereign Quantum Vault v1.0</div>
   <div class="loading-bar"><div class="loading-bar-fill" id="loading-bar-fill"></div></div>
-  <div class="loading-status" id="loading-status">Initializing...</div>
+  <div class="loading-status" id="loading-status">Initializing Quantum Core...</div>
 </div>
 
 <!-- HEADER -->
@@ -380,7 +390,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
       <div class="brand-logo">C</div>
       <div class="brand-text">
         <span class="brand-name">COFC GATE</span>
-        <span class="brand-tagline">Sovereign Apex v16</span>
+        <span class="brand-tagline">Sovereign Quantum Vault v1.0</span>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
@@ -390,7 +400,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
       </div>
       <div class="status-indicator">
         <span class="status-dot"></span>
-        <span>SECURE</span>
+        <span>QUANTUM SECURE</span>
       </div>
     </div>
   </div>
@@ -401,9 +411,9 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 <!-- LOGIN -->
 <div id="login-screen">
   <div class="login-card">
-    <div class="login-badge">🔐 Sovereign Identity</div>
-    <h1 class="login-title">Liveness Verification</h1>
-    <p class="login-subtitle">Biometric Factor · WebAuthn-Ready · E2E Encrypted</p>
+    <div class="login-badge">⚛️ Sovereign Quantum Identity</div>
+    <h1 class="login-title">Quantum Liveness Verification</h1>
+    <p class="login-subtitle">256-Round Quantum Signature · SHA3-512 · AES-256-GCM</p>
 
     <div class="face-scanner-wrap">
       <div class="face-scanner" id="face-scanner" role="button" tabindex="0" aria-label="Face scanner">
@@ -450,7 +460,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
     <div class="login-status" id="login-status">Tap the circle to begin</div>
 
     <div class="login-hint">
-      <span class="login-hint-badge">🎥 Liveness</span>
+      <span class="login-hint-badge">⚛️ 256-Round Quantum</span>
       <span class="login-hint-badge">🔐 PBKDF2-600K</span>
       <span class="login-hint-badge">🔒 AES-256-GCM</span>
     </div>
@@ -465,7 +475,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
       <div class="profile-name"><span id="profile-display-name">User</span></div>
       <div class="profile-username" id="profile-username">@sovereign</div>
       <div class="profile-meta">
-        <span class="profile-meta-item">🎥 Verified</span>
+        <span class="profile-meta-item">⚛️ Quantum Verified</span>
         <span class="profile-meta-item" id="profile-wallet-count">0 wallets</span>
       </div>
     </div>
@@ -648,8 +658,8 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
       </div>
       <div class="setting-row">
         <div class="setting-info">
-          <div class="setting-title">Audit Logging</div>
-          <div class="setting-desc">Sign all transactions with ECDSA</div>
+          <div class="setting-title">Quantum Audit Chain</div>
+          <div class="setting-desc">Sign all operations with quantum signature</div>
         </div>
         <button class="setting-toggle active" id="toggle-audit" data-setting="auditLogging"></button>
       </div>
@@ -660,13 +670,21 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
   </div>
 </div>
 
+<!-- FOOTER -->
 <footer class="footer">
-  <div>COFC TECHNOLOGIES LTD — SOVEREIGN APEX v16.0</div>
-  <div style="margin-top:4px">© 2026 ALL RIGHTS RESERVED</div>
+  <div>COFC TECHNOLOGIES LTD — SOVEREIGN QUANTUM VAULT v1.0</div>
+  <div class="footer-sovereign">BEST REGARDS,
+ALEKSEY DANIEL DANILOVICH AND MY WIVES
+THE KING AND THE QUEENS OF TEVEL
+WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
+
+5 OCTOBER 2026 · 5:55 PM · REAL JERUSALEM TIME</div>
+  <div style="margin-top:12px">© 2026 COFC TECHNOLOGIES LTD — ALL RIGHTS RESERVED</div>
 </footer>
 
 <!-- MODALS -->
 
+<!-- Add Coin -->
 <div class="modal" id="modal-add-coin">
   <div class="modal-content">
     <div class="modal-header">
@@ -678,6 +696,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
   </div>
 </div>
 
+<!-- Coin Picker -->
 <div class="modal" id="modal-coin-picker">
   <div class="modal-content">
     <div class="modal-header">
@@ -689,6 +708,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
   </div>
 </div>
 
+<!-- Wallet Details -->
 <div class="modal" id="modal-wallet-details">
   <div class="modal-content">
     <div class="modal-header">
@@ -704,6 +724,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
   </div>
 </div>
 
+<!-- Receive -->
 <div class="modal" id="modal-receive">
   <div class="modal-content">
     <div class="modal-header">
@@ -723,13 +744,18 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
   </div>
 </div>
 
+<!-- Triple-Auth -->
 <div class="modal" id="modal-triple-auth">
   <div class="modal-content" style="max-width:480px">
     <div class="modal-header">
-      <div class="modal-title" style="color:var(--red)">🔒 Triple-Auth Required</div>
+      <div class="modal-title" style="color:var(--red)">🔒 Quantum Triple-Auth Required</div>
       <button class="modal-close" data-close="modal-triple-auth">&times;</button>
     </div>
     <div>
+      <div class="quantum-box">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+        <p>3-factor verification with quantum signature binding. This action is permanently logged.</p>
+      </div>
       <div style="text-align:center;padding:10px 0 20px">
         <div style="font-size:11px;color:var(--gray);font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px">Step 1 of 3 — Password</div>
         <input type="password" class="form-input" id="triple-auth-password" placeholder="Enter wallet password" autocomplete="off" style="text-align:center;font-size:16px">
@@ -737,7 +763,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
       </div>
       <div style="display:flex;align-items:center;gap:8px;padding:12px;background:rgba(220,53,69,.04);border-radius:8px;margin-bottom:8px;font-size:11px">
         <span style="width:24px;height:24px;background:var(--gray-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:10px">2</span>
-        <span style="color:var(--gray);font-weight:700">Biometric verification</span>
+        <span style="color:var(--gray);font-weight:700">Biometric + Quantum signature</span>
       </div>
       <div style="display:flex;align-items:center;gap:8px;padding:12px;background:rgba(220,53,69,.04);border-radius:8px;margin-bottom:18px;font-size:11px">
         <span style="width:24px;height:24px;background:var(--gray-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:10px">3</span>
@@ -751,10 +777,11 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
   </div>
 </div>
 
+<!-- Confirm Reveal -->
 <div class="modal" id="modal-confirm-reveal">
   <div class="modal-content" style="max-width:440px">
     <div class="modal-header">
-      <div class="modal-title" style="color:var(--red)">⚠️ Final Confirmation</div>
+      <div class="modal-title" style="color:var(--red)">⚠️ Final Quantum Confirmation</div>
     </div>
     <div class="warning-box">
       <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
@@ -767,6 +794,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
   </div>
 </div>
 
+<!-- Reveal Secret -->
 <div class="modal" id="modal-reveal-secret">
   <div class="modal-content">
     <div class="modal-header">
@@ -775,23 +803,24 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
     </div>
     <div class="warning-box">
       <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
-      <p>Never share these secrets. This action is logged.</p>
+      <p>Never share these secrets. This action is logged with quantum signature.</p>
     </div>
     <div id="reveal-secret-content"></div>
   </div>
 </div>
 
+<!-- 2FA -->
 <div class="modal" id="modal-2fa">
   <div class="modal-content" style="max-width:420px">
     <div class="modal-header">
-      <div class="modal-title">🔐 Biometric Confirmation</div>
+      <div class="modal-title">⚛️ Quantum Biometric Confirmation</div>
     </div>
     <div style="text-align:center;padding:20px 0">
-      <div style="width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--yellow-dark));margin:0 auto 18px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-yellow);font-size:40px">🧬</div>
-      <div style="font-size:15px;font-weight:900;margin-bottom:8px">Liveness Check</div>
-      <div style="font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:20px;font-weight:600">Look at the camera and blink when prompted</div>
+      <div style="width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--blue));margin:0 auto 18px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(124,58,237,.35);font-size:40px">⚛️</div>
+      <div style="font-size:15px;font-weight:900;margin-bottom:8px">Quantum Liveness Check</div>
+      <div style="font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:20px;font-weight:600">Look at the camera. Blink when prompted.<br>Your biometric generates a 256-round quantum signature.</div>
       <button class="btn btn-yellow" id="btn-2fa-verify">
-        <span class="btn-label">Start Verification</span>
+        <span class="btn-label">Start Quantum Verification</span>
         <span class="btn-spinner"></span>
       </button>
       <button class="btn btn-outline btn-sm" id="btn-2fa-cancel" style="margin-top:8px">
@@ -801,6 +830,53 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
   </div>
 </div>
 
+<!-- Set Password (first-time) -->
+<div class="modal" id="modal-set-password">
+  <div class="modal-content" style="max-width:480px">
+    <div class="modal-header">
+      <div class="modal-title">⚛️ Create Master Password</div>
+    </div>
+    <div class="quantum-box">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+      <p>Your vault will be protected by a 256-round quantum signature derived from this password + your biometric.</p>
+    </div>
+    <div style="text-align:center;padding:10px 0 20px">
+      <input type="password" class="form-input" id="set-password-1" placeholder="Password (min 12 chars)" autocomplete="new-password" style="text-align:center;font-size:16px">
+      <input type="password" class="form-input" id="set-password-2" placeholder="Confirm password" autocomplete="new-password" style="text-align:center;font-size:16px">
+      <div class="form-hint" id="set-password-hint" style="min-height:20px"></div>
+    </div>
+    <div class="warning-box">
+      <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+      <p>If you lose this password, your funds cannot be recovered. Store it safely offline.</p>
+    </div>
+    <button class="btn btn-yellow" id="btn-set-password">
+      <span class="btn-label">Create Quantum Vault</span>
+      <span class="btn-spinner"></span>
+    </button>
+  </div>
+</div>
+
+<!-- Existing Password (returning) -->
+<div class="modal" id="modal-existing-password">
+  <div class="modal-content" style="max-width:440px">
+    <div class="modal-header">
+      <div class="modal-title">⚛️ Quantum Access</div>
+    </div>
+    <div style="text-align:center;padding:10px 0 20px">
+      <div style="font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:20px;font-weight:600">
+        Quantum signature verified. Now enter your master password.
+      </div>
+      <input type="password" class="form-input" id="existing-password-input" placeholder="Password" autocomplete="current-password" style="text-align:center;font-size:16px">
+      <div class="form-hint" id="existing-password-hint" style="min-height:20px"></div>
+    </div>
+    <button class="btn btn-yellow" id="btn-existing-password">
+      <span class="btn-label">Unlock Quantum Vault</span>
+      <span class="btn-spinner"></span>
+    </button>
+  </div>
+</div>
+
 <script src="gate.js" defer></script>
+<script src="patch.js" defer></script>
 </body>
-</html>
+   </html>
