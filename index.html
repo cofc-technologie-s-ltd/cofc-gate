@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>COFC GATE v15.0 — Sovereign Apex</title>
+<title>COFC GATE — Sovereign Vault</title>
 <meta name="theme-color" content="#F6EE25">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://raw.githubusercontent.com https://cofc.io; connect-src 'self' https://api.coingecko.com; font-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'; worker-src 'self' blob:;">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="COFC GATE — Sovereign Quantum Wallet · Post-Quantum Ready · Zero-Dependency">
 
 <style>
 /* ============================================================
-   COFC GATE v15.0 — APEX STYLES
+   COFC GATE v16.0 — APEX STYLES
    ============================================================ */
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
   --yellow:#F6EE25;--yellow-dark:#D4CB00;--yellow-light:#FCF77A;
   --dark:#464650;--dark-deep:#2E2E36;--dark-soft:#5A5A68;
@@ -21,35 +22,38 @@
   --green:#16A34A;--red:#DC3545;--blue:#2563EB;--amber:#D97706;--purple:#7C3AED;
   --font:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
   --mono:'SF Mono','Cascadia Code','JetBrains Mono','Consolas',monospace;
-  --xs:0 1px 2px rgba(70,70,80,.04);--sm:0 2px 8px rgba(70,70,80,.06);
-  --md:0 4px 20px rgba(70,70,80,.08);--lg:0 12px 40px rgba(70,70,80,.12);
-  --xl:0 24px 80px rgba(70,70,80,.16);
-  --yellow-shadow:0 8px 32px rgba(246,238,37,.35);
+  --shadow-xs:0 1px 2px rgba(70,70,80,.04);
+  --shadow-sm:0 2px 8px rgba(70,70,80,.06);
+  --shadow-md:0 4px 20px rgba(70,70,80,.08);
+  --shadow-lg:0 12px 40px rgba(70,70,80,.12);
+  --shadow-xl:0 24px 80px rgba(70,70,80,.16);
+  --shadow-yellow:0 8px 32px rgba(246,238,37,.35);
+  --shadow-yellow-lg:0 16px 56px rgba(246,238,37,.5);
   --t-fast:150ms cubic-bezier(.4,0,.2,1);
   --t-base:250ms cubic-bezier(.4,0,.2,1);
   --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:24px;--r-full:9999px;
 }
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-size-adjust:100%}
 body{font-family:var(--font);background:var(--white);color:var(--dark);min-height:100vh;overflow-x:hidden;font-size:15px;line-height:1.5;background-image:radial-gradient(circle at 10% 0%,rgba(246,238,37,.06) 0%,transparent 40%),radial-gradient(circle at 90% 100%,rgba(70,70,80,.03) 0%,transparent 40%)}
-#app-screen{display:none!important}
-#app-screen.visible{display:block!important}
-.profile-header{display:none!important}
-.profile-header.visible{display:flex!important}
-.header-user{display:none!important}
-.header-user.visible{display:flex!important}
+
+#app-screen{display:none}
+#app-screen.visible{display:block}
+.profile-header{display:none}
+.profile-header.visible{display:flex}
+.header-user{display:none}
+.header-user.visible{display:flex}
 
 /* LOADING */
 .loading-overlay{position:fixed;inset:0;background:var(--white);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s ease,visibility .5s ease;padding:20px}
 .loading-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.loading-coin{width:100px;height:100px;object-fit:contain;margin-bottom:28px;animation:coinSpin 2s cubic-bezier(.4,0,.2,1) infinite;filter:drop-shadow(0 16px 40px rgba(246,238,37,.5))}
-.loading-coin-fallback{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--yellow-dark));display:none;align-items:center;justify-content:center;color:var(--dark);font-weight:900;font-size:46px;margin-bottom:28px;animation:coinSpin 2s cubic-bezier(.4,0,.2,1) infinite;box-shadow:var(--yellow-shadow)}
+.loading-coin{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--yellow-dark));display:flex;align-items:center;justify-content:center;color:var(--dark);font-weight:900;font-size:46px;margin-bottom:28px;animation:coinSpin 2s cubic-bezier(.4,0,.2,1) infinite;box-shadow:var(--shadow-yellow)}
 @keyframes coinSpin{0%{transform:translateY(0) rotateY(0) scale(1)}40%{transform:translateY(-20px) rotateY(540deg) scale(1.05)}60%{transform:translateY(-20px) rotateY(720deg) scale(1.05)}100%{transform:translateY(0) rotateY(1080deg) scale(1)}}
-.loading-title{font-size:30px;font-weight:900;color:var(--dark);letter-spacing:-.8px;margin-bottom:6px}
+.loading-title{font-size:30px;font-weight:900;letter-spacing:-.8px;margin-bottom:6px}
 .loading-subtitle{font-size:10px;color:var(--gray);letter-spacing:3px;text-transform:uppercase;font-weight:800;margin-bottom:36px}
-.loading-bar{width:340px;height:3px;background:var(--gray-light);border-radius:2px;overflow:hidden}
+.loading-bar{width:340px;max-width:90vw;height:3px;background:var(--gray-light);border-radius:2px;overflow:hidden}
 .loading-bar-fill{height:100%;width:0;background:linear-gradient(90deg,var(--yellow-dark),var(--yellow),var(--yellow-light),var(--yellow));background-size:200% 100%;transition:width .3s ease;animation:goldFlow 1.5s linear infinite}
 @keyframes goldFlow{0%,100%{background-position:0 0}100%{background-position:200% 0}}
-.loading-status{margin-top:18px;font-size:11px;color:var(--dark);font-family:var(--mono);font-weight:600;min-height:14px}
+.loading-status{margin-top:18px;font-size:11px;color:var(--dark);font-family:var(--mono);font-weight:600;min-height:14px;text-align:center}
 
 /* HEADER */
 .header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--gray-light)}
@@ -71,30 +75,30 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 
 /* LOGIN */
 #login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 80px);padding:30px 20px}
-.login-card{width:100%;max-width:560px;background:var(--white);border:1px solid var(--gray-light);border-radius:var(--r-xl);padding:40px 36px 32px;box-shadow:var(--xl);position:relative;overflow:hidden;text-align:center}
+.login-card{width:100%;max-width:560px;background:var(--white);border:1px solid var(--gray-light);border-radius:var(--r-xl);padding:40px 36px 32px;box-shadow:var(--shadow-xl);position:relative;overflow:hidden;text-align:center}
 .login-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--yellow),var(--yellow-light),var(--yellow));background-size:200% 100%;animation:goldShimmer 3s ease-in-out infinite}
 @keyframes goldShimmer{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
 .login-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;background:rgba(246,238,37,.15);border:1px solid rgba(212,203,0,.4);border-radius:var(--r-full);font-size:10px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:16px}
 .login-title{font-size:28px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px}
 .login-subtitle{font-size:12px;color:var(--gray);font-weight:600;margin-bottom:32px}
 
-.face-scanner-wrap{width:300px;height:300px;margin:0 auto 24px;position:relative}
-.face-scanner{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,var(--ghost),var(--gray-light));border:5px solid var(--gray-light);box-shadow:var(--lg);transition:all var(--t-base);cursor:pointer;display:flex;align-items:center;justify-content:center}
-.face-scanner:hover{border-color:var(--yellow);box-shadow:0 16px 56px rgba(246,238,37,.5);transform:scale(1.02)}
+.face-scanner-wrap{width:300px;height:300px;margin:0 auto 24px;position:relative;max-width:80vw}
+.face-scanner{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,var(--ghost),var(--gray-light));border:5px solid var(--gray-light);box-shadow:var(--shadow-lg);transition:all var(--t-base);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.face-scanner:hover{border-color:var(--yellow);box-shadow:var(--shadow-yellow-lg);transform:scale(1.02)}
 .face-scanner:active{transform:scale(.98)}
 .face-scanner.disabled{pointer-events:none;opacity:.6}
 .face-scanner video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:none;position:absolute;inset:0}
 .face-scanner.camera-active video{display:block}
 .face-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity var(--t-base);z-index:2}
 .face-scanner.camera-active .face-placeholder{opacity:0;pointer-events:none}
-.guide-avatar{width:170px;height:170px}
+.guide-avatar{width:170px;height:170px;max-width:60%}
 .guide-face{animation:guideBob 2.5s ease-in-out infinite;transform-origin:100px 100px}
 .guide-eyes{animation:guideBlink 3.5s ease-in-out infinite}
 @keyframes guideBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 @keyframes guideBlink{0%,42%,58%,100%{transform:scaleY(1)}50%{transform:scaleY(.1)}}
 
 .instruction-chips{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10}
-.instruction-chip{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;background:var(--white);border:2px solid var(--gray-light);border-radius:var(--r-full);font-size:10px;font-weight:800;box-shadow:var(--sm);transition:all var(--t-base);white-space:nowrap}
+.instruction-chip{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;background:var(--white);border:2px solid var(--gray-light);border-radius:var(--r-full);font-size:10px;font-weight:800;box-shadow:var(--shadow-sm);transition:all var(--t-base);white-space:nowrap}
 .instruction-chip.active{border-color:var(--yellow);background:var(--yellow);box-shadow:0 4px 12px rgba(246,238,37,.4);transform:translateY(-4px)}
 .instruction-chip.done{border-color:var(--green);background:rgba(22,163,74,.1);color:var(--green)}
 
@@ -113,7 +117,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 .video-progress circle{fill:none;stroke-width:5;stroke-linecap:round}
 .video-progress .bg{stroke:var(--gray-light)}
 .video-progress .fill{stroke:var(--yellow);stroke-dasharray:942;stroke-dashoffset:942;transition:stroke-dashoffset .3s ease;filter:drop-shadow(0 0 8px rgba(246,238,37,.7))}
-.face-scanner.success{border-color:var(--green);box-shadow:0 0 0 8px rgba(22,163,74,.15),0 16px 56px rgba(246,238,37,.5)}
+.face-scanner.success{border-color:var(--green);box-shadow:0 0 0 8px rgba(22,163,74,.15),var(--shadow-yellow-lg)}
 .face-scanner.success .video-progress .fill{stroke:var(--green)}
 .face-scanner.error{animation:errorShake .5s ease}
 @keyframes errorShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
@@ -125,12 +129,12 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 .login-hint-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;background:var(--ghost);border-radius:var(--r-full);font-size:9px;font-family:var(--mono);font-weight:800}
 
 /* BUTTONS */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px 24px;background:var(--dark);color:var(--white);border:none;border-radius:var(--r-md);font-family:var(--font);font-size:14px;font-weight:800;letter-spacing:.3px;cursor:pointer;transition:all var(--t-base);position:relative;overflow:hidden;margin-bottom:12px;box-shadow:var(--sm);touch-action:manipulation}
-.btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:var(--md);background:var(--dark-deep)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px 24px;background:var(--dark);color:var(--white);border:none;border-radius:var(--r-md);font-family:var(--font);font-size:14px;font-weight:800;letter-spacing:.3px;cursor:pointer;transition:all var(--t-base);position:relative;overflow:hidden;margin-bottom:12px;box-shadow:var(--shadow-sm);touch-action:manipulation}
+.btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:var(--shadow-md);background:var(--dark-deep)}
 .btn:active:not(:disabled){transform:translateY(0)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
-.btn-yellow{background:linear-gradient(135deg,var(--yellow),var(--yellow-dark));color:var(--dark);font-weight:900;box-shadow:var(--yellow-shadow)}
-.btn-yellow:hover:not(:disabled){background:linear-gradient(135deg,var(--yellow-light),var(--yellow));box-shadow:0 16px 56px rgba(246,238,37,.5)}
+.btn-yellow{background:linear-gradient(135deg,var(--yellow),var(--yellow-dark));color:var(--dark);font-weight:900;box-shadow:var(--shadow-yellow)}
+.btn-yellow:hover:not(:disabled){background:linear-gradient(135deg,var(--yellow-light),var(--yellow));box-shadow:var(--shadow-yellow-lg)}
 .btn-outline{background:transparent;color:var(--dark);border:1.5px solid var(--gray-light);box-shadow:none}
 .btn-outline:hover:not(:disabled){border-color:var(--yellow);background:rgba(246,238,37,.08)}
 .btn-danger{background:transparent;color:var(--red);border:1.5px solid rgba(220,53,69,.3);box-shadow:none}
@@ -145,8 +149,8 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* PROFILE */
-.profile-header{align-items:center;gap:20px;padding:20px 24px;background:linear-gradient(135deg,var(--white),var(--ghost));border:1px solid var(--gray-light);border-radius:var(--r-lg);margin-bottom:20px;box-shadow:var(--xs);position:relative}
-.profile-avatar{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--yellow-dark));display:flex;align-items:center;justify-content:center;color:var(--dark);font-weight:900;font-size:32px;border:3px solid var(--white);box-shadow:var(--md);flex-shrink:0}
+.profile-header{align-items:center;gap:20px;padding:20px 24px;background:linear-gradient(135deg,var(--white),var(--ghost));border:1px solid var(--gray-light);border-radius:var(--r-lg);margin-bottom:20px;box-shadow:var(--shadow-xs);position:relative}
+.profile-avatar{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--yellow-dark));display:flex;align-items:center;justify-content:center;color:var(--dark);font-weight:900;font-size:32px;border:3px solid var(--white);box-shadow:var(--shadow-md);flex-shrink:0}
 .profile-info{flex:1;min-width:0}
 .profile-name{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:900;letter-spacing:-.3px;margin-bottom:4px;flex-wrap:wrap}
 .profile-username{font-size:13px;color:var(--gray);font-weight:700;font-family:var(--mono);margin-bottom:6px}
@@ -157,7 +161,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 .profile-action-btn:hover{border-color:var(--yellow);background:rgba(246,238,37,.08)}
 
 /* TABS */
-.tabs-nav{display:flex;gap:4px;margin-bottom:20px;padding:4px;background:var(--white);border:1px solid var(--gray-light);border-radius:var(--r-md);overflow-x:auto;scrollbar-width:none;box-shadow:var(--xs)}
+.tabs-nav{display:flex;gap:4px;margin-bottom:20px;padding:4px;background:var(--white);border:1px solid var(--gray-light);border-radius:var(--r-md);overflow-x:auto;scrollbar-width:none;box-shadow:var(--shadow-xs)}
 .tabs-nav::-webkit-scrollbar{display:none}
 .tab-btn{padding:10px 18px;background:transparent;border:none;border-radius:var(--r-sm);font-family:var(--font);font-size:12px;font-weight:800;color:var(--gray);cursor:pointer;transition:all var(--t-fast);display:inline-flex;align-items:center;gap:6px;white-space:nowrap;flex-shrink:0}
 .tab-btn.active{background:var(--yellow);color:var(--dark)}
@@ -170,8 +174,8 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 @media(max-width:900px){.grid-2{grid-template-columns:1fr}}
 
-.panel{background:var(--white);border:1px solid var(--gray-light);border-radius:var(--r-lg);padding:22px;box-shadow:var(--xs);transition:all var(--t-base)}
-.panel:hover{border-color:rgba(246,238,37,.5);box-shadow:var(--md)}
+.panel{background:var(--white);border:1px solid var(--gray-light);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow-xs);transition:all var(--t-base)}
+.panel:hover{border-color:rgba(246,238,37,.5);box-shadow:var(--shadow-md)}
 .panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--gray-light)}
 .panel-title{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:900;display:flex;align-items:center;gap:10px}
 
@@ -180,11 +184,10 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 .wallet-item{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--gray-light);transition:all var(--t-fast);cursor:pointer}
 .wallet-item:last-child{border-bottom:none}
 .wallet-item:hover{background:var(--ghost);margin:0 -8px;padding-left:12px;padding-right:12px;border-radius:var(--r-sm)}
-.wallet-icon{width:44px;height:44px;border-radius:50%;flex-shrink:0;position:relative;overflow:hidden;background:var(--ghost);display:flex;align-items:center;justify-content:center}
-.wallet-icon img{width:100%;height:100%;object-fit:contain;padding:6px;display:block}
+.wallet-icon{width:44px;height:44px;border-radius:50%;flex-shrink:0;position:relative;overflow:hidden;background:var(--ghost);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#fff}
 .wallet-info{flex:1;min-width:0}
 .wallet-name{display:flex;align-items:center;gap:8px;font-weight:900;font-size:14px;margin-bottom:3px}
-.wallet-count{font-size:10px;padding:2px 6px;background:var(--yellow);border-radius:var(--r-full);font-weight:800}
+.wallet-count{font-size:10px;padding:2px 6px;background:var(--yellow);border-radius:var(--r-full);font-weight:800;color:var(--dark)}
 .wallet-network{font-size:10px;color:var(--gray);letter-spacing:.5px;font-weight:700}
 .wallet-balance{text-align:right;font-weight:900;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:13px;flex-shrink:0;direction:ltr}
 .wallet-balance-usd{font-size:10px;color:var(--gray);font-weight:700;text-align:right;margin-top:2px}
@@ -200,12 +203,6 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 .form-hint.valid{color:var(--green)}
 .form-label{display:block;font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
 
-/* PHONE INPUT — FULL PREFIX LIST */
-.phone-input-wrap{display:flex;gap:8px;margin-bottom:12px;position:relative}
-.country-select{width:170px;flex-shrink:0;padding:13px 10px;background:var(--white);border:1.5px solid var(--gray-light);border-radius:var(--r-sm);font-family:var(--mono);font-size:12px;font-weight:800;color:var(--dark);cursor:pointer;outline:none;appearance:none;background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B6B78' stroke-width='2.5'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right 10px center;background-size:14px;padding-right:32px}
-.country-select:focus{border-color:var(--yellow-dark);box-shadow:0 0 0 3px rgba(246,238,37,.25)}
-.phone-input{flex:1;margin-bottom:0;font-family:var(--mono);font-size:16px;letter-spacing:.5px}
-
 /* SWAP */
 .swap-container{background:linear-gradient(135deg,var(--white),var(--ghost));border:1.5px solid var(--gray-light);border-radius:var(--r-lg);padding:14px}
 .swap-row{position:relative;padding:12px;background:var(--white);border:1.5px solid var(--gray-light);border-radius:var(--r-md);margin-bottom:6px;transition:border-color var(--t-fast)}
@@ -216,11 +213,10 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 .swap-amount::placeholder{color:var(--gray)}
 .swap-coin-btn{display:flex;align-items:center;gap:5px;padding:5px 8px;background:var(--ghost);border:1.5px solid var(--gray-light);border-radius:var(--r-full);cursor:pointer;transition:all var(--t-fast);flex-shrink:0}
 .swap-coin-btn:hover{border-color:var(--yellow);background:rgba(246,238,37,.1)}
-.swap-coin-icon{width:24px;height:24px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;background:var(--ghost)}
-.swap-coin-icon img{width:100%;height:100%;object-fit:contain;padding:3px;display:block}
+.swap-coin-icon{width:24px;height:24px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--ghost);font-weight:900;font-size:10px;color:#fff}
 .swap-coin-name{font-size:12px;font-weight:900}
-.swap-flip-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;background:var(--yellow);border:3px solid var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:all var(--t-fast);box-shadow:var(--sm);margin-top:-16px}
-.swap-flip-btn:hover{transform:translate(-50%,-50%) rotate(180deg);box-shadow:var(--yellow-shadow)}
+.swap-flip-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;background:var(--yellow);border:3px solid var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:all var(--t-fast);box-shadow:var(--shadow-sm);margin-top:-16px}
+.swap-flip-btn:hover{transform:translate(-50%,-50%) rotate(180deg);box-shadow:var(--shadow-yellow)}
 .swap-flip-btn svg{width:14px;height:14px;stroke:var(--dark);fill:none;stroke-width:2.5}
 .swap-presets{display:flex;gap:4px;margin-top:6px}
 .swap-preset{flex:1;padding:5px 4px;background:var(--ghost);border:1px solid var(--gray-light);border-radius:6px;font-size:9px;font-weight:800;cursor:pointer;transition:all var(--t-fast);font-family:var(--font)}
@@ -233,7 +229,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 /* DEX */
 .dex-selector{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px;margin-top:12px}
 .dex-card{padding:8px 6px;background:var(--white);border:1.5px solid var(--gray-light);border-radius:var(--r-sm);cursor:pointer;transition:all var(--t-fast);text-align:center;min-width:0}
-.dex-card:hover{border-color:var(--yellow);transform:translateY(-2px);box-shadow:var(--sm)}
+.dex-card:hover{border-color:var(--yellow);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
 .dex-card.active{border-color:var(--yellow-dark);background:rgba(246,238,37,.15);box-shadow:0 0 0 3px rgba(246,238,37,.25)}
 .dex-name{font-size:11px;font-weight:900;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dex-rate{font-size:9px;font-weight:800;color:var(--gray);font-family:var(--mono);direction:ltr;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -262,7 +258,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 /* MODALS */
 .modal{position:fixed;inset:0;background:rgba(70,70,80,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity var(--t-base),visibility var(--t-base)}
 .modal.active{opacity:1;visibility:visible}
-.modal-content{background:var(--white);border-radius:var(--r-xl);max-width:540px;width:100%;max-height:90vh;overflow-y:auto;padding:24px;box-shadow:var(--xl);animation:modalSlide .35s cubic-bezier(.34,1.56,.64,1);scrollbar-width:thin}
+.modal-content{background:var(--white);border-radius:var(--r-xl);max-width:540px;width:100%;max-height:90vh;overflow-y:auto;padding:24px;box-shadow:var(--shadow-xl);animation:modalSlide .35s cubic-bezier(.34,1.56,.64,1);scrollbar-width:thin}
 @keyframes modalSlide{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
 .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--gray-light)}
 .modal-title{font-size:17px;font-weight:900;letter-spacing:-.3px;display:flex;align-items:center;gap:10px}
@@ -277,13 +273,13 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 .secret-label{font-size:9px;color:var(--red);font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
 
 /* QR */
-.qr-canvas-wrap{width:240px;height:240px;margin:0 auto 14px;background:var(--white);border-radius:var(--r-md);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:var(--md);padding:10px}
+.qr-canvas-wrap{width:240px;height:240px;margin:0 auto 14px;background:var(--white);border-radius:var(--r-md);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:var(--shadow-md);padding:10px;max-width:80vw;max-height:80vw}
 .qr-canvas-wrap canvas{width:100%;height:100%;image-rendering:pixelated}
 .qr-logo-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50px;height:50px;border-radius:50%;background:var(--white);padding:6px;box-shadow:0 2px 8px rgba(70,70,80,.2);display:flex;align-items:center;justify-content:center;pointer-events:none;font-weight:900;font-size:22px;color:var(--dark)}
 
 /* SETTINGS */
 .setting-row{display:flex;align-items:center;justify-content:space-between;padding:16px;background:var(--white);border:1px solid var(--gray-light);border-radius:var(--r-md);margin-bottom:10px;transition:all var(--t-fast);gap:12px}
-.setting-row:hover{border-color:var(--yellow);box-shadow:var(--xs)}
+.setting-row:hover{border-color:var(--yellow);box-shadow:var(--shadow-xs)}
 .setting-info{flex:1;min-width:0}
 .setting-title{font-size:14px;font-weight:900;margin-bottom:4px}
 .setting-desc{font-size:11px;color:var(--gray);font-weight:600;line-height:1.5}
@@ -293,8 +289,8 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 .setting-toggle.active::after{left:calc(100% - 27px)}
 
 /* TOAST */
-.toast-container{position:fixed;top:80px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:10px;pointer-events:none;max-width:90vw}
-.toast{padding:14px 22px;background:var(--white);border:1px solid var(--gray-light);border-radius:var(--r-md);font-size:13px;font-weight:700;box-shadow:var(--lg);animation:toastIn .35s cubic-bezier(.34,1.56,.64,1);pointer-events:auto;max-width:420px;display:flex;align-items:center;gap:10px}
+.toast-container{position:fixed;top:80px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:10px;pointer-events:none;max-width:90vw;width:100%}
+.toast{padding:14px 22px;background:var(--white);border:1px solid var(--gray-light);border-radius:var(--r-md);font-size:13px;font-weight:700;box-shadow:var(--shadow-lg);animation:toastIn .35s cubic-bezier(.34,1.56,.64,1);pointer-events:auto;max-width:420px;margin:0 auto;display:flex;align-items:center;gap:10px;word-break:break-word}
 .toast.success{border-right:3px solid var(--green)}
 .toast.error{border-right:3px solid var(--red)}
 .toast.warn{border-right:3px solid var(--amber)}
@@ -315,14 +311,14 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 
 /* WALLET ACCOUNT CARDS */
 .wallet-account{padding:12px;background:var(--white);border:1px solid var(--gray-light);border-radius:var(--r-md);margin-bottom:10px;transition:all var(--t-fast)}
-.wallet-account:hover{border-color:var(--yellow);box-shadow:var(--sm)}
+.wallet-account:hover{border-color:var(--yellow);box-shadow:var(--shadow-sm)}
 .wallet-account-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:10px;flex-wrap:wrap}
 .wallet-account-name{font-size:13px;font-weight:900;display:flex;align-items:center;gap:6px}
 .wallet-account-balance{font-size:13px;font-weight:900;font-family:var(--mono);direction:ltr}
 .wallet-address-row{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--ghost);border-radius:6px;margin-bottom:8px;font-family:var(--mono);font-size:10px;word-break:break-all;cursor:pointer;transition:all var(--t-fast);font-weight:600}
 .wallet-address-row:hover{background:rgba(246,238,37,.15)}
 .wallet-account-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:8px}
-.wallet-account-action{padding:8px 4px;background:var(--white);border:1px solid var(--gray-light);border-radius:6px;font-family:var(--font);font-size:10px;font-weight:800;cursor:pointer;transition:all var(--t-fast);display:flex;align-items:center;justify-content:center;gap:3px}
+.wallet-account-action{padding:8px 4px;background:var(--white);border:1px solid var(--gray-light);border-radius:6px;font-family:var(--font);font-size:10px;font-weight:800;cursor:pointer;transition:all var(--t-fast);display:flex;align-items:center;justify-content:center;gap:3px;color:var(--dark)}
 .wallet-account-action:hover{border-color:var(--yellow);background:rgba(246,238,37,.1)}
 .wallet-account-action.primary{background:var(--yellow);border-color:var(--yellow-dark);font-weight:900}
 .wallet-account-action.danger:hover{border-color:var(--red);color:var(--red);background:rgba(220,53,69,.04)}
@@ -330,7 +326,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 /* HW WALLET */
 .hw-wallet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:14px 0}
 .hw-wallet-card{padding:14px;background:var(--white);border:1.5px solid var(--gray-light);border-radius:var(--r-md);cursor:pointer;transition:all var(--t-fast);text-align:center}
-.hw-wallet-card:hover{border-color:var(--yellow);transform:translateY(-2px);box-shadow:var(--sm)}
+.hw-wallet-card:hover{border-color:var(--yellow);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
 .hw-wallet-card.connected{border-color:var(--green);background:rgba(22,163,74,.05)}
 .hw-wallet-name{font-size:12px;font-weight:900;margin-bottom:4px}
 .hw-wallet-status{font-size:9px;font-weight:800;color:var(--gray);text-transform:uppercase;letter-spacing:1px}
@@ -356,7 +352,6 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
   .modal-content{padding:20px;border-radius:var(--r-lg)}
   .tab-btn{padding:8px 12px;font-size:11px}
   .wallet-account-actions{grid-template-columns:repeat(2,1fr)}
-  .country-select{width:120px;font-size:11px}
   .hw-wallet-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:400px){
@@ -371,9 +366,9 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 
 <!-- LOADING -->
 <div class="loading-overlay" id="loading-overlay">
-  <div class="loading-coin-fallback" style="display:flex">₡</div>
+  <div class="loading-coin">₡</div>
   <div class="loading-title">COFC GATE</div>
-  <div class="loading-subtitle">Sovereign Apex v15</div>
+  <div class="loading-subtitle">Sovereign Apex v16</div>
   <div class="loading-bar"><div class="loading-bar-fill" id="loading-bar-fill"></div></div>
   <div class="loading-status" id="loading-status">Initializing...</div>
 </div>
@@ -385,10 +380,10 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
       <div class="brand-logo">C</div>
       <div class="brand-text">
         <span class="brand-name">COFC GATE</span>
-        <span class="brand-tagline">Sovereign Apex v15</span>
+        <span class="brand-tagline">Sovereign Apex v16</span>
       </div>
     </div>
-    <div class="header-actions" style="display:flex;align-items:center;gap:10px">
+    <div style="display:flex;align-items:center;gap:10px">
       <div class="header-user" id="header-user">
         <div class="header-avatar" id="header-avatar">U</div>
         <span class="header-username" id="header-username">@user</span>
@@ -406,9 +401,9 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 <!-- LOGIN -->
 <div id="login-screen">
   <div class="login-card">
-    <div class="login-badge">🔐 Quantum Biometric Authentication</div>
-    <h1 class="login-title">Sovereign Identity</h1>
-    <p class="login-subtitle">Liveness · Challenge-Response · Post-Quantum</p>
+    <div class="login-badge">🔐 Sovereign Identity</div>
+    <h1 class="login-title">Liveness Verification</h1>
+    <p class="login-subtitle">Biometric Factor · WebAuthn-Ready · E2E Encrypted</p>
 
     <div class="face-scanner-wrap">
       <div class="face-scanner" id="face-scanner" role="button" tabindex="0" aria-label="Face scanner">
@@ -456,8 +451,8 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 
     <div class="login-hint">
       <span class="login-hint-badge">🎥 Liveness</span>
-      <span class="login-hint-badge">🧬 Quantum Challenge</span>
-      <span class="login-hint-badge">🔐 Triple-Auth</span>
+      <span class="login-hint-badge">🔐 PBKDF2-600K</span>
+      <span class="login-hint-badge">🔒 AES-256-GCM</span>
     </div>
   </div>
 </div>
@@ -475,8 +470,8 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
       </div>
     </div>
     <div class="profile-actions">
-      <button class="profile-action-btn" onclick="UI.openSettings()">⚙️ Settings</button>
-      <button class="profile-action-btn" onclick="UI.openProfileEdit()">👤 Profile</button>
+      <button class="profile-action-btn" id="btn-settings">⚙️ Settings</button>
+      <button class="profile-action-btn" id="btn-profile">👤 Profile</button>
     </div>
   </div>
 
@@ -507,26 +502,24 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
     </button>
   </div>
 
-  <!-- WALLETS TAB -->
+  <!-- WALLETS -->
   <div class="tab-content active" data-tab-content="wallets">
     <div class="grid-2">
       <div class="panel">
         <div class="panel-header">
           <div class="panel-title">My Wallets</div>
-          <button class="profile-action-btn" onclick="Wallets.openAddCoin()">+ Add</button>
+          <button class="profile-action-btn" id="btn-add-coin">+ Add</button>
         </div>
         <ul class="wallet-list" id="wallet-list"></ul>
       </div>
       <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">Portfolio</div>
-        </div>
+        <div class="panel-header"><div class="panel-title">Portfolio</div></div>
         <div id="portfolio-summary"></div>
       </div>
     </div>
   </div>
 
-  <!-- SWAP TAB -->
+  <!-- SWAP -->
   <div class="tab-content" data-tab-content="swap">
     <div class="grid-2">
       <div class="panel">
@@ -536,26 +529,26 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
             <div class="swap-label"><span>From</span><span id="from-balance">0</span></div>
             <div class="swap-input-row">
               <input type="text" class="swap-amount" id="swap-from-amount" placeholder="0.00" inputmode="decimal" autocomplete="off">
-              <button class="swap-coin-btn" onclick="Swap.openPicker('from')">
+              <button class="swap-coin-btn" id="btn-swap-from-picker">
                 <div class="swap-coin-icon" id="swap-from-icon"></div>
                 <span class="swap-coin-name" id="swap-from-symbol">CASH</span>
               </button>
             </div>
             <div class="swap-presets">
-              <button class="swap-preset" onclick="Swap.setPercent(25)">25%</button>
-              <button class="swap-preset" onclick="Swap.setPercent(50)">50%</button>
-              <button class="swap-preset" onclick="Swap.setPercent(75)">75%</button>
-              <button class="swap-preset" onclick="Swap.setPercent(100)">MAX</button>
+              <button class="swap-preset" data-pct="25">25%</button>
+              <button class="swap-preset" data-pct="50">50%</button>
+              <button class="swap-preset" data-pct="75">75%</button>
+              <button class="swap-preset" data-pct="100">MAX</button>
             </div>
           </div>
-          <button class="swap-flip-btn" onclick="Swap.flip()">
+          <button class="swap-flip-btn" id="btn-swap-flip">
             <svg viewBox="0 0 24 24"><path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/></svg>
           </button>
           <div class="swap-row">
             <div class="swap-label"><span>To</span><span id="to-balance">0</span></div>
             <div class="swap-input-row">
               <input type="text" class="swap-amount" id="swap-to-amount" placeholder="0.00" readonly>
-              <button class="swap-coin-btn" onclick="Swap.openPicker('to')">
+              <button class="swap-coin-btn" id="btn-swap-to-picker">
                 <div class="swap-coin-icon" id="swap-to-icon"></div>
                 <span class="swap-coin-name" id="swap-to-symbol">BTC</span>
               </button>
@@ -579,7 +572,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
     </div>
   </div>
 
-  <!-- SEND TAB -->
+  <!-- SEND -->
   <div class="tab-content" data-tab-content="send">
     <div class="grid-2">
       <div class="panel">
@@ -604,12 +597,12 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
     </div>
   </div>
 
-  <!-- HISTORY TAB -->
+  <!-- HISTORY -->
   <div class="tab-content" data-tab-content="history">
     <div class="panel">
       <div class="panel-header">
         <div class="panel-title">All Transactions</div>
-        <button class="profile-action-btn" onclick="History.exportCSV()">⬇ Export</button>
+        <button class="profile-action-btn" id="btn-export">⬇ Export</button>
       </div>
       <div class="tx-filters" id="tx-filters">
         <button class="tx-filter active" data-filter="all">All</button>
@@ -621,11 +614,11 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
     </div>
   </div>
 
-  <!-- HARDWARE TAB -->
+  <!-- HARDWARE -->
   <div class="tab-content" data-tab-content="hardware">
     <div class="panel">
       <div class="panel-header"><div class="panel-title">Hardware Wallets (WebHID)</div></div>
-      <p style="font-size:12px;color:var(--gray);font-weight:600;margin-bottom:16px">Connect your hardware wallet via USB for air-gapped signing. Supports Ledger, Trezor, BitBox02, Coldcard, KeepKey.</p>
+      <p style="font-size:12px;color:var(--gray);font-weight:600;margin-bottom:16px">Connect hardware wallet via USB. Requires Chrome/Edge desktop (Firefox/Safari do not support WebHID).</p>
       <div class="hw-wallet-grid" id="hw-wallet-grid"></div>
       <button class="btn btn-yellow" id="btn-connect-hw" style="margin-top:12px">
         <span class="btn-label">🔌 Connect Hardware Wallet</span>
@@ -635,7 +628,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
     </div>
   </div>
 
-  <!-- SECURITY TAB -->
+  <!-- SECURITY -->
   <div class="tab-content" data-tab-content="security">
     <div class="panel">
       <div class="panel-header"><div class="panel-title">Security Settings</div></div>
@@ -644,23 +637,23 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
           <div class="setting-title">Auto-Lock (3 min)</div>
           <div class="setting-desc">Lock vault after 3 minutes of inactivity</div>
         </div>
-        <button class="setting-toggle active" id="toggle-autolock" onclick="Settings.toggle('autoLock')"></button>
+        <button class="setting-toggle active" id="toggle-autolock" data-setting="autoLock"></button>
       </div>
       <div class="setting-row">
         <div class="setting-info">
           <div class="setting-title">Clear Clipboard (30s)</div>
           <div class="setting-desc">Auto-clear copied secrets</div>
         </div>
-        <button class="setting-toggle active" id="toggle-clipboard" onclick="Settings.toggle('autoClearClipboard')"></button>
+        <button class="setting-toggle active" id="toggle-clipboard" data-setting="autoClearClipboard"></button>
       </div>
       <div class="setting-row">
         <div class="setting-info">
           <div class="setting-title">Audit Logging</div>
-          <div class="setting-desc">Sign all transactions with Ed25519</div>
+          <div class="setting-desc">Sign all transactions with ECDSA</div>
         </div>
-        <button class="setting-toggle active" id="toggle-audit" onclick="Settings.toggle('auditLogging')"></button>
+        <button class="setting-toggle active" id="toggle-audit" data-setting="auditLogging"></button>
       </div>
-      <button class="btn btn-danger" onclick="Settings.wipeAllData()" style="margin-top:16px">
+      <button class="btn btn-danger" id="btn-wipe" style="margin-top:16px">
         <span class="btn-label">Wipe All Data (GDPR)</span>
       </button>
     </div>
@@ -668,82 +661,77 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 </div>
 
 <footer class="footer">
-  <div>COFC TECHNOLOGIES LTD — SOVEREIGN APEX v15.0</div>
+  <div>COFC TECHNOLOGIES LTD — SOVEREIGN APEX v16.0</div>
   <div style="margin-top:4px">© 2026 ALL RIGHTS RESERVED</div>
 </footer>
 
 <!-- MODALS -->
 
-<!-- Add Coin -->
 <div class="modal" id="modal-add-coin">
   <div class="modal-content">
     <div class="modal-header">
       <div class="modal-title">Choose Asset</div>
-      <button class="modal-close" onclick="UI.closeModal('modal-add-coin')">&times;</button>
+      <button class="modal-close" data-close="modal-add-coin">&times;</button>
     </div>
-    <input type="text" class="form-input" id="coin-search-input" placeholder="Search 10,000+ assets..." autocomplete="off">
+    <input type="text" class="form-input" id="coin-search-input" placeholder="Search assets..." autocomplete="off">
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;max-height:400px;overflow-y:auto;padding:4px" id="coin-grid"></div>
   </div>
 </div>
 
-<!-- Coin Picker -->
 <div class="modal" id="modal-coin-picker">
   <div class="modal-content">
     <div class="modal-header">
       <div class="modal-title">Select Asset</div>
-      <button class="modal-close" onclick="UI.closeModal('modal-coin-picker')">&times;</button>
+      <button class="modal-close" data-close="modal-coin-picker">&times;</button>
     </div>
     <input type="text" class="form-input" id="picker-search-input" placeholder="Search..." autocomplete="off">
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;max-height:400px;overflow-y:auto;padding:4px" id="picker-coin-grid"></div>
   </div>
 </div>
 
-<!-- Wallet Details -->
 <div class="modal" id="modal-wallet-details">
   <div class="modal-content">
     <div class="modal-header">
       <div class="modal-title" id="wallet-details-symbol">BTC</div>
-      <button class="modal-close" onclick="UI.closeModal('modal-wallet-details')">&times;</button>
+      <button class="modal-close" data-close="modal-wallet-details">&times;</button>
     </div>
     <div style="display:flex;gap:8px;margin-bottom:12px">
-      <button class="btn btn-yellow btn-sm" onclick="Wallets.openSendForCurrent()" style="flex:1"><span class="btn-label">Send</span></button>
-      <button class="btn btn-outline btn-sm" onclick="Wallets.openReceiveForCurrent()" style="flex:1"><span class="btn-label">Receive</span></button>
+      <button class="btn btn-yellow btn-sm" id="btn-wallet-send" style="flex:1"><span class="btn-label">Send</span></button>
+      <button class="btn btn-outline btn-sm" id="btn-wallet-receive" style="flex:1"><span class="btn-label">Receive</span></button>
     </div>
-    <button class="btn btn-outline btn-sm" onclick="Wallets.createNewAccount()" style="margin-bottom:12px"><span class="btn-label">+ New Address</span></button>
+    <button class="btn btn-outline btn-sm" id="btn-wallet-new-account" style="margin-bottom:12px"><span class="btn-label">+ New Address</span></button>
     <div id="wallet-accounts-list"></div>
   </div>
 </div>
 
-<!-- Receive -->
 <div class="modal" id="modal-receive">
   <div class="modal-content">
     <div class="modal-header">
       <div class="modal-title">Receive</div>
-      <button class="modal-close" onclick="UI.closeModal('modal-receive')">&times;</button>
+      <button class="modal-close" data-close="modal-receive">&times;</button>
     </div>
     <div style="text-align:center;padding:12px 0">
       <div style="font-size:11px;color:var(--gray);margin-bottom:8px;font-weight:800;text-transform:uppercase;letter-spacing:1px" id="receive-name">Wallet</div>
       <div class="qr-canvas-wrap">
         <canvas id="qr-canvas" width="256" height="256"></canvas>
-        <div class="qr-logo-overlay" id="qr-overlay">₡</div>
+        <div class="qr-logo-overlay">₡</div>
       </div>
       <div id="receive-address" style="font-family:var(--mono);font-size:10px;word-break:break-all;background:var(--ghost);padding:10px;border-radius:8px;margin-bottom:12px"></div>
-      <button class="btn btn-outline btn-sm" onclick="QR.download()" style="margin-bottom:8px"><span class="btn-label">⬇ Download</span></button>
-      <button class="btn btn-yellow btn-sm" onclick="Wallets.copyCurrentAddress()"><span class="btn-label">📋 Copy</span></button>
+      <button class="btn btn-outline btn-sm" id="btn-qr-download" style="margin-bottom:8px"><span class="btn-label">⬇ Download</span></button>
+      <button class="btn btn-yellow btn-sm" id="btn-copy-address"><span class="btn-label">📋 Copy</span></button>
     </div>
   </div>
 </div>
 
-<!-- Triple-Auth Modal -->
 <div class="modal" id="modal-triple-auth">
   <div class="modal-content" style="max-width:480px">
     <div class="modal-header">
       <div class="modal-title" style="color:var(--red)">🔒 Triple-Auth Required</div>
-      <button class="modal-close" onclick="UI.closeModal('modal-triple-auth');TripleAuth.cancel()">&times;</button>
+      <button class="modal-close" data-close="modal-triple-auth">&times;</button>
     </div>
-    <div id="triple-auth-step">
+    <div>
       <div style="text-align:center;padding:10px 0 20px">
-        <div style="font-size:11px;color:var(--gray);font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px" id="triple-auth-step-label">Step 1 of 3 — Password</div>
+        <div style="font-size:11px;color:var(--gray);font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px">Step 1 of 3 — Password</div>
         <input type="password" class="form-input" id="triple-auth-password" placeholder="Enter wallet password" autocomplete="off" style="text-align:center;font-size:16px">
         <div class="form-hint" id="triple-auth-hint"></div>
       </div>
@@ -763,7 +751,6 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
   </div>
 </div>
 
-<!-- Confirm Reveal -->
 <div class="modal" id="modal-confirm-reveal">
   <div class="modal-content" style="max-width:440px">
     <div class="modal-header">
@@ -780,12 +767,11 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
   </div>
 </div>
 
-<!-- Reveal Secret -->
 <div class="modal" id="modal-reveal-secret">
   <div class="modal-content">
     <div class="modal-header">
       <div class="modal-title" style="color:var(--red)">⚠️ Wallet Secrets</div>
-      <button class="modal-close" onclick="UI.closeModal('modal-reveal-secret')">&times;</button>
+      <button class="modal-close" data-close="modal-reveal-secret">&times;</button>
     </div>
     <div class="warning-box">
       <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
@@ -795,2475 +781,26 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
   </div>
 </div>
 
-<!-- 2FA Biometric -->
 <div class="modal" id="modal-2fa">
   <div class="modal-content" style="max-width:420px">
     <div class="modal-header">
       <div class="modal-title">🔐 Biometric Confirmation</div>
     </div>
     <div style="text-align:center;padding:20px 0">
-      <div style="width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--yellow-dark));margin:0 auto 18px;display:flex;align-items:center;justify-content:center;box-shadow:var(--yellow-shadow);font-size:40px">🧬</div>
-      <div style="font-size:15px;font-weight:900;margin-bottom:8px">Quantum Challenge</div>
-      <div style="font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:20px;font-weight:600">Look at the camera — blink when prompted</div>
+      <div style="width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--yellow-dark));margin:0 auto 18px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-yellow);font-size:40px">🧬</div>
+      <div style="font-size:15px;font-weight:900;margin-bottom:8px">Liveness Check</div>
+      <div style="font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:20px;font-weight:600">Look at the camera and blink when prompted</div>
       <button class="btn btn-yellow" id="btn-2fa-verify">
         <span class="btn-label">Start Verification</span>
         <span class="btn-spinner"></span>
       </button>
-      <button class="btn btn-outline btn-sm" onclick="UI.closeModal('modal-2fa');TwoFA.cancel()" style="margin-top:8px">
+      <button class="btn btn-outline btn-sm" id="btn-2fa-cancel" style="margin-top:8px">
         <span class="btn-label">Cancel</span>
       </button>
     </div>
   </div>
 </div>
 
-<script>
-'use strict';
-
-/* ============================================================
-   COFC GATE v15.0 — APEX SOVEREIGN PRODUCTION
-   ============================================================ */
-
-window.addEventListener('error', e => console.error('[COFC]', e.message));
-window.addEventListener('unhandledrejection', e => console.error('[COFC]', e.reason));
-
-/* ============================================================
-   CSPRNG — CHUNKED (FIXES THE 33MB ERROR)
-   ============================================================ */
-const Random = (() => {
-  const MAX_CHUNK = 65536; // 64KB — browser limit
-
-  function bytes(length) {
-    if (!Number.isInteger(length) || length <= 0 || length > 1e8) {
-      throw new Error('Invalid byte length: ' + length);
-    }
-    const out = new Uint8Array(length);
-    let offset = 0;
-    while (offset < length) {
-      const chunkSize = Math.min(MAX_CHUNK, length - offset);
-      const chunk = new Uint8Array(chunkSize);
-      crypto.getRandomValues(chunk);
-      out.set(chunk, offset);
-      offset += chunkSize;
-    }
-    // Sanity: check not all zeros (very unlikely)
-    let allZero = true;
-    for (let i = 0; i < Math.min(64, length); i++) {
-      if (out[i] !== 0) { allZero = false; break; }
-    }
-    if (allZero && length >= 64) throw new Error('CSPRNG failure');
-    return out;
-  }
-
-  function hex(length) {
-    const b = bytes(length);
-    let s = '';
-    for (let i = 0; i < b.length; i++) s += b[i].toString(16).padStart(2, '0');
-    return s;
-  }
-
-  return { bytes, hex };
-})();
-
-/* ============================================================
-   CRYPTO UTILS
-   ============================================================ */
-const C = (() => {
-  const SUBTLE = crypto.subtle;
-  const ENC = new TextEncoder();
-  const DEC = new TextDecoder();
-
-  function str2buf(s) { return ENC.encode(s); }
-  function buf2str(b) { return DEC.decode(b); }
-
-  function b64enc(buf) {
-    const bytes = buf instanceof Uint8Array ? buf : new Uint8Array(buf);
-    let bin = '';
-    const CHUNK = 0x8000;
-    for (let i = 0; i < bytes.length; i += CHUNK) {
-      bin += String.fromCharCode.apply(null, bytes.subarray(i, i + CHUNK));
-    }
-    return btoa(bin);
-  }
-
-  function b64dec(s) {
-    const bin = atob(s);
-    const out = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
-    return out;
-  }
-
-  function hexEnc(buf) {
-    const b = buf instanceof Uint8Array ? buf : new Uint8Array(buf);
-    let s = '';
-    for (let i = 0; i < b.length; i++) s += b[i].toString(16).padStart(2, '0');
-    return s;
-  }
-
-  function hexDec(s) {
-    if (s.length % 2 !== 0) throw new Error('Invalid hex');
-    const out = new Uint8Array(s.length / 2);
-    for (let i = 0; i < out.length; i++) out[i] = parseInt(s.substr(i * 2, 2), 16);
-    return out;
-  }
-
-  async function sha256(data) {
-    const buf = typeof data === 'string' ? str2buf(data) : data;
-    return new Uint8Array(await SUBTLE.digest('SHA-256', buf));
-  }
-
-  async function sha512(data) {
-    const buf = typeof data === 'string' ? str2buf(data) : data;
-    return new Uint8Array(await SUBTLE.digest('SHA-512', buf));
-  }
-
-  async function hmacSha512(key, data) {
-    const k = await SUBTLE.importKey('raw', key, { name: 'HMAC', hash: 'SHA-512' }, false, ['sign']);
-    return new Uint8Array(await SUBTLE.sign('HMAC', k, data));
-  }
-
-  async function hmacSha256(key, data) {
-    const k = await SUBTLE.importKey('raw', key, { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
-    return new Uint8Array(await SUBTLE.sign('HMAC', k, data));
-  }
-
-  async function pbkdf2(password, salt, iterations, lengthBits) {
-    const key = await SUBTLE.importKey('raw',
-      typeof password === 'string' ? str2buf(password) : password,
-      { name: 'PBKDF2' }, false, ['deriveBits']);
-    const bits = await SUBTLE.deriveBits(
-      { name: 'PBKDF2', salt, iterations, hash: 'SHA-512' },
-      key, lengthBits);
-    return new Uint8Array(bits);
-  }
-
-  async function aesEncrypt(key, plaintext) {
-    const iv = Random.bytes(12);
-    const k = await SUBTLE.importKey('raw', key, { name: 'AES-GCM' }, false, ['encrypt']);
-    const ct = await SUBTLE.encrypt({ name: 'AES-GCM', iv, tagLength: 128 }, k, plaintext);
-    return { iv, ciphertext: new Uint8Array(ct) };
-  }
-
-  async function aesDecrypt(key, iv, ciphertext) {
-    const k = await SUBTLE.importKey('raw', key, { name: 'AES-GCM' }, false, ['decrypt']);
-    const pt = await SUBTLE.decrypt({ name: 'AES-GCM', iv, tagLength: 128 }, k, ciphertext);
-    return new Uint8Array(pt);
-  }
-
-  async function hkdf(ikm, salt, info, length) {
-    const key = await SUBTLE.importKey('raw', ikm, { name: 'HKDF' }, false, ['deriveBits']);
-    const bits = await SUBTLE.deriveBits(
-      { name: 'HKDF', hash: 'SHA-512', salt: salt || new Uint8Array(0), info: str2buf(info) },
-      key, length * 8);
-    return new Uint8Array(bits);
-  }
-
-  function timingSafeEqual(a, b) {
-    if (!(a instanceof Uint8Array) || !(b instanceof Uint8Array)) return false;
-    const maxLen = Math.max(a.length, b.length);
-    let diff = a.length ^ b.length;
-    for (let i = 0; i < maxLen; i++) diff |= (a[i] || 0) ^ (b[i] || 0);
-    return diff === 0;
-  }
-
-  function zeroize(buf) {
-    if (!(buf instanceof Uint8Array)) return;
-    crypto.getRandomValues(buf);
-    buf.fill(0);
-  }
-
-  return { str2buf, buf2str, b64enc, b64dec, hexEnc, hexDec,
-    sha256, sha512, hmacSha512, hmacSha256, pbkdf2,
-    aesEncrypt, aesDecrypt, hkdf, timingSafeEqual, zeroize };
-})();
-
-/* ============================================================
-   SHA3-512 — Pure JS Keccak
-   ============================================================ */
-const SHA3 = (() => {
-  const RC = [
-    0x0000000000000001n, 0x0000000000008082n, 0x800000000000808an,
-    0x8000000080008000n, 0x000000000000808bn, 0x0000000080000001n,
-    0x8000000080008081n, 0x8000000000008009n, 0x000000000000008an,
-    0x0000000000000088n, 0x0000000080008009n, 0x000000008000000an,
-    0x000000008000808bn, 0x800000000000008bn, 0x8000000000008089n,
-    0x8000000000008003n, 0x8000000000008002n, 0x8000000000000080n,
-    0x000000000000800an, 0x800000008000000an, 0x8000000080008081n,
-    0x8000000000008080n, 0x0000000080000001n, 0x8000000080008008n];
-  const MASK = (1n << 64n) - 1n;
-  const ROT = [[0,36,3,41,18],[1,44,10,45,2],[62,6,43,15,61],[28,55,25,21,56],[27,20,39,8,14]];
-
-  function rotl(x, n) { n = BigInt(n); return ((x << n) | (x >> (64n - n))) & MASK; }
-
-  function keccakF(s) {
-    for (let r = 0; r < 24; r++) {
-      const C0 = s[0][0] ^ s[0][1] ^ s[0][2] ^ s[0][3] ^ s[0][4];
-      const C1 = s[1][0] ^ s[1][1] ^ s[1][2] ^ s[1][3] ^ s[1][4];
-      const C2 = s[2][0] ^ s[2][1] ^ s[2][2] ^ s[2][3] ^ s[2][4];
-      const C3 = s[3][0] ^ s[3][1] ^ s[3][2] ^ s[3][3] ^ s[3][4];
-      const C4 = s[4][0] ^ s[4][1] ^ s[4][2] ^ s[4][3] ^ s[4][4];
-      const D0 = C4 ^ rotl(C1, 1), D1 = C0 ^ rotl(C2, 1),
-            D2 = C1 ^ rotl(C3, 1), D3 = C2 ^ rotl(C4, 1), D4 = C3 ^ rotl(C0, 1);
-      for (let x = 0; x < 5; x++) {
-        const D = [D0, D1, D2, D3, D4][x];
-        for (let y = 0; y < 5; y++) s[x][y] ^= D;
-      }
-      const B = [[0n,0n,0n,0n,0n],[0n,0n,0n,0n,0n],[0n,0n,0n,0n,0n],[0n,0n,0n,0n,0n],[0n,0n,0n,0n,0n]];
-      for (let x = 0; x < 5; x++)
-        for (let y = 0; y < 5; y++)
-          B[y][(2 * x + 3 * y) % 5] = rotl(s[x][y], ROT[x][y]);
-      for (let x = 0; x < 5; x++)
-        for (let y = 0; y < 5; y++)
-          s[x][y] = B[x][y] ^ ((~B[(x + 1) % 5][y] & MASK) & B[(x + 2) % 5][y]);
-      s[0][0] ^= RC[r];
-    }
-  }
-
-  function hash512(input) {
-    const rate = 72;
-    const padLen = rate - (input.length % rate);
-    const padded = new Uint8Array(input.length + padLen);
-    padded.set(input);
-    padded[input.length] = 0x06;
-    padded[padded.length - 1] |= 0x80;
-    const s = Array.from({ length: 5 }, () => new Array(5).fill(0n));
-    for (let i = 0; i < padded.length; i += rate) {
-      for (let j = 0; j < rate / 8; j++) {
-        const x = j % 5, y = Math.floor(j / 5);
-        let lane = 0n;
-        for (let k = 0; k < 8; k++) lane |= BigInt(padded[i + j * 8 + k]) << BigInt(8 * k);
-        s[x][y] ^= lane;
-      }
-      keccakF(s);
-    }
-    const out = new Uint8Array(64);
-    for (let j = 0; j < 8; j++) {
-      const lane = s[j % 5][Math.floor(j / 5)];
-      for (let k = 0; k < 8; k++) out[j * 8 + k] = Number((lane >> BigInt(8 * k)) & 0xffn);
-    }
-    return out;
-  }
-
-  return { hash512 };
-})();
-
-/* ============================================================
-   KDF — Web Worker (Argon2id-lite + PBKDF2 + SHA3)
-   ============================================================ */
-const KDFWorkerCode = `
-'use strict';
-const RC=[0x0000000000000001n,0x0000000000008082n,0x800000000000808an,0x8000000080008000n,0x000000000000808bn,0x0000000080000001n,0x8000000080008081n,0x8000000000008009n,0x000000000000008an,0x0000000000000088n,0x0000000080008009n,0x000000008000000an,0x000000008000808bn,0x800000000000008bn,0x8000000000008089n,0x8000000000008003n,0x8000000000008002n,0x8000000000000080n,0x000000000000800an,0x800000008000000an,0x8000000080008081n,0x8000000000008080n,0x0000000080000001n,0x8000000080008008n];
-const MASK=(1n<<64n)-1n;
-const ROT=[[0,36,3,41,18],[1,44,10,45,2],[62,6,43,15,61],[28,55,25,21,56],[27,20,39,8,14]];
-function rotl(x,n){n=BigInt(n);return((x<<n)|(x>>(64n-n)))&MASK}
-function keccakF(s){for(let r=0;r<24;r++){const C0=s[0][0]^s[0][1]^s[0][2]^s[0][3]^s[0][4],C1=s[1][0]^s[1][1]^s[1][2]^s[1][3]^s[1][4],C2=s[2][0]^s[2][1]^s[2][2]^s[2][3]^s[2][4],C3=s[3][0]^s[3][1]^s[3][2]^s[3][3]^s[3][4],C4=s[4][0]^s[4][1]^s[4][2]^s[4][3]^s[4][4];const D0=C4^rotl(C1,1),D1=C0^rotl(C2,1),D2=C1^rotl(C3,1),D3=C2^rotl(C4,1),D4=C3^rotl(C0,1);const D=[D0,D1,D2,D3,D4];for(let x=0;x<5;x++)for(let y=0;y<5;y++)s[x][y]^=D[x];const B=[[0n,0n,0n,0n,0n],[0n,0n,0n,0n,0n],[0n,0n,0n,0n,0n],[0n,0n,0n,0n,0n],[0n,0n,0n,0n,0n]];for(let x=0;x<5;x++)for(let y=0;y<5;y++)B[y][(2*x+3*y)%5]=rotl(s[x][y],ROT[x][y]);for(let x=0;x<5;x++)for(let y=0;y<5;y++)s[x][y]=B[x][y]^((~B[(x+1)%5][y]&MASK)&B[(x+2)%5][y]);s[0][0]^=RC[r]}}
-function sha3_512(input){const rate=72;const padLen=rate-(input.length%rate);const padded=new Uint8Array(input.length+padLen);padded.set(input);padded[input.length]=0x06;padded[padded.length-1]|=0x80;const s=Array.from({length:5},()=>new Array(5).fill(0n));for(let i=0;i<padded.length;i+=rate){for(let j=0;j<rate/8;j++){const x=j%5,y=Math.floor(j/5);let lane=0n;for(let k=0;k<8;k++)lane|=BigInt(padded[i+j*8+k])<<BigInt(8*k);s[x][y]^=lane}keccakF(s)}const out=new Uint8Array(64);for(let j=0;j<8;j++){const lane=s[j%5][Math.floor(j/5)];for(let k=0;k<8;k++)out[j*8+k]=Number((lane>>BigInt(8*k))&0xffn)}return out}
-
-self.onmessage = async (e) => {
-  const { id, password, salt, iterations = 300000, argon2Rounds = 4, argon2MemKB = 32768 } = e.data;
-  try {
-    const saltBytes = new Uint8Array(salt);
-    const pwdBytes = new TextEncoder().encode(password);
-
-    // Stage 1: Argon2id-lite (memory-hard via extended state chain)
-    let state = new Uint8Array(await crypto.subtle.digest('SHA-512',
-      new Uint8Array([...pwdBytes, ...saltBytes])));
-    const mem = new Uint8Array(argon2MemKB * 1024);
-    crypto.getRandomValues(mem);
-    for (let round = 0; round < argon2Rounds; round++) {
-      const input = new Uint8Array(64 + mem.length);
-      input.set(state, 0);
-      input.set(mem, 64);
-      state = new Uint8Array(await crypto.subtle.digest('SHA-512', input));
-      const offset = (state[0] << 8 | state[1]) % (mem.length - 64);
-      for (let i = 0; i < 64; i++) mem[offset + i] ^= state[i];
-    }
-    crypto.getRandomValues(mem);
-
-    // Stage 2: PBKDF2-SHA512 (compute-hard)
-    const argon2Text = btoa(String.fromCharCode(...state));
-    const keyMaterial = await crypto.subtle.importKey(
-      'raw', new TextEncoder().encode(argon2Text),
-      { name: 'PBKDF2' }, false, ['deriveBits']);
-    const pbkdf2Bits = new Uint8Array(await crypto.subtle.deriveBits(
-      { name: 'PBKDF2', salt: saltBytes, iterations, hash: 'SHA-512' },
-      keyMaterial, 512));
-
-    // Stage 3: SHA3-512 (post-quantum)
-    const sha3Out = sha3_512(pbkdf2Bits);
-
-    // Stage 4: HKDF to 32 bytes
-    const hkdfKey = await crypto.subtle.importKey('raw', sha3Out, { name: 'HKDF' }, false, ['deriveBits']);
-    const finalBits = await crypto.subtle.deriveBits(
-      { name: 'HKDF', hash: 'SHA-512', salt: saltBytes,
-        info: new TextEncoder().encode('cofc-v15-key') },
-      hkdfKey, 256);
-
-    crypto.getRandomValues(state);
-    crypto.getRandomValues(pbkdf2Bits);
-    crypto.getRandomValues(sha3Out);
-
-    self.postMessage({ id, ok: true, key: Array.from(new Uint8Array(finalBits)) });
-  } catch (err) {
-    self.postMessage({ id, ok: false, error: err.message });
-  }
-};
-`;
-
-const KDF = (() => {
-  let worker = null;
-  let msgId = 0;
-  const pending = new Map();
-
-  function init() {
-    if (worker) return;
-    const blob = new Blob([KDFWorkerCode], { type: 'application/javascript' });
-    const url = URL.createObjectURL(blob);
-    worker = new Worker(url);
-    URL.revokeObjectURL(url);
-    worker.onmessage = (e) => {
-      const { id, ok, key, error } = e.data;
-      const p = pending.get(id);
-      if (p) {
-        pending.delete(id);
-        if (ok) p.resolve(new Uint8Array(key));
-        else p.reject(new Error(error || 'KDF failed'));
-      }
-    };
-  }
-
-  async function derive(password, salt, opts = {}) {
-    init();
-    return new Promise((resolve, reject) => {
-      const id = ++msgId;
-      pending.set(id, { resolve, reject });
-      worker.postMessage({
-        id, password,
-        salt: Array.from(salt),
-        iterations: opts.iterations || 300000,
-        argon2Rounds: opts.argon2Rounds || 4,
-        argon2MemKB: opts.argon2MemKB || 32768
-      });
-      setTimeout(() => {
-        if (pending.has(id)) { pending.delete(id); reject(new Error('KDF timeout')); }
-      }, 60000);
-    });
-  }
-
-  function terminate() {
-    if (worker) { worker.terminate(); worker = null; }
-    pending.clear();
-  }
-
-  return { derive, terminate };
-})();
-
-/* ============================================================
-   Ed25519 — Real implementation (TweetNaCl-based)
-   ============================================================ */
-const Ed25519 = (() => {
-  // Use ECDSA P-256 as WebCrypto doesn't expose Ed25519 in all browsers
-  // This is a documented, standards-compliant signature scheme
-  // Note: renamed from "Ed25519" to "Signature" to be accurate
-
-  async function generateKeyPair() {
-    return crypto.subtle.generateKey(
-      { name: 'ECDSA', namedCurve: 'P-256' },
-      false, ['sign', 'verify']);
-  }
-
-  async function sign(privateKey, message) {
-    const sig = await crypto.subtle.sign(
-      { name: 'ECDSA', hash: 'SHA-256' }, privateKey, message);
-    return new Uint8Array(sig);
-  }
-
-  async function verify(publicKey, signature, message) {
-    return crypto.subtle.verify(
-      { name: 'ECDSA', hash: 'SHA-256' }, publicKey, signature, message);
-  }
-
-  async function exportPublic(pubKey) {
-    return new Uint8Array(await crypto.subtle.exportKey('raw', pubKey));
-  }
-
-  return { generateKeyPair, sign, verify, exportPublic };
-})();
-
-/* ============================================================
-   BIP39 — Real wordlist + checksum
-   ============================================================ */
-const BIP39 = (() => {
-  // Full BIP39 English wordlist (2048 words) — abbreviated for display
-  // In production, embed the complete list
-  const WORDLIST = ('abandon ability able about above absent absorb abstract absurd abuse access accident account accuse achieve acid acoustic acquire across act action actor actress actual adapt add addict address adjust admit adult advance advice aerobic affair afford afraid again age agent agree ahead aim air airport aisle alarm album alcohol alert alien all alley allow almost alone alpha already also alter always amateur amazing among amount amused analyst anchor ancient anger angle angry animal ankle announce annual another answer antenna antique anxiety any apart apology appear apple approve april area arena argue arm armed armor army around arrange arrest arrive arrow art artefact artist artwork ask aspect assault asset assist assume asthma athlete atom attack attend attitude attract auction audit august aunt author auto autumn average avocado avoid awake aware away awesome awful awkward axis baby bachelor bacon badge bag balance balcony ball bamboo banana banner bar barely bargain barrel base basic basket battle beach bean beauty because become beef before begin behave behind believe below belt bench benefit best betray better between beyond bicycle bid bike bind biology bird birth bitter black blade blame blanket blast bleak bless blind blood blossom blouse blue blur blush board boat body boil bomb bone bonus book boost border boring born borrow boss bottom bounce box boy bracket brain brand brass brave bread breeze brick bridge brief bright bring brisk broccoli broken bronze broom brother brown brush bubble bucket budget buffalo build bulb bulk bundle bunker burden burger burst bus business busy butter buyer buzz cabbage cabin cable cactus cage cake call calm camera camp can canal cancel candy cannon canoe canvas canyon capable capital captain car carbon card cargo carpet carry cart case cash casino castle casual cat catalog catch category cattle caught cause caution cave ceiling celery central century cereal certain chain chair chalk champion change chaos chapter charge chase chat cheap check cheese chef cherry chest chicken chief child chimney choice choose chronic chunk churn cigar cinnamon circle citizen city civil claim clap clarify claw clay clean clerk clever click client cliff climb clinic clip clock clog close cloth cloud clown club clump cluster clutch coach coast coconut code coffee coil coin collect color column combo comfort comic common company concert conduct confirm congress connect consider control convince cook cool copper copy coral core corn correct cost cotton couch country couple course cousin cover coyote crack cradle craft cram crane crash crater crawl crazy cream credit creek crew cricket crime crisp critic crop cross crouch crowd crucial cruel crush cry crystal cube culture cup cupboard curious current curtain curve cushion custom cute cycle dad damage damp dance danger daring dash daughter dawn day deal debate debris decade december decide decline decorate decrease deer defense define delay deliver demand demise denial dentist deny depart depend deposit depth deputy derive describe desert design desk despair destroy detail detect develop device devote diagram dial diamond diary dice diesel diet differ digital dignity dilemma dinner dinosaur direct dirt disagree discover disease dish dismiss disorder display distance divert divide divorce dizzy doctor document dog doll dolphin domain donate donkey donor door dose double dove draft dragon drama drastic draw dream dress drift drill drink drip drive drop drum dry duck dumb dune during dust dutch duty dwarf dynamic eager eagle early earn earth easily east easy echo ecology economy edge edit educate effort egg eight either elbow elder electric elegant element elephant elevator elite else embark embody embrace emerge emotion employ empower empty enable enact end endless endorse enemy energy enforce engage engine enhance enjoy enlist ensure enter entire entry envelope episode equal equip era erase erode erosion error erupt escape essay essence estate eternal ethics evidence evil evoke evolve exact example excess exchange excite exclude excuse execute exhaust exhibit exile exist exit exotic expand expect expire explain expose express extend extra eye eyebrow fabric face faculty fade faint faith fall false fame family famous fan fancy fantasy farm fashion fat fatal father fatigue fault favorite feature february federal fee feed feel female fence festival fetch fever few fiber fiction field file film filter final find fine finger finish fire firm first fiscal fish fit fitness fix flag flame flash flat flavor flee flight flip float flock floor flower fluid flush fly foam focus fog foil fold follow food foot force forest forget fork fortune forum forward fossil foster found fox fragile frame frequent fresh friend fringe frog front frost frown frozen fruit fuel fun funny furnace fury future gadget gain galaxy gallery game gap garage garbage garden garlic garment gas gasp gate gather gauge gaze general genius genre gentle genuine gesture ghost giant gift giggle ginger giraffe girl give glad glance glare glass glide glimpse globe gloom glory glove glow glue goat goddess gold good goose gorilla gospel gossip govern gown grab grace grain grant grape grass gravity great green grid grief grit grocery group grow grunt guard guess guide guilt guitar gun gym habit hair half hammer hand happy harbor hard harsh harvest hat have hawk hazard head health heart heavy hedgehog height hello helmet help hen hero hidden high hill hint hip hire history hobby hockey hold hole holiday hollow home honey hood hope horn horror horse hospital host hotel hour hover hub human humble hunt hurry husband hybrid ice icon idea identify idle ignore ill illegal illness image imitate immense immune impact impose improve impulse inch include income increase index indicate indoor industry infant inflict inform inhale inherit initial inject injury inmate inner innocent input inquiry insane insect inside inspire install intact interest into invest invite involve iron island isolate issue item jacket jaguar jar jazz jealous jeans jelly jewel job join joke journey joy judge juice jump jungle junior junk just kangaroo keen keep ketchup key kick kid kidney kind kingdom kiss kit kitchen kite kitten kiwi knee knife knock know lab label labor ladder lady lake lamp language laptop large later latin laugh laundry lava law lawn lawsuit layer lazy leader leaf learn leave lecture left leg legal legend leisure lemon lend length lens leopard lesson letter level liar liberty library license life lift light like limb limit link lion liquid list little live lizard load loan lobster local lock logic lonely long loop lottery loud lounge love loyal lucky luggage lumber lunar lunch luxury lyrics machine mad magic magnet maid mail main major make mammal man manage mandate mango mansion manual maple marble march margin marine market marriage mask mass master match material math matrix matter maximum maze meadow mean measure meat mechanic medal media melody melt member memory mention menu mercy merge merit merry mesh message metal method middle midnight milk million mimic mind mineral minimum minor minute miracle mirror misery miss mistake mix mixed mixture mobile model modify mom moment monitor monkey monster month moon moral more morning mosquito mother motion motor mountain mouse move movie much muffin mule multiply muscle museum mushroom music must mutual myself mystery myth naive name napkin narrow nasty nation nature near neck need negative neglect neither nephew nerve nest net network neutral never news next nice night noble noise nominee noodle normal north nose notable note nothing notice novel now nuclear number nurse nut oak obey object oblige obscure observe obtain obvious occasion offer office offset often oil okay old olive olympic omit once one onion online only open opera opinion oppose option orange orbit orchard order ordinary organ orient original orphan ostrich other outdoor outer output outside oval oven over owner oxygen oyster ozone pact paddle page pair palace palm panda panel panic panther paper parade parent park parrot party pass patch path patient patrol pattern pause pave payment peace peanut pear peasant pelican pen penalty pencil people pepper perfect permit person pet phrase physical piano picnic picture piece pig pigeon pill pilot pink pioneer pipe pistol pitch pizza place planet plastic plate play please pledge pluck plug plunge poem point polar pole police pond pony pool popular portion position possible post potato pottery poverty powder power practice praise predict prefer prepare present pretty prevent price pride primary print priority prison private prize problem process produce profit program project promote proof property prosper protect proud provide public pudding pull pulp pulse pumpkin punch pupil puppy purchase purity purse push put puzzle pyramid quality quantum quarter question quick quit quiz quote rabbit raccoon race rack radar radio rail rain raise rally ramp ranch random range rapid rare rate rather raven raw razor ready real reason rebel rebuild recall receive recipe record recycle reduce reflect reform refuse region regret regular reject relax release relief rely remain remember remind remove render renew rent reopen repair repeat replace report require rescue resemble resist resource response result retire retreat return reunion reveal review reward rhythm rib ribbon rice rich ride ridge rifle right rigid ring riot ripple risk ritual rival river road roast robot robust rocket romance roof rookie room rose rotate rough round route royal rubber rude rug rule run rural sad saddle sadness safe sail saint salt same sample sand satisfy satellite save scale scan scare scatter scene scheme school science scissors scorpion scout scrap screen script scrub sea search season seat second secret section security seed seek segment select sell semester seminar senior sense sentence series service session settle setup seven shadow shaft shallow share shed shell sheriff shield shift shine ship shiver shock shoe shoot shop short shoulder shove shrimp shrug shuffle shy sibling sick side siege sight sign silent silk silly silver similar simple since sing siren sister situate six size skate sketch ski skill skin skirt skull slab slam sleep slender slice slide slight slim slogan slot slow slush small smart smile smoke smooth snack snake snap sniff snow soap soccer social sock soda soft solar soldier solid solution solve someone song soon sorry sort soul sound soup source south space spare spatial spawn speak special speed spell spend sphere spice spider spike spin spirit split spoil sponsor spoon sport spot spray spread spring spy square squeeze squirrel stable stadium staff stage stairs stamp stand start state stay steak steel stem step stereo stick still sting stock stomach stone stool story stove strategy street strike strong struggle student stuff stumble style subject submit subway success such sudden suffer sugar suggest suit summer sun sunny sunset super supply supreme sure surface surge surprise surround survey suspect sustain swallow swamp swap swarm swear sweet swift swim swing switch sword symbol symptom syrup system table tackle tag tail talent talk tank tape target task taste tattoo taxi teach team tell ten tenant tennis tent term test text thank theater them theme then theory there they thing think third this though thought threat three thrive throw thumb thunder ticket tide tiger tilt timber time tiny tip tired tissue title toast tobacco today toddler toe together toilet token tomato tomorrow tone tongue tonight tool tooth top topic toss total touch tough tour tourist toward tower town toy track trade traffic tragic train transfer trap trash travel tray treat tree trend trial tribe trick trigger trim trip trophy trouble truck true truly trumpet trust truth try tube tuition tumble tuna tunnel turkey turn turtle twelve twin twist two type typical ugly umbrella unable unaware uncle uncover under undo unfair unfold unhappy uniform unique unit universe unknown unlock until unusual unveil update upgrade uphold upon upper upset urban urge usage use used useful user usual utility vacuum vague valid valley valuable vanish vapor various vast vault vehicle velvet vendor venture venue verb verify version very vessel veteran viable vibrant vicious victory video view village vintage violate violent virtual virus visit visa visual vital vivid vocal voice void volcano volume vote voyage wage wagon wait walk wall wallet wander want war warm warrior wash waste watch water wave way wealth weapon wear web wedding weird welcome west wet whale what wheat wheel when where whip whisper wide wife wild will win window wine wing wink winner winter wire wisdom wise wish witness wolf woman wonder wood wool word work world worry worth wrap wreck wrestle wrist write wrong yard year yellow you young youth zebra zero zone zoo').split(' ');
-
-  const WORD_INDEX = new Map(WORDLIST.map((w, i) => [w, i]));
-
-  function bytesToBits(bytes) {
-    const bits = [];
-    for (const b of bytes) for (let i = 7; i >= 0; i--) bits.push((b >> i) & 1);
-    return bits;
-  }
-
-  async function entropyToMnemonic(entropy) {
-    const entropyBits = entropy.length * 8;
-    const checksumBits = entropyBits / 32;
-    const totalBits = entropyBits + checksumBits;
-    const wordCount = totalBits / 11;
-    const hash = await C.sha256(entropy);
-    const hashBits = bytesToBits(hash);
-    const entropyBitArr = bytesToBits(entropy);
-    const allBits = entropyBitArr.concat(hashBits.slice(0, checksumBits));
-    const words = [];
-    for (let i = 0; i < wordCount; i++) {
-      let idx = 0;
-      for (let j = 0; j < 11; j++) idx = (idx << 1) | allBits[i * 11 + j];
-      words.push(WORDLIST[idx]);
-    }
-    return words.join(' ');
-  }
-
-  function generateSeed() {
-    const entropy = Random.bytes(32);
-    return entropyToMnemonic(entropy);
-  }
-
-  async function validateMnemonic(mnemonic) {
-    const words = mnemonic.trim().toLowerCase().split(/\s+/);
-    if (![12, 15, 18, 21, 24].includes(words.length)) return false;
-    for (const w of words) if (!WORD_INDEX.has(w)) return false;
-    const bits = [];
-    for (const w of words) {
-      const idx = WORD_INDEX.get(w);
-      for (let i = 10; i >= 0; i--) bits.push((idx >> i) & 1);
-    }
-    const totalBits = bits.length;
-    const checksumBits = totalBits / 33;
-    const entropyBits = totalBits - checksumBits;
-    const entropyBytes = [];
-    for (let i = 0; i < entropyBits; i += 8) {
-      let b = 0;
-      for (let j = 0; j < 8; j++) b = (b << 1) | bits[i + j];
-      entropyBytes.push(b);
-    }
-    const entropy = new Uint8Array(entropyBytes);
-    const hash = await C.sha256(entropy);
-    const hashBits = bytesToBits(hash);
-    for (let i = 0; i < checksumBits; i++) {
-      if (bits[entropyBits + i] !== hashBits[i]) return false;
-    }
-    return true;
-  }
-
-  async function derivePrivateKey(mnemonic) {
-    const seed = await C.pbkdf2(mnemonic, C.str2buf('mnemonic'), 2048, 512);
-    const I = await C.hmacSha512(C.str2buf('Bitcoin seed'), seed);
-    return I.slice(0, 32);
-  }
-
-  return { generateSeed, validateMnemonic, derivePrivateKey, WORDLIST };
-})();
-
-/* ============================================================
-   EncryptedStorage — AES-256-GCM
-   ============================================================ */
-const Enc = (() => {
-  const PREFIX = 'cofc_v15_';
-  let masterKey = null;
-  const cache = new Map();
-
-  function setMasterKey(key) {
-    if (masterKey) C.zeroize(masterKey);
-    masterKey = key;
-    cache.clear();
-  }
-
-  async function set(name, value) {
-    if (!masterKey) throw new Error('No master key');
-    const json = JSON.stringify(value);
-    const { iv, ciphertext } = await C.aesEncrypt(masterKey, C.str2buf(json));
-    const env = { v: 15, iv: C.b64enc(iv), ct: C.b64enc(ciphertext) };
-    localStorage.setItem(PREFIX + name, JSON.stringify(env));
-    cache.set(name, value);
-  }
-
-  async function get(name, fallback = null) {
-    if (cache.has(name)) return cache.get(name);
-    const raw = localStorage.getItem(PREFIX + name);
-    if (!raw) return fallback;
-    if (!masterKey) return fallback;
-    try {
-      const env = JSON.parse(raw);
-      if (!env.v || !env.iv || !env.ct) return fallback;
-      const iv = C.b64dec(env.iv);
-      const ct = C.b64dec(env.ct);
-      const pt = await C.aesDecrypt(masterKey, iv, ct);
-      const value = JSON.parse(C.buf2str(pt));
-      cache.set(name, value);
-      return value;
-    } catch (e) { return fallback; }
-  }
-
-  function remove(name) {
-    localStorage.removeItem(PREFIX + name);
-    cache.delete(name);
-  }
-
-  function clearAll() {
-    for (let i = localStorage.length - 1; i >= 0; i--) {
-      const k = localStorage.key(i);
-      if (k && k.startsWith(PREFIX)) localStorage.removeItem(k);
-    }
-    cache.clear();
-  }
-
-  return { setMasterKey, set, get, remove, clearAll };
-})();
-
-/* ============================================================
-   COUNTRY PREFIX LIST — FULL, NO EMOJI
-   ============================================================ */
-const COUNTRY_PREFIXES = [
-  { code: 'AF', prefix: '+93', name: 'Afghanistan' },
-  { code: 'AL', prefix: '+355', name: 'Albania' },
-  { code: 'DZ', prefix: '+213', name: 'Algeria' },
-  { code: 'AD', prefix: '+376', name: 'Andorra' },
-  { code: 'AO', prefix: '+244', name: 'Angola' },
-  { code: 'AR', prefix: '+54', name: 'Argentina' },
-  { code: 'AM', prefix: '+374', name: 'Armenia' },
-  { code: 'AU', prefix: '+61', name: 'Australia' },
-  { code: 'AT', prefix: '+43', name: 'Austria' },
-  { code: 'AZ', prefix: '+994', name: 'Azerbaijan' },
-  { code: 'BH', prefix: '+973', name: 'Bahrain' },
-  { code: 'BD', prefix: '+880', name: 'Bangladesh' },
-  { code: 'BY', prefix: '+375', name: 'Belarus' },
-  { code: 'BE', prefix: '+32', name: 'Belgium' },
-  { code: 'BO', prefix: '+591', name: 'Bolivia' },
-  { code: 'BA', prefix: '+387', name: 'Bosnia' },
-  { code: 'BR', prefix: '+55', name: 'Brazil' },
-  { code: 'BG', prefix: '+359', name: 'Bulgaria' },
-  { code: 'KH', prefix: '+855', name: 'Cambodia' },
-  { code: 'CM', prefix: '+237', name: 'Cameroon' },
-  { code: 'CA', prefix: '+1', name: 'Canada' },
-  { code: 'CL', prefix: '+56', name: 'Chile' },
-  { code: 'CN', prefix: '+86', name: 'China' },
-  { code: 'CO', prefix: '+57', name: 'Colombia' },
-  { code: 'CR', prefix: '+506', name: 'Costa Rica' },
-  { code: 'HR', prefix: '+385', name: 'Croatia' },
-  { code: 'CU', prefix: '+53', name: 'Cuba' },
-  { code: 'CY', prefix: '+357', name: 'Cyprus' },
-  { code: 'CZ', prefix: '+420', name: 'Czechia' },
-  { code: 'DK', prefix: '+45', name: 'Denmark' },
-  { code: 'DO', prefix: '+1', name: 'Dominican Rep.' },
-  { code: 'EC', prefix: '+593', name: 'Ecuador' },
-  { code: 'EG', prefix: '+20', name: 'Egypt' },
-  { code: 'SV', prefix: '+503', name: 'El Salvador' },
-  { code: 'EE', prefix: '+372', name: 'Estonia' },
-  { code: 'ET', prefix: '+251', name: 'Ethiopia' },
-  { code: 'FI', prefix: '+358', name: 'Finland' },
-  { code: 'FR', prefix: '+33', name: 'France' },
-  { code: 'GE', prefix: '+995', name: 'Georgia' },
-  { code: 'DE', prefix: '+49', name: 'Germany' },
-  { code: 'GH', prefix: '+233', name: 'Ghana' },
-  { code: 'GR', prefix: '+30', name: 'Greece' },
-  { code: 'GT', prefix: '+502', name: 'Guatemala' },
-  { code: 'HN', prefix: '+504', name: 'Honduras' },
-  { code: 'HK', prefix: '+852', name: 'Hong Kong' },
-  { code: 'HU', prefix: '+36', name: 'Hungary' },
-  { code: 'IS', prefix: '+354', name: 'Iceland' },
-  { code: 'IN', prefix: '+91', name: 'India' },
-  { code: 'ID', prefix: '+62', name: 'Indonesia' },
-  { code: 'IR', prefix: '+98', name: 'Iran' },
-  { code: 'IQ', prefix: '+964', name: 'Iraq' },
-  { code: 'IE', prefix: '+353', name: 'Ireland' },
-  { code: 'IL', prefix: '+972', name: 'Israel' },
-  { code: 'IT', prefix: '+39', name: 'Italy' },
-  { code: 'JM', prefix: '+1', name: 'Jamaica' },
-  { code: 'JP', prefix: '+81', name: 'Japan' },
-  { code: 'JO', prefix: '+962', name: 'Jordan' },
-  { code: 'KZ', prefix: '+7', name: 'Kazakhstan' },
-  { code: 'KE', prefix: '+254', name: 'Kenya' },
-  { code: 'KW', prefix: '+965', name: 'Kuwait' },
-  { code: 'LV', prefix: '+371', name: 'Latvia' },
-  { code: 'LB', prefix: '+961', name: 'Lebanon' },
-  { code: 'LY', prefix: '+218', name: 'Libya' },
-  { code: 'LT', prefix: '+370', name: 'Lithuania' },
-  { code: 'LU', prefix: '+352', name: 'Luxembourg' },
-  { code: 'MY', prefix: '+60', name: 'Malaysia' },
-  { code: 'MT', prefix: '+356', name: 'Malta' },
-  { code: 'MX', prefix: '+52', name: 'Mexico' },
-  { code: 'MD', prefix: '+373', name: 'Moldova' },
-  { code: 'MC', prefix: '+377', name: 'Monaco' },
-  { code: 'MA', prefix: '+212', name: 'Morocco' },
-  { code: 'NP', prefix: '+977', name: 'Nepal' },
-  { code: 'NL', prefix: '+31', name: 'Netherlands' },
-  { code: 'NZ', prefix: '+64', name: 'New Zealand' },
-  { code: 'NI', prefix: '+505', name: 'Nicaragua' },
-  { code: 'NG', prefix: '+234', name: 'Nigeria' },
-  { code: 'NO', prefix: '+47', name: 'Norway' },
-  { code: 'OM', prefix: '+968', name: 'Oman' },
-  { code: 'PK', prefix: '+92', name: 'Pakistan' },
-  { code: 'PS', prefix: '+970', name: 'Palestine' },
-  { code: 'PA', prefix: '+507', name: 'Panama' },
-  { code: 'PY', prefix: '+595', name: 'Paraguay' },
-  { code: 'PE', prefix: '+51', name: 'Peru' },
-  { code: 'PH', prefix: '+63', name: 'Philippines' },
-  { code: 'PL', prefix: '+48', name: 'Poland' },
-  { code: 'PT', prefix: '+351', name: 'Portugal' },
-  { code: 'QA', prefix: '+974', name: 'Qatar' },
-  { code: 'RO', prefix: '+40', name: 'Romania' },
-  { code: 'RU', prefix: '+7', name: 'Russia' },
-  { code: 'SA', prefix: '+966', name: 'Saudi Arabia' },
-  { code: 'RS', prefix: '+381', name: 'Serbia' },
-  { code: 'SG', prefix: '+65', name: 'Singapore' },
-  { code: 'SK', prefix: '+421', name: 'Slovakia' },
-  { code: 'SI', prefix: '+386', name: 'Slovenia' },
-  { code: 'ZA', prefix: '+27', name: 'South Africa' },
-  { code: 'KR', prefix: '+82', name: 'South Korea' },
-  { code: 'ES', prefix: '+34', name: 'Spain' },
-  { code: 'LK', prefix: '+94', name: 'Sri Lanka' },
-  { code: 'SD', prefix: '+249', name: 'Sudan' },
-  { code: 'SE', prefix: '+46', name: 'Sweden' },
-  { code: 'CH', prefix: '+41', name: 'Switzerland' },
-  { code: 'SY', prefix: '+963', name: 'Syria' },
-  { code: 'TW', prefix: '+886', name: 'Taiwan' },
-  { code: 'TH', prefix: '+66', name: 'Thailand' },
-  { code: 'TN', prefix: '+216', name: 'Tunisia' },
-  { code: 'TR', prefix: '+90', name: 'Turkey' },
-  { code: 'UA', prefix: '+380', name: 'Ukraine' },
-  { code: 'AE', prefix: '+971', name: 'UAE' },
-  { code: 'GB', prefix: '+44', name: 'United Kingdom' },
-  { code: 'US', prefix: '+1', name: 'United States' },
-  { code: 'UY', prefix: '+598', name: 'Uruguay' },
-  { code: 'UZ', prefix: '+998', name: 'Uzbekistan' },
-  { code: 'VE', prefix: '+58', name: 'Venezuela' },
-  { code: 'VN', prefix: '+84', name: 'Vietnam' },
-  { code: 'YE', prefix: '+967', name: 'Yemen' },
-  { code: 'ZM', prefix: '+260', name: 'Zambia' },
-  { code: 'ZW', prefix: '+263', name: 'Zimbabwe' }
-];
-
-/* ============================================================
-   COINS — Trust Wallet Compatible
-   ============================================================ */
-const TW = 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains';
-const COINS = [
-  // Sovereign Assets
-  { symbol: 'CASH', name: 'COFC CASH', chain: 'BSC', color: '#F6EE25', cg: null, logo: '' },
-  { symbol: 'TIME', name: 'TIME Protocol', chain: 'TIME', color: '#0891b2', cg: null, logo: '' },
-  { symbol: 'GOLD', name: 'COFC GOLD', chain: 'Sovereign', color: '#FFD700', cg: null, logo: '' },
-  { symbol: 'KEY', name: 'COFC KEY', chain: 'Sovereign', color: '#FFA500', cg: null, logo: '' },
-  { symbol: 'GEM', name: 'COFC GEM', chain: 'Consciousness', color: '#7C3AED', cg: null, logo: '' },
-  // Top 50 by Market Cap (representative sample from Trust Wallet repo)
-  { symbol: 'BTC', name: 'Bitcoin', chain: 'Bitcoin', color: '#f7931a', cg: 'bitcoin', logo: `${TW}/bitcoin/info/logo.png` },
-  { symbol: 'ETH', name: 'Ethereum', chain: 'Ethereum', color: '#627eea', cg: 'ethereum', logo: `${TW}/ethereum/info/logo.png` },
-  { symbol: 'USDT', name: 'Tether', chain: 'Multi', color: '#26a17b', cg: 'tether', logo: `${TW}/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png` },
-  { symbol: 'BNB', name: 'BNB', chain: 'BSC', color: '#f3ba2f', cg: 'binancecoin', logo: `${TW}/smartchain/info/logo.png` },
-  { symbol: 'SOL', name: 'Solana', chain: 'Solana', color: '#14f195', cg: 'solana', logo: `${TW}/solana/info/logo.png` },
-  { symbol: 'XRP', name: 'Ripple', chain: 'XRP', color: '#23292f', cg: 'ripple', logo: `${TW}/ripple/info/logo.png` },
-  { symbol: 'USDC', name: 'USD Coin', chain: 'Multi', color: '#2775ca', cg: 'usd-coin', logo: `${TW}/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png` },
-  { symbol: 'ADA', name: 'Cardano', chain: 'Cardano', color: '#0033ad', cg: 'cardano', logo: `${TW}/cardano/info/logo.png` },
-  { symbol: 'DOGE', name: 'Dogecoin', chain: 'Dogecoin', color: '#c2a633', cg: 'dogecoin', logo: `${TW}/dogecoin/info/logo.png` },
-  { symbol: 'AVAX', name: 'Avalanche', chain: 'Avalanche', color: '#e84142', cg: 'avalanche-2', logo: `${TW}/avalanchec/info/logo.png` },
-  { symbol: 'DOT', name: 'Polkadot', chain: 'Polkadot', color: '#e6007a', cg: 'polkadot', logo: `${TW}/polkadot/info/logo.png` },
-  { symbol: 'MATIC', name: 'Polygon', chain: 'Polygon', color: '#8247e5', cg: 'matic-network', logo: `${TW}/polygon/info/logo.png` },
-  { symbol: 'LINK', name: 'Chainlink', chain: 'Ethereum', color: '#2a5ada', cg: 'chainlink', logo: `${TW}/ethereum/assets/0x514910771AF9Ca656af840dff83E8264EcF986CA/logo.png` },
-  { symbol: 'LTC', name: 'Litecoin', chain: 'Litecoin', color: '#345d9d', cg: 'litecoin', logo: `${TW}/litecoin/info/logo.png` },
-  { symbol: 'TRX', name: 'TRON', chain: 'TRON', color: '#ef0027', cg: 'tron', logo: `${TW}/tron/info/logo.png` },
-  { symbol: 'ATOM', name: 'Cosmos', chain: 'Cosmos', color: '#2e3148', cg: 'cosmos', logo: `${TW}/cosmos/info/logo.png` },
-  { symbol: 'XLM', name: 'Stellar', chain: 'Stellar', color: '#14b6e7', cg: 'stellar', logo: `${TW}/stellar/info/logo.png` },
-  { symbol: 'NEAR', name: 'NEAR', chain: 'NEAR', color: '#000000', cg: 'near', logo: `${TW}/near/info/logo.png` },
-  { symbol: 'ALGO', name: 'Algorand', chain: 'Algorand', color: '#000000', cg: 'algorand', logo: `${TW}/algorand/info/logo.png` },
-  { symbol: 'VET', name: 'VeChain', chain: 'VeChain', color: '#15bdff', cg: 'vechain', logo: `${TW}/vechain/info/logo.png` },
-  { symbol: 'FIL', name: 'Filecoin', chain: 'Filecoin', color: '#0090ff', cg: 'filecoin', logo: `${TW}/filecoin/info/logo.png` },
-  { symbol: 'ICP', name: 'Internet Computer', chain: 'ICP', color: '#29abe2', cg: 'internet-computer', logo: `${TW}/internetcomputer/info/logo.png` },
-  { symbol: 'HBAR', name: 'Hedera', chain: 'Hedera', color: '#222222', cg: 'hedera-hashgraph', logo: `${TW}/hedera/info/logo.png` },
-  { symbol: 'APT', name: 'Aptos', chain: 'Aptos', color: '#000000', cg: 'aptos', logo: `${TW}/aptos/info/logo.png` },
-  { symbol: 'ARB', name: 'Arbitrum', chain: 'Arbitrum', color: '#28a0f0', cg: 'arbitrum', logo: `${TW}/arbitrum/info/logo.png` },
-  { symbol: 'OP', name: 'Optimism', chain: 'Optimism', color: '#ff0420', cg: 'optimism', logo: `${TW}/optimism/info/logo.png` },
-  { symbol: 'SUI', name: 'Sui', chain: 'Sui', color: '#4da2ff', cg: 'sui', logo: `${TW}/sui/info/logo.png` },
-  { symbol: 'INJ', name: 'Injective', chain: 'Injective', color: '#00f2fe', cg: 'injective-protocol', logo: `${TW}/injective/info/logo.png` },
-  { symbol: 'AAVE', name: 'Aave', chain: 'Ethereum', color: '#b6509e', cg: 'aave', logo: `${TW}/ethereum/assets/0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9/logo.png` },
-  { symbol: 'MKR', name: 'Maker', chain: 'Ethereum', color: '#1aab9b', cg: 'maker', logo: `${TW}/ethereum/assets/0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2/logo.png` },
-  { symbol: 'GRT', name: 'The Graph', chain: 'Ethereum', color: '#6747ed', cg: 'the-graph', logo: `${TW}/ethereum/assets/0xc944E90C64B2c07662A292be6244BDf05Cda44a7/logo.png` },
-  { symbol: 'SAND', name: 'Sandbox', chain: 'Ethereum', color: '#00adef', cg: 'the-sandbox', logo: `${TW}/ethereum/assets/0x3845badAde8e6dFF049820680d1F14bD3903a5d0/logo.png` },
-  { symbol: 'MANA', name: 'Decentraland', chain: 'Ethereum', color: '#ff2d55', cg: 'decentraland', logo: `${TW}/ethereum/assets/0x0F5D2fB29fb7d3CFeE444a200298f468908cC942/logo.png` },
-  { symbol: 'CRO', name: 'Cronos', chain: 'Cronos', color: '#002d74', cg: 'crypto-com-chain', logo: `${TW}/cryptoorgchain/info/logo.png` },
-  { symbol: 'FTM', name: 'Fantom', chain: 'Fantom', color: '#1969ff', cg: 'fantom', logo: `${TW}/fantom/info/logo.png` },
-  { symbol: 'EGLD', name: 'MultiversX', chain: 'MultiversX', color: '#000000', cg: 'elrond-erd-2', logo: `${TW}/elrond/info/logo.png` },
-  { symbol: 'THETA', name: 'Theta', chain: 'Theta', color: '#2ab8e6', cg: 'theta-token', logo: `${TW}/theta/info/logo.png` },
-  { symbol: 'XTZ', name: 'Tezos', chain: 'Tezos', color: '#2c7df7', cg: 'tezos', logo: `${TW}/tezos/info/logo.png` },
-  { symbol: 'FLOW', name: 'Flow', chain: 'Flow', color: '#00ef8b', cg: 'flow', logo: `${TW}/flow/info/logo.png` },
-  { symbol: 'CHZ', name: 'Chiliz', chain: 'Chiliz', color: '#cd0124', cg: 'chiliz', logo: `${TW}/ethereum/assets/0x3506424F91fD33084466F402d5D97f05F8e3b4AF/logo.png` },
-  { symbol: 'EOS', name: 'EOS', chain: 'EOS', color: '#000000', cg: 'eos', logo: `${TW}/eos/info/logo.png` },
-  { symbol: 'CAKE', name: 'PancakeSwap', chain: 'BSC', color: '#d1884f', cg: 'pancakeswap-token', logo: `${TW}/smartchain/assets/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82/logo.png` },
-  { symbol: 'UNI', name: 'Uniswap', chain: 'Ethereum', color: '#ff007a', cg: 'uniswap', logo: `${TW}/ethereum/assets/0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984/logo.png` },
-  { symbol: 'RUNE', name: 'THORChain', chain: 'Multi', color: '#00ccff', cg: 'thorchain', logo: `${TW}/thorchain/info/logo.png` },
-  { symbol: 'LDO', name: 'Lido DAO', chain: 'Ethereum', color: '#00a3ff', cg: 'lido-dao', logo: `${TW}/ethereum/assets/0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32/logo.png` },
-  { symbol: 'IMX', name: 'Immutable X', chain: 'Ethereum', color: '#15b2e5', cg: 'immutable-x', logo: `${TW}/ethereum/assets/0xF57e7e7C23978C3cAEC3C3548E3D615c346e79fF/logo.png` },
-  { symbol: 'CRV', name: 'Curve DAO', chain: 'Ethereum', color: '#40649f', cg: 'curve-dao-token', logo: `${TW}/ethereum/assets/0xD533a949740bb3306d119CC777fa900bA034cd52/logo.png` },
-  { symbol: 'SNX', name: 'Synthetix', chain: 'Ethereum', color: '#00d1ff', cg: 'havven', logo: `${TW}/ethereum/assets/0xC011a73ee8576Fb46F5E1c5751cA3B9Fe0af2a6F/logo.png` },
-  { symbol: 'ENS', name: 'Ethereum Name Service', chain: 'Ethereum', color: '#5298ff', cg: 'ethereum-name-service', logo: `${TW}/ethereum/assets/0xC18360217D8F7Ab5e7c516566761Ea12Ce7F9D72/logo.png` }
-];
-
-const COINS_MAP = Object.fromEntries(COINS.map(c => [c.symbol, c]));
-
-/* ============================================================
-   Money — BigInt
-   ============================================================ */
-const Money = (() => {
-  const SCALE = 10n ** 8n;
-
-  function fromString(s) {
-    if (typeof s !== 'string') s = String(s);
-    s = s.trim();
-    if (!/^-?\d+(\.\d+)?$/.test(s)) return null;
-    const neg = s.startsWith('-');
-    if (neg) s = s.slice(1);
-    const [intPart = '0', fracPart = ''] = s.split('.');
-    const fracPadded = (fracPart + '0'.repeat(8)).slice(0, 8);
-    const val = BigInt(intPart || '0') * SCALE + BigInt(fracPadded || '0');
-    return neg ? -val : val;
-  }
-
-  function fromNumber(n) {
-    if (!Number.isFinite(n)) return 0n;
-    return fromString(n.toFixed(8)) || 0n;
-  }
-
-  function toString(v) {
-    if (typeof v !== 'bigint') v = BigInt(v);
-    const neg = v < 0n;
-    let abs = neg ? -v : v;
-    const int = abs / SCALE;
-    const frac = abs % SCALE;
-    let fracStr = frac.toString().padStart(8, '0').replace(/0+$/, '');
-    if (fracStr === '') fracStr = '0';
-    return (neg ? '-' : '') + int.toString() + '.' + fracStr;
-  }
-
-  function format(v, maxDecimals = 6) {
-    const s = toString(v);
-    const [int, frac = ''] = s.split('.');
-    const trimmed = frac.slice(0, maxDecimals).replace(/0+$/, '');
-    return trimmed ? int + '.' + trimmed : int;
-  }
-
-  function add(a, b) { return BigInt(a) + BigInt(b); }
-  function sub(a, b) { return BigInt(a) - BigInt(b); }
-  function mul(a, b) { return (BigInt(a) * BigInt(b)) / SCALE; }
-  function div(a, b) { return BigInt(b) === 0n ? 0n : (BigInt(a) * SCALE) / BigInt(b); }
-  function cmp(a, b) { const x = BigInt(a), y = BigInt(b); return x < y ? -1 : x > y ? 1 : 0; }
-
-  return { fromString, fromNumber, toString, format, add, sub, mul, div, cmp, SCALE };
-})();
-
-/* ============================================================
-   UI Utils
-   ============================================================ */
-const UI = (() => {
-  const traps = new WeakMap();
-
-  function esc(s) {
-    if (s === null || s === undefined) return '';
-    return String(s)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
-  }
-
-  function openModal(id) {
-    const m = document.getElementById(id);
-    if (!m) return;
-    document.querySelectorAll('.modal.active').forEach(x => {
-      if (x.id !== id) closeModal(x.id);
-    });
-    m.classList.add('active');
-    trap(m);
-  }
-
-  function closeModal(id) {
-    const m = document.getElementById(id);
-    if (!m) return;
-    m.classList.remove('active');
-    release(m);
-  }
-
-  function trap(m) {
-    const f = m.querySelectorAll('button:not([disabled]),[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])');
-    if (!f.length) return;
-    const first = f[0], last = f[f.length - 1];
-    const h = (e) => {
-      if (e.key !== 'Tab') return;
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    };
-    m.addEventListener('keydown', h);
-    traps.set(m, h);
-    setTimeout(() => { try { first.focus(); } catch (e) {} }, 50);
-  }
-
-  function release(m) {
-    const h = traps.get(m);
-    if (h) { m.removeEventListener('keydown', h); traps.delete(m); }
-  }
-
-  function switchTab(tab) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.dataset.tabContent === tab));
-    if (tab === 'swap') { Swap.render(); Swap.calculate(); }
-    if (tab === 'history') History.render();
-    if (tab === 'send') Send.renderCoinSelector();
-    if (tab === 'hardware') Hardware.render();
-  }
-
-  function openSettings() { switchTab('security'); }
-  function openProfileEdit() {
-    const n = prompt('Display name:', Profile.data.displayName);
-    if (n) { Profile.data.displayName = n.slice(0, 40); Profile.save(); Profile.render(); }
-  }
-
-  return { esc, openModal, closeModal, switchTab, openSettings, openProfileEdit };
-})();
-
-function toast(msg, type = 'info') {
-  const c = document.getElementById('toast-container');
-  if (!c) return;
-  const t = document.createElement('div');
-  t.className = 'toast ' + type;
-  t.textContent = String(msg).slice(0, 300);
-  c.appendChild(t);
-  setTimeout(() => {
-    t.style.opacity = '0';
-    t.style.transition = 'opacity .3s ease';
-    setTimeout(() => t.remove(), 300);
-  }, 3400);
-}
-
-/* ============================================================
-   Audit Log (Merkle chain)
-   ============================================================ */
-const Audit = (() => {
-  const entries = [];
-  const MAX = 100;
-
-  async function log(msg, type = 'info') {
-    const prevHash = entries[0]?.hash || '0'.repeat(64);
-    const entry = { ts: Date.now(), msg: String(msg).slice(0, 200), type, prevHash };
-    const bytes = C.str2buf(JSON.stringify(entry));
-    entry.hash = C.hexEnc(await C.sha256(bytes));
-    entries.unshift(entry);
-    if (entries.length > MAX) entries.length = MAX;
-    render();
-  }
-
-  function render() {
-    const d = document.getElementById('audit-log');
-    if (!d) return;
-    const frag = document.createDocumentFragment();
-    for (const e of entries) {
-      const div = document.createElement('div');
-      div.className = 'log-entry ' + e.type;
-      const time = document.createElement('span');
-      time.className = 'log-time';
-      time.textContent = '[' + new Date(e.ts).toISOString().substr(11, 8) + ']';
-      const msg = document.createElement('span');
-      msg.textContent = ' ' + e.msg;
-      div.appendChild(time);
-      div.appendChild(msg);
-      frag.appendChild(div);
-    }
-    d.replaceChildren(frag);
-  }
-
-  return { log, render };
-})();
-
-/* ============================================================
-   Vault — Master key + auto-lock
-   ============================================================ */
-const Vault = (() => {
-  let masterKey = null;
-  let autoLockTimer = null;
-  let isLoggedIn = false;
-  const AUTO_LOCK_MS = 3 * 60 * 1000;
-
-  function setMasterKey(k) {
-    if (masterKey) C.zeroize(masterKey);
-    masterKey = k;
-    Enc.setMasterKey(k);
-  }
-
-  function getMasterKey() { return masterKey; }
-
-  function armAutoLock() {
-    if (autoLockTimer) clearTimeout(autoLockTimer);
-    if (!isLoggedIn) return;
-    autoLockTimer = setTimeout(() => lock(), AUTO_LOCK_MS);
-  }
-
-  function lock() {
-    if (autoLockTimer) { clearTimeout(autoLockTimer); autoLockTimer = null; }
-    if (masterKey) { C.zeroize(masterKey); masterKey = null; }
-    Enc.setMasterKey(null);
-    isLoggedIn = false;
-    Audit.log('Vault locked', 'warn');
-    toast('🔒 Vault locked', 'warn');
-    document.getElementById('login-screen').style.display = 'flex';
-    document.getElementById('app-screen').classList.remove('visible');
-    document.getElementById('profile-header').classList.remove('visible');
-    document.getElementById('header-user').classList.remove('visible');
-  }
-
-  function setLoggedIn(v) {
-    isLoggedIn = v;
-    if (v) armAutoLock();
-  }
-
-  return { setMasterKey, getMasterKey, armAutoLock, lock, setLoggedIn };
-})();
-
-/* ============================================================
-   Face Liveness (Brightness-based, documented as such)
-   ============================================================ */
-const Face = (() => {
-  let video, canvas, ctx, stream, active = false, running = false;
-
-  async function init() {
-    video = document.getElementById('camera-feed');
-    canvas = document.createElement('canvas');
-    canvas.width = 128;
-    canvas.height = 96;
-    ctx = canvas.getContext('2d', { willReadFrequently: true });
-  }
-
-  async function start() {
-    if (active) return true;
-    if (!navigator.mediaDevices?.getUserMedia) throw new Error('Camera not supported');
-    if (!window.isSecureContext) throw new Error('HTTPS required');
-    try {
-      stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
-        audio: false
-      });
-      video.srcObject = stream;
-      video.setAttribute('playsinline', 'true');
-      await new Promise((res, rej) => {
-        video.onloadedmetadata = () => video.play().then(res).catch(rej);
-        setTimeout(() => rej(new Error('Video timeout')), 5000);
-      });
-      active = true;
-      return true;
-    } catch (e) {
-      if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
-      throw new Error(e.name === 'NotAllowedError' ? 'Camera permission denied' : 'Camera error');
-    }
-  }
-
-  function stop() {
-    running = false;
-    if (stream) { try { stream.getTracks().forEach(t => t.stop()); } catch (e) {} stream = null; }
-    if (video) { try { video.pause(); video.srcObject = null; } catch (e) {} }
-    active = false;
-  }
-
-  function capture() {
-    if (!video || !active) return null;
-    try {
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      return ctx.getImageData(0, 0, canvas.width, canvas.height);
-    } catch (e) { return null; }
-  }
-
-  function brightness(img, x1, y1, x2, y2) {
-    const d = img.data, w = img.width, h = img.height;
-    const x1p = Math.floor(x1 * w), y1p = Math.floor(y1 * h);
-    const x2p = Math.floor(x2 * w), y2p = Math.floor(y2 * h);
-    let sum = 0, cnt = 0;
-    for (let y = y1p; y < y2p; y += 2) for (let x = x1p; x < x2p; x += 2) {
-      if (y < 0 || y >= h || x < 0 || x >= w) continue;
-      const i = (y * w + x) * 4;
-      sum += d[i] * .299 + d[i + 1] * .587 + d[i + 2] * .114;
-      cnt++;
-    }
-    return cnt ? sum / cnt : 0;
-  }
-
-  function detectBlink(p, c) {
-    if (!p || !c) return false;
-    const leP = brightness(p, .3, .35, .45, .5), leC = brightness(c, .3, .35, .45, .5);
-    const reP = brightness(p, .55, .35, .7, .5), reC = brightness(c, .55, .35, .7, .5);
-    const ckP = brightness(p, .3, .6, .7, .75), ckC = brightness(c, .3, .6, .7, .75);
-    const eyeDelta = (leP - leC + reP - reC) / 2;
-    const cheekDelta = ckP - ckC;
-    return eyeDelta > 15 && Math.abs(eyeDelta - cheekDelta) > 8;
-  }
-
-  function detectTurn(f) {
-    const l = brightness(f, .05, .3, .4, .7), r = brightness(f, .6, .3, .95, .7);
-    return Math.abs(l - r) > 20;
-  }
-
-  function detectSmile(f) {
-    const mouth = brightness(f, .4, .65, .6, .85), chin = brightness(f, .4, .85, .6, .95);
-    return mouth - chin > 8;
-  }
-
-  async function runCheck(onProgress, challenge) {
-    running = true;
-    const frames = [];
-    try {
-      const start = Date.now(), MAX = 25000;
-      await new Promise(r => setTimeout(r, 500));
-      const baseline = capture();
-      if (!baseline) throw new Error('Cannot capture baseline');
-      frames.push(baseline);
-      let last = baseline;
-
-      const steps = [
-        { step: 'blink', duration: 4000, hint: '👁️ Blink now', detect: (c, p) => detectBlink(p, c) },
-        { step: 'turn', duration: 5000, hint: '↔️ Turn head slowly', detect: (c) => detectTurn(c) },
-        { step: 'smile', duration: 4000, hint: '😊 Smile', detect: (c) => detectSmile(c) }
-      ];
-
-      for (let i = 0; i < steps.length; i++) {
-        if (!running) throw new Error('Cancelled');
-        const s = steps[i];
-        const ss = Date.now();
-        let detections = 0;
-        onProgress({ step: s.step, hint: s.hint, completed: i });
-        while (Date.now() - ss < s.duration) {
-          if (!running) throw new Error('Cancelled');
-          if (Date.now() - start > MAX) throw new Error('Timeout');
-          await new Promise(r => setTimeout(r, 80));
-          const f = capture();
-          if (!f) continue;
-          if (frames.length < 50) frames.push(f);
-          if (s.detect(f, last)) { detections++; if (detections >= 3) break; }
-          else detections = Math.max(0, detections - 1);
-          last = f;
-        }
-        if (detections < 3 && s.step === 'turn') throw new Error('Detection failed');
-      }
-
-      // Build entropy: frames + server challenge (nonce)
-      const entropy = new Uint8Array(128);
-      let idx = 0;
-      for (const f of frames.slice(0, 20)) {
-        if (idx >= 96) break;
-        for (let j = 0; j < 5 && idx < 96; j++) {
-          entropy[idx++] = f.data[(j * 17 + idx * 13) % f.data.length];
-        }
-      }
-      // Append challenge (server nonce)
-      entropy.set(challenge, 96);
-
-      const h = SHA3.hash512(entropy);
-      C.zeroize(entropy);
-      return h;
-    } finally {
-      running = false;
-    }
-  }
-
-  return { init, start, stop, runCheck };
-})();
-
-/* ============================================================
-   TwoFA
-   ============================================================ */
-const TwoFA = (() => {
-  let pending = null;
-  let verifying = false;
-
-  function request(cb) {
-    if (pending) { toast('Complete current verification first', 'warn'); return; }
-    pending = cb;
-    UI.openModal('modal-2fa');
-  }
-
-  async function verify() {
-    if (verifying) return;
-    verifying = true;
-    const btn = document.getElementById('btn-2fa-verify');
-    if (btn) { btn.disabled = true; btn.classList.add('loading'); }
-    try {
-      await Face.start();
-      const challenge = Random.bytes(32); // server-provided in production
-      const entropy = await Face.runCheck(() => {}, challenge);
-      if (!entropy || entropy.length !== 64) throw new Error('Invalid biometric');
-      Face.stop();
-      UI.closeModal('modal-2fa');
-      const cb = pending; pending = null;
-      if (cb) await cb();
-    } catch (e) {
-      toast('Biometric failed: ' + e.message, 'error');
-    } finally {
-      verifying = false;
-      if (btn) { btn.disabled = false; btn.classList.remove('loading'); }
-    }
-  }
-
-  function cancel() { pending = null; Face.stop(); }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const b = document.getElementById('btn-2fa-verify');
-    if (b) b.addEventListener('click', verify);
-  });
-
-  return { request, verify, cancel };
-})();
-
-/* ============================================================
-   TripleAuth
-   ============================================================ */
-const TripleAuth = (() => {
-  let target = null, cb = null, verifiedPwd = null;
-
-  function request(t, callback) {
-    target = t; cb = callback; verifiedPwd = null;
-    const input = document.getElementById('triple-auth-password');
-    if (input) input.value = '';
-    const hint = document.getElementById('triple-auth-hint');
-    if (hint) { hint.textContent = ''; hint.className = 'form-hint'; }
-    UI.openModal('modal-triple-auth');
-  }
-
-  async function verifyPassword() {
-    const pwd = (document.getElementById('triple-auth-password') || {}).value || '';
-    if (!pwd) {
-      const hint = document.getElementById('triple-auth-hint');
-      if (hint) { hint.textContent = 'Enter password'; hint.className = 'form-hint error'; }
-      return;
-    }
-    const btn = document.getElementById('btn-triple-auth-step1');
-    if (btn) { btn.disabled = true; btn.classList.add('loading'); }
-    try {
-      const stored = await Enc.get('auth');
-      if (!stored || !stored.pwdHash) throw new Error('No auth data');
-      const salt = C.b64dec(stored.salt);
-      const derived = await KDF.derive(pwd, salt, { iterations: 300000 });
-      const expected = C.hexDec(stored.pwdHash);
-      if (!C.timingSafeEqual(derived, expected)) throw new Error('Wrong password');
-      C.zeroize(derived);
-      verifiedPwd = pwd;
-      UI.closeModal('modal-triple-auth');
-
-      // Step 2: Biometric
-      await new Promise(r => setTimeout(r, 200));
-      TwoFA.request(async () => {
-        // Step 3: Confirm
-        const input = document.getElementById('confirm-reveal-input');
-        if (input) input.value = '';
-        const confirmBtn = document.getElementById('btn-confirm-reveal');
-        if (confirmBtn) confirmBtn.disabled = true;
-        UI.openModal('modal-confirm-reveal');
-      });
-    } catch (e) {
-      const hint = document.getElementById('triple-auth-hint');
-      if (hint) { hint.textContent = e.message || 'Failed'; hint.className = 'form-hint error'; }
-    } finally {
-      if (btn) { btn.disabled = false; btn.classList.remove('loading'); }
-    }
-  }
-
-  function confirm() {
-    const input = document.getElementById('confirm-reveal-input');
-    if (!input || input.value.trim().toUpperCase() !== 'REVEAL') return;
-    UI.closeModal('modal-confirm-reveal');
-    Audit.log('Secret revealed: ' + target, 'warn');
-    if (cb) cb(target, verifiedPwd);
-    target = null; cb = null; verifiedPwd = null;
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const b1 = document.getElementById('btn-triple-auth-step1');
-    if (b1) b1.addEventListener('click', verifyPassword);
-    const inp = document.getElementById('confirm-reveal-input');
-    const cb2 = document.getElementById('btn-confirm-reveal');
-    if (inp && cb2) {
-      inp.addEventListener('input', () => {
-        cb2.disabled = inp.value.trim().toUpperCase() !== 'REVEAL';
-      });
-      cb2.addEventListener('click', confirm);
-    }
-  });
-
-  return { request, cancel: () => { target = null; cb = null; verifiedPwd = null; } };
-})();
-
-/* ============================================================
-   Wallets
-   ============================================================ */
-const Wallets = (() => {
-  let all = {};
-  let currentSymbol = null;
-  let currentAccountId = null;
-
-  async function init() {
-    const stored = await Enc.get('wallets');
-    if (stored && typeof stored === 'object') all = stored;
-    await ensureDefaults();
-    await LivePrices.fetch(['BTC', 'ETH', 'SOL', 'BNB', 'XRP', 'CASH']);
-  }
-
-  async function ensureDefaults() {
-    const defaults = [
-      { symbol: 'CASH', balance: '1250000' },
-      { symbol: 'GOLD', balance: '1000' },
-      { symbol: 'TIME', balance: '8420.12' },
-      { symbol: 'GEM', balance: '500' },
-      { symbol: 'KEY', balance: '100' }
-    ];
-    for (const d of defaults) {
-      const c = COINS_MAP[d.symbol];
-      if (!c) continue;
-      if (!all[c.symbol]) {
-        all[c.symbol] = {
-          symbol: c.symbol, name: c.name, chain: c.chain, color: c.color,
-          accounts: [await genAccount(c, Money.fromString(d.balance), 'Main')]
-        };
-      }
-    }
-    await save();
-  }
-
-  async function genAccount(coin, balance, label) {
-    const addrBytes = Random.bytes(32);
-    let address;
-    if (coin.symbol === 'BTC') address = 'bc1q' + C.hexEnc(addrBytes).slice(0, 38);
-    else if (['CASH', 'GOLD', 'USDT', 'USDC', 'BNB', 'MATIC', 'LINK', 'AAVE'].includes(coin.symbol))
-      address = '0x' + C.hexEnc(addrBytes).slice(0, 40);
-    else if (coin.symbol === 'SOL') address = C.b64enc(addrBytes).slice(0, 44);
-    else address = coin.symbol + '_' + C.hexEnc(addrBytes).slice(0, 40);
-    const secret = C.hexEnc(Random.bytes(32));
-    return {
-      id: 'acc_' + Random.hex(8),
-      label, address, balance: balance || 0n, secret,
-      createdAt: Date.now(), txs: []
-    };
-  }
-
-  async function save() {
-    await Enc.set('wallets', all);
-  }
-
-  async function render() {
-    const list = document.getElementById('wallet-list');
-    if (!list) return;
-    if (!Object.keys(all).length) {
-      list.innerHTML = '<li class="empty-state"><div class="empty-state-title">No wallets</div></li>';
-      return;
-    }
-    const frag = document.createDocumentFragment();
-    for (const w of Object.values(all)) {
-      const bal = w.accounts.reduce((s, a) => s + (a.balance || 0n), 0n);
-      const usd = LivePrices.formatUSD(Money.toString(bal), w.symbol);
-      const logo = Logo.get(w.symbol, w.color);
-      const li = document.createElement('li');
-      li.className = 'wallet-item';
-      li.innerHTML = `
-        <div class="wallet-icon" style="background:${UI.esc(w.color)}20;">
-          <img src="${UI.esc(logo)}" alt="${UI.esc(w.symbol)}" loading="lazy" onerror="this.style.display='none';this.parentElement.style.background='${UI.esc(w.color)}';this.parentElement.textContent='${UI.esc(w.symbol[0])}';this.parentElement.style.color='white';this.parentElement.style.fontWeight='900';">
-        </div>
-        <div class="wallet-info">
-          <div class="wallet-name">${UI.esc(w.symbol)} <span class="wallet-count">${w.accounts.length}</span></div>
-          <div class="wallet-network">${UI.esc(w.name)}</div>
-        </div>
-        <div>
-          <div class="wallet-balance">${UI.esc(Money.format(bal))}</div>
-          <div class="wallet-balance-usd">${UI.esc(usd)}</div>
-        </div>`;
-      li.addEventListener('click', () => openDetails(w.symbol));
-      frag.appendChild(li);
-    }
-    list.replaceChildren(frag);
-
-    const cnt = document.getElementById('profile-wallet-count');
-    if (cnt) cnt.textContent = totalCount() + ' wallets';
-    renderPortfolio();
-  }
-
-  function renderPortfolio() {
-    const c = document.getElementById('portfolio-summary');
-    if (!c) return;
-    let total = 0;
-    const bd = [];
-    for (const w of Object.values(all)) {
-      const bal = w.accounts.reduce((s, a) => s + (a.balance || 0n), 0n);
-      const p = LivePrices.getPrice(w.symbol);
-      const usd = p !== null ? Number(Money.toString(bal)) * p : 0;
-      total += usd;
-      bd.push({ symbol: w.symbol, balance: bal, usd, color: w.color });
-    }
-    bd.sort((a, b) => b.usd - a.usd);
-    const frag = document.createDocumentFragment();
-    const header = document.createElement('div');
-    header.style.cssText = 'text-align:center;padding:20px 0;border-bottom:1px solid var(--gray-light);margin-bottom:16px;';
-    header.innerHTML = `<div style="font-size:11px;color:var(--gray);font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Total Value</div><div style="font-size:30px;font-weight:900;font-family:var(--mono);direction:ltr;">$${total.toLocaleString('en-US', { maximumFractionDigits: 2 })}</div>`;
-    frag.appendChild(header);
-    for (const b of bd.slice(0, 8)) {
-      const logo = Logo.get(b.symbol, b.color);
-      const row = document.createElement('div');
-      row.style.cssText = 'display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--gray-light);';
-      row.innerHTML = `
-        <div style="width:32px;height:32px;border-radius:50%;background:${UI.esc(b.color)}20;overflow:hidden;display:flex;align-items:center;justify-content:center;">
-          <img src="${UI.esc(logo)}" style="width:100%;height:100%;object-fit:contain;padding:4px;" onerror="this.style.display='none'">
-        </div>
-        <div style="flex:1;min-width:0;">
-          <div style="font-weight:900;font-size:12px;">${UI.esc(b.symbol)}</div>
-          <div style="font-size:10px;color:var(--gray);font-family:var(--mono);font-weight:600;direction:ltr;">${UI.esc(Money.format(b.balance))}</div>
-        </div>
-        <div style="text-align:right;flex-shrink:0;">
-          <div style="font-weight:900;font-size:12px;font-family:var(--mono);direction:ltr;">$${b.usd.toLocaleString('en-US', { maximumFractionDigits: 2 })}</div>
-          <div style="font-size:10px;color:var(--gray);font-weight:700;">${total > 0 ? (b.usd / total * 100).toFixed(1) : 0}%</div>
-        </div>`;
-      frag.appendChild(row);
-    }
-    c.replaceChildren(frag);
-  }
-
-  function totalCount() { return Object.values(all).reduce((s, w) => s + w.accounts.length, 0); }
-
-  function openAddCoin() {
-    UI.openModal('modal-add-coin');
-    renderGrid('');
-  }
-
-  function renderGrid(filter) {
-    const g = document.getElementById('coin-grid');
-    if (!g) return;
-    const f = (filter || '').toLowerCase().trim();
-    const list = COINS.filter(c => !f || c.symbol.toLowerCase().includes(f) || c.name.toLowerCase().includes(f));
-    const frag = document.createDocumentFragment();
-    for (const c of list) {
-      const added = !!all[c.symbol];
-      const logo = Logo.get(c.symbol, c.color);
-      const card = document.createElement('div');
-      card.style.cssText = `padding:10px 6px;background:var(--white);border:1.5px solid var(--gray-light);border-radius:12px;cursor:pointer;transition:all 150ms;text-align:center;${added ? 'opacity:0.5;' : ''}`;
-      card.innerHTML = `
-        <div style="width:42px;height:42px;border-radius:50%;background:${UI.esc(c.color)}20;overflow:hidden;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;">
-          <img src="${UI.esc(logo)}" style="width:100%;height:100%;object-fit:contain;padding:5px;" onerror="this.style.display='none'">
-        </div>
-        <div style="font-size:10px;font-weight:900;">${UI.esc(c.symbol)}</div>
-        <div style="font-size:9px;color:var(--gray);font-weight:700;">${UI.esc(c.chain.substring(0, 10))}</div>`;
-      card.addEventListener('click', () => addCoin(c.symbol));
-      frag.appendChild(card);
-    }
-    g.replaceChildren(frag);
-  }
-
-  async function addCoin(symbol) {
-    const c = COINS_MAP[symbol];
-    if (!c) return;
-    if (all[symbol]) { toast(symbol + ' already added', 'warn'); return; }
-    all[symbol] = {
-      symbol: c.symbol, name: c.name, chain: c.chain, color: c.color,
-      accounts: [await genAccount(c, 0n, 'Main')]
-    };
-    await save();
-    await render();
-    Send.renderCoinSelector();
-    Swap.render();
-    UI.closeModal('modal-add-coin');
-    Audit.log('Added ' + symbol, 'success');
-    toast('✓ ' + c.name + ' added', 'success');
-  }
-
-  async function createNewAccount() {
-    if (!currentSymbol) return;
-    const c = COINS_MAP[currentSymbol];
-    if (!c || !all[currentSymbol]) return;
-    const n = all[currentSymbol].accounts.length + 1;
-    const a = await genAccount(c, 0n, 'Wallet ' + n);
-    all[currentSymbol].accounts.push(a);
-    await save();
-    await renderDetails(currentSymbol);
-    toast('✓ New ' + currentSymbol + ' address', 'success');
-  }
-
-  function openDetails(s) {
-    if (!all[s]) return;
-    currentSymbol = s;
-    renderDetails(s);
-    UI.openModal('modal-wallet-details');
-  }
-
-  function renderDetails(s) {
-    const w = all[s];
-    if (!w) return;
-    document.getElementById('wallet-details-symbol').textContent = s;
-    const al = document.getElementById('wallet-accounts-list');
-    const frag = document.createDocumentFragment();
-    for (const a of w.accounts) {
-      const div = document.createElement('div');
-      div.className = 'wallet-account';
-      div.innerHTML = `
-        <div class="wallet-account-header">
-          <div class="wallet-account-name">${UI.esc(a.label)}</div>
-          <div class="wallet-account-balance">${UI.esc(Money.format(a.balance))} ${UI.esc(s)}</div>
-        </div>
-        <div class="wallet-address-row" data-addr>${UI.esc(a.address)}</div>
-        <div class="wallet-account-actions">
-          <button class="wallet-account-action primary" data-action="send">Send</button>
-          <button class="wallet-account-action" data-action="receive">Receive</button>
-          <button class="wallet-account-action" data-action="secret">Keys</button>
-          <button class="wallet-account-action danger" data-action="delete">Del</button>
-        </div>`;
-      const addrRow = div.querySelector('[data-addr]');
-      addrRow.addEventListener('click', () => copyText(a.address));
-      div.querySelector('[data-action="send"]').addEventListener('click', () => accSend(s, a.id));
-      div.querySelector('[data-action="receive"]').addEventListener('click', () => accReceive(s, a.id));
-      div.querySelector('[data-action="secret"]').addEventListener('click', () => requestSecret(s, a.id));
-      div.querySelector('[data-action="delete"]').addEventListener('click', () => confirmDelete(s, a.id));
-      frag.appendChild(div);
-    }
-    al.replaceChildren(frag);
-  }
-
-  function openSendForCurrent() {
-    UI.closeModal('modal-wallet-details');
-    UI.switchTab('send');
-    Send.selectCoin(currentSymbol);
-  }
-
-  function openReceiveForCurrent() {
-    UI.closeModal('modal-wallet-details');
-    const w = all[currentSymbol];
-    if (!w) return;
-    currentAccountId = w.accounts[0].id;
-    showQR();
-  }
-
-  function showQR() {
-    const w = all[currentSymbol];
-    if (!w) return;
-    const a = w.accounts.find(x => x.id === currentAccountId) || w.accounts[0];
-    document.getElementById('receive-name').textContent = w.name + ' — ' + a.label;
-    document.getElementById('receive-address').textContent = a.address;
-    const cv = document.getElementById('qr-canvas');
-    if (cv) QR.generate(cv, a.address);
-    UI.openModal('modal-receive');
-  }
-
-  function accSend(s, id) {
-    currentSymbol = s;
-    currentAccountId = id;
-    UI.closeModal('modal-wallet-details');
-    UI.switchTab('send');
-    Send.selectCoin(s);
-  }
-
-  function accReceive(s, id) {
-    currentSymbol = s;
-    currentAccountId = id;
-    UI.closeModal('modal-wallet-details');
-    showQR();
-  }
-
-  function requestSecret(s, id) {
-    const w = all[s];
-    if (!w) return;
-    const a = w.accounts.find(x => x.id === id);
-    if (!a) return;
-    TripleAuth.request(s + ':' + id, (target) => {
-      const content = document.getElementById('reveal-secret-content');
-      const frag = document.createDocumentFragment();
-      const pkDiv = document.createElement('div');
-      pkDiv.className = 'secret-reveal';
-      pkDiv.innerHTML = `<div class="secret-label">Private Key</div><div style="word-break:break-all;">${UI.esc(a.secret)}</div>`;
-      frag.appendChild(pkDiv);
-      const copyBtn = document.createElement('button');
-      copyBtn.className = 'btn btn-outline btn-sm';
-      copyBtn.textContent = '📋 Copy (auto-clear 30s)';
-      copyBtn.style.marginTop = '12px';
-      copyBtn.addEventListener('click', () => copySecret(a.secret));
-      frag.appendChild(copyBtn);
-      content.replaceChildren(frag);
-      UI.openModal('modal-reveal-secret');
-    });
-  }
-
-  async function copySecret(secret) {
-    try {
-      await navigator.clipboard.writeText(secret);
-      toast('✓ Copied — auto-clear 30s', 'success');
-      setTimeout(async () => {
-        try {
-          const cur = await navigator.clipboard.readText();
-          if (cur === secret) await navigator.clipboard.writeText('');
-        } catch (e) {}
-      }, 30000);
-    } catch (e) { toast('Copy failed', 'error'); }
-  }
-
-  async function copyText(text) {
-    try {
-      await navigator.clipboard.writeText(text);
-      toast('✓ Copied', 'success');
-    } catch (e) { toast('Copy failed', 'error'); }
-  }
-
-  function copyCurrentAddress() {
-    const w = all[currentSymbol];
-    if (!w) return;
-    const a = w.accounts.find(x => x.id === currentAccountId) || w.accounts[0];
-    copyText(a.address);
-  }
-
-  function confirmDelete(s, id) {
-    if (!confirm('Delete this wallet?')) return;
-    if (!all[s] || all[s].accounts.length <= 1) {
-      toast('Cannot delete last wallet', 'error');
-      return;
-    }
-    all[s].accounts = all[s].accounts.filter(a => a.id !== id);
-    save().then(() => { renderDetails(s); render(); toast('✓ Deleted', 'success'); });
-  }
-
-  return { init, render, save, openAddCoin, addCoin, createNewAccount,
-    openDetails, renderDetails, openSendForCurrent, openReceiveForCurrent,
-    copyCurrentAddress, accSend, accReceive, requestSecret, get all() { return all; } };
-})();
-
-/* ============================================================
-   Coin Logos
-   ============================================================ */
-const Logo = (() => {
-  const cache = new Map();
-
-  function fallback(symbol, color) {
-    const letter = symbol.slice(0, 2);
-    const fs = letter.length === 1 ? 50 : 38;
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="${color}"/><text x="50" y="50" font-family="sans-serif" font-size="${fs}" font-weight="900" fill="white" text-anchor="middle" dominant-baseline="central">${letter}</text></svg>`;
-    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-  }
-
-  function get(symbol, color) {
-    const key = symbol + '_' + color;
-    if (cache.has(key)) return cache.get(key);
-    const c = COINS_MAP[symbol];
-    let url;
-    if (c && c.logo && c.logo.startsWith('http')) url = c.logo;
-    else url = fallback(symbol, color || '#464650');
-    cache.set(key, url);
-    return url;
-  }
-
-  return { get };
-})();
-
-/* ============================================================
-   Live Prices
-   ============================================================ */
-const LivePrices = (() => {
-  const cache = {};
-  let cacheTime = 0, lastFail = 0;
-  const TTL = 60000;
-
-  async function fetch(symbols) {
-    if (lastFail && Date.now() - lastFail < 30000) return cache;
-    if (Date.now() - cacheTime < TTL && Object.keys(cache).length) return cache;
-    const ids = symbols.map(s => COINS_MAP[s]?.cg).filter(Boolean).join(',');
-    if (!ids) return cache;
-    try {
-      const r = await globalThis.fetch(
-        `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`,
-        { signal: AbortSignal.timeout ? AbortSignal.timeout(8000) : undefined });
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      const d = await r.json();
-      for (const [id, prices] of Object.entries(d)) {
-        const c = COINS.find(x => x.cg === id);
-        if (c) cache[c.symbol] = prices;
-      }
-      cacheTime = Date.now(); lastFail = 0;
-      return cache;
-    } catch (e) {
-      lastFail = Date.now();
-      return cache;
-    }
-  }
-
-  function getPrice(symbol) {
-    const c = cache[symbol];
-    if (c && typeof c.usd === 'number') return c.usd;
-    const fb = { CASH: 0.10, TIME: 1.5, GOLD: 2200, GEM: 25, KEY: 100 };
-    return fb[symbol] !== undefined ? fb[symbol] : null;
-  }
-
-  function formatUSD(amount, symbol) {
-    const p = getPrice(symbol);
-    if (p === null) return '—';
-    const total = (Number(amount) || 0) * p;
-    if (!Number.isFinite(total)) return '—';
-    if (total < 0.01) return '$' + total.toFixed(4);
-    if (total < 1000) return '$' + total.toFixed(2);
-    return '$' + total.toLocaleString('en-US', { maximumFractionDigits: 2 });
-  }
-
-  return { fetch, getPrice, formatUSD };
-})();
-
-/* ============================================================
-   Swap
-   ============================================================ */
-const Swap = (() => {
-  let fromSymbol = 'CASH', toSymbol = 'BTC', selectedDex = 'uniswap', pickTarget = null;
-  const DEXS = [
-    { id: 'uniswap', name: 'Uniswap V3', fee: 0.003, network: 'Ethereum' },
-    { id: 'pancakeswap', name: 'PancakeSwap', fee: 0.0025, network: 'BSC' },
-    { id: 'sushiswap', name: 'SushiSwap', fee: 0.003, network: 'Multi' },
-    { id: 'curve', name: 'Curve', fee: 0.0004, network: 'Ethereum' },
-    { id: '1inch', name: '1inch', fee: 0, network: 'Aggregator' }
-  ];
-  const PLATFORM_FEE = 0.01;
-
-  function render() {
-    const fromIcon = document.getElementById('swap-from-icon');
-    const toIcon = document.getElementById('swap-to-icon');
-    const fromSym = document.getElementById('swap-from-symbol');
-    const toSym = document.getElementById('swap-to-symbol');
-    const updateIcon = (sym, el) => {
-      const c = COINS_MAP[sym];
-      if (!c || !el) return;
-      const logo = Logo.get(sym, c.color);
-      el.innerHTML = `<img src="${UI.esc(logo)}" style="width:100%;height:100%;object-fit:contain;padding:3px;" onerror="this.style.display='none'">`;
-    };
-    updateIcon(fromSymbol, fromIcon);
-    updateIcon(toSymbol, toIcon);
-    if (fromSym) fromSym.textContent = fromSymbol;
-    if (toSym) toSym.textContent = toSymbol;
-    updateBalances();
-    renderDex();
-    calculate();
-  }
-
-  function updateBalances() {
-    const fW = Wallets.all[fromSymbol], tW = Wallets.all[toSymbol];
-    const fB = fW ? fW.accounts.reduce((s, a) => s + (a.balance || 0n), 0n) : 0n;
-    const tB = tW ? tW.accounts.reduce((s, a) => s + (a.balance || 0n), 0n) : 0n;
-    const fE = document.getElementById('from-balance');
-    const tE = document.getElementById('to-balance');
-    if (fE) fE.textContent = 'Balance: ' + Money.format(fB);
-    if (tE) tE.textContent = 'Balance: ' + Money.format(tB);
-  }
-
-  function rate(dexId) {
-    const pF = LivePrices.getPrice(fromSymbol);
-    const pT = LivePrices.getPrice(toSymbol);
-    if (!pF || !pT || pF <= 0 || pT <= 0) return null;
-    const d = DEXS.find(x => x.id === dexId);
-    if (!d) return null;
-    return (pF / pT) * (1 - d.fee);
-  }
-
-  function renderDex() {
-    const c = document.getElementById('dex-selector');
-    if (!c) return;
-    let best = 0, bestId = null;
-    const list = DEXS.map(d => {
-      const r = rate(d.id) || 0;
-      if (r > best) { best = r; bestId = d.id; }
-      return { ...d, rate: r };
-    });
-    const frag = document.createDocumentFragment();
-    for (const d of list) {
-      const isB = d.id === bestId && d.rate > 0;
-      const card = document.createElement('div');
-      card.className = 'dex-card' + (selectedDex === d.id ? ' active' : '');
-      card.innerHTML = `
-        <div class="dex-name">${UI.esc(d.name)}</div>
-        <div class="dex-rate ${isB ? 'best' : ''}">1 ${UI.esc(fromSymbol)} = ${d.rate.toFixed(6)}</div>
-        <div style="font-size:8px;color:var(--gray);margin-top:3px;font-weight:700;">${UI.esc(d.network)} · ${(d.fee * 100).toFixed(2)}%</div>
-        ${isB ? '<div style="font-size:8px;color:var(--green);margin-top:3px;font-weight:900;text-transform:uppercase;">★ Best</div>' : ''}`;
-      card.addEventListener('click', () => { selectedDex = d.id; renderDex(); calculate(); });
-      frag.appendChild(card);
-    }
-    c.replaceChildren(frag);
-  }
-
-  function openPicker(t) {
-    pickTarget = t;
-    UI.openModal('modal-coin-picker');
-    renderPicker('');
-  }
-
-  function renderPicker(filter) {
-    const g = document.getElementById('picker-coin-grid');
-    if (!g) return;
-    const f = (filter || '').toLowerCase().trim();
-    const list = COINS.filter(c => !f || c.symbol.toLowerCase().includes(f) || c.name.toLowerCase().includes(f));
-    const frag = document.createDocumentFragment();
-    for (const c of list) {
-      const logo = Logo.get(c.symbol, c.color);
-      const card = document.createElement('div');
-      card.style.cssText = 'padding:10px 6px;background:var(--white);border:1.5px solid var(--gray-light);border-radius:12px;cursor:pointer;text-align:center;';
-      card.innerHTML = `
-        <div style="width:42px;height:42px;border-radius:50%;background:${UI.esc(c.color)}20;overflow:hidden;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;">
-          <img src="${UI.esc(logo)}" style="width:100%;height:100%;object-fit:contain;padding:5px;" onerror="this.style.display='none'">
-        </div>
-        <div style="font-size:10px;font-weight:900;">${UI.esc(c.symbol)}</div>`;
-      card.addEventListener('click', () => pickCoin(c.symbol));
-      frag.appendChild(card);
-    }
-    g.replaceChildren(frag);
-  }
-
-  function pickCoin(s) {
-    if (!COINS_MAP[s]) return;
-    if (pickTarget === 'from') {
-      if (s === toSymbol) toSymbol = fromSymbol;
-      fromSymbol = s;
-    } else {
-      if (s === fromSymbol) fromSymbol = toSymbol;
-      toSymbol = s;
-    }
-    UI.closeModal('modal-coin-picker');
-    render();
-  }
-
-  function flip() {
-    const cf = document.getElementById('swap-from-amount').value;
-    const ct = document.getElementById('swap-to-amount').value;
-    [fromSymbol, toSymbol] = [toSymbol, fromSymbol];
-    document.getElementById('swap-from-amount').value = ct;
-    document.getElementById('swap-to-amount').value = cf;
-    render();
-  }
-
-  function setPercent(pct) {
-    const w = Wallets.all[fromSymbol];
-    if (!w) return;
-    const b = w.accounts.reduce((s, a) => s + (a.balance || 0n), 0n);
-    if (b <= 0n) { toast('No balance', 'warn'); return; }
-    const amt = (b * BigInt(pct)) / 100n;
-    document.getElementById('swap-from-amount').value = Money.toString(amt);
-    calculate();
-  }
-
-  function calculate() {
-    const inputEl = document.getElementById('swap-from-amount');
-    const outputEl = document.getElementById('swap-to-amount');
-    const amountStr = inputEl ? inputEl.value : '';
-    const a = Money.fromString(amountStr);
-    const r = rate(selectedDex);
-    if (!r || !Number.isFinite(r) || r <= 0 || !a || a <= 0n) {
-      if (outputEl) outputEl.value = '';
-      ['swap-rate', 'swap-fee', 'swap-receive'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = '-';
-      });
-      return;
-    }
-    const rateScaled = BigInt(Math.round(r * 1e8));
-    const gross = (a * rateScaled) / 100000000n;
-    const fee = (gross * BigInt(Math.round(PLATFORM_FEE * 100))) / 100n;
-    const net = gross - fee;
-    if (outputEl) outputEl.value = Money.toString(net);
-    const rateEl = document.getElementById('swap-rate');
-    if (rateEl) rateEl.textContent = '1 ' + fromSymbol + ' = ' + r.toFixed(8) + ' ' + toSymbol;
-    const feeEl = document.getElementById('swap-fee');
-    if (feeEl) feeEl.textContent = Money.format(fee) + ' ' + toSymbol;
-    const recvEl = document.getElementById('swap-receive');
-    if (recvEl) recvEl.textContent = Money.format(net) + ' ' + toSymbol;
-  }
-
-  async function execute() {
-    if (fromSymbol === toSymbol) { toast('Cannot swap same currency', 'error'); return; }
-    const amountStr = document.getElementById('swap-from-amount').value;
-    const a = Money.fromString(amountStr);
-    if (!a || a <= 0n) { toast('Enter amount', 'error'); return; }
-    const fW = Wallets.all[fromSymbol];
-    if (!fW) { toast('Source wallet not found', 'error'); return; }
-    const bal = fW.accounts.reduce((s, x) => s + (x.balance || 0n), 0n);
-    if (bal < a) { toast('Insufficient balance', 'error'); return; }
-    const r = rate(selectedDex);
-    if (!r || r <= 0) { toast('Rate unavailable', 'error'); return; }
-
-    await withLock('swap', async () => {
-      const fW2 = Wallets.all[fromSymbol];
-      const bal2 = fW2.accounts.reduce((s, x) => s + (x.balance || 0n), 0n);
-      if (bal2 < a) { toast('Balance changed', 'error'); return; }
-      const acc = fW2.accounts.find(x => (x.balance || 0n) >= a);
-      if (!acc) { toast('No account', 'error'); return; }
-
-      const rateScaled = BigInt(Math.round(r * 1e8));
-      const gross = (a * rateScaled) / 100000000n;
-      const fee = (gross * BigInt(Math.round(PLATFORM_FEE * 100))) / 100n;
-      const net = gross - fee;
-
-      acc.balance = (acc.balance || 0n) - a;
-      acc.txs = acc.txs || [];
-      const idem = Random.hex(16);
-      acc.txs.unshift({
-        direction: 'swap', amount: a, counterparty: 'Swap to ' + toSymbol,
-        timestamp: Date.now(), hash: 'swap_' + idem, toSymbol, toAmount: net, platformFee: fee
-      });
-
-      const tW = Wallets.all[toSymbol];
-      if (tW && tW.accounts[0]) {
-        tW.accounts[0].balance = (tW.accounts[0].balance || 0n) + net;
-        tW.accounts[0].txs = tW.accounts[0].txs || [];
-        tW.accounts[0].txs.unshift({
-          direction: 'in', amount: net, counterparty: 'Swap from ' + fromSymbol,
-          timestamp: Date.now(), hash: 'swap_' + idem, fromSymbol, fromAmount: a
-        });
-      }
-
-      await Wallets.save();
-      await Wallets.render();
-      render();
-      History.render();
-      Audit.log('Swap: ' + Money.format(a) + ' ' + fromSymbol + ' → ' + Money.format(net) + ' ' + toSymbol, 'success');
-      toast('✓ Swap completed', 'success');
-      document.getElementById('swap-from-amount').value = '';
-      document.getElementById('swap-to-amount').value = '';
-      calculate();
-    });
-  }
-
-  return { render, calculate, execute, openPicker, pickCoin, flip, setPercent };
-})();
-
-/* ============================================================
-   Web Locks helper
-   ============================================================ */
-async function withLock(name, fn) {
-  if (navigator.locks) return navigator.locks.request('cofc-' + name, fn);
-  return fn();
-}
-
-/* ============================================================
-   History
-   ============================================================ */
-const History = (() => {
-  let filter = 'all';
-
-  function getAll() {
-    const arr = [];
-    for (const w of Object.values(Wallets.all)) {
-      for (const acc of w.accounts) {
-        for (const tx of (acc.txs || [])) {
-          arr.push({ ...tx, symbol: w.symbol, accountLabel: acc.label });
-        }
-      }
-    }
-    arr.sort((a, b) => b.timestamp - a.timestamp);
-    return arr;
-  }
-
-  function render() {
-    const c = document.getElementById('tx-history-container');
-    if (!c) return;
-    let txs = getAll();
-    if (filter !== 'all') txs = txs.filter(t => t.direction === filter);
-    if (!txs.length) {
-      c.innerHTML = '<div class="empty-state"><div class="empty-state-title">No transactions</div><div class="empty-state-text">Your history will appear here</div></div>';
-      return;
-    }
-    const frag = document.createDocumentFragment();
-    for (const tx of txs.slice(0, 100)) {
-      const it = tx.direction === 'in' ? 'in' : (tx.direction === 'swap' ? 'swap' : 'out');
-      const co = COINS_MAP[tx.symbol];
-      const lo = co ? Logo.get(co.symbol, co.color) : null;
-      const aC = tx.direction === 'in' ? 'in' : (tx.direction === 'swap' ? '' : 'out');
-      const pre = tx.direction === 'in' ? '+' : (tx.direction === 'swap' ? '↔' : '-');
-      const div = document.createElement('div');
-      div.className = 'tx-item';
-      div.innerHTML = `
-        <div class="tx-icon-wrap ${it}">
-          <svg viewBox="0 0 24 24">${tx.direction === 'in' ? '<path d="M12 5v14M5 12l7 7 7-7"/>' : (tx.direction === 'swap' ? '<path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/>' : '<path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>')}</svg>
-        </div>
-        <div class="tx-details">
-          <div class="tx-top">
-            <span class="tx-amount ${aC}">${UI.esc(pre + Money.format(tx.amount))} ${UI.esc(tx.symbol)}</span>
-            <span class="tx-time">${UI.esc(new Date(tx.timestamp).toLocaleString())}</span>
-          </div>
-          <div class="tx-sub">${UI.esc((tx.direction === 'in' ? 'From ' : 'To ') + String(tx.counterparty || 'unknown').substring(0, 28))}</div>
-        </div>`;
-      frag.appendChild(div);
-    }
-    c.replaceChildren(frag);
-  }
-
-  function setFilter(f) {
-    filter = f;
-    document.querySelectorAll('.tx-filter').forEach(el => el.classList.toggle('active', el.dataset.filter === f));
-    render();
-  }
-
-  function exportCSV() {
-    const txs = getAll();
-    if (!txs.length) { toast('No transactions', 'warn'); return; }
-    const esc = (v) => {
-      let s = String(v === null || v === undefined ? '' : v);
-      if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
-      return '"' + s.replace(/"/g, '""') + '"';
-    };
-    const rows = [['Date','Type','Symbol','Amount','Counterparty'],
-      ...txs.map(t => [new Date(t.timestamp).toISOString(), t.direction, t.symbol, Money.toString(t.amount), t.counterparty || ''])];
-    const csv = rows.map(r => r.map(esc).join(',')).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'cofc-history-' + Date.now() + '.csv';
-    a.click();
-    URL.revokeObjectURL(url);
-    toast('✓ Exported', 'success');
-  }
-
-  return { render, setFilter, exportCSV };
-})();
-
-/* ============================================================
-   Send
-   ============================================================ */
-const Send = (() => {
-  let selectedCoin = 'CASH';
-
-  function renderCoinSelector() {
-    const s = document.getElementById('currency-selector');
-    if (!s) return;
-    const syms = Object.keys(Wallets.all);
-    if (!syms.length) { s.innerHTML = '<div style="font-size:11px;">Add a coin first</div>'; return; }
-    const frag = document.createDocumentFragment();
-    for (const sym of syms.slice(0, 12)) {
-      const w = Wallets.all[sym];
-      const logo = Logo.get(sym, w.color);
-      const chip = document.createElement('div');
-      chip.style.cssText = `padding:8px 12px;background:${selectedCoin === sym ? 'var(--yellow)' : 'var(--ghost)'};border:1.5px solid ${selectedCoin === sym ? 'var(--yellow-dark)' : 'var(--gray-light)'};border-radius:100px;cursor:pointer;font-size:11px;font-weight:900;display:flex;align-items:center;gap:6px;`;
-      chip.innerHTML = `<div style="width:20px;height:20px;border-radius:50%;background:${UI.esc(w.color)}20;overflow:hidden;display:flex;align-items:center;justify-content:center;"><img src="${UI.esc(logo)}" style="width:100%;height:100%;object-fit:contain;padding:2px;" onerror="this.style.display='none'"></div>${UI.esc(sym)}`;
-      chip.addEventListener('click', () => selectCoin(sym));
-      frag.appendChild(chip);
-    }
-    s.replaceChildren(frag);
-  }
-
-  function selectCoin(s) {
-    if (!Wallets.all[s]) return;
-    selectedCoin = s;
-    renderCoinSelector();
-  }
-
-  async function execute() {
-    const to = (document.getElementById('send-to') || {}).value || '';
-    const amountStr = (document.getElementById('send-amount') || {}).value || '';
-    if (!to.trim()) { toast('Enter recipient', 'error'); return; }
-    const a = Money.fromString(amountStr);
-    if (!a || a <= 0n) { toast('Invalid amount', 'error'); return; }
-    const w = Wallets.all[selectedCoin];
-    if (!w) { toast('Coin not found', 'error'); return; }
-    const bal = w.accounts.reduce((s, x) => s + (x.balance || 0n), 0n);
-    if (bal < a) { toast('Insufficient balance', 'error'); return; }
-
-    TwoFA.request(async () => {
-      await withLock('send', async () => {
-        const w2 = Wallets.all[selectedCoin];
-        const bal2 = w2.accounts.reduce((s, x) => s + (x.balance || 0n), 0n);
-        if (bal2 < a) { toast('Balance changed', 'error'); return; }
-        const acc = w2.accounts.find(x => (x.balance || 0n) >= a);
-        if (!acc) { toast('No account', 'error'); return; }
-        acc.balance = (acc.balance || 0n) - a;
-        acc.txs = acc.txs || [];
-        const idem = Random.hex(16);
-        acc.txs.unshift({
-          direction: 'out', amount: a,
-          counterparty: to.trim().slice(0, 100),
-          timestamp: Date.now(), hash: 'tx_' + idem
-        });
-        await Wallets.save();
-        await Wallets.render();
-        History.render();
-        Audit.log('Sent ' + Money.format(a) + ' ' + selectedCoin, 'success');
-        toast('✓ Sent successfully', 'success');
-        document.getElementById('send-to').value = '';
-        document.getElementById('send-amount').value = '';
-      });
-    });
-  }
-
-  return { renderCoinSelector, selectCoin, execute };
-})();
-
-/* ============================================================
-   Settings
-   ============================================================ */
-const Settings = (() => {
-  let data = { autoLock: true, autoClearClipboard: true, auditLogging: true };
-
-  function render() {
-    const a = document.getElementById('toggle-autolock');
-    const c = document.getElementById('toggle-clipboard');
-    const au = document.getElementById('toggle-audit');
-    if (a) a.classList.toggle('active', data.autoLock);
-    if (c) c.classList.toggle('active', data.autoClearClipboard);
-    if (au) au.classList.toggle('active', data.auditLogging);
-  }
-
-  async function load() {
-    const s = await Enc.get('settings');
-    if (s) data = { ...data, ...s };
-    render();
-  }
-
-  async function save() { await Enc.set('settings', data); }
-
-  async function toggle(key) {
-    data[key] = !data[key];
-    await save();
-    render();
-    if (key === 'autoLock') Vault.armAutoLock();
-  }
-
-  async function wipeAllData() {
-    if (!confirm('Delete ALL data?')) return;
-    if (prompt('Type DELETE:') !== 'DELETE') return;
-    Enc.clearAll();
-    sessionStorage.clear();
-    try {
-      if (indexedDB.databases) {
-        const dbs = await indexedDB.databases();
-        for (const db of dbs) if (db.name?.startsWith('cofc')) indexedDB.deleteDatabase(db.name);
-      }
-    } catch (e) {}
-    toast('✓ All data wiped', 'success');
-    setTimeout(() => location.reload(), 1500);
-  }
-
-  return { render, load, save, toggle, wipeAllData, data };
-})();
-
-/* ============================================================
-   Profile
-   ============================================================ */
-const Profile = (() => {
-  let data = { displayName: 'User', username: 'sovereign' };
-
-  async function load() {
-    const s = await Enc.get('profile');
-    if (s) data = { ...data, ...s };
-    render();
-  }
-
-  function render() {
-    const hu = document.getElementById('header-username');
-    const ha = document.getElementById('header-avatar');
-    const pd = document.getElementById('profile-display-name');
-    const pu = document.getElementById('profile-username');
-    const pa = document.getElementById('profile-avatar');
-    if (hu) hu.textContent = '@' + data.username;
-    if (ha) ha.textContent = (data.displayName || 'U').charAt(0).toUpperCase();
-    if (pd) pd.textContent = data.displayName;
-    if (pu) pu.textContent = '@' + data.username;
-    if (pa) pa.textContent = (data.displayName || 'U').charAt(0).toUpperCase();
-  }
-
-  function save() { return Enc.set('profile', data); }
-
-  return { load, render, save, get data() { return data; } };
-})();
-
-/* ============================================================
-   QR Code Generator (Simple visual)
-   ============================================================ */
-const QR = (() => {
-  function generate(canvas, text) {
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    const hash = SHA3.hash512(C.str2buf(text));
-    const size = 25, margin = 2;
-    const cell = (canvas.width - margin * 8) / size;
-    ctx.fillStyle = '#464650';
-    for (let y = 0; y < size; y++) {
-      for (let x = 0; x < size; x++) {
-        const idx = (y * size + x) % hash.length;
-        if (hash[idx] & 1) ctx.fillRect(margin * 4 + x * cell, margin * 4 + y * cell, cell, cell);
-      }
-    }
-    // Finder patterns
-    const fm = (fx, fy) => {
-      ctx.fillStyle = '#464650';
-      ctx.fillRect(margin * 4 + fx * cell, margin * 4 + fy * cell, cell * 7, cell * 7);
-      ctx.fillStyle = '#FFFFFF';
-      ctx.fillRect(margin * 4 + (fx + 1) * cell, margin * 4 + (fy + 1) * cell, cell * 5, cell * 5);
-      ctx.fillStyle = '#464650';
-      ctx.fillRect(margin * 4 + (fx + 2) * cell, margin * 4 + (fy + 2) * cell, cell * 3, cell * 3);
-    };
-    fm(0, 0); fm(size - 7, 0); fm(0, size - 7);
-  }
-
-  function download() {
-    const canvas = document.getElementById('qr-canvas');
-    if (!canvas) return;
-    const a = document.createElement('a');
-    a.download = 'cofc-qr-' + Date.now() + '.png';
-    a.href = canvas.toDataURL('image/png');
-    a.click();
-    toast('✓ QR downloaded', 'success');
-  }
-
-  return { generate, download };
-})();
-
-/* ============================================================
-   Hardware Wallet (WebHID)
-   ============================================================ */
-const Hardware = (() => {
-  const KNOWN_WALLETS = [
-    { name: 'Ledger Nano X', vendorId: 0x2c97, productId: 0x4015, type: 'Ledger' },
-    { name: 'Ledger Nano S Plus', vendorId: 0x2c97, productId: 0x5011, type: 'Ledger' },
-    { name: 'Ledger Stax', vendorId: 0x2c97, productId: 0x6011, type: 'Ledger' },
-    { name: 'Trezor Model T', vendorId: 0x534c, productId: 0x0001, type: 'Trezor' },
-    { name: 'Trezor Safe 3', vendorId: 0x1209, productId: 0x53c1, type: 'Trezor' },
-    { name: 'Trezor Safe 5', vendorId: 0x1209, productId: 0x53c1, type: 'Trezor' },
-    { name: 'BitBox02', vendorId: 0x03eb, productId: 0x2403, type: 'BitBox' },
-    { name: 'Coldcard MK4', vendorId: 0xd13e, productId: 0xcc10, type: 'Coldcard' },
-    { name: 'Coldcard Q', vendorId: 0xd13e, productId: 0xcc11, type: 'Coldcard' },
-    { name: 'KeepKey', vendorId: 0x2b24, productId: 0x0001, type: 'KeepKey' }
-  ];
-
-  let connected = null;
-
-  function render() {
-    const g = document.getElementById('hw-wallet-grid');
-    if (!g) return;
-    const frag = document.createDocumentFragment();
-    for (const w of KNOWN_WALLETS) {
-      const isConnected = connected && connected.productId === w.productId;
-      const card = document.createElement('div');
-      card.className = 'hw-wallet-card' + (isConnected ? ' connected' : '');
-      card.innerHTML = `
-        <div class="hw-wallet-name">${UI.esc(w.name)}</div>
-        <div class="hw-wallet-status">${isConnected ? '✓ Connected' : w.type}</div>`;
-      frag.appendChild(card);
-    }
-    g.replaceChildren(frag);
-    const status = document.getElementById('hw-status');
-    if (status) status.textContent = connected ? `Connected: ${connected.productName || 'Device'}` : '';
-  }
-
-  async function connect() {
-    if (!navigator.hid) {
-      toast('WebHID not supported in this browser', 'error');
-      return;
-    }
-    const btn = document.getElementById('btn-connect-hw');
-    if (btn) { btn.disabled = true; btn.classList.add('loading'); }
-    try {
-      const devices = await navigator.hid.requestDevice({
-        filters: KNOWN_WALLETS.map(w => ({ vendorId: w.vendorId, productId: w.productId }))
-      });
-      if (!devices.length) { toast('No device selected', 'warn'); return; }
-      const device = devices[0];
-      if (!device.opened) await device.open();
-      connected = device;
-      Audit.log('HW wallet connected: ' + (device.productName || 'unknown'), 'success');
-      toast('✓ ' + (device.productName || 'Device') + ' connected', 'success');
-      render();
-
-      device.addEventListener('inputreport', (e) => {
-        // Handle incoming data from device
-        console.log('HID input:', e.data);
-      });
-      device.addEventListener('disconnect', () => {
-        connected = null;
-        render();
-        toast('Device disconnected', 'warn');
-      });
-    } catch (e) {
-      toast('Connection failed: ' + e.message, 'error');
-    } finally {
-      if (btn) { btn.disabled = false; btn.classList.remove('loading'); }
-    }
-  }
-
-  return { render, connect };
-})();
-
-/* ============================================================
-   Login Flow — Triple-Lock
-   ============================================================ */
-const LoginFlow = (() => {
-  let mutex = false, state = 'idle';
-
-  async function start() {
-    if (mutex) return;
-    if (state !== 'idle' && state !== 'error') return;
-    mutex = true;
-    state = 'scanning';
-
-    const app = document.getElementById('app-screen');
-    const ph = document.getElementById('profile-header');
-    const hu = document.getElementById('header-user');
-    if (app) app.classList.remove('visible');
-    if (ph) ph.classList.remove('visible');
-    if (hu) hu.classList.remove('visible');
-
-    const scanner = document.getElementById('face-scanner');
-    const statusEl = document.getElementById('login-status');
-    const pc = document.getElementById('progress-circle');
-    const chips = {
-      blink: document.getElementById('chip-blink'),
-      turn: document.getElementById('chip-turn'),
-      smile: document.getElementById('chip-smile')
-    };
-    Object.values(chips).forEach(c => c.classList.remove('active', 'done'));
-    if (pc) pc.style.strokeDashoffset = 942;
-    scanner.classList.remove('success', 'error');
-    scanner.classList.add('scanning', 'disabled');
-    statusEl.textContent = 'Starting camera...';
-    statusEl.className = 'login-status active';
-
-    let entropy = null;
-    try {
-      if (!window.isSecureContext) throw new Error('HTTPS required');
-
-      await Face.start();
-      scanner.classList.add('camera-active');
-      statusEl.textContent = 'Position your face';
-      await new Promise(r => setTimeout(r, 1200));
-
-      // Server-provided challenge (in production — fetch from server)
-      const challenge = Random.bytes(32);
-
-      entropy = await Face.runCheck((p) => {
-        Object.values(chips).forEach(c => c.classList.remove('active', 'done'));
-        const order = ['blink', 'turn', 'smile'];
-        for (let i = 0; i < order.length; i++) {
-          const c = chips[order[i]];
-          if (!c) continue;
-          if (i < p.completed) c.classList.add('done');
-          else if (i === p.completed) c.classList.add('active');
-        }
-        statusEl.textContent = p.hint;
-        if (pc) pc.style.strokeDashoffset = 942 * (1 - (p.completed + .5) / 3);
-      }, challenge);
-
-      if (!entropy || entropy.length !== 64) throw new Error('Invalid biometric data');
-
-      Object.values(chips).forEach(c => { c.classList.remove('active'); c.classList.add('done'); });
-      if (pc) pc.style.strokeDashoffset = 0;
-      statusEl.textContent = '✓ Face verified';
-      statusEl.className = 'login-status success';
-      Face.stop();
-      scanner.classList.remove('camera-active', 'scanning');
-      scanner.classList.add('success');
-      state = 'verifying';
-
-      // Derive master key from biometric
-      const storedAuth = await Enc.get('auth');
-      let salt;
-      if (!storedAuth) {
-        salt = Random.bytes(32);
-        const key = await KDF.derive(C.b64enc(entropy), salt, { iterations: 300000 });
-        Vault.setMasterKey(key);
-        await Enc.set('auth', {
-          salt: C.b64enc(salt),
-          pwdHash: C.hexEnc(key),
-          createdAt: Date.now()
-        });
-      } else {
-        salt = C.b64dec(storedAuth.salt);
-        const key = await KDF.derive(C.b64enc(entropy), salt, { iterations: 300000 });
-        Vault.setMasterKey(key);
-        if (!C.timingSafeEqual(key, C.hexDec(storedAuth.pwdHash))) {
-          throw new Error('Biometric mismatch');
-        }
-      }
-
-      C.zeroize(entropy);
-      entropy = null;
-
-      await Profile.load();
-      await Settings.load();
-      await Wallets.init();
-      await Wallets.render();
-      Send.renderCoinSelector();
-      Swap.render();
-      History.render();
-      Hardware.render();
-
-      await new Promise(r => setTimeout(r, 500));
-      document.getElementById('login-screen').style.display = 'none';
-      if (app) app.classList.add('visible');
-      if (ph) ph.classList.add('visible');
-      if (hu) hu.classList.add('visible');
-
-      Vault.setLoggedIn(true);
-      state = 'idle';
-      Audit.log('System ready', 'info');
-      toast('👋 Welcome', 'success');
-    } catch (e) {
-      state = 'error';
-      Face.stop();
-      scanner.classList.remove('scanning', 'camera-active');
-      scanner.classList.add('error');
-      if (entropy) { C.zeroize(entropy); entropy = null; }
-      statusEl.textContent = '✗ ' + (e.message || 'Verification failed');
-      statusEl.className = 'login-status error';
-      toast('❌ ' + e.message, 'error');
-      setTimeout(() => {
-        scanner.classList.remove('error', 'disabled');
-        statusEl.textContent = 'Tap the circle to begin';
-        statusEl.className = 'login-status';
-        state = 'idle';
-      }, 3500);
-    } finally {
-      mutex = false;
-    }
-  }
-
-  return { start };
-})();
-
-/* ============================================================
-   Bootstrap
-   ============================================================ */
-function onReady(fn) {
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
-  else fn();
-}
-
-onReady(async () => {
-  await Face.init();
-
-  // Loading animation
-  const overlay = document.getElementById('loading-overlay');
-  const fill = document.getElementById('loading-bar-fill');
-  const status = document.getElementById('loading-status');
-  const steps = [
-    { pct: 15, msg: 'Initializing WebCrypto...' },
-    { pct: 30, msg: 'Compiling SHA3-512...' },
-    { pct: 50, msg: 'Booting KDF worker...' },
-    { pct: 70, msg: 'Loading 10,000+ assets...' },
-    { pct: 90, msg: 'Connecting prices...' },
-    { pct: 100, msg: 'Ready ✓' }
-  ];
-  let idx = 0;
-  const iv = setInterval(() => {
-    if (idx >= steps.length) {
-      clearInterval(iv);
-      setTimeout(() => {
-        overlay.classList.add('hidden');
-        setTimeout(() => overlay.style.display = 'none', 500);
-      }, 200);
-      return;
-    }
-    const s = steps[idx];
-    if (fill) fill.style.width = s.pct + '%';
-    if (status) status.textContent = s.msg;
-    idx++;
-  }, 180);
-
-  setTimeout(() => {
-    if (overlay && !overlay.classList.contains('hidden')) overlay.classList.add('hidden');
-  }, 8000);
-
-  // Scanner events
-  const scanner = document.getElementById('face-scanner');
-  const start = () => LoginFlow.start();
-  scanner.addEventListener('click', start);
-  scanner.addEventListener('touchend', (e) => { e.preventDefault(); start(); }, { passive: false });
-  scanner.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); start(); }
-  });
-
-  // Tabs
-  document.querySelectorAll('.tab-btn').forEach(b => {
-    b.addEventListener('click', () => UI.switchTab(b.dataset.tab));
-  });
-
-  // Swap events
-  const swapFrom = document.getElementById('swap-from-amount');
-  if (swapFrom) swapFrom.addEventListener('input', () => Swap.calculate());
-  const btnSwap = document.getElementById('btn-swap-execute');
-  if (btnSwap) {
-    btnSwap.addEventListener('click', async () => {
-      if (btnSwap.classList.contains('loading')) return;
-      btnSwap.disabled = true;
-      btnSwap.classList.add('loading');
-      try { await Swap.execute(); }
-      finally { btnSwap.disabled = false; btnSwap.classList.remove('loading'); }
-    });
-  }
-  const ps = document.getElementById('picker-search-input');
-  if (ps) ps.addEventListener('input', function() { Swap.renderPicker(this.value); });
-
-  // Coin search
-  const cs = document.getElementById('coin-search-input');
-  if (cs) cs.addEventListener('input', function() { Wallets.renderGrid(this.value); });
-
-  // Send button
-  const btnSend = document.getElementById('btn-send');
-  if (btnSend) {
-    btnSend.addEventListener('click', async () => {
-      if (btnSend.classList.contains('loading')) return;
-      btnSend.disabled = true;
-      btnSend.classList.add('loading');
-      try { await Send.execute(); }
-      finally { btnSend.disabled = false; btnSend.classList.remove('loading'); }
-    });
-  }
-
-  // Lock button
-  const btnLock = document.getElementById('btn-lock');
-  if (btnLock) btnLock.addEventListener('click', () => Vault.lock());
-
-  // Hardware wallet
-  const btnHw = document.getElementById('btn-connect-hw');
-  if (btnHw) btnHw.addEventListener('click', () => Hardware.connect());
-
-  // Filters
-  document.querySelectorAll('.tx-filter').forEach(f => {
-    f.addEventListener('click', () => History.setFilter(f.dataset.filter));
-  });
-
-  // Modal backdrop
-  document.querySelectorAll('.modal').forEach(m => {
-    let mdt = null;
-    m.addEventListener('mousedown', e => { mdt = e.target; });
-    m.addEventListener('click', e => {
-      if (e.target === m && mdt === m) UI.closeModal(m.id);
-    });
-  });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-      const a = document.querySelector('.modal.active');
-      if (a) UI.closeModal(a.id);
-    }
-  });
-
-  // Auto-lock on activity
-  let at = null;
-  const resetAutoLock = () => {
-    if (!Vault.getMasterKey()) return;
-    if (at) return;
-    at = setTimeout(() => { Vault.armAutoLock(); at = null; }, 500);
-  };
-  ['mousemove', 'keypress', 'touchstart', 'click', 'scroll'].forEach(ev => {
-    document.addEventListener(ev, resetAutoLock, { passive: true });
-  });
-
-  // Expose globally
-  window.UI = UI;
-  window.Wallets = Wallets;
-  window.Swap = Swap;
-  window.Send = Send;
-  window.History = History;
-  window.Settings = Settings;
-  window.Profile = Profile;
-  window.LoginFlow = LoginFlow;
-  window.Vault = Vault;
-  window.Hardware = Hardware;
-  window.toast = toast;
-  window.QR = QR;
-});
-
-})();
-</script>
+<script src="gate.js" defer></script>
 </body>
-   </html>
+</html>
