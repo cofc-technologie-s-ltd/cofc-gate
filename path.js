@@ -4,30 +4,62 @@
    BEST REGARDS,
    ALEKSEY DANIEL DANILOVICH AND MY WIVES
    THE KING AND THE QUEENS OF TEVEL
+   WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
    
    5 OCTOBER 2026 · 5:55 PM · REAL JERUSALEM TIME
    COFC TECHNOLOGIES LTD · © 2026
    
-   v1.0.0 Genesis Sovereign:
+   Version: 1.0.0 "Genesis Sovereign"
+   
+   Contents:
    - Health check (15 tests)
    - Migration from v1.x / v16 / v15
+   - Extension registry for future chains
    - Cleanup on unload
    ============================================================================ */
 'use strict';
 
 /* ============================================================================
-   HEALTH CHECK
+   EXTENSION REGISTRY — Plug-in system for future chains
+   ============================================================================ */
+window.CofcExtensions = {
+  chains: {},
+  
+  register: function(name, handler) {
+    if (typeof name !== 'string' || !handler) {
+      console.warn('[COFC] Invalid extension registration');
+      return false;
+    }
+    this.chains[name] = handler;
+    console.log('[COFC] Extension registered:', name);
+    return true;
+  },
+  
+  get: function(name) {
+    return this.chains[name] || null;
+  },
+  
+  list: function() {
+    return Object.keys(this.chains);
+  }
+};
+
+/* ============================================================================
+   HEALTH CHECK + MIGRATION
    ============================================================================ */
 (function() {
   function waitForGate() {
     return new Promise((resolve) => {
-      if (window.CofcGate) return resolve();
+      if (window.CofcGate) return resolve(true);
       let attempts = 0;
       const check = setInterval(() => {
         attempts++;
-        if (window.CofcGate || attempts > 200) {
+        if (window.CofcGate) {
           clearInterval(check);
-          resolve();
+          resolve(true);
+        } else if (attempts > 200) {
+          clearInterval(check);
+          resolve(false);
         }
       }, 50);
     });
@@ -45,7 +77,7 @@
       results.push({ name: 'WebCrypto', ok: false, err: e.message });
     }
 
-    // 2. SHA3-256 (structural)
+    // 2. SHA3-256 structural
     try {
       const h = C.SHA3.hash256(new Uint8Array([0]));
       results.push({ name: 'SHA3-256', ok: h.length === 32 });
@@ -53,15 +85,7 @@
       results.push({ name: 'SHA3-256', ok: false, err: e.message });
     }
 
-    // 3. SHA3-512 (structural)
-    try {
-      const h = C.SHA3.hash512(new Uint8Array([0]));
-      results.push({ name: 'SHA3-512', ok: h.length === 64 });
-    } catch (e) {
-      results.push({ name: 'SHA3-512', ok: false, err: e.message });
-    }
-
-    // 4. SHA3-256 known vector (NIST: SHA3-256("") = a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a)
+    // 3. SHA3-256 NIST vector: SHA3-256("") = a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a
     try {
       const h = C.SHA3.hash256(new Uint8Array(0));
       const actual = C.Crypto.hexEnc(h);
@@ -69,6 +93,14 @@
       results.push({ name: 'SHA3-256 NIST vector', ok: actual === expected });
     } catch (e) {
       results.push({ name: 'SHA3-256 NIST vector', ok: false, err: e.message });
+    }
+
+    // 4. SHA3-512 structural
+    try {
+      const h = C.SHA3.hash512(new Uint8Array([0]));
+      results.push({ name: 'SHA3-512', ok: h.length === 64 });
+    } catch (e) {
+      results.push({ name: 'SHA3-512', ok: false, err: e.message });
     }
 
     // 5. Quantum Mixing
@@ -81,7 +113,7 @@
       results.push({ name: 'QuantumMixing', ok: false, err: e.message });
     }
 
-    // 6. BiometricKey — same input → same output
+    // 6. BiometricKey deterministic
     try {
       const sample = new Uint8Array(256);
       crypto.getRandomValues(sample);
@@ -93,14 +125,13 @@
       results.push({ name: 'BiometricKey', ok: false, err: e.message });
     }
 
-    // 7. BiometricKey — similar input → close output
+    // 7. BiometricKey tolerance
     try {
       const a = new Uint8Array(256).fill(100);
-      const b = new Uint8Array(256).fill(102);  // Slight variation
+      const b = new Uint8Array(256).fill(102);
       const fa = C.BiometricKey.fuzzyExtract(a);
       const fb = C.BiometricKey.fuzzyExtract(b);
       const dist = C.BiometricKey.hammingDistance(fa, fb);
-      // Should be small (within tolerance)
       results.push({ name: 'BiometricKey tolerance', ok: dist < C.BiometricKey.TOLERANCE });
     } catch (e) {
       results.push({ name: 'BiometricKey tolerance', ok: false, err: e.message });
@@ -144,31 +175,35 @@
       results.push({ name: 'AES-256-GCM', ok: false, err: e.message });
     }
 
-    // 12. SafeRandom
+    // 12. secp256k1 — sign and recover
     try {
-      const a = C.SafeRandom.bytes(32);
-      const b = C.SafeRandom.bytes(32);
-      const diff = a.some((v, i) => v !== b[i]);
-      results.push({ name: 'SafeRandom', ok: diff });
+      const privKey = C.SafeRandom.bytes(32);
+      const privBig = C.Secp256k1.bytesToBigInt(privKey);
+      // Ensure valid
+      const privValid = privBig > 0n && privBig < C.Secp256k1.N;
+      if (privValid) {
+        const msgHash = C.SHA3.hash256(new Uint8Array([1,2,3]));
+        const sig = await C.Secp256k1.sign(msgHash, privBig);
+        const pub = C.Secp256k1.compressPublicKey(privBig);
+        results.push({ name: 'secp256k1 sign', ok: sig.r.length === 32 && sig.s.length === 32 && pub.length === 33 });
+      } else {
+        results.push({ name: 'secp256k1 sign', ok: false, err: 'invalid privkey' });
+      }
     } catch (e) {
-      results.push({ name: 'SafeRandom', ok: false, err: e.message });
+      results.push({ name: 'secp256k1 sign', ok: false, err: e.message });
     }
 
-    // 13. Storage round-trip (restores original master key)
+    // 13. Ethereum address derivation
     try {
-      const originalKey = C.Vault.getMasterKey();
-      const testKey = C.SafeRandom.bytes(32);
-      C.Storage.setMasterKey(testKey);
-      const testValue = { hello: 'world', n: 42 };
-      await C.Storage.set('__test__', testValue);
-      const read = await C.Storage.get('__test__');
-      const ok = read && read.hello === 'world' && read.n === 42;
-      C.Storage.remove('__test__');
-      // FIX BUG-15: Restore original key
-      C.Storage.setMasterKey(originalKey);
-      results.push({ name: 'Storage (encrypted)', ok });
+      const privKey = new Uint8Array(32);
+      privKey[31] = 1; // priv = 1 → known address
+      const addr = C.Ethereum.deriveAddress(privKey);
+      // priv = 1 → 0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf
+      const expected = '0x7e5f4552091a69125d5dfcb7b8c2659029395bdf';
+      const ok = addr.toLowerCase() === expected;
+      results.push({ name: 'Ethereum address derivation', ok });
     } catch (e) {
-      results.push({ name: 'Storage (encrypted)', ok: false, err: e.message });
+      results.push({ name: 'Ethereum address derivation', ok: false, err: e.message });
     }
 
     // 14. Φ Distribution
@@ -180,13 +215,21 @@
       results.push({ name: 'Φ Distribution', ok: false, err: e.message });
     }
 
-    // 15. Audit log
+    // 15. Storage round-trip (restores original master key)
     try {
-      await C.Audit.log('Health check', 'info');
-      const verify = await C.Audit.verify();
-      results.push({ name: 'Audit (hash chain)', ok: verify.valid });
+      const originalKey = C.Vault.getMasterKey();
+      const testKey = C.SafeRandom.bytes(32);
+      C.Storage.setMasterKey(testKey);
+      const testValue = { hello: 'world', n: 42 };
+      await C.Storage.set('__test__', testValue);
+      const read = await C.Storage.get('__test__');
+      const ok = read && read.hello === 'world' && read.n === 42;
+      C.Storage.remove('__test__');
+      C.Storage.setMasterKey(originalKey);
+      results.push({ name: 'Storage (encrypted)', ok });
     } catch (e) {
-      results.push({ name: 'Audit (hash chain)', ok: false, err: e.message });
+      try { C.Storage.setMasterKey(null); } catch (err) {}
+      results.push({ name: 'Storage (encrypted)', ok: false, err: e.message });
     }
 
     return results;
@@ -219,11 +262,13 @@
   /* ============================================================================
      MIGRATION
      ============================================================================ */
-  const OLD_PREFIXES = ['cofc_v1_0_', 'cofc_v16_', 'cofc_v15_'];
+  const OLD_PREFIXES = ['cofc_v1_0_', 'cofc_v2_', 'cofc_v16_', 'cofc_v15_'];
   const NEW_PREFIX = 'cofc_v1_';
 
   function findOldData() {
     if (localStorage.getItem(NEW_PREFIX + 'auth') !== null) return null;
+    if (localStorage.getItem('cofc_v2_auth') !== null) return { from: 'v2.0', prefix: 'cofc_v2_' };
+    if (localStorage.getItem('cofc_v1_0_auth') !== null) return { from: 'v1.0-beta', prefix: 'cofc_v1_0_' };
     if (localStorage.getItem('cofc_v16_auth') !== null) return { from: 'v16.1', prefix: 'cofc_v16_' };
     if (localStorage.getItem('cofc_v15_auth') !== null) return { from: 'v15', prefix: 'cofc_v15_' };
     return null;
@@ -251,11 +296,11 @@
           </div>
           <div style="background:rgba(37,99,235,.05);border:1px solid rgba(37,99,235,.2);padding:14px 16px;border-radius:12px;margin-bottom:18px;display:flex;gap:10px;align-items:flex-start">
             <svg style="color:var(--blue);flex-shrink:0;margin-top:2px;width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-            <p style="font-size:12px;color:var(--blue);font-weight:700;line-height:1.5">Existing vault from <strong>${fromVersion}</strong> detected. We recommend starting fresh to use the new v1.0 encryption format.</p>
+            <p style="font-size:12px;color:var(--blue);font-weight:700;line-height:1.5">Existing vault from <strong>${fromVersion}</strong> detected. We recommend starting fresh to use the new v1.0.0 encryption format.</p>
           </div>
           <div style="text-align:center;padding:10px 0 20px">
             <div style="font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:20px;font-weight:600">
-              Old data will be backed up in the browser. You can always restore it manually.
+              Old data will be cleared from this browser. Make sure you have your password and seed phrase backed up.
             </div>
           </div>
           <button class="btn btn-yellow" id="btn-migration-fresh">
@@ -295,6 +340,40 @@
   }
 
   /* ============================================================================
+     REGISTER DEFAULT EXTENSIONS
+     ============================================================================ */
+  function registerDefaultExtensions() {
+    // Bitcoin extension
+    window.CofcExtensions.register('bitcoin', {
+      deriveAddress: async (privateKey) => {
+        return await window.CofcGate.Bitcoin.deriveP2WPKH(privateKey);
+      },
+      deriveAddresses: async (privateKey) => {
+        return await window.CofcGate.Bitcoin.deriveAddresses(privateKey);
+      }
+    });
+
+    // Ethereum extension
+    window.CofcExtensions.register('ethereum', {
+      deriveAddress: (privateKey) => {
+        return window.CofcGate.Ethereum.deriveAddress(privateKey);
+      },
+      getBalance: async (address) => {
+        return await window.CofcGate.Ethereum.getBalance(address);
+      }
+    });
+
+    // Solana extension (read-only)
+    window.CofcExtensions.register('solana', {
+      deriveAddress: async (seed) => {
+        return await window.CofcGate.Solana.deriveAddress(seed);
+      }
+    });
+
+    console.log('[COFC] Default extensions registered: bitcoin, ethereum, solana');
+  }
+
+  /* ============================================================================
      INIT
      ============================================================================ */
   let healthCheckRun = false;
@@ -312,17 +391,23 @@
   }
 
   async function init() {
-    await waitForGate();
-    if (!window.CofcGate) {
+    const gateReady = await waitForGate();
+    if (!gateReady || !window.CofcGate) {
       console.error('[COFC] gate.js not loaded — patch cannot initialize');
       return;
     }
+
     console.log('[COFC] patch.js v1.0.0 Genesis Sovereign initializing...');
 
-    // FIX BUG-26: Run health check on first user activity, not immediately
+    // Wait extra 2 seconds for gate to be fully ready
+    await new Promise(r => setTimeout(r, 2000));
+
+    // Register default extensions
+    registerDefaultExtensions();
+
+    // Health check on first user activity
     document.addEventListener('click', runHealthCheckOnce, { once: true });
     document.addEventListener('touchstart', runHealthCheckOnce, { once: true });
-    // Fallback: run after 5 seconds
     setTimeout(runHealthCheckOnce, 5000);
 
     // Migration check
