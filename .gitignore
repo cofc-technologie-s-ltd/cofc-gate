@@ -1,0 +1,60 @@
+# ============================================
+# COFC GATE — .gitignore
+# ============================================
+
+# Dependencies (even though we have zero)
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+build/
+*.min.js
+*.min.css
+
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.crt
+ssl/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary
+tmp/
+temp/
+*.tmp
+*.bak
+
+# Sensitive user data (never commit)
+cofc_v8_*
+backup/
+exports/
+*.sqlite
+*.db
