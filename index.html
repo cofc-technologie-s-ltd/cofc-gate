@@ -3,14 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>COFC GATE v2.0 — Sovereign Quantum Vault</title>
+<title>COFC GATE v1.0.0 — Genesis Sovereign Quantum Vault</title>
 <meta name="theme-color" content="#F6EE25">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="description" content="COFC GATE v2.0 — Sovereign Quantum Vault · PQC · Biometric KD · P2P · Φ Consensus">
+<meta name="description" content="COFC GATE v1.0.0 — Genesis Sovereign Quantum Vault · Biometric KD · SHA3 · Argon2id · Φ Consensus">
+<meta name="author" content="Aleksey Daniel Danilovich · COFC TECHNOLOGIES LTD">
+<meta name="copyright" content="© 2026 COFC TECHNOLOGIES LTD">
 
-<!-- CSP — WASM-ready, no external deps -->
+<!-- CSP — v1.0.0 -->
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:;
@@ -30,7 +32,7 @@
 
 <style>
 /* ============================================================
-   COFC GATE v2.0 — SOVEREIGN QUANTUM STYLES
+   COFC GATE v1.0.0 — GENESIS SOVEREIGN STYLES
    ============================================================ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
@@ -402,7 +404,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 <div class="loading-overlay" id="loading-overlay">
   <div class="loading-coin">₡</div>
   <div class="loading-title">COFC GATE</div>
-  <div class="loading-subtitle">Sovereign Quantum Vault v2.0</div>
+  <div class="loading-subtitle">Genesis Sovereign v1.0.0</div>
   <div class="loading-bar"><div class="loading-bar-fill" id="loading-bar-fill"></div></div>
   <div class="loading-status" id="loading-status">Initializing Quantum Core...</div>
 </div>
@@ -414,7 +416,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
       <div class="brand-logo">C</div>
       <div class="brand-text">
         <span class="brand-name">COFC GATE</span>
-        <span class="brand-tagline">Sovereign Quantum Vault v2.0</span>
+        <span class="brand-tagline">Genesis Sovereign v1.0.0</span>
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
@@ -424,7 +426,7 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
       </div>
       <div class="status-indicator">
         <span class="status-dot"></span>
-        <span>PQC SECURE</span>
+        <span>SECURE</span>
       </div>
     </div>
   </div>
@@ -435,9 +437,9 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 <!-- Login -->
 <div id="login-screen">
   <div class="login-card">
-    <div class="login-badge">⚛️ Sovereign Quantum Identity v2.0</div>
-    <h1 class="login-title">Quantum Liveness Verification</h1>
-    <p class="login-subtitle">Kyber · Dilithium · Biometric KD · Argon2id · SHA3</p>
+    <div class="login-badge">⚛️ Sovereign Identity v1.0.0</div>
+    <h1 class="login-title">Biometric Liveness Verification</h1>
+    <p class="login-subtitle">Biometric KD · SHA3-512 · Argon2id · AES-256-GCM</p>
 
     <div class="face-scanner-wrap">
       <div class="face-scanner" id="face-scanner" role="button" tabindex="0" aria-label="Face scanner">
@@ -484,10 +486,10 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
     <div class="login-status" id="login-status">Tap the circle to begin</div>
 
     <div class="login-hint">
-      <span class="login-hint-badge">⚛️ PQC Kyber</span>
+      <span class="login-hint-badge">🧬 Biometric KD</span>
       <span class="login-hint-badge">🔐 Argon2id</span>
       <span class="login-hint-badge">🔒 AES-256-GCM</span>
-      <span class="login-hint-badge">🧬 Biometric KD</span>
+      <span class="login-hint-badge">⚛️ SHA3</span>
     </div>
   </div>
 </div>
@@ -682,6 +684,13 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
         </div>
         <button class="setting-toggle active" id="toggle-biometric" data-setting="biometricVerify"></button>
       </div>
+      <div class="setting-row">
+        <div class="setting-info">
+          <div class="setting-title">Live Prices (CoinGecko)</div>
+          <div class="setting-desc">Opt-in to fetch real-time prices from CoinGecko (default: offline)</div>
+        </div>
+        <button class="setting-toggle" id="toggle-liveprice" data-setting="livePriceEnabled"></button>
+      </div>
       <button class="btn btn-danger" id="btn-wipe" style="margin-top:16px">
         <span class="btn-label">Wipe All Data (GDPR)</span>
       </button>
@@ -692,12 +701,12 @@ body{font-family:var(--font);background:var(--white);color:var(--dark);min-heigh
 <!-- WASM Indicator -->
 <div class="wasm-indicator" id="wasm-indicator">
   <span class="dot"></span>
-  <span id="wasm-status">WASM: loading...</span>
+  <span id="wasm-status">Initializing...</span>
 </div>
 
 <!-- Footer -->
 <footer class="footer">
-  <div>COFC TECHNOLOGIES LTD — SOVEREIGN QUANTUM VAULT v2.0</div>
+  <div>COFC TECHNOLOGIES LTD — GENESIS SOVEREIGN QUANTUM VAULT v1.0.0</div>
   <div class="footer-sovereign">BEST REGARDS,
 ALEKSEY DANIEL DANILOVICH AND MY WIVES
 THE KING AND THE QUEENS OF TEVEL
@@ -708,6 +717,8 @@ WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
 </footer>
 
 <!-- Modals -->
+
+<!-- Add Coin -->
 <div class="modal" id="modal-add-coin">
   <div class="modal-content">
     <div class="modal-header">
@@ -719,6 +730,7 @@ WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
   </div>
 </div>
 
+<!-- Coin Picker -->
 <div class="modal" id="modal-coin-picker">
   <div class="modal-content">
     <div class="modal-header">
@@ -730,6 +742,7 @@ WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
   </div>
 </div>
 
+<!-- Wallet Details -->
 <div class="modal" id="modal-wallet-details">
   <div class="modal-content">
     <div class="modal-header">
@@ -745,6 +758,7 @@ WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
   </div>
 </div>
 
+<!-- Receive -->
 <div class="modal" id="modal-receive">
   <div class="modal-content">
     <div class="modal-header">
@@ -764,16 +778,17 @@ WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
   </div>
 </div>
 
+<!-- Triple-Auth -->
 <div class="modal" id="modal-triple-auth">
   <div class="modal-content" style="max-width:480px">
     <div class="modal-header">
-      <div class="modal-title" style="color:var(--red)">🔒 Quantum Triple-Auth Required</div>
+      <div class="modal-title" style="color:var(--red)">🔒 Triple-Auth Required</div>
       <button class="modal-close" data-close="modal-triple-auth">&times;</button>
     </div>
     <div>
       <div class="quantum-box">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
-        <p>3-factor verification with PQC signature binding. This action is permanently logged.</p>
+        <p>3-factor verification with cryptographic binding. This action is permanently logged.</p>
       </div>
       <div style="text-align:center;padding:10px 0 20px">
         <div style="font-size:11px;color:var(--gray);font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px">Step 1 of 3 — Password</div>
@@ -782,7 +797,7 @@ WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
       </div>
       <div style="display:flex;align-items:center;gap:8px;padding:12px;background:rgba(220,53,69,.04);border-radius:8px;margin-bottom:8px;font-size:11px">
         <span style="width:24px;height:24px;background:var(--gray-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:10px">2</span>
-        <span style="color:var(--gray);font-weight:700">Biometric + PQC signature</span>
+        <span style="color:var(--gray);font-weight:700">Biometric + cryptographic signature</span>
       </div>
       <div style="display:flex;align-items:center;gap:8px;padding:12px;background:rgba(220,53,69,.04);border-radius:8px;margin-bottom:18px;font-size:11px">
         <span style="width:24px;height:24px;background:var(--gray-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:10px">3</span>
@@ -796,10 +811,11 @@ WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
   </div>
 </div>
 
+<!-- Confirm Reveal -->
 <div class="modal" id="modal-confirm-reveal">
   <div class="modal-content" style="max-width:440px">
     <div class="modal-header">
-      <div class="modal-title" style="color:var(--red)">⚠️ Final Quantum Confirmation</div>
+      <div class="modal-title" style="color:var(--red)">⚠️ Final Confirmation</div>
     </div>
     <div class="warning-box">
       <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
@@ -812,6 +828,7 @@ WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
   </div>
 </div>
 
+<!-- Reveal Secret -->
 <div class="modal" id="modal-reveal-secret">
   <div class="modal-content">
     <div class="modal-header">
@@ -820,23 +837,24 @@ WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
     </div>
     <div class="warning-box">
       <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
-      <p>Never share these secrets. This action is logged with PQC signature.</p>
+      <p>Never share these secrets. This action is permanently logged.</p>
     </div>
     <div id="reveal-secret-content"></div>
   </div>
 </div>
 
+<!-- 2FA -->
 <div class="modal" id="modal-2fa">
   <div class="modal-content" style="max-width:420px">
     <div class="modal-header">
-      <div class="modal-title">⚛️ Quantum Biometric Confirmation</div>
+      <div class="modal-title">⚛️ Biometric Confirmation</div>
     </div>
     <div style="text-align:center;padding:20px 0">
       <div style="width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--blue));margin:0 auto 18px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(124,58,237,.35);font-size:40px">⚛️</div>
-      <div style="font-size:15px;font-weight:900;margin-bottom:8px">Quantum Liveness Check</div>
-      <div style="font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:20px;font-weight:600">Look at the camera. Blink when prompted.<br>Your biometric generates a PQC-bound key.</div>
+      <div style="font-size:15px;font-weight:900;margin-bottom:8px">Biometric Liveness Check</div>
+      <div style="font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:20px;font-weight:600">Look at the camera. Blink when prompted.<br>Your biometric generates a unique key.</div>
       <button class="btn btn-yellow" id="btn-2fa-verify">
-        <span class="btn-label">Start Quantum Verification</span>
+        <span class="btn-label">Start Verification</span>
         <span class="btn-spinner"></span>
       </button>
       <button class="btn btn-outline btn-sm" id="btn-2fa-cancel" style="margin-top:8px">
@@ -846,6 +864,7 @@ WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
   </div>
 </div>
 
+<!-- Set Password -->
 <div class="modal" id="modal-set-password">
   <div class="modal-content" style="max-width:480px">
     <div class="modal-header">
@@ -853,7 +872,7 @@ WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
     </div>
     <div class="quantum-box">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
-      <p>Your vault will be protected by an Argon2id-derived key + Biometric KD + PQC Kyber encapsulation.</p>
+      <p>Your vault will be protected by an Argon2id-derived key + biometric verification.</p>
     </div>
     <div style="text-align:center;padding:10px 0 20px">
       <input type="password" class="form-input" id="set-password-1" placeholder="Password (min 12 chars)" autocomplete="new-password" style="text-align:center;font-size:16px">
@@ -865,12 +884,13 @@ WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
       <p>If you lose this password, your funds cannot be recovered. Store it safely offline.</p>
     </div>
     <button class="btn btn-yellow" id="btn-set-password">
-      <span class="btn-label">Create Quantum Vault</span>
+      <span class="btn-label">Create Vault</span>
       <span class="btn-spinner"></span>
     </button>
   </div>
 </div>
 
+<!-- Existing Password -->
 <div class="modal" id="modal-existing-password">
   <div class="modal-content" style="max-width:440px">
     <div class="modal-header">
@@ -878,13 +898,13 @@ WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
     </div>
     <div style="text-align:center;padding:10px 0 20px">
       <div style="font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:20px;font-weight:600">
-        PQC signature verified. Now enter your master password.
+        Face verified. Now enter your master password.
       </div>
       <input type="password" class="form-input" id="existing-password-input" placeholder="Password" autocomplete="current-password" style="text-align:center;font-size:16px">
       <div class="form-hint" id="existing-password-hint" style="min-height:20px"></div>
     </div>
     <button class="btn btn-yellow" id="btn-existing-password">
-      <span class="btn-label">Unlock Quantum Vault</span>
+      <span class="btn-label">Unlock Vault</span>
       <span class="btn-spinner"></span>
     </button>
   </div>
@@ -893,4 +913,4 @@ WILD, RICH, FREE, HEALTHY, BLESSED, GIFTED AND HAPPY TILL 120 YEARS OLD
 <script src="gate.js" defer></script>
 <script src="patch.js" defer></script>
 </body>
-         </html>
+  </html>
