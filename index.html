@@ -10,30 +10,21 @@
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://raw.githubusercontent.com https://assets.coingecko.com; connect-src 'self' https://api.coingecko.com; font-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="COFC GATE">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://cofc.io https://raw.githubusercontent.com; connect-src 'self' https://api.coingecko.com; font-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests;">
 
 <style>
 /* ============================================================
-   COFC GATE v11.0 — ULTIMATE EDITION
-   Premium Design · TrustWallet Logos · Triple-Lock Security
+   COFC GATE v12.0 — APEX ULTIMATE
+   Full Responsive · Direct CDN · Triple-Lock Security
    ============================================================ */
 :root {
-  --yellow: #F6EE25;
-  --yellow-dark: #D4CB00;
-  --yellow-light: #FCF77A;
+  --yellow: #F6EE25; --yellow-dark: #D4CB00; --yellow-light: #FCF77A;
   --yellow-glow: rgba(246,238,37,0.35);
-  --dark: #464650;
-  --dark-deep: #2E2E36;
-  --dark-soft: #5A5A68;
-  --gray: #6B6B78;
-  --gray-light: #E8E8EB;
-  --ghost: #F4F4F5;
-  --white: #FFFFFF;
-  --green: #16A34A;
-  --red: #DC3545;
-  --blue: #2563EB;
-  --amber: #D97706;
-  --purple: #7C3AED;
+  --dark: #464650; --dark-deep: #2E2E36; --dark-soft: #5A5A68;
+  --gray: #6B6B78; --gray-light: #E8E8EB; --ghost: #F4F4F5; --white: #FFFFFF;
+  --green: #16A34A; --red: #DC3545; --blue: #2563EB; --amber: #D97706; --purple: #7C3AED;
   --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   --font-mono: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
   --shadow-xs: 0 1px 2px rgba(70,70,80,0.04);
@@ -45,23 +36,16 @@
   --shadow-yellow-lg: 0 16px 56px rgba(246,238,37,0.5);
   --t-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --t-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-full: 9999px;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 24px; --radius-full: 9999px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 body {
   font-family: var(--font-display);
-  background: var(--white);
-  color: var(--dark);
-  min-height: 100vh;
-  overflow-x: hidden;
-  font-size: 15px;
-  line-height: 1.5;
+  background: var(--white); color: var(--dark);
+  min-height: 100vh; overflow-x: hidden;
+  font-size: 15px; line-height: 1.5;
   background-image:
     radial-gradient(circle at 10% 0%, rgba(246,238,37,0.06) 0%, transparent 40%),
     radial-gradient(circle at 90% 100%, rgba(70,70,80,0.03) 0%, transparent 40%);
@@ -69,18 +53,13 @@ body {
 
 /* Loading */
 .loading-overlay {
-  position: fixed; inset: 0;
-  background: var(--white);
-  z-index: 99999;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-  padding: 20px;
+  position: fixed; inset: 0; background: var(--white); z-index: 99999;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease; padding: 20px;
 }
 .loading-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 .loading-coin {
-  width: 100px; height: 100px; object-fit: contain;
-  margin-bottom: 28px;
+  width: 100px; height: 100px; object-fit: contain; margin-bottom: 28px;
   animation: coinSpin 2s cubic-bezier(0.4,0,0.2,1) infinite;
   filter: drop-shadow(0 16px 40px rgba(246,238,37,0.5));
 }
@@ -89,8 +68,7 @@ body {
   width: 100px; height: 100px; border-radius: 50%;
   background: linear-gradient(135deg, var(--yellow), var(--yellow-dark));
   display: none; align-items: center; justify-content: center;
-  color: var(--dark); font-weight: 900; font-size: 46px;
-  margin-bottom: 28px;
+  color: var(--dark); font-weight: 900; font-size: 46px; margin-bottom: 28px;
   animation: coinSpin 2s cubic-bezier(0.4,0,0.2,1) infinite;
   box-shadow: var(--shadow-yellow);
 }
@@ -105,10 +83,9 @@ body {
 .loading-subtitle { font-size: 10px; color: var(--gray); letter-spacing: 3px; text-transform: uppercase; font-weight: 800; margin-bottom: 36px; }
 .loading-bar { width: 340px; height: 3px; background: var(--gray-light); border-radius: 2px; overflow: hidden; }
 .loading-bar-fill {
-  height: 100%;
+  height: 100%; width: 0%;
   background: linear-gradient(90deg, var(--yellow-dark), var(--yellow), var(--yellow-light), var(--yellow));
-  background-size: 200% 100%; width: 0%;
-  transition: width 0.3s ease;
+  background-size: 200% 100%; transition: width 0.3s ease;
   animation: goldFlow 1.5s linear infinite;
 }
 @keyframes goldFlow { 0%,100% { background-position: 0% 0; } 100% { background-position: 200% 0; } }
@@ -123,10 +100,8 @@ body {
   border-bottom: 1px solid var(--gray-light);
 }
 .header-inner {
-  max-width: 1400px; margin: 0 auto;
-  padding: 12px 24px;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 20px;
+  max-width: 1400px; margin: 0 auto; padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
 }
 .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
 .brand-logo-wrap {
@@ -149,8 +124,7 @@ body {
   display: none; align-items: center; gap: 10px;
   padding: 6px 12px 6px 6px;
   background: var(--ghost); border: 1px solid var(--gray-light);
-  border-radius: var(--radius-full); cursor: pointer;
-  transition: all var(--t-fast);
+  border-radius: var(--radius-full); cursor: pointer; transition: all var(--t-fast);
 }
 .header-user.visible { display: flex; }
 .header-user:hover { border-color: var(--yellow); background: rgba(246,238,37,0.08); }
@@ -168,15 +142,12 @@ body {
 .header-verified { width: 14px; height: 14px; color: var(--blue); flex-shrink: 0; }
 
 .status-indicator {
-  display: flex; align-items: center; gap: 6px;
-  padding: 6px 12px;
+  display: flex; align-items: center; gap: 6px; padding: 6px 12px;
   background: rgba(22,163,74,0.08); border: 1px solid rgba(22,163,74,0.2);
-  border-radius: var(--radius-full); font-weight: 800; font-size: 11px;
-  color: var(--green);
+  border-radius: var(--radius-full); font-weight: 800; font-size: 11px; color: var(--green);
 }
 .status-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--green);
+  width: 7px; height: 7px; border-radius: 50%; background: var(--green);
   box-shadow: 0 0 0 3px rgba(22,163,74,0.15);
   animation: statusPulse 2s ease-in-out infinite;
 }
@@ -184,22 +155,18 @@ body {
 
 .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
 
-/* Login */
+/* ============================================================
+   LOGIN
+   ============================================================ */
 #login-screen {
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  min-height: calc(100vh - 80px);
-  padding: 30px 20px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: calc(100vh - 80px); padding: 30px 20px;
 }
 .login-card {
   width: 100%; max-width: 520px;
-  background: var(--white);
-  border: 1px solid var(--gray-light);
-  border-radius: var(--radius-xl);
-  padding: 40px 36px 32px;
-  box-shadow: var(--shadow-xl);
-  position: relative; overflow: hidden;
-  text-align: center;
+  background: var(--white); border: 1px solid var(--gray-light);
+  border-radius: var(--radius-xl); padding: 40px 36px 32px;
+  box-shadow: var(--shadow-xl); position: relative; overflow: hidden; text-align: center;
 }
 .login-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
@@ -211,17 +178,18 @@ body {
 .login-badge {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 5px 14px;
-  background: rgba(246,238,37,0.15);
-  border: 1px solid rgba(212,203,0,0.4);
+  background: rgba(246,238,37,0.15); border: 1px solid rgba(212,203,0,0.4);
   border-radius: var(--radius-full);
   font-size: 10px; font-weight: 900; color: var(--dark);
-  letter-spacing: 1.2px; text-transform: uppercase;
-  margin-bottom: 16px;
+  letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 16px;
 }
 .login-title { font-size: 28px; font-weight: 900; color: var(--dark); letter-spacing: -0.5px; margin-bottom: 8px; }
 .login-subtitle { font-size: 12px; color: var(--gray); font-weight: 600; margin-bottom: 32px; }
 
-.face-scanner-wrap { width: 320px; height: 320px; margin: 0 auto 24px; position: relative; }
+.face-scanner-wrap {
+  width: 320px; height: 320px;
+  margin: 0 auto 24px; position: relative;
+}
 .face-scanner {
   position: absolute; inset: 0;
   border-radius: 50%; overflow: hidden;
@@ -237,7 +205,11 @@ body {
 .face-scanner.disabled { pointer-events: none; opacity: 0.6; }
 .face-scanner video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); display: none; position: absolute; inset: 0; }
 .face-scanner.camera-active video { display: block; }
-.face-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; transition: opacity var(--t-base); z-index: 2; }
+.face-placeholder {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px; transition: opacity var(--t-base); z-index: 2;
+}
 .face-scanner.camera-active .face-placeholder { opacity: 0; pointer-events: none; }
 .guide-avatar { width: 180px; height: 180px; position: relative; }
 .guide-face { animation: guideBob 2.5s ease-in-out infinite; transform-origin: 100px 100px; }
@@ -248,20 +220,15 @@ body {
 @keyframes guideTurn { 0%,20%,80%,100% { transform: rotate(0deg); } 35% { transform: rotate(-8deg); } 65% { transform: rotate(8deg); } }
 
 .instruction-chips {
-  position: absolute; bottom: -16px; left: 50%;
-  transform: translateX(-50%);
-  display: flex; gap: 6px; z-index: 10;
-  direction: ltr;
+  position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 6px; z-index: 10; direction: ltr;
 }
 .instruction-chip {
   display: inline-flex; align-items: center; gap: 4px;
   padding: 6px 12px; background: var(--white);
-  border: 2px solid var(--gray-light);
-  border-radius: var(--radius-full);
+  border: 2px solid var(--gray-light); border-radius: var(--radius-full);
   font-size: 10px; font-weight: 800; color: var(--dark);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--t-base);
-  white-space: nowrap;
+  box-shadow: var(--shadow-sm); transition: all var(--t-base); white-space: nowrap;
 }
 .instruction-chip.active { border-color: var(--yellow); background: var(--yellow); box-shadow: 0 4px 12px rgba(246,238,37,0.4); transform: translateY(-4px); }
 .instruction-chip.done { border-color: var(--green); background: rgba(22,163,74,0.1); color: var(--green); }
@@ -269,16 +236,35 @@ body {
 
 .face-overlay { position: absolute; inset: 0; pointer-events: none; z-index: 5; opacity: 0; transition: opacity var(--t-base); }
 .face-scanner.scanning .face-overlay { opacity: 1; }
-.face-frame { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 62%; height: 78%; border: 3px solid var(--yellow); border-radius: 50% 50% 45% 45%; animation: framePulse 2s ease-in-out infinite; }
-@keyframes framePulse { 0%,100% { border-color: rgba(246,238,37,0.6); box-shadow: 0 0 0 9999px rgba(70,70,80,0.15); } 50% { border-color: rgba(246,238,37,1); box-shadow: 0 0 0 9999px rgba(70,70,80,0.2); } }
-.scan-line { position: absolute; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--yellow), transparent); box-shadow: 0 0 20px rgba(246,238,37,0.8); animation: scanLineMove 2s ease-in-out infinite; }
+.face-frame {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 62%; height: 78%;
+  border: 3px solid var(--yellow); border-radius: 50% 50% 45% 45%;
+  animation: framePulse 2s ease-in-out infinite;
+}
+@keyframes framePulse {
+  0%,100% { border-color: rgba(246,238,37,0.6); box-shadow: 0 0 0 9999px rgba(70,70,80,0.15); }
+  50% { border-color: rgba(246,238,37,1); box-shadow: 0 0 0 9999px rgba(70,70,80,0.2); }
+}
+.scan-line {
+  position: absolute; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+  box-shadow: 0 0 20px rgba(246,238,37,0.8);
+  animation: scanLineMove 2s ease-in-out infinite;
+}
 @keyframes scanLineMove { 0%,100% { top: 15%; opacity: 0.3; } 50% { top: 85%; opacity: 1; } }
 .corner-bracket { position: absolute; width: 26px; height: 26px; border: 3px solid var(--yellow); }
 .corner-bracket.tl { top: 10%; left: 10%; border-right: none; border-bottom: none; border-radius: 8px 0 0 0; }
 .corner-bracket.tr { top: 10%; right: 10%; border-left: none; border-bottom: none; border-radius: 0 8px 0 0; }
 .corner-bracket.bl { bottom: 10%; left: 10%; border-right: none; border-top: none; border-radius: 0 0 0 8px; }
 .corner-bracket.br { bottom: 10%; right: 10%; border-left: none; border-top: none; border-radius: 0 0 8px 0; }
-.live-indicator { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 6px; padding: 4px 12px; background: rgba(220,53,69,0.95); border-radius: var(--radius-full); font-size: 10px; font-weight: 900; color: white; letter-spacing: 1.5px; z-index: 6; opacity: 0; transition: opacity var(--t-fast); }
+.live-indicator {
+  position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 6px; padding: 4px 12px;
+  background: rgba(220,53,69,0.95); border-radius: var(--radius-full);
+  font-size: 10px; font-weight: 900; color: white; letter-spacing: 1.5px; z-index: 6;
+  opacity: 0; transition: opacity var(--t-fast);
+}
 .face-scanner.camera-active .live-indicator { opacity: 1; }
 .live-dot { width: 6px; height: 6px; border-radius: 50%; background: white; animation: livePulse 1s ease-in-out infinite; }
 @keyframes livePulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
@@ -286,22 +272,57 @@ body {
 .video-progress svg { width: 100%; height: 100%; transform: rotate(-90deg); }
 .video-progress circle { fill: none; stroke-width: 5; stroke-linecap: round; }
 .video-progress .bg { stroke: var(--gray-light); }
-.video-progress .fill { stroke: var(--yellow); stroke-dasharray: 1005; stroke-dashoffset: 1005; transition: stroke-dashoffset 0.3s ease; filter: drop-shadow(0 0 8px rgba(246,238,37,0.7)); }
+.video-progress .fill {
+  stroke: var(--yellow); stroke-dasharray: 1005; stroke-dashoffset: 1005;
+  transition: stroke-dashoffset 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(246,238,37,0.7));
+}
 .face-scanner.success { border-color: var(--green); box-shadow: 0 0 0 8px rgba(22,163,74,0.15), var(--shadow-yellow-lg); }
 .face-scanner.success .video-progress .fill { stroke: var(--green); }
 .face-scanner.error { animation: errorShake 0.5s ease; }
-@keyframes errorShake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-10px); } 40% { transform: translateX(10px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
-
-.login-status { font-size: 13px; color: var(--gray); margin: 32px 0 18px; min-height: 20px; font-weight: 700; transition: color var(--t-fast); }
+@keyframes errorShake {
+  0%,100% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+.login-status {
+  font-size: 13px; color: var(--gray);
+  margin: 32px 0 18px; min-height: 20px;
+  font-weight: 700; transition: color var(--t-fast);
+}
 .login-status.active { color: var(--dark); }
 .login-status.success { color: var(--green); }
 .login-status.error { color: var(--red); }
 
-.login-hint { font-size: 10px; color: var(--gray); letter-spacing: 1.2px; text-transform: uppercase; font-weight: 800; padding-top: 16px; border-top: 1px solid var(--gray-light); display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; }
-.login-hint-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; background: var(--ghost); border-radius: var(--radius-full); font-size: 9px; font-family: var(--font-mono); font-weight: 800; }
+.login-hint {
+  font-size: 10px; color: var(--gray); letter-spacing: 1.2px;
+  text-transform: uppercase; font-weight: 800;
+  padding-top: 16px; border-top: 1px solid var(--gray-light);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 20px;
+}
+.login-hint-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; background: var(--ghost);
+  border-radius: var(--radius-full);
+  font-size: 9px; font-family: var(--font-mono); font-weight: 800;
+}
 
-/* Buttons */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 15px 24px; background: var(--dark); color: var(--white); border: none; border-radius: var(--radius-md); font-family: var(--font-display); font-size: 14px; font-weight: 800; letter-spacing: 0.3px; cursor: pointer; transition: all var(--t-base); position: relative; overflow: hidden; margin-bottom: 12px; box-shadow: var(--shadow-sm); touch-action: manipulation; }
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 15px 24px;
+  background: var(--dark); color: var(--white);
+  border: none; border-radius: var(--radius-md);
+  font-family: var(--font-display); font-size: 14px; font-weight: 800;
+  letter-spacing: 0.3px; cursor: pointer; transition: all var(--t-base);
+  position: relative; overflow: hidden; margin-bottom: 12px;
+  box-shadow: var(--shadow-sm); touch-action: manipulation;
+}
 .btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: var(--shadow-md); background: var(--dark-deep); }
 .btn:active:not(:disabled) { transform: translateY(0); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -313,53 +334,138 @@ body {
 .btn-danger:hover:not(:disabled) { background: rgba(220,53,69,0.05); border-color: var(--red); }
 .btn-sm { padding: 10px 16px; font-size: 12px; }
 .btn-icon { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-.btn-spinner { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.25); border-top-color: var(--white); animation: spin 0.7s linear infinite; display: none; }
+.btn-spinner {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.25); border-top-color: var(--white);
+  animation: spin 0.7s linear infinite; display: none;
+}
 .btn-yellow .btn-spinner { border-color: rgba(70,70,80,0.2); border-top-color: var(--dark); }
 .btn.loading .btn-spinner { display: inline-block; }
 .btn.loading .btn-label { display: none; }
 .btn.loading { pointer-events: none; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Profile */
-.profile-header { display: none; align-items: center; gap: 20px; padding: 20px 24px; background: linear-gradient(135deg, var(--white) 0%, var(--ghost) 100%); border: 1px solid var(--gray-light); border-radius: var(--radius-lg); margin-bottom: 20px; box-shadow: var(--shadow-xs); position: relative; }
+/* ============================================================
+   PROFILE HEADER
+   ============================================================ */
+.profile-header {
+  display: none; align-items: center; gap: 20px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, var(--white) 0%, var(--ghost) 100%);
+  border: 1px solid var(--gray-light); border-radius: var(--radius-lg);
+  margin-bottom: 20px; box-shadow: var(--shadow-xs); position: relative;
+}
 .profile-header.visible { display: flex; }
 .profile-avatar-wrap { position: relative; width: 88px; height: 88px; flex-shrink: 0; }
-.profile-avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--white); box-shadow: var(--shadow-md); background: var(--gray-light); display: block; }
+.profile-avatar {
+  width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+  border: 3px solid var(--white); box-shadow: var(--shadow-md);
+  background: var(--gray-light); display: block;
+}
 .profile-avatar.no-img { display: none; }
-.profile-avatar-fallback { width: 100%; height: 100%; border-radius: 50%; background: linear-gradient(135deg, var(--yellow), var(--yellow-dark)); display: none; align-items: center; justify-content: center; color: var(--dark); font-weight: 900; font-size: 32px; border: 3px solid var(--white); box-shadow: var(--shadow-md); }
+.profile-avatar-fallback {
+  width: 100%; height: 100%; border-radius: 50%;
+  background: linear-gradient(135deg, var(--yellow), var(--yellow-dark));
+  display: none; align-items: center; justify-content: center;
+  color: var(--dark); font-weight: 900; font-size: 32px;
+  border: 3px solid var(--white); box-shadow: var(--shadow-md);
+}
 .profile-avatar.no-img + .profile-avatar-fallback { display: flex; }
-.profile-avatar-edit { position: absolute; bottom: -2px; right: -2px; width: 32px; height: 32px; border-radius: 50%; background: var(--dark); color: var(--white); display: flex; align-items: center; justify-content: center; cursor: pointer; border: 3px solid var(--white); transition: all var(--t-fast); z-index: 3; }
+.profile-avatar-edit {
+  position: absolute; bottom: -2px; right: -2px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--dark); color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; border: 3px solid var(--white);
+  transition: all var(--t-fast); z-index: 3;
+}
 .profile-avatar-edit:hover { background: var(--yellow); color: var(--dark); transform: scale(1.1); }
 .profile-avatar-edit svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 .profile-info { flex: 1; min-width: 0; }
-.profile-name { display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 900; color: var(--dark); letter-spacing: -0.3px; margin-bottom: 4px; flex-wrap: wrap; }
+.profile-name {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 20px; font-weight: 900; color: var(--dark);
+  letter-spacing: -0.3px; margin-bottom: 4px; flex-wrap: wrap;
+}
 .profile-verified-badge { width: 20px; height: 20px; color: var(--blue); flex-shrink: 0; }
 .profile-username { font-size: 13px; color: var(--gray); font-weight: 700; font-family: var(--font-mono); margin-bottom: 6px; }
 .profile-meta { display: flex; gap: 12px; flex-wrap: wrap; font-size: 11px; color: var(--dark); }
-.profile-meta-item { display: flex; align-items: center; gap: 4px; padding: 3px 10px; background: rgba(246,238,37,0.15); border-radius: var(--radius-full); font-weight: 800; }
+.profile-meta-item {
+  display: flex; align-items: center; gap: 4px;
+  padding: 3px 10px; background: rgba(246,238,37,0.15);
+  border-radius: var(--radius-full); font-weight: 800;
+}
 .profile-actions { display: flex; flex-direction: column; gap: 6px; }
-.profile-action-btn { padding: 8px 14px; background: var(--white); border: 1px solid var(--gray-light); border-radius: var(--radius-full); font-size: 11px; font-weight: 800; color: var(--dark); cursor: pointer; transition: all var(--t-fast); display: flex; align-items: center; gap: 6px; font-family: var(--font-display); }
+.profile-action-btn {
+  padding: 8px 14px; background: var(--white);
+  border: 1px solid var(--gray-light); border-radius: var(--radius-full);
+  font-size: 11px; font-weight: 800; color: var(--dark);
+  cursor: pointer; transition: all var(--t-fast);
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-display);
+}
 .profile-action-btn:hover { border-color: var(--yellow); background: rgba(246,238,37,0.08); }
 .profile-action-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
-/* Status Bar */
-.status-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; padding: 16px 20px; background: var(--white); border: 1px solid var(--gray-light); border-radius: var(--radius-md); margin-bottom: 20px; font-size: 12px; box-shadow: var(--shadow-xs); position: relative; overflow: hidden; }
-.status-bar::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--yellow), transparent); background-size: 200% 100%; animation: scanLine 4s linear infinite; }
+/* ============================================================
+   STATUS BAR
+   ============================================================ */
+.status-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 14px; padding: 16px 20px;
+  background: var(--white); border: 1px solid var(--gray-light);
+  border-radius: var(--radius-md); margin-bottom: 20px;
+  font-size: 12px; box-shadow: var(--shadow-xs); position: relative; overflow: hidden;
+}
+.status-bar::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+  background-size: 200% 100%;
+  animation: scanLine 4s linear infinite;
+}
 @keyframes scanLine { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .status-item { display: flex; align-items: center; gap: 8px; color: var(--dark); font-weight: 600; }
-.status-badge { padding: 5px 12px; border-radius: var(--radius-full); font-weight: 800; font-size: 11px; display: inline-flex; align-items: center; gap: 5px; }
-.status-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 6px currentColor; }
+.status-badge {
+  padding: 5px 12px; border-radius: var(--radius-full);
+  font-weight: 800; font-size: 11px;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.status-badge::before {
+  content: ''; width: 6px; height: 6px;
+  border-radius: 50%; background: currentColor;
+  box-shadow: 0 0 6px currentColor;
+}
 .badge-success { color: var(--green); background: rgba(22,163,74,0.08); border: 1px solid rgba(22,163,74,0.2); }
 .badge-yellow { color: var(--dark); background: rgba(246,238,37,0.3); border: 1px solid rgba(212,203,0,0.5); }
 .badge-quantum { color: var(--blue); background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2); }
-.timer-bar { width: 100%; height: 3px; background: var(--gray-light); border-radius: 2px; overflow: hidden; margin-top: 10px; }
-.timer-fill { height: 100%; background: linear-gradient(90deg, var(--yellow), var(--yellow-dark)); transition: width 1s linear; }
+.timer-bar {
+  width: 100%; height: 3px; background: var(--gray-light);
+  border-radius: 2px; overflow: hidden; margin-top: 10px;
+}
+.timer-fill {
+  height: 100%; transition: width 1s linear;
+  background: linear-gradient(90deg, var(--yellow), var(--yellow-dark));
+}
 .timer-fill.warning { background: linear-gradient(90deg, var(--amber), var(--red)); }
 
-/* Tabs */
-.tabs-nav { display: flex; gap: 4px; margin-bottom: 20px; padding: 4px; background: var(--white); border: 1px solid var(--gray-light); border-radius: var(--radius-md); overflow-x: auto; scrollbar-width: none; box-shadow: var(--shadow-xs); }
+/* ============================================================
+   TABS
+   ============================================================ */
+.tabs-nav {
+  display: flex; gap: 4px; margin-bottom: 20px;
+  padding: 4px; background: var(--white);
+  border: 1px solid var(--gray-light); border-radius: var(--radius-md);
+  overflow-x: auto; scrollbar-width: none; box-shadow: var(--shadow-xs);
+}
 .tabs-nav::-webkit-scrollbar { display: none; }
-.tab-btn { padding: 10px 18px; background: transparent; border: none; border-radius: var(--radius-sm); font-family: var(--font-display); font-size: 12px; font-weight: 800; color: var(--gray); cursor: pointer; transition: all var(--t-fast); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; flex-shrink: 0; }
+.tab-btn {
+  padding: 10px 18px; background: transparent; border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display); font-size: 12px; font-weight: 800;
+  color: var(--gray); cursor: pointer; transition: all var(--t-fast);
+  display: inline-flex; align-items: center; gap: 6px;
+  white-space: nowrap; flex-shrink: 0;
+}
 .tab-btn.active { background: var(--yellow); color: var(--dark); }
 .tab-btn:hover:not(.active) { background: var(--ghost); color: var(--dark); }
 .tab-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
@@ -371,70 +477,132 @@ body {
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
 
-.panel { background: var(--white); border: 1px solid var(--gray-light); border-radius: var(--radius-lg); padding: 22px; box-shadow: var(--shadow-xs); transition: all var(--t-base); }
+/* ============================================================
+   PANELS
+   ============================================================ */
+.panel {
+  background: var(--white); border: 1px solid var(--gray-light);
+  border-radius: var(--radius-lg); padding: 22px;
+  box-shadow: var(--shadow-xs); transition: all var(--t-base);
+}
 .panel:hover { border-color: rgba(246,238,37,0.5); box-shadow: var(--shadow-md); }
-.panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--gray-light); }
-.panel-title { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dark); font-weight: 900; display: flex; align-items: center; gap: 10px; }
+.panel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px; padding-bottom: 14px;
+  border-bottom: 1px solid var(--gray-light);
+}
+.panel-title {
+  font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--dark); font-weight: 900;
+  display: flex; align-items: center; gap: 10px;
+}
 .panel-title-icon { width: 18px; height: 18px; stroke: var(--yellow-dark); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 .panel-actions { display: flex; gap: 6px; }
-.panel-action-btn { padding: 6px 10px; background: var(--ghost); border: 1px solid var(--gray-light); border-radius: var(--radius-sm); font-size: 10px; font-weight: 800; color: var(--dark); cursor: pointer; transition: all var(--t-fast); display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-display); }
+.panel-action-btn {
+  padding: 6px 10px; background: var(--ghost);
+  border: 1px solid var(--gray-light); border-radius: var(--radius-sm);
+  font-size: 10px; font-weight: 800; color: var(--dark);
+  cursor: pointer; transition: all var(--t-fast);
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-display);
+}
 .panel-action-btn:hover { background: var(--yellow); border-color: var(--yellow); }
 .panel-action-btn svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
-/* Coin Logo (Perfect sizes) */
+/* ============================================================
+   COIN LOGOS (Consistent sizing)
+   ============================================================ */
 .coin-logo {
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--ghost);
-  flex-shrink: 0;
-  position: relative;
+  border-radius: 50%; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ghost); flex-shrink: 0; position: relative;
 }
-.coin-logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-}
+.coin-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .coin-logo .coin-logo-fallback {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 900;
-  font-family: var(--font-display);
-  letter-spacing: -0.5px;
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 900;
+  font-family: var(--font-display); letter-spacing: -0.5px;
   border-radius: 50%;
 }
 
-/* Wallet List */
+/* ============================================================
+   WALLET LIST
+   ============================================================ */
 .wallet-list { list-style: none; }
-.wallet-item { display: flex; align-items: center; gap: 12px; padding: 12px 4px; border-bottom: 1px solid var(--gray-light); transition: all var(--t-fast); cursor: pointer; }
+.wallet-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 4px; border-bottom: 1px solid var(--gray-light);
+  transition: all var(--t-fast); cursor: pointer;
+}
 .wallet-item:last-child { border-bottom: none; }
 .wallet-item:hover { background: var(--ghost); margin: 0 -8px; padding-left: 12px; padding-right: 12px; border-radius: var(--radius-sm); }
-.wallet-icon { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; position: relative; overflow: hidden; background: var(--ghost); }
+.wallet-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  flex-shrink: 0; position: relative; overflow: hidden;
+  background: var(--ghost);
+  display: flex; align-items: center; justify-content: center;
+}
 .wallet-icon img { width: 100%; height: 100%; object-fit: contain; padding: 6px; display: block; }
-.wallet-icon .wallet-icon-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 14px; border-radius: 50%; }
+.wallet-icon .wallet-icon-fallback {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 900; font-size: 14px;
+  border-radius: 50%;
+}
 .wallet-info { flex: 1; min-width: 0; }
-.wallet-name { display: flex; align-items: center; gap: 8px; font-weight: 900; font-size: 14px; color: var(--dark); margin-bottom: 3px; }
-.wallet-count { font-size: 10px; padding: 2px 6px; background: var(--yellow); border-radius: var(--radius-full); color: var(--dark); font-weight: 800; }
+.wallet-name {
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 900; font-size: 14px; color: var(--dark);
+  margin-bottom: 3px;
+}
+.wallet-count {
+  font-size: 10px; padding: 2px 6px;
+  background: var(--yellow); border-radius: var(--radius-full);
+  color: var(--dark); font-weight: 800;
+}
 .wallet-network { font-size: 10px; color: var(--gray); letter-spacing: 0.5px; font-weight: 700; }
-.wallet-balance { text-align: right; font-weight: 900; font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-size: 13px; color: var(--dark); flex-shrink: 0; direction: ltr; }
-.wallet-balance-usd { font-size: 10px; color: var(--gray); font-weight: 700; text-align: right; margin-top: 2px; }
+.wallet-balance {
+  text-align: right; font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--dark); flex-shrink: 0; direction: ltr;
+}
+.wallet-balance-usd {
+  font-size: 10px; color: var(--gray); font-weight: 700;
+  text-align: right; margin-top: 2px;
+}
 
-/* Price Ticker */
-.price-ticker { display: flex; gap: 8px; overflow-x: auto; padding: 12px 0; margin-bottom: 16px; scrollbar-width: thin; }
+/* ============================================================
+   PRICE TICKER
+   ============================================================ */
+.price-ticker {
+  display: flex; gap: 8px; overflow-x: auto;
+  padding: 12px 0; margin-bottom: 16px;
+  scrollbar-width: thin;
+}
 .price-ticker::-webkit-scrollbar { height: 4px; }
 .price-ticker::-webkit-scrollbar-thumb { background: var(--gray-light); border-radius: 2px; }
-.ticker-item { flex-shrink: 0; display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--white); border: 1.5px solid var(--gray-light); border-radius: var(--radius-md); cursor: pointer; transition: all var(--t-fast); min-width: 140px; }
+.ticker-item {
+  flex-shrink: 0; display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px; background: var(--white);
+  border: 1.5px solid var(--gray-light); border-radius: var(--radius-md);
+  cursor: pointer; transition: all var(--t-fast); min-width: 140px;
+}
 .ticker-item:hover { border-color: var(--yellow); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-.ticker-logo { width: 32px; height: 32px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; background: var(--ghost); }
+.ticker-logo {
+  width: 32px; height: 32px; border-radius: 50%;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; position: relative; background: var(--ghost);
+}
 .ticker-logo img { width: 100%; height: 100%; object-fit: contain; padding: 4px; display: block; }
-.ticker-logo .ticker-logo-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 11px; border-radius: 50%; }
+.ticker-logo .ticker-logo-fallback {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 900; font-size: 11px;
+  border-radius: 50%;
+}
 .ticker-info { display: flex; flex-direction: column; line-height: 1.2; }
 .ticker-symbol { font-size: 11px; font-weight: 900; color: var(--dark); }
 .ticker-price { font-size: 12px; font-weight: 800; color: var(--dark); font-family: var(--font-mono); direction: ltr; }
@@ -442,151 +610,416 @@ body {
 .ticker-change.up { color: var(--green); }
 .ticker-change.down { color: var(--red); }
 
-/* Forms */
-.form-input, .form-select, .form-textarea { width: 100%; background: var(--white); border: 1.5px solid var(--gray-light); color: var(--dark); padding: 13px 16px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 13px; transition: all var(--t-fast); margin-bottom: 12px; outline: none; font-weight: 600; }
-.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--yellow-dark); box-shadow: 0 0 0 3px rgba(246,238,37,0.25); }
+/* ============================================================
+   FORMS
+   ============================================================ */
+.form-input, .form-select, .form-textarea {
+  width: 100%; background: var(--white);
+  border: 1.5px solid var(--gray-light); color: var(--dark);
+  padding: 13px 16px; border-radius: var(--radius-sm);
+  font-family: var(--font-mono); font-size: 13px;
+  transition: all var(--t-fast); margin-bottom: 12px;
+  outline: none; font-weight: 600;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--yellow-dark); box-shadow: 0 0 0 3px rgba(246,238,37,0.25);
+}
 .form-input::placeholder, .form-textarea::placeholder { color: var(--gray); font-weight: 500; }
 .form-input.error { border-color: var(--red); box-shadow: 0 0 0 3px rgba(220,53,69,0.1); }
 .form-input.valid { border-color: var(--green); box-shadow: 0 0 0 3px rgba(22,163,74,0.1); }
-.form-input-hint { font-size: 10px; color: var(--gray); margin-top: -8px; margin-bottom: 14px; min-height: 14px; font-weight: 700; padding-right: 4px; }
+.form-input-hint {
+  font-size: 10px; color: var(--gray);
+  margin-top: -8px; margin-bottom: 14px;
+  min-height: 14px; font-weight: 700; padding-right: 4px;
+}
 .form-input-hint.error { color: var(--red); }
 .form-input-hint.valid { color: var(--green); }
 .form-group { margin-bottom: 16px; }
-.form-label { display: block; font-size: 11px; font-weight: 900; color: var(--dark); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.form-label {
+  display: block; font-size: 11px; font-weight: 900;
+  color: var(--dark); letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 8px;
+}
 
-.send-tabs { display: flex; gap: 6px; margin-bottom: 16px; padding: 4px; background: var(--ghost); border-radius: var(--radius-sm); }
-.send-tab { flex: 1; padding: 9px 12px; border: none; background: transparent; border-radius: 6px; font-family: var(--font-display); font-size: 11px; font-weight: 800; color: var(--gray); cursor: pointer; transition: all var(--t-fast); display: flex; align-items: center; justify-content: center; gap: 5px; }
+/* ============================================================
+   SEND TABS
+   ============================================================ */
+.send-tabs {
+  display: flex; gap: 6px; margin-bottom: 16px;
+  padding: 4px; background: var(--ghost); border-radius: var(--radius-sm);
+}
+.send-tab {
+  flex: 1; padding: 9px 12px;
+  border: none; background: transparent; border-radius: 6px;
+  font-family: var(--font-display); font-size: 11px; font-weight: 800;
+  color: var(--gray); cursor: pointer; transition: all var(--t-fast);
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+}
 .send-tab.active { background: var(--white); color: var(--dark); box-shadow: var(--shadow-xs); }
 .send-tab svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
-.currency-selector { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; margin-bottom: 14px; max-height: 156px; overflow-y: auto; padding: 4px; }
-.currency-chip { padding: 10px 6px; background: var(--white); border: 1.5px solid var(--gray-light); border-radius: var(--radius-sm); cursor: pointer; transition: all var(--t-fast); display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center; }
+/* Currency selector */
+.currency-selector {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px; margin-bottom: 14px;
+  max-height: 156px; overflow-y: auto; padding: 4px;
+}
+.currency-chip {
+  padding: 10px 6px; background: var(--white);
+  border: 1.5px solid var(--gray-light); border-radius: var(--radius-sm);
+  cursor: pointer; transition: all var(--t-fast);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 5px; text-align: center;
+}
 .currency-chip:hover { border-color: var(--yellow); transform: translateY(-2px); }
-.currency-chip.active { border-color: var(--yellow-dark); background: rgba(246,238,37,0.15); box-shadow: 0 0 0 3px rgba(246,238,37,0.25); }
-.currency-chip-icon { width: 32px; height: 32px; border-radius: 50%; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; background: var(--ghost); }
+.currency-chip.active {
+  border-color: var(--yellow-dark); background: rgba(246,238,37,0.15);
+  box-shadow: 0 0 0 3px rgba(246,238,37,0.25);
+}
+.currency-chip-icon {
+  width: 32px; height: 32px; border-radius: 50%;
+  overflow: hidden; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ghost);
+}
 .currency-chip-icon img { width: 100%; height: 100%; object-fit: contain; padding: 4px; display: block; }
-.currency-chip-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: white; font-weight: 900; font-size: 11px; }
+.currency-chip-fallback {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; color: white; font-weight: 900; font-size: 11px;
+}
 .currency-chip-symbol { font-size: 10px; font-weight: 900; color: var(--dark); }
 
-/* Swap */
-.swap-container { background: linear-gradient(135deg, var(--white), var(--ghost)); border: 1.5px solid var(--gray-light); border-radius: var(--radius-lg); padding: 20px; }
-.swap-row { position: relative; padding: 16px; background: var(--white); border: 1.5px solid var(--gray-light); border-radius: var(--radius-md); margin-bottom: 8px; transition: border-color var(--t-fast); }
+/* ============================================================
+   SWAP — COMPACT SIZE (Fixed design)
+   ============================================================ */
+.swap-container {
+  background: linear-gradient(135deg, var(--white), var(--ghost));
+  border: 1.5px solid var(--gray-light); border-radius: var(--radius-lg);
+  padding: 16px; /* Reduced from 20px */
+}
+.swap-row {
+  position: relative; padding: 14px; /* Reduced from 16px */
+  background: var(--white); border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius-md); margin-bottom: 8px;
+  transition: border-color var(--t-fast);
+}
 .swap-row:focus-within { border-color: var(--yellow-dark); }
-.swap-label { font-size: 10px; font-weight: 900; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: flex; justify-content: space-between; }
-.swap-input-row { display: flex; align-items: center; gap: 12px; }
-.swap-amount { flex: 1; min-width: 0; border: none; outline: none; background: transparent; font-family: var(--font-mono); font-size: 22px; font-weight: 900; color: var(--dark); padding: 0; direction: ltr; text-align: left; }
+.swap-label {
+  font-size: 10px; font-weight: 900; color: var(--gray);
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 8px; display: flex; justify-content: space-between;
+}
+.swap-input-row { display: flex; align-items: center; gap: 10px; }
+.swap-amount {
+  flex: 1; min-width: 0; border: none; outline: none;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 18px; /* Reduced from 22px */
+  font-weight: 900; color: var(--dark);
+  padding: 0; direction: ltr; text-align: left;
+}
 .swap-amount::placeholder { color: var(--gray); }
-.swap-coin-btn { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: var(--ghost); border: 1.5px solid var(--gray-light); border-radius: var(--radius-full); cursor: pointer; transition: all var(--t-fast); flex-shrink: 0; }
+.swap-coin-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 10px; /* Reduced from 8px 14px */
+  background: var(--ghost); border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius-full); cursor: pointer;
+  transition: all var(--t-fast); flex-shrink: 0;
+}
 .swap-coin-btn:hover { border-color: var(--yellow); background: rgba(246,238,37,0.1); }
-.swap-coin-icon { width: 32px; height: 32px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; background: var(--ghost); }
+.swap-coin-icon {
+  width: 26px; height: 26px; /* Reduced from 32px */
+  border-radius: 50%; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; position: relative; background: var(--ghost);
+}
 .swap-coin-icon img { width: 100%; height: 100%; object-fit: contain; padding: 3px; display: block; }
-.swap-coin-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: white; font-weight: 900; font-size: 11px; }
-.swap-coin-name { font-size: 14px; font-weight: 900; color: var(--dark); }
-.swap-coin-chevron { width: 16px; height: 16px; stroke: var(--dark); fill: none; stroke-width: 2.5; }
+.swap-coin-fallback {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; color: white; font-weight: 900; font-size: 10px;
+}
+.swap-coin-name { font-size: 13px; font-weight: 900; color: var(--dark); }
+.swap-coin-chevron { width: 14px; height: 14px; stroke: var(--dark); fill: none; stroke-width: 2.5; }
 
-.swap-flip-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; border-radius: 50%; background: var(--yellow); border: 3px solid var(--white); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: all var(--t-fast); box-shadow: var(--shadow-sm); margin-top: -20px; }
+.swap-flip-btn {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 34px; height: 34px; /* Reduced from 40px */
+  border-radius: 50%; background: var(--yellow);
+  border: 3px solid var(--white);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 10;
+  transition: all var(--t-fast);
+  box-shadow: var(--shadow-sm); margin-top: -17px;
+}
 .swap-flip-btn:hover { transform: translate(-50%, -50%) rotate(180deg); box-shadow: var(--shadow-yellow); }
-.swap-flip-btn svg { width: 18px; height: 18px; stroke: var(--dark); fill: none; stroke-width: 2.5; }
+.swap-flip-btn svg { width: 16px; height: 16px; stroke: var(--dark); fill: none; stroke-width: 2.5; }
 
-.swap-presets { display: flex; gap: 6px; margin-top: 10px; }
-.swap-preset { flex: 1; padding: 6px; background: var(--ghost); border: 1px solid var(--gray-light); border-radius: 6px; font-size: 10px; font-weight: 800; color: var(--dark); cursor: pointer; transition: all var(--t-fast); font-family: var(--font-display); }
+.swap-presets { display: flex; gap: 5px; margin-top: 8px; }
+.swap-preset {
+  flex: 1; padding: 5px;
+  background: var(--ghost); border: 1px solid var(--gray-light);
+  border-radius: 6px; font-size: 10px; font-weight: 800;
+  color: var(--dark); cursor: pointer; transition: all var(--t-fast);
+  font-family: var(--font-display);
+}
 .swap-preset:hover { background: var(--yellow); border-color: var(--yellow); }
 
-.swap-info { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; padding: 14px; background: var(--white); border-radius: var(--radius-sm); }
-.swap-info-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--dark); font-weight: 700; }
+.swap-info {
+  display: flex; flex-direction: column; gap: 6px;
+  margin-top: 14px; padding: 12px;
+  background: var(--white); border-radius: var(--radius-sm);
+}
+.swap-info-row {
+  display: flex; justify-content: space-between;
+  font-size: 11px; color: var(--dark); font-weight: 700;
+}
 .swap-info-label { color: var(--gray); }
 .swap-info-value { font-family: var(--font-mono); font-weight: 800; direction: ltr; }
 .swap-info-value.up { color: var(--green); }
 .swap-info-value.down { color: var(--red); }
 
-.dex-selector { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; margin-top: 16px; }
-.dex-card { padding: 12px; background: var(--white); border: 1.5px solid var(--gray-light); border-radius: var(--radius-sm); cursor: pointer; transition: all var(--t-fast); text-align: center; }
+.dex-selector {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px; margin-top: 16px;
+}
+.dex-card {
+  padding: 10px; /* Reduced from 12px */
+  background: var(--white); border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius-sm); cursor: pointer;
+  transition: all var(--t-fast); text-align: center;
+}
 .dex-card:hover { border-color: var(--yellow); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-.dex-card.active { border-color: var(--yellow-dark); background: rgba(246,238,37,0.15); box-shadow: 0 0 0 3px rgba(246,238,37,0.25); }
-.dex-name { font-size: 13px; font-weight: 900; color: var(--dark); margin-bottom: 4px; }
-.dex-rate { font-size: 11px; font-weight: 800; color: var(--gray); font-family: var(--font-mono); direction: ltr; }
+.dex-card.active {
+  border-color: var(--yellow-dark); background: rgba(246,238,37,0.15);
+  box-shadow: 0 0 0 3px rgba(246,238,37,0.25);
+}
+.dex-name { font-size: 12px; font-weight: 900; color: var(--dark); margin-bottom: 4px; }
+.dex-rate { font-size: 10px; font-weight: 800; color: var(--gray); font-family: var(--font-mono); direction: ltr; }
 .dex-rate.best { color: var(--green); }
 
-/* History */
+/* ============================================================
+   HISTORY
+   ============================================================ */
 .tx-filters { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-.tx-filter { padding: 8px 14px; background: var(--ghost); border: 1.5px solid var(--gray-light); border-radius: var(--radius-full); font-size: 11px; font-weight: 800; color: var(--dark); cursor: pointer; transition: all var(--t-fast); font-family: var(--font-display); }
+.tx-filter {
+  padding: 8px 14px; background: var(--ghost);
+  border: 1.5px solid var(--gray-light); border-radius: var(--radius-full);
+  font-size: 11px; font-weight: 800; color: var(--dark);
+  cursor: pointer; transition: all var(--t-fast);
+  font-family: var(--font-display);
+}
 .tx-filter.active { background: var(--yellow); border-color: var(--yellow); }
-.tx-item { display: flex; align-items: center; gap: 12px; padding: 14px; border-bottom: 1px solid var(--gray-light); transition: background var(--t-fast); }
+.tx-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px; border-bottom: 1px solid var(--gray-light);
+  transition: background var(--t-fast);
+}
 .tx-item:hover { background: var(--ghost); border-radius: var(--radius-sm); }
 .tx-item:last-child { border-bottom: none; }
-.tx-icon-wrap { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; background: var(--yellow); color: var(--dark); }
+.tx-icon-wrap {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; position: relative;
+  background: var(--yellow); color: var(--dark);
+}
 .tx-icon-wrap.out { background: rgba(220,53,69,0.15); color: var(--red); }
 .tx-icon-wrap.in { background: rgba(22,163,74,0.15); color: var(--green); }
 .tx-icon-wrap.swap { background: rgba(37,99,235,0.15); color: var(--blue); }
 .tx-icon-wrap svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2.5; }
-.tx-coin-badge { position: absolute; bottom: -2px; right: -2px; width: 20px; height: 20px; border-radius: 50%; background: var(--white); padding: 2px; box-shadow: 0 1px 4px rgba(0,0,0,0.15); overflow: hidden; }
+.tx-coin-badge {
+  position: absolute; bottom: -2px; right: -2px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--white); padding: 2px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15); overflow: hidden;
+}
 .tx-coin-badge img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
 .tx-details { flex: 1; min-width: 0; }
 .tx-top { display: flex; justify-content: space-between; margin-bottom: 4px; gap: 8px; }
-.tx-amount { font-weight: 900; font-size: 14px; font-family: var(--font-mono); color: var(--dark); direction: ltr; }
+.tx-amount {
+  font-weight: 900; font-size: 14px;
+  font-family: var(--font-mono); color: var(--dark);
+  direction: ltr;
+}
 .tx-amount.out { color: var(--red); }
 .tx-amount.in { color: var(--green); }
 .tx-time { font-size: 10px; color: var(--gray); font-family: var(--font-mono); font-weight: 600; white-space: nowrap; direction: ltr; }
-.tx-sub { font-size: 11px; color: var(--gray); font-family: var(--font-mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tx-sub {
+  font-size: 11px; color: var(--gray); font-family: var(--font-mono);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 .tx-hash { font-size: 9px; color: var(--gray); font-family: var(--font-mono); margin-top: 2px; }
 
-/* Settings */
-.setting-row { display: flex; align-items: center; justify-content: space-between; padding: 16px; background: var(--white); border: 1px solid var(--gray-light); border-radius: var(--radius-md); margin-bottom: 10px; transition: all var(--t-fast); }
+/* ============================================================
+   SETTINGS
+   ============================================================ */
+.setting-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px; background: var(--white);
+  border: 1px solid var(--gray-light); border-radius: var(--radius-md);
+  margin-bottom: 10px; transition: all var(--t-fast);
+}
 .setting-row:hover { border-color: var(--yellow); box-shadow: var(--shadow-xs); }
 .setting-info { flex: 1; }
 .setting-title { font-size: 14px; font-weight: 900; color: var(--dark); margin-bottom: 4px; }
 .setting-desc { font-size: 11px; color: var(--gray); font-weight: 600; line-height: 1.5; }
-.setting-toggle { position: relative; width: 52px; height: 30px; background: var(--gray-light); border-radius: 999px; cursor: pointer; transition: background var(--t-base); flex-shrink: 0; border: none; padding: 0; }
-.setting-toggle::after { content: ''; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: var(--white); box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: all var(--t-base); }
+.setting-toggle {
+  position: relative; width: 52px; height: 30px;
+  background: var(--gray-light); border-radius: 999px;
+  cursor: pointer; transition: background var(--t-base);
+  flex-shrink: 0; border: none; padding: 0;
+}
+.setting-toggle::after {
+  content: ''; position: absolute; top: 3px; left: 3px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--white); box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: all var(--t-base);
+}
 .setting-toggle.active { background: var(--green); }
 .setting-toggle.active::after { left: calc(100% - 27px); }
 
-/* Modals */
-.modal { position: fixed; inset: 0; background: rgba(70,70,80,0.55); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; visibility: hidden; transition: opacity var(--t-base), visibility var(--t-base); }
+/* ============================================================
+   MODALS
+   ============================================================ */
+.modal {
+  position: fixed; inset: 0;
+  background: rgba(70,70,80,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000; display: flex; align-items: center; justify-content: center;
+  padding: 20px; opacity: 0; visibility: hidden;
+  transition: opacity var(--t-base), visibility var(--t-base);
+}
 .modal.active { opacity: 1; visibility: visible; }
-.modal-content { background: var(--white); border-radius: var(--radius-xl); max-width: 540px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 28px; box-shadow: var(--shadow-xl); animation: modalSlide 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); scrollbar-width: thin; }
+.modal-content {
+  background: var(--white); border-radius: var(--radius-xl);
+  max-width: 540px; width: 100%;
+  max-height: 90vh; overflow-y: auto; padding: 28px;
+  box-shadow: var(--shadow-xl);
+  animation: modalSlide 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  scrollbar-width: thin;
+}
 @keyframes modalSlide { from { opacity: 0; transform: translateY(24px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-light); }
-.modal-title { font-size: 18px; font-weight: 900; color: var(--dark); letter-spacing: -0.3px; display: flex; align-items: center; gap: 10px; }
+.modal-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 20px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--gray-light);
+}
+.modal-title {
+  font-size: 18px; font-weight: 900; color: var(--dark);
+  letter-spacing: -0.3px; display: flex; align-items: center; gap: 10px;
+}
 .modal-title-icon { width: 24px; height: 24px; stroke: var(--yellow-dark); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-.modal-close { width: 32px; height: 32px; border-radius: 50%; background: var(--ghost); border: none; color: var(--dark); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all var(--t-fast); line-height: 1; }
+.modal-close {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--ghost); border: none; color: var(--dark);
+  font-size: 20px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--t-fast); line-height: 1;
+}
 .modal-close:hover { background: var(--red); color: white; transform: rotate(90deg); }
 
-/* Coin grid */
+/* Coin picker */
 .coin-search { position: relative; margin-bottom: 16px; }
-.coin-search input { width: 100%; padding: 12px 44px 12px 16px; background: var(--ghost); border: 1.5px solid var(--gray-light); border-radius: var(--radius-md); font-family: var(--font-display); font-size: 13px; outline: none; transition: all var(--t-fast); font-weight: 600; }
+.coin-search input {
+  width: 100%; padding: 12px 44px 12px 16px;
+  background: var(--ghost); border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius-md);
+  font-family: var(--font-display); font-size: 13px;
+  outline: none; transition: all var(--t-fast); font-weight: 600;
+}
 .coin-search input:focus { border-color: var(--yellow-dark); background: var(--white); }
-.coin-search svg { position: absolute; top: 50%; right: 14px; transform: translateY(-50%); width: 18px; height: 18px; stroke: var(--gray); fill: none; stroke-width: 2.5; }
-.coin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; max-height: 400px; overflow-y: auto; padding: 4px; }
-.coin-card { padding: 12px 8px; background: var(--white); border: 1.5px solid var(--gray-light); border-radius: var(--radius-md); cursor: pointer; transition: all var(--t-fast); display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.coin-search svg {
+  position: absolute; top: 50%; right: 14px; transform: translateY(-50%);
+  width: 18px; height: 18px; stroke: var(--gray); fill: none; stroke-width: 2.5;
+}
+.coin-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px; max-height: 400px; overflow-y: auto; padding: 4px;
+}
+.coin-card {
+  padding: 12px 8px; background: var(--white);
+  border: 1.5px solid var(--gray-light); border-radius: var(--radius-md);
+  cursor: pointer; transition: all var(--t-fast);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 6px;
+}
 .coin-card:hover { border-color: var(--yellow); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.coin-card-icon { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; background: var(--ghost); }
+.coin-card-icon {
+  width: 48px; height: 48px; border-radius: 50%;
+  overflow: hidden; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ghost);
+}
 .coin-card-icon img { width: 100%; height: 100%; object-fit: contain; padding: 6px; display: block; }
-.coin-card-icon-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: white; font-weight: 900; font-size: 16px; }
+.coin-card-icon-fallback {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; color: white; font-weight: 900; font-size: 16px;
+}
 .coin-card-name { font-size: 11px; font-weight: 900; color: var(--dark); letter-spacing: 0.3px; }
 .coin-card-chain { font-size: 9px; color: var(--gray); font-weight: 700; text-transform: uppercase; }
 
-/* Wallet details */
-.wallet-detail-header { display: flex; align-items: center; gap: 14px; padding: 16px; background: var(--ghost); border-radius: var(--radius-md); margin-bottom: 18px; }
-.wallet-detail-icon { width: 60px; height: 60px; border-radius: 50%; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--ghost); }
+/* Wallet Details */
+.wallet-detail-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px; background: var(--ghost);
+  border-radius: var(--radius-md); margin-bottom: 18px;
+}
+.wallet-detail-icon {
+  width: 60px; height: 60px; border-radius: 50%;
+  overflow: hidden; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; background: var(--ghost);
+}
 .wallet-detail-icon img { width: 100%; height: 100%; object-fit: contain; padding: 8px; display: block; }
-.wallet-detail-icon-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: white; font-weight: 900; font-size: 20px; }
+.wallet-detail-icon-fallback {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; color: white; font-weight: 900; font-size: 20px;
+}
 .wallet-detail-info { flex: 1; min-width: 0; }
 .wallet-detail-name { font-size: 16px; font-weight: 900; color: var(--dark); margin-bottom: 2px; }
 .wallet-detail-balance { font-size: 20px; font-weight: 900; color: var(--dark); font-family: var(--font-mono); direction: ltr; }
 .wallet-detail-usd { font-size: 12px; color: var(--gray); margin-top: 2px; font-weight: 700; }
 
-.wallet-account { padding: 14px; background: var(--white); border: 1px solid var(--gray-light); border-radius: var(--radius-md); margin-bottom: 10px; transition: all var(--t-fast); }
+.wallet-account {
+  padding: 14px; background: var(--white);
+  border: 1px solid var(--gray-light); border-radius: var(--radius-md);
+  margin-bottom: 10px; transition: all var(--t-fast);
+}
 .wallet-account:hover { border-color: var(--yellow); box-shadow: var(--shadow-sm); }
-.wallet-account-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 10px; }
+.wallet-account-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px; gap: 10px;
+}
 .wallet-account-name { font-size: 13px; font-weight: 900; color: var(--dark); display: flex; align-items: center; gap: 8px; }
-.wallet-account-label { font-size: 10px; padding: 2px 8px; background: var(--yellow); border-radius: var(--radius-full); color: var(--dark); font-weight: 800; font-family: var(--font-mono); }
+.wallet-account-label {
+  font-size: 10px; padding: 2px 8px;
+  background: var(--yellow); border-radius: var(--radius-full);
+  color: var(--dark); font-weight: 800; font-family: var(--font-mono);
+}
 .wallet-account-balance { font-size: 14px; font-weight: 900; color: var(--dark); font-family: var(--font-mono); direction: ltr; }
-.wallet-address-row { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--ghost); border-radius: 6px; margin-bottom: 8px; font-family: var(--font-mono); font-size: 10px; color: var(--dark); word-break: break-all; cursor: pointer; transition: all var(--t-fast); font-weight: 600; }
+.wallet-address-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 10px; background: var(--ghost);
+  border-radius: 6px; margin-bottom: 8px;
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--dark); word-break: break-all;
+  cursor: pointer; transition: all var(--t-fast); font-weight: 600;
+}
 .wallet-address-row:hover { background: rgba(246,238,37,0.15); }
 .wallet-address-row svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.5; flex-shrink: 0; }
 .wallet-account-actions { display: flex; gap: 6px; margin-top: 10px; }
-.wallet-account-action { flex: 1; padding: 10px 6px; background: var(--white); border: 1px solid var(--gray-light); border-radius: 6px; font-family: var(--font-display); font-size: 10px; font-weight: 800; color: var(--dark); cursor: pointer; transition: all var(--t-fast); display: flex; align-items: center; justify-content: center; gap: 4px; }
+.wallet-account-action {
+  flex: 1; padding: 10px 6px; background: var(--white);
+  border: 1px solid var(--gray-light); border-radius: 6px;
+  font-family: var(--font-display); font-size: 10px; font-weight: 800;
+  color: var(--dark); cursor: pointer; transition: all var(--t-fast);
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+}
 .wallet-account-action:hover { border-color: var(--yellow); background: rgba(246,238,37,0.1); }
 .wallet-account-action.primary { background: var(--yellow); border-color: var(--yellow-dark); font-weight: 900; }
 .wallet-account-action.primary:hover { background: var(--yellow-dark); }
@@ -594,22 +1027,65 @@ body {
 .wallet-account-action svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
 /* QR */
-.qr-container { background: linear-gradient(180deg, var(--white) 0%, var(--ghost) 100%); padding: 22px; border-radius: var(--radius-lg); border: 2px dashed var(--gray-light); text-align: center; margin: 18px 0; }
-.qr-canvas-wrap { width: 260px; height: 260px; margin: 0 auto 16px; background: var(--white); border-radius: var(--radius-md); overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; box-shadow: var(--shadow-md); padding: 10px; }
+.qr-container {
+  background: linear-gradient(180deg, var(--white) 0%, var(--ghost) 100%);
+  padding: 22px; border-radius: var(--radius-lg);
+  border: 2px dashed var(--gray-light); text-align: center; margin: 18px 0;
+}
+.qr-canvas-wrap {
+  width: 260px; height: 260px; margin: 0 auto 16px;
+  background: var(--white); border-radius: var(--radius-md);
+  overflow: hidden; display: flex;
+  align-items: center; justify-content: center;
+  position: relative; box-shadow: var(--shadow-md); padding: 10px;
+}
 .qr-canvas-wrap canvas { width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
-.qr-logo-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 54px; height: 54px; border-radius: 50%; background: var(--white); padding: 6px; box-shadow: 0 2px 8px rgba(70,70,80,0.2); display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.qr-logo-overlay {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 54px; height: 54px; border-radius: 50%;
+  background: var(--white); padding: 6px;
+  box-shadow: 0 2px 8px rgba(70,70,80,0.2);
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
 .qr-logo-overlay img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
 
 /* Secret */
-.secret-reveal { padding: 14px; background: rgba(220,53,69,0.04); border: 1px solid rgba(220,53,69,0.2); border-radius: var(--radius-sm); margin-top: 10px; font-family: var(--font-mono); font-size: 11px; color: var(--dark); word-break: break-all; line-height: 1.6; font-weight: 600; }
-.secret-label { font-size: 9px; color: var(--red); font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.secret-reveal {
+  padding: 14px; background: rgba(220,53,69,0.04);
+  border: 1px solid rgba(220,53,69,0.2); border-radius: var(--radius-sm);
+  margin-top: 10px; font-family: var(--font-mono);
+  font-size: 11px; color: var(--dark);
+  word-break: break-all; line-height: 1.6; font-weight: 600;
+}
+.secret-label {
+  font-size: 9px; color: var(--red); font-weight: 900;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 6px; display: flex; align-items: center; gap: 6px;
+}
 
 /* Phone */
 .phone-input-wrap { display: flex; gap: 8px; margin-bottom: 12px; }
-.country-select { width: 130px; flex-shrink: 0; padding: 13px 12px; background: var(--white); border: 1.5px solid var(--gray-light); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 12px; font-weight: 800; color: var(--dark); cursor: pointer; outline: none; }
-.phone-tx-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-bottom: 1px solid var(--gray-light); transition: background var(--t-fast); }
+.country-select {
+  width: 130px; flex-shrink: 0; padding: 13px 12px;
+  background: var(--white); border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono); font-size: 12px; font-weight: 800;
+  color: var(--dark); cursor: pointer; outline: none;
+}
+.phone-tx-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px; border-bottom: 1px solid var(--gray-light);
+  transition: background var(--t-fast);
+}
 .phone-tx-item:hover { background: var(--ghost); }
-.phone-tx-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--yellow); color: var(--dark); font-weight: 900; font-size: 11px; }
+.phone-tx-icon {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; background: var(--yellow);
+  color: var(--dark); font-weight: 900; font-size: 11px;
+}
 .phone-tx-details { flex: 1; min-width: 0; }
 .phone-tx-top { display: flex; justify-content: space-between; margin-bottom: 3px; }
 .phone-tx-coin { font-weight: 900; font-size: 12px; color: var(--dark); }
@@ -617,10 +1093,18 @@ body {
 .phone-tx-sub { font-size: 10px; color: var(--gray); font-family: var(--font-mono); font-weight: 600; }
 
 /* Audit log */
-.audit-log { height: 240px; overflow-y: auto; background: var(--ghost); border: 1px solid var(--gray-light); border-radius: var(--radius-sm); padding: 12px 14px; font-size: 11px; line-height: 1.7; font-family: var(--font-mono); }
+.audit-log {
+  height: 240px; overflow-y: auto; background: var(--ghost);
+  border: 1px solid var(--gray-light); border-radius: var(--radius-sm);
+  padding: 12px 14px; font-size: 11px; line-height: 1.7;
+  font-family: var(--font-mono);
+}
 .audit-log::-webkit-scrollbar { width: 5px; }
 .audit-log::-webkit-scrollbar-thumb { background: var(--gray-light); border-radius: 3px; }
-.log-entry { padding: 5px 0; border-bottom: 1px solid rgba(70,70,80,0.05); color: var(--dark); animation: logSlide 0.3s; }
+.log-entry {
+  padding: 5px 0; border-bottom: 1px solid rgba(70,70,80,0.05);
+  color: var(--dark); animation: logSlide 0.3s;
+}
 .log-entry:last-child { border-bottom: none; }
 .log-entry.success { color: var(--green); font-weight: 700; }
 .log-entry.error { color: var(--red); font-weight: 700; }
@@ -629,8 +1113,20 @@ body {
 @keyframes logSlide { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
 
 /* Toast */
-.toast-container { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; max-width: 90vw; }
-.toast { padding: 14px 22px; background: var(--white); border: 1px solid var(--gray-light); border-radius: var(--radius-md); font-size: 13px; color: var(--dark); font-weight: 700; box-shadow: var(--shadow-lg); animation: toastIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: auto; max-width: 420px; display: flex; align-items: center; gap: 10px; }
+.toast-container {
+  position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
+  z-index: 9999; display: flex; flex-direction: column; gap: 10px;
+  pointer-events: none; max-width: 90vw;
+}
+.toast {
+  padding: 14px 22px; background: var(--white);
+  border: 1px solid var(--gray-light); border-radius: var(--radius-md);
+  font-size: 13px; color: var(--dark); font-weight: 700;
+  box-shadow: var(--shadow-lg);
+  animation: toastIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: auto; max-width: 420px;
+  display: flex; align-items: center; gap: 10px;
+}
 .toast.success { border-right: 3px solid var(--green); }
 .toast.error { border-right: 3px solid var(--red); }
 .toast.warn { border-right: 3px solid var(--amber); }
@@ -644,36 +1140,86 @@ body {
 .empty-state-text { font-size: 12px; font-weight: 600; }
 
 /* Footer */
-.footer { text-align: center; padding: 28px 24px; color: var(--gray); font-size: 10px; letter-spacing: 1.5px; border-top: 1px solid var(--gray-light); margin-top: 48px; font-weight: 800; text-transform: uppercase; }
-.footer-brand { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; color: var(--dark); font-weight: 900; font-size: 11px; letter-spacing: 2px; }
+.footer {
+  text-align: center; padding: 28px 24px;
+  color: var(--gray); font-size: 10px; letter-spacing: 1.5px;
+  border-top: 1px solid var(--gray-light); margin-top: 48px;
+  font-weight: 800; text-transform: uppercase;
+}
+.footer-brand {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; margin-bottom: 8px;
+  color: var(--dark); font-weight: 900;
+  font-size: 11px; letter-spacing: 2px;
+}
 
 .hidden-file-input { display: none; }
 
+/* ============================================================
+   RESPONSIVE — MOBILE FIRST
+   ============================================================ */
 @media (max-width: 700px) {
   .header-inner { padding: 10px 16px; }
   .container { padding: 16px; }
   .login-card { padding: 32px 22px 26px; }
-  .face-scanner-wrap { width: 280px; height: 280px; }
-  .guide-avatar { width: 160px; height: 160px; }
+  .face-scanner-wrap { width: 260px; height: 260px; }
+  .guide-avatar { width: 150px; height: 150px; }
   .login-title { font-size: 22px; }
   .brand-name { font-size: 14px; }
   .brand-tagline { display: none; }
   .panel { padding: 18px; }
   .profile-header { flex-direction: column; text-align: center; padding: 20px; }
   .profile-actions { width: 100%; flex-direction: row; }
+  .profile-actions .profile-action-btn { flex: 1; justify-content: center; }
   .toast-container { left: 16px; right: 16px; transform: none; max-width: none; }
   .coin-grid { grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); }
   .phone-input-wrap { flex-direction: column; }
   .country-select { width: 100%; }
   .header-username { max-width: 80px; }
   .qr-canvas-wrap { width: 220px; height: 220px; }
-  .swap-amount { font-size: 18px; }
+  /* Swap mobile fixes */
+  .swap-amount { font-size: 16px; }
+  .swap-row { padding: 12px; }
+  .swap-coin-name { font-size: 12px; }
+  .swap-coin-icon { width: 24px; height: 24px; }
+  .swap-coin-btn { padding: 5px 8px; }
+  .swap-flip-btn { width: 30px; height: 30px; margin-top: -15px; }
+  .swap-flip-btn svg { width: 14px; height: 14px; }
+  .dex-selector { grid-template-columns: repeat(2, 1fr); }
+  .status-bar { padding: 12px 14px; }
+  .status-item { font-size: 10px; }
+  .status-badge { padding: 4px 8px; font-size: 10px; }
+  .tabs-nav { padding: 3px; }
+  .tab-btn { padding: 8px 12px; font-size: 11px; }
+  .tx-time { font-size: 9px; }
 }
+
+@media (max-width: 400px) {
+  .face-scanner-wrap { width: 230px; height: 230px; }
+  .login-title { font-size: 20px; }
+  .login-subtitle { font-size: 11px; }
+  .profile-actions { flex-direction: column; }
+  .swap-amount { font-size: 15px; }
+}
+
+@media (min-width: 1200px) {
+  /* Larger layout for desktop */
+  .container { padding: 32px; }
+  .panel { padding: 26px; }
+  .swap-amount { font-size: 20px; }
+}
+
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
+
 *:focus-visible { outline: 2px solid var(--yellow-dark); outline-offset: 3px; border-radius: 4px; }
 
+/* RTL */
 [dir="rtl"] .swap-info-value, [dir="rtl"] .tx-amount, [dir="rtl"] .wallet-balance,
 [dir="rtl"] .wallet-detail-balance, [dir="rtl"] .swap-amount, [dir="rtl"] .dex-rate,
 [dir="rtl"] .ticker-price, [dir="rtl"] .phone-tx-amount, [dir="rtl"] .wallet-account-balance,
@@ -683,7 +1229,7 @@ body {
 <body>
 
 <div class="loading-overlay" id="loading-overlay">
-  <img src="images/cash.png" alt="CASH" class="loading-coin" id="loading-coin" onerror="this.classList.add('no-img')">
+  <img src="https://cofc.io/images/cash.png" alt="CASH" class="loading-coin" id="loading-coin" onerror="this.classList.add('no-img')">
   <div class="loading-coin-fallback">₡</div>
   <div class="loading-title" data-i18n="app_name">COFC GATE</div>
   <div class="loading-subtitle" data-i18n="loading_subtitle">Sovereign Vault</div>
@@ -695,7 +1241,7 @@ body {
   <div class="header-inner">
     <div class="brand" onclick="location.reload()">
       <div class="brand-logo-wrap" id="brand-logo-wrap">
-        <img src="images/cofc.png" alt="COFC" class="brand-logo-img" onerror="document.getElementById('brand-logo-wrap').classList.add('no-img')">
+        <img src="https://cofc.io/images/cofc.png" alt="COFC" class="brand-logo-img" onerror="document.getElementById('brand-logo-wrap').classList.add('no-img')">
         <div class="brand-logo-fallback">C</div>
       </div>
       <div class="brand-text">
@@ -709,8 +1255,7 @@ body {
         <div class="header-avatar-fallback" id="header-avatar-fallback">U</div>
         <span class="header-username" id="header-username">@user</span>
         <svg class="header-verified" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2l3 3h4v4l3 3-3 3v4h-4l-3 3-3-3H6v-4l-3-3 3-3V5h4z"/>
-          <path d="M9 12l2 2 4-4"/>
+          <path d="M12 2l3 3h4v4l3 3-3 3v4h-4l-3 3-3-3H6v-4l-3-3 3-3V5h4z"/><path d="M9 12l2 2 4-4"/>
         </svg>
       </div>
       <div class="status-indicator">
@@ -725,9 +1270,7 @@ body {
 
 <div id="login-screen">
   <div class="login-card">
-    <div class="login-badge">
-      <span data-i18n="login_badge">🔐 Biometric Authentication</span>
-    </div>
+    <div class="login-badge"><span data-i18n="login_badge">🔐 Biometric Authentication</span></div>
     <h1 class="login-title" data-i18n="login_title">Face Recognition</h1>
     <p class="login-subtitle" data-i18n="login_subtitle">Liveness detection with anti-spoofing protection</p>
 
@@ -770,7 +1313,6 @@ body {
           <div class="corner-bracket bl"></div><div class="corner-bracket br"></div>
         </div>
       </div>
-      
       <div class="instruction-chips">
         <div class="instruction-chip" id="chip-blink" data-step="blink">
           <svg class="instruction-chip-icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -908,7 +1450,7 @@ body {
             <div class="swap-label"><span data-i18n="from">From</span><span id="from-balance">0</span></div>
             <div class="swap-input-row">
               <input type="number" class="swap-amount" id="swap-from-amount" placeholder="0.00" min="0" step="any" autocomplete="off">
-              <button class="swap-coin-btn" onclick="Swap.openCoinPicker('from')">
+              <button class="swap-coin-btn" onclick="Swap.openPicker('from')">
                 <div class="swap-coin-icon" id="swap-from-icon"></div>
                 <span class="swap-coin-name" id="swap-from-symbol">CASH</span>
                 <svg class="swap-coin-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
@@ -928,7 +1470,7 @@ body {
             <div class="swap-label"><span data-i18n="to">To</span><span id="to-balance">0</span></div>
             <div class="swap-input-row">
               <input type="number" class="swap-amount" id="swap-to-amount" placeholder="0.00" min="0" step="any" autocomplete="off" readonly>
-              <button class="swap-coin-btn" onclick="Swap.openCoinPicker('to')">
+              <button class="swap-coin-btn" onclick="Swap.openPicker('to')">
                 <div class="swap-coin-icon" id="swap-to-icon"></div>
                 <span class="swap-coin-name" id="swap-to-symbol">BTC</span>
                 <svg class="swap-coin-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
@@ -942,7 +1484,7 @@ body {
           <div class="swap-info-row"><span class="swap-info-label" data-i18n="slippage">Slippage</span><span class="swap-info-value" id="swap-slippage">0.5%</span></div>
           <div class="swap-info-row"><span class="swap-info-label" data-i18n="you_receive">You Receive</span><span class="swap-info-value up" id="swap-receive">-</span></div>
         </div>
-        <button class="btn btn-yellow" id="btn-swap-execute" style="margin-top: 16px;">
+        <button class="btn btn-yellow" id="btn-swap-execute" style="margin-top: 14px;">
           <svg class="btn-icon" viewBox="0 0 24 24"><path d="M7 16V4M7 4L3 8M7 4l4 4M17 8v12M17 20l4-4M17 20l-4-4"/></svg>
           <span class="btn-label" data-i18n="execute_swap">Execute Swap</span>
           <span class="btn-spinner"></span>
@@ -1064,13 +1606,11 @@ body {
   <div data-i18n="footer_text">SOVEREIGN APEX VAULT · © 2026 ALL RIGHTS RESERVED</div>
 </footer>
 
+<!-- Modals -->
 <div class="modal" id="modal-add-coin">
   <div class="modal-content">
     <div class="modal-header">
-      <div class="modal-title">
-        <svg class="modal-title-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        <span data-i18n="choose_coin">Choose Coin</span>
-      </div>
+      <div class="modal-title"><svg class="modal-title-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span data-i18n="choose_coin">Choose Coin</span></div>
       <button class="modal-close" onclick="UI.closeModal('modal-add-coin')">&times;</button>
     </div>
     <div class="coin-search">
@@ -1084,10 +1624,7 @@ body {
 <div class="modal" id="modal-coin-picker">
   <div class="modal-content">
     <div class="modal-header">
-      <div class="modal-title">
-        <svg class="modal-title-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        <span data-i18n="select_coin">Select Coin</span>
-      </div>
+      <div class="modal-title"><svg class="modal-title-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span data-i18n="select_coin">Select Coin</span></div>
       <button class="modal-close" onclick="UI.closeModal('modal-coin-picker')">&times;</button>
     </div>
     <div class="coin-search">
@@ -1135,10 +1672,7 @@ body {
 <div class="modal" id="modal-receive">
   <div class="modal-content">
     <div class="modal-header">
-      <div class="modal-title">
-        <svg class="modal-title-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/></svg>
-        <span data-i18n="receive_title">Receive</span>
-      </div>
+      <div class="modal-title"><svg class="modal-title-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/></svg><span data-i18n="receive_title">Receive</span></div>
       <button class="modal-close" onclick="UI.closeModal('modal-receive')">&times;</button>
     </div>
     <div class="wallet-detail-header">
@@ -1152,7 +1686,7 @@ body {
       <div class="qr-canvas-wrap">
         <canvas id="qr-canvas" width="256" height="256"></canvas>
         <div class="qr-logo-overlay" id="qr-logo-overlay">
-          <img src="images/cash.png" alt="COFC" onerror="this.style.display='none'">
+          <img src="https://cofc.io/images/cash.png" alt="COFC" onerror="this.style.display='none'">
         </div>
       </div>
       <button class="btn btn-outline btn-sm" onclick="QR.download()" style="width: auto; margin: 0 auto;">
@@ -1170,10 +1704,7 @@ body {
 <div class="modal" id="modal-reveal-secret">
   <div class="modal-content">
     <div class="modal-header">
-      <div class="modal-title">
-        <svg class="modal-title-icon" viewBox="0 0 24 24" style="stroke: var(--red);"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
-        <span data-i18n="reveal_secret">Reveal Wallet Secrets</span>
-      </div>
+      <div class="modal-title"><svg class="modal-title-icon" viewBox="0 0 24 24" style="stroke: var(--red);"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg><span data-i18n="reveal_secret">Reveal Wallet Secrets</span></div>
       <button class="modal-close" onclick="UI.closeModal('modal-reveal-secret')">&times;</button>
     </div>
     <div style="background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.2); border-radius: var(--radius-md); padding: 14px; margin-bottom: 18px;">
@@ -1188,10 +1719,7 @@ body {
 <div class="modal" id="modal-profile-edit">
   <div class="modal-content">
     <div class="modal-header">
-      <div class="modal-title">
-        <svg class="modal-title-icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-        <span data-i18n="edit_profile">Edit Profile</span>
-      </div>
+      <div class="modal-title"><svg class="modal-title-icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><span data-i18n="edit_profile">Edit Profile</span></div>
       <button class="modal-close" onclick="UI.closeModal('modal-profile-edit')">&times;</button>
     </div>
     <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 24px;">
@@ -1232,38 +1760,23 @@ body {
 <div class="modal" id="modal-settings">
   <div class="modal-content">
     <div class="modal-header">
-      <div class="modal-title">
-        <svg class="modal-title-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-        <span data-i18n="settings_title">Security Settings</span>
-      </div>
+      <div class="modal-title"><svg class="modal-title-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg><span data-i18n="settings_title">Security Settings</span></div>
       <button class="modal-close" onclick="UI.closeModal('modal-settings')">&times;</button>
     </div>
     <div class="setting-row">
-      <div class="setting-info">
-        <div class="setting-title" data-i18n="setting_fingerprint">Fingerprint 2FA</div>
-        <div class="setting-desc" data-i18n="setting_fingerprint_desc">Require fingerprint verification for every transaction</div>
-      </div>
+      <div class="setting-info"><div class="setting-title" data-i18n="setting_fingerprint">Fingerprint 2FA</div><div class="setting-desc" data-i18n="setting_fingerprint_desc">Require fingerprint verification for every transaction</div></div>
       <button class="setting-toggle" id="toggle-fingerprint-2fa" onclick="Settings.toggleFingerprint2FA()"></button>
     </div>
     <div class="setting-row">
-      <div class="setting-info">
-        <div class="setting-title" data-i18n="setting_biometric">Biometric Login</div>
-        <div class="setting-desc" data-i18n="setting_biometric_desc">Use face + passkey for login</div>
-      </div>
+      <div class="setting-info"><div class="setting-title" data-i18n="setting_biometric">Biometric Login</div><div class="setting-desc" data-i18n="setting_biometric_desc">Use face + passkey for login</div></div>
       <button class="setting-toggle active" id="toggle-biometric-login" onclick="Settings.toggleBiometricLogin()"></button>
     </div>
     <div class="setting-row">
-      <div class="setting-info">
-        <div class="setting-title" data-i18n="setting_clipboard">Auto-Clear Clipboard</div>
-        <div class="setting-desc" data-i18n="setting_clipboard_desc">Clear copied secrets after 30 seconds</div>
-      </div>
+      <div class="setting-info"><div class="setting-title" data-i18n="setting_clipboard">Auto-Clear Clipboard</div><div class="setting-desc" data-i18n="setting_clipboard_desc">Clear copied secrets after 30 seconds</div></div>
       <button class="setting-toggle active" id="toggle-clipboard" onclick="Settings.toggleClipboard()"></button>
     </div>
     <div class="setting-row">
-      <div class="setting-info">
-        <div class="setting-title" data-i18n="setting_autolock">Auto-Lock (3 min)</div>
-        <div class="setting-desc" data-i18n="setting_autolock_desc">Lock the vault after 3 minutes of inactivity</div>
-      </div>
+      <div class="setting-info"><div class="setting-title" data-i18n="setting_autolock">Auto-Lock (3 min)</div><div class="setting-desc" data-i18n="setting_autolock_desc">Lock the vault after 3 minutes of inactivity</div></div>
       <button class="setting-toggle active" id="toggle-autolock" onclick="Settings.toggleAutoLock()"></button>
     </div>
     <button class="btn btn-danger btn-sm" onclick="Settings.wipeAllData()" style="margin-top: 20px;">
@@ -1276,10 +1789,7 @@ body {
 <div class="modal" id="modal-2fa">
   <div class="modal-content" style="max-width: 420px;">
     <div class="modal-header">
-      <div class="modal-title">
-        <svg class="modal-title-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span data-i18n="2fa_title">2FA Verification</span>
-      </div>
+      <div class="modal-title"><svg class="modal-title-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span data-i18n="2fa_title">2FA Verification</span></div>
     </div>
     <div style="text-align: center; padding: 20px 0;">
       <div style="width: 96px; height: 96px; border-radius: 50%; background: linear-gradient(135deg, var(--yellow), var(--yellow-dark)); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-yellow);">
@@ -1302,19 +1812,18 @@ body {
 
 <script>
 /* ============================================================
-   COFC GATE v11.0 — ULTIMATE PRODUCTION RELEASE
-   Triple-Lock Security · TrustWallet Logos · Blazing Fast
+   COFC GATE v12.0 — APEX ULTIMATE
+   All QA Fixed · Responsive · Direct CDN · Triple-Lock
    ============================================================ */
 (function() {
 'use strict';
 
-const DIAG = { enabled: false, log(){}, warn(){}, error(...a) { console.error('[COFC]', ...a); } };
-
+const DIAG = { enabled:false, log(){}, warn(){}, error(...a) { console.error('[COFC]', ...a); } };
 window.addEventListener('error', (e) => DIAG.error('Uncaught:', e.message));
 window.addEventListener('unhandledrejection', (e) => DIAG.error('Rejection:', e.reason));
 
 /* ============================================================
-   I18N — Auto-detect only
+   I18N
    ============================================================ */
 const I18N = {
   translations: {
@@ -1391,68 +1900,28 @@ const I18N = {
       scan_camera_error:'מצלמה לא זמינה', insufficient_balance:'יתרה לא מספקת',
       invalid_amount:'כמות לא תקינה', sent_success:'נשלח בהצלחה', copied:'הועתק',
       no_transfers:'לא נמצאו העברות', swap_success:'ההמרה הושלמה', dex_best:'שער הטוב ביותר'
-    },
-    ar: { app_name:'COFC GATE', secure:'آمن', login_title:'التعرف على الوجه', chip_blink:'ارمش', chip_turn:'استدر', chip_smile:'ابتسم',
-      tab_wallets:'المحافظ', tab_swap:'مبادلة', tab_send:'إرسال', tab_history:'السجل', tab_lookup:'بحث',
-      send_btn:'إرسال', cancel:'إلغاء', close:'إغلاق', settings:'الإعدادات', edit_profile:'الملف' },
-    es: { app_name:'COFC GATE', secure:'SEGURO', login_title:'Reconocimiento Facial', chip_blink:'Parpadear',
-      chip_turn:'Girar', chip_smile:'Sonreír', tab_wallets:'Carteras', tab_swap:'Intercambio', tab_send:'Enviar',
-      tab_history:'Historial', tab_lookup:'Buscar', send_btn:'Enviar', cancel:'Cancelar', close:'Cerrar',
-      settings:'Ajustes', edit_profile:'Perfil' },
-    fr: { app_name:'COFC GATE', secure:'SÉCURISÉ', login_title:'Reconnaissance Faciale', chip_blink:'Cligner',
-      chip_turn:'Tourner', chip_smile:'Sourire', tab_wallets:'Portefeuilles', tab_swap:'Échange', tab_send:'Envoyer',
-      tab_history:'Historique', tab_lookup:'Rechercher', send_btn:'Envoyer', cancel:'Annuler', close:'Fermer',
-      settings:'Paramètres', edit_profile:'Profil' },
-    de: { app_name:'COFC GATE', secure:'SICHER', login_title:'Gesichtserkennung', chip_blink:'Blinzeln',
-      chip_turn:'Drehen', chip_smile:'Lächeln', tab_wallets:'Geldbörsen', tab_swap:'Tauschen', tab_send:'Senden',
-      tab_history:'Verlauf', tab_lookup:'Suchen', send_btn:'Senden', cancel:'Abbrechen', close:'Schließen',
-      settings:'Einstellungen', edit_profile:'Profil' },
-    ru: { app_name:'COFC GATE', secure:'ЗАЩИЩЕНО', login_title:'Распознавание Лица', chip_blink:'Моргнуть',
-      chip_turn:'Повернуть', chip_smile:'Улыбнуться', tab_wallets:'Кошельки', tab_swap:'Обмен', tab_send:'Отправить',
-      tab_history:'История', tab_lookup:'Поиск', send_btn:'Отправить', cancel:'Отмена', close:'Закрыть',
-      settings:'Настройки', edit_profile:'Профиль' },
-    zh: { app_name:'COFC GATE', secure:'安全', login_title:'人脸识别', chip_blink:'眨眼', chip_turn:'转头', chip_smile:'微笑',
-      tab_wallets:'钱包', tab_swap:'兑换', tab_send:'发送', tab_history:'历史', tab_lookup:'查询',
-      send_btn:'发送', cancel:'取消', close:'关闭', settings:'设置', edit_profile:'个人资料' },
-    ja: { app_name:'COFC GATE', secure:'安全', login_title:'顔認識', chip_blink:'まばたき', chip_turn:'振り向く', chip_smile:'笑顔',
-      tab_wallets:'ウォレット', tab_swap:'交換', tab_send:'送信', tab_history:'履歴', tab_lookup:'検索',
-      send_btn:'送信', cancel:'キャンセル', close:'閉じる', settings:'設定', edit_profile:'プロフィール' },
-    hi: { app_name:'COFC GATE', secure:'सुरक्षित', login_title:'चेहरा पहचान', chip_blink:'पलक झपकाएं',
-      chip_turn:'मुड़ें', chip_smile:'मुस्कुराएं', tab_wallets:'वॉलेट', tab_swap:'स्वैप', tab_send:'भेजें',
-      tab_history:'इतिहास', tab_lookup:'खोज', send_btn:'भेजें', cancel:'रद्द', close:'बंद', settings:'सेटिंग्स', edit_profile:'प्रोफाइल' }
-  },
-  current: 'en',
-  t(key) { const d = this.translations[this.current] || this.translations.en; return d[key] || this.translations.en[key] || key; },
-  detect() {
-    let saved = null;
-    try { saved = localStorage.getItem('cofc_v11_lang'); } catch(e){}
-    if (saved && this.translations[saved]) return saved;
-    const navLang = (navigator.language || '').split('-')[0].toLowerCase();
-    if (this.translations[navLang]) return navLang;
-    if (navigator.languages) {
-      for (const l of navigator.languages) {
-        const c = l.split('-')[0].toLowerCase();
-        if (this.translations[c]) return c;
-      }
     }
-    try {
-      const loc = Intl.DateTimeFormat().resolvedOptions().locale;
-      const c = loc.split('-')[0].toLowerCase();
-      if (this.translations[c]) return c;
-    } catch(e){}
+  },
+  current:'en',
+  t(k) { const d = this.translations[this.current] || this.translations.en; return d[k] || this.translations.en[k] || k; },
+  detect() {
+    let s = null; try { s = localStorage.getItem('cofc_v12_lang'); } catch(e){}
+    if (s && this.translations[s]) return s;
+    const n = (navigator.language || '').split('-')[0].toLowerCase();
+    if (this.translations[n]) return n;
+    if (navigator.languages) for (const l of navigator.languages) { const c = l.split('-')[0].toLowerCase(); if (this.translations[c]) return c; }
+    try { const loc = Intl.DateTimeFormat().resolvedOptions().locale; const c = loc.split('-')[0].toLowerCase(); if (this.translations[c]) return c; } catch(e){}
     return 'en';
   },
   set(lang) {
     if (!this.translations[lang]) lang = 'en';
     this.current = lang;
-    try { localStorage.setItem('cofc_v11_lang', lang); } catch(e){}
+    try { localStorage.setItem('cofc_v12_lang', lang); } catch(e){}
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
     document.body.style.direction = document.documentElement.dir;
     document.querySelectorAll('[data-i18n]').forEach(el => {
-      const k = el.getAttribute('data-i18n');
-      const v = this.t(k);
-      if (v) el.textContent = v;
+      const k = el.getAttribute('data-i18n'); const v = this.t(k); if (v) el.textContent = v;
     });
   },
   init() { this.set(this.detect()); }
@@ -1461,44 +1930,31 @@ const I18N = {
 /* ============================================================
    CRYPTO
    ============================================================ */
-const NativeHKDF = {
-  async derive(ikm, salt, info, length) {
-    const k = await crypto.subtle.importKey('raw', ikm, { name: 'HKDF' }, false, ['deriveBits']);
-    const bits = await crypto.subtle.deriveBits({
-      name: 'HKDF', hash: 'SHA-512',
-      salt: salt && salt.length ? salt : new Uint8Array(0), info
-    }, k, length * 8);
-    return new Uint8Array(bits);
-  }
-};
+const NativeHKDF = { async derive(ikm, salt, info, length) {
+  const k = await crypto.subtle.importKey('raw', ikm, { name:'HKDF' }, false, ['deriveBits']);
+  const bits = await crypto.subtle.deriveBits({ name:'HKDF', hash:'SHA-512', salt: salt && salt.length ? salt : new Uint8Array(0), info }, k, length * 8);
+  return new Uint8Array(bits);
+}};
 const NativeHash = {
   async sha256(d) { return new Uint8Array(await crypto.subtle.digest('SHA-256', d)); },
   async sha512(d) { return new Uint8Array(await crypto.subtle.digest('SHA-512', d)); }
 };
-const Base58 = {
-  ALPHABET: '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz',
-  encode(bytes) {
-    const digits = [0];
-    for (let i = 0; i < bytes.length; i++) {
-      let carry = bytes[i];
-      for (let j = 0; j < digits.length; j++) {
-        carry += digits[j] << 8; digits[j] = carry % 58; carry = (carry / 58) | 0;
-      }
-      while (carry > 0) { digits.push(carry % 58); carry = (carry / 58) | 0; }
-    }
-    let out = '';
-    for (let i = 0; i < bytes.length && bytes[i] === 0; i++) out += '1';
-    for (let i = digits.length - 1; i >= 0; i--) out += this.ALPHABET[digits[i]];
-    return out;
+const Base58 = { ALPHABET:'123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz', encode(bytes) {
+  const digits = [0];
+  for (let i = 0; i < bytes.length; i++) {
+    let carry = bytes[i];
+    for (let j = 0; j < digits.length; j++) { carry += digits[j] << 8; digits[j] = carry % 58; carry = (carry / 58) | 0; }
+    while (carry > 0) { digits.push(carry % 58); carry = (carry / 58) | 0; }
   }
-};
+  let out = '';
+  for (let i = 0; i < bytes.length && bytes[i] === 0; i++) out += '1';
+  for (let i = digits.length - 1; i >= 0; i--) out += this.ALPHABET[digits[i]];
+  return out;
+}};
 function secureRandomBytes(len) {
   if (len <= 65536) return crypto.getRandomValues(new Uint8Array(len));
   const r = new Uint8Array(len);
-  for (let o = 0; o < len; o += 65536) {
-    const c = new Uint8Array(Math.min(65536, len - o));
-    crypto.getRandomValues(c); r.set(c, o);
-  }
+  for (let o = 0; o < len; o += 65536) { const c = new Uint8Array(Math.min(65536, len - o)); crypto.getRandomValues(c); r.set(c, o); }
   return r;
 }
 
@@ -1508,52 +1964,39 @@ function secureRandomBytes(len) {
 const QRCode = {
   generate(text, size) {
     size = size || 256;
-    const modules = this._encode(text);
-    if (!modules) return null;
-    const canvas = document.createElement('canvas');
-    canvas.width = size; canvas.height = size;
-    const ctx = canvas.getContext('2d');
+    const m = this._encode(text);
+    if (!m) return null;
+    const c = document.createElement('canvas');
+    c.width = size; c.height = size;
+    const ctx = c.getContext('2d');
     ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, size, size);
-    const n = modules.length;
-    const margin = Math.floor(size * 0.06);
+    const n = m.length; const margin = Math.floor(size * 0.06);
     const ms = (size - margin * 2) / n;
     ctx.fillStyle = '#464650';
-    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
-      if (modules[y][x]) ctx.fillRect(margin + x * ms, margin + y * ms, Math.ceil(ms), Math.ceil(ms));
-    }
-    return canvas;
+    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) if (m[y][x]) ctx.fillRect(margin + x * ms, margin + y * ms, Math.ceil(ms), Math.ceil(ms));
+    return c;
   },
   _encode(text) {
-    const data = new TextEncoder().encode(text);
-    const dLen = data.length;
-    let version, cap;
-    if (dLen <= 25) { version = 2; cap = 34; }
-    else if (dLen <= 47) { version = 3; cap = 55; }
-    else if (dLen <= 77) { version = 4; cap = 80; }
-    else if (dLen <= 114) { version = 5; cap = 108; }
-    else if (dLen <= 154) { version = 6; cap = 136; }
-    else { version = 7; cap = 156; }
-    if (dLen > cap) return null;
-    const size = version * 4 + 17;
-    const m = Array.from({ length: size }, () => new Array(size).fill(false));
-    const r = Array.from({ length: size }, () => new Array(size).fill(false));
+    const data = new TextEncoder().encode(text); const L = data.length;
+    let v, cap;
+    if (L <= 25) { v = 2; cap = 34; } else if (L <= 47) { v = 3; cap = 55; } else if (L <= 77) { v = 4; cap = 80; } else if (L <= 114) { v = 5; cap = 108; } else if (L <= 154) { v = 6; cap = 136; } else { v = 7; cap = 156; }
+    if (L > cap) return null;
+    const size = v * 4 + 17;
+    const m = Array.from({ length:size }, () => new Array(size).fill(false));
+    const r = Array.from({ length:size }, () => new Array(size).fill(false));
     this._finder(m, r, 0, 0); this._finder(m, r, size - 7, 0); this._finder(m, r, 0, size - 7);
     for (let i = 8; i < size - 8; i++) { m[6][i] = i % 2 === 0; m[i][6] = i % 2 === 0; r[6][i] = r[i][6] = true; }
     for (let i = 0; i < 9; i++) { if (!r[8][i]) r[8][i] = true; if (!r[i][8]) r[i][8] = true; }
     for (let i = 0; i < 8; i++) { if (!r[8][size-1-i]) r[8][size-1-i] = true; if (!r[size-1-i][8]) r[size-1-i][8] = true; }
     m[size-8][8] = true; r[size-8][8] = true;
-    let bi = 0;
-    const tB = dLen * 8;
+    let bi = 0; const tB = L * 8;
     const gB = (i) => { if (i >= tB) return 0; return (data[Math.floor(i/8)] >> (7 - (i%8))) & 1; };
     for (let right = size - 1; right >= 1; right -= 2) {
       if (right === 6) right = 5;
-      for (let vert = 0; vert < size; vert++) {
-        for (let j = 0; j < 2; j++) {
-          const col = right - j;
-          const up = ((right + 1) & 2) === 0;
-          const row = up ? size - 1 - vert : vert;
-          if (!r[row][col] && bi < tB + 30) { m[row][col] = gB(bi) === 1; bi++; }
-        }
+      for (let vert = 0; vert < size; vert++) for (let j = 0; j < 2; j++) {
+        const col = right - j; const up = ((right + 1) & 2) === 0;
+        const row = up ? size - 1 - vert : vert;
+        if (!r[row][col] && bi < tB + 30) { m[row][col] = gB(bi) === 1; bi++; }
       }
     }
     for (let i = 0; i < size; i++) for (let j = 0; j < size; j++) if (!r[i][j] && (i+j)%2 === 0) m[i][j] = !m[i][j];
@@ -1562,8 +2005,7 @@ const QRCode = {
   _finder(m, r, x, y) {
     const s = m.length;
     for (let i = -1; i <= 7; i++) for (let j = -1; j <= 7; j++) {
-      const rr = y+i, c = x+j;
-      if (rr < 0 || rr >= s || c < 0 || c >= s) continue;
+      const rr = y+i, c = x+j; if (rr < 0 || rr >= s || c < 0 || c >= s) continue;
       const outer = i === 0 || i === 6 || j === 0 || j === 6;
       const inner = i >= 2 && i <= 4 && j >= 2 && j <= 4;
       m[rr][c] = (i >= 0 && i <= 6 && j >= 0 && j <= 6) && (outer || inner);
@@ -1573,74 +2015,72 @@ const QRCode = {
 };
 
 /* ============================================================
-   COIN DATABASE with TrustWallet CDN URLs (HIGH QUALITY LOGOS)
-   Source: https://github.com/trustwallet/assets (open, fast, crisp)
+   COIN DATABASE — Direct CDN URLs
+   CASH: cofc.io/images/cash.png (per user request)
+   Others: TrustWallet CDN (high quality)
    ============================================================ */
-const TW = 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains';
+const CDN_BASE = 'https://cofc.io/images';
+const TW_BASE = 'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains';
 const COINS_DB = [
-  // Major
-  { symbol:'BTC', name:'Bitcoin', chain:'Bitcoin', color:'#f7931a', coingeckoId:'bitcoin', logo:`${TW}/bitcoin/info/logo.png` },
-  { symbol:'ETH', name:'Ethereum', chain:'Ethereum', color:'#627eea', coingeckoId:'ethereum', logo:`${TW}/ethereum/info/logo.png` },
-  { symbol:'USDT', name:'Tether', chain:'Multi', color:'#26a17b', coingeckoId:'tether', logo:`${TW}/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png` },
-  { symbol:'BNB', name:'BNB', chain:'BSC', color:'#f3ba2f', coingeckoId:'binancecoin', logo:`${TW}/smartchain/info/logo.png` },
-  { symbol:'SOL', name:'Solana', chain:'Solana', color:'#14f195', coingeckoId:'solana', logo:`${TW}/solana/info/logo.png` },
-  { symbol:'XRP', name:'Ripple', chain:'XRP Ledger', color:'#23292f', coingeckoId:'ripple', logo:`${TW}/ripple/info/logo.png` },
-  { symbol:'USDC', name:'USD Coin', chain:'Multi', color:'#2775ca', coingeckoId:'usd-coin', logo:`${TW}/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png` },
-  { symbol:'ADA', name:'Cardano', chain:'Cardano', color:'#0033ad', coingeckoId:'cardano', logo:`${TW}/cardano/info/logo.png` },
-  { symbol:'DOGE', name:'Dogecoin', chain:'Dogecoin', color:'#c2a633', coingeckoId:'dogecoin', logo:`${TW}/dogecoin/info/logo.png` },
-  { symbol:'AVAX', name:'Avalanche', chain:'Avalanche', color:'#e84142', coingeckoId:'avalanche-2', logo:`${TW}/avalanchec/info/logo.png` },
-  { symbol:'DOT', name:'Polkadot', chain:'Polkadot', color:'#e6007a', coingeckoId:'polkadot', logo:`${TW}/polkadot/info/logo.png` },
-  { symbol:'MATIC', name:'Polygon', chain:'Polygon', color:'#8247e5', coingeckoId:'matic-network', logo:`${TW}/polygon/info/logo.png` },
-  { symbol:'LINK', name:'Chainlink', chain:'Ethereum', color:'#2a5ada', coingeckoId:'chainlink', logo:`${TW}/ethereum/assets/0x514910771AF9Ca656af840dff83E8264EcF986CA/logo.png` },
-  { symbol:'LTC', name:'Litecoin', chain:'Litecoin', color:'#345d9d', coingeckoId:'litecoin', logo:`${TW}/litecoin/info/logo.png` },
-  { symbol:'TRX', name:'TRON', chain:'TRON', color:'#ef0027', coingeckoId:'tron', logo:`${TW}/tron/info/logo.png` },
-  { symbol:'ATOM', name:'Cosmos', chain:'Cosmos', color:'#2e3148', coingeckoId:'cosmos', logo:`${TW}/cosmos/info/logo.png` },
-  { symbol:'XLM', name:'Stellar', chain:'Stellar', color:'#14b6e7', coingeckoId:'stellar', logo:`${TW}/stellar/info/logo.png` },
-  { symbol:'NEAR', name:'NEAR', chain:'NEAR', color:'#000000', coingeckoId:'near', logo:`${TW}/near/info/logo.png` },
-  { symbol:'ALGO', name:'Algorand', chain:'Algorand', color:'#000000', coingeckoId:'algorand', logo:`${TW}/algorand/info/logo.png` },
-  { symbol:'VET', name:'VeChain', chain:'VeChain', color:'#15bdff', coingeckoId:'vechain', logo:`${TW}/vechain/info/logo.png` },
-  { symbol:'FIL', name:'Filecoin', chain:'Filecoin', color:'#0090ff', coingeckoId:'filecoin', logo:`${TW}/filecoin/info/logo.png` },
-  { symbol:'ICP', name:'Internet Computer', chain:'ICP', color:'#29abe2', coingeckoId:'internet-computer', logo:`${TW}/internetcomputer/info/logo.png` },
-  { symbol:'HBAR', name:'Hedera', chain:'Hedera', color:'#222222', coingeckoId:'hedera-hashgraph', logo:`${TW}/hedera/info/logo.png` },
-  { symbol:'APT', name:'Aptos', chain:'Aptos', color:'#000000', coingeckoId:'aptos', logo:`${TW}/aptos/info/logo.png` },
-  { symbol:'ARB', name:'Arbitrum', chain:'Arbitrum', color:'#28a0f0', coingeckoId:'arbitrum', logo:`${TW}/arbitrum/info/logo.png` },
-  { symbol:'OP', name:'Optimism', chain:'Optimism', color:'#ff0420', coingeckoId:'optimism', logo:`${TW}/optimism/info/logo.png` },
-  { symbol:'SUI', name:'Sui', chain:'Sui', color:'#4da2ff', coingeckoId:'sui', logo:`${TW}/sui/info/logo.png` },
-  { symbol:'INJ', name:'Injective', chain:'Injective', color:'#00f2fe', coingeckoId:'injective-protocol', logo:`${TW}/injective/info/logo.png` },
-  { symbol:'RNDR', name:'Render', chain:'Ethereum', color:'#ff0000', coingeckoId:'render-token', logo:`${TW}/ethereum/assets/0x6De037ef9aD2725EB40118Bb1702EBb27e4Aeb24/logo.png` },
-  { symbol:'AAVE', name:'Aave', chain:'Ethereum', color:'#b6509e', coingeckoId:'aave', logo:`${TW}/ethereum/assets/0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9/logo.png` },
-  { symbol:'MKR', name:'Maker', chain:'Ethereum', color:'#1aab9b', coingeckoId:'maker', logo:`${TW}/ethereum/assets/0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2/logo.png` },
-  { symbol:'GRT', name:'The Graph', chain:'Ethereum', color:'#6747ed', coingeckoId:'the-graph', logo:`${TW}/ethereum/assets/0xc944E90C64B2c07662A292be6244BDf05Cda44a7/logo.png` },
-  { symbol:'SAND', name:'The Sandbox', chain:'Ethereum', color:'#00adef', coingeckoId:'the-sandbox', logo:`${TW}/ethereum/assets/0x3845badAde8e6dFF049820680d1F14bD3903a5d0/logo.png` },
-  { symbol:'MANA', name:'Decentraland', chain:'Ethereum', color:'#ff2d55', coingeckoId:'decentraland', logo:`${TW}/ethereum/assets/0x0F5D2fB29fb7d3CFeE444a200298f468908cC942/logo.png` },
-  { symbol:'CRO', name:'Cronos', chain:'Cronos', color:'#002d74', coingeckoId:'crypto-com-chain', logo:`${TW}/cryptoorgchain/info/logo.png` },
-  { symbol:'FTM', name:'Fantom', chain:'Fantom', color:'#1969ff', coingeckoId:'fantom', logo:`${TW}/fantom/info/logo.png` },
-  { symbol:'EGLD', name:'MultiversX', chain:'MultiversX', color:'#000000', coingeckoId:'elrond-erd-2', logo:`${TW}/elrond/info/logo.png` },
-  { symbol:'THETA', name:'Theta', chain:'Theta', color:'#2ab8e6', coingeckoId:'theta-token', logo:`${TW}/theta/info/logo.png` },
-  { symbol:'XTZ', name:'Tezos', chain:'Tezos', color:'#2c7df7', coingeckoId:'tezos', logo:`${TW}/tezos/info/logo.png` },
-  { symbol:'FLOW', name:'Flow', chain:'Flow', color:'#00ef8b', coingeckoId:'flow', logo:`${TW}/flow/info/logo.png` },
-  { symbol:'CHZ', name:'Chiliz', chain:'Chiliz', color:'#cd0124', coingeckoId:'chiliz', logo:`${TW}/ethereum/assets/0x3506424F91fD33084466F402d5D97f05F8e3b4AF/logo.png` },
-  { symbol:'EOS', name:'EOS', chain:'EOS', color:'#000000', coingeckoId:'eos', logo:`${TW}/eos/info/logo.png` },
-  { symbol:'CAKE', name:'PancakeSwap', chain:'BSC', color:'#d1884f', coingeckoId:'pancakeswap-token', logo:`${TW}/smartchain/assets/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82/logo.png` },
-  // COFC
-  { symbol:'CASH', name:'COFC CASH', chain:'BSC', color:'#F6EE25', coingeckoId:null, logo:'images/cash.png', local:true },
-  { symbol:'TIME', name:'TIME Protocol', chain:'TIME', color:'#0891b2', coingeckoId:null, logo:null },
-  { symbol:'KEY', name:'KEY Hardware', chain:'WebHID', color:'#ffd700', coingeckoId:null, logo:null },
-  { symbol:'GEM', name:'GEM', chain:'Consciousness', color:'#7c3aed', coingeckoId:null, logo:null },
-  { symbol:'GOLD', name:'Sovereign GOLD', chain:'Vault', color:'#ffd700', coingeckoId:null, logo:null },
-  { symbol:'IDR', name:'Indian Digital Rupee', chain:'GPOE', color:'#ff9933', coingeckoId:null, logo:null },
-  { symbol:'CBDC', name:'Transcendental CBDC', chain:'Quantum', color:'#00c8ff', coingeckoId:null, logo:null }
+  { symbol:'BTC', name:'Bitcoin', chain:'Bitcoin', color:'#f7931a', coingeckoId:'bitcoin', logo:`${TW_BASE}/bitcoin/info/logo.png` },
+  { symbol:'ETH', name:'Ethereum', chain:'Ethereum', color:'#627eea', coingeckoId:'ethereum', logo:`${TW_BASE}/ethereum/info/logo.png` },
+  { symbol:'USDT', name:'Tether', chain:'Multi', color:'#26a17b', coingeckoId:'tether', logo:`${TW_BASE}/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png` },
+  { symbol:'BNB', name:'BNB', chain:'BSC', color:'#f3ba2f', coingeckoId:'binancecoin', logo:`${TW_BASE}/smartchain/info/logo.png` },
+  { symbol:'SOL', name:'Solana', chain:'Solana', color:'#14f195', coingeckoId:'solana', logo:`${TW_BASE}/solana/info/logo.png` },
+  { symbol:'XRP', name:'Ripple', chain:'XRP Ledger', color:'#23292f', coingeckoId:'ripple', logo:`${TW_BASE}/ripple/info/logo.png` },
+  { symbol:'USDC', name:'USD Coin', chain:'Multi', color:'#2775ca', coingeckoId:'usd-coin', logo:`${TW_BASE}/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png` },
+  { symbol:'ADA', name:'Cardano', chain:'Cardano', color:'#0033ad', coingeckoId:'cardano', logo:`${TW_BASE}/cardano/info/logo.png` },
+  { symbol:'DOGE', name:'Dogecoin', chain:'Dogecoin', color:'#c2a633', coingeckoId:'dogecoin', logo:`${TW_BASE}/dogecoin/info/logo.png` },
+  { symbol:'AVAX', name:'Avalanche', chain:'Avalanche', color:'#e84142', coingeckoId:'avalanche-2', logo:`${TW_BASE}/avalanchec/info/logo.png` },
+  { symbol:'DOT', name:'Polkadot', chain:'Polkadot', color:'#e6007a', coingeckoId:'polkadot', logo:`${TW_BASE}/polkadot/info/logo.png` },
+  { symbol:'MATIC', name:'Polygon', chain:'Polygon', color:'#8247e5', coingeckoId:'matic-network', logo:`${TW_BASE}/polygon/info/logo.png` },
+  { symbol:'LINK', name:'Chainlink', chain:'Ethereum', color:'#2a5ada', coingeckoId:'chainlink', logo:`${TW_BASE}/ethereum/assets/0x514910771AF9Ca656af840dff83E8264EcF986CA/logo.png` },
+  { symbol:'LTC', name:'Litecoin', chain:'Litecoin', color:'#345d9d', coingeckoId:'litecoin', logo:`${TW_BASE}/litecoin/info/logo.png` },
+  { symbol:'TRX', name:'TRON', chain:'TRON', color:'#ef0027', coingeckoId:'tron', logo:`${TW_BASE}/tron/info/logo.png` },
+  { symbol:'ATOM', name:'Cosmos', chain:'Cosmos', color:'#2e3148', coingeckoId:'cosmos', logo:`${TW_BASE}/cosmos/info/logo.png` },
+  { symbol:'XLM', name:'Stellar', chain:'Stellar', color:'#14b6e7', coingeckoId:'stellar', logo:`${TW_BASE}/stellar/info/logo.png` },
+  { symbol:'NEAR', name:'NEAR', chain:'NEAR', color:'#000000', coingeckoId:'near', logo:`${TW_BASE}/near/info/logo.png` },
+  { symbol:'ALGO', name:'Algorand', chain:'Algorand', color:'#000000', coingeckoId:'algorand', logo:`${TW_BASE}/algorand/info/logo.png` },
+  { symbol:'VET', name:'VeChain', chain:'VeChain', color:'#15bdff', coingeckoId:'vechain', logo:`${TW_BASE}/vechain/info/logo.png` },
+  { symbol:'FIL', name:'Filecoin', chain:'Filecoin', color:'#0090ff', coingeckoId:'filecoin', logo:`${TW_BASE}/filecoin/info/logo.png` },
+  { symbol:'ICP', name:'Internet Computer', chain:'ICP', color:'#29abe2', coingeckoId:'internet-computer', logo:`${TW_BASE}/internetcomputer/info/logo.png` },
+  { symbol:'HBAR', name:'Hedera', chain:'Hedera', color:'#222222', coingeckoId:'hedera-hashgraph', logo:`${TW_BASE}/hedera/info/logo.png` },
+  { symbol:'APT', name:'Aptos', chain:'Aptos', color:'#000000', coingeckoId:'aptos', logo:`${TW_BASE}/aptos/info/logo.png` },
+  { symbol:'ARB', name:'Arbitrum', chain:'Arbitrum', color:'#28a0f0', coingeckoId:'arbitrum', logo:`${TW_BASE}/arbitrum/info/logo.png` },
+  { symbol:'OP', name:'Optimism', chain:'Optimism', color:'#ff0420', coingeckoId:'optimism', logo:`${TW_BASE}/optimism/info/logo.png` },
+  { symbol:'SUI', name:'Sui', chain:'Sui', color:'#4da2ff', coingeckoId:'sui', logo:`${TW_BASE}/sui/info/logo.png` },
+  { symbol:'INJ', name:'Injective', chain:'Injective', color:'#00f2fe', coingeckoId:'injective-protocol', logo:`${TW_BASE}/injective/info/logo.png` },
+  { symbol:'RNDR', name:'Render', chain:'Ethereum', color:'#ff0000', coingeckoId:'render-token', logo:`${TW_BASE}/ethereum/assets/0x6De037ef9aD2725EB40118Bb1702EBb27e4Aeb24/logo.png` },
+  { symbol:'AAVE', name:'Aave', chain:'Ethereum', color:'#b6509e', coingeckoId:'aave', logo:`${TW_BASE}/ethereum/assets/0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9/logo.png` },
+  { symbol:'MKR', name:'Maker', chain:'Ethereum', color:'#1aab9b', coingeckoId:'maker', logo:`${TW_BASE}/ethereum/assets/0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2/logo.png` },
+  { symbol:'GRT', name:'The Graph', chain:'Ethereum', color:'#6747ed', coingeckoId:'the-graph', logo:`${TW_BASE}/ethereum/assets/0xc944E90C64B2c07662A292be6244BDf05Cda44a7/logo.png` },
+  { symbol:'SAND', name:'The Sandbox', chain:'Ethereum', color:'#00adef', coingeckoId:'the-sandbox', logo:`${TW_BASE}/ethereum/assets/0x3845badAde8e6dFF049820680d1F14bD3903a5d0/logo.png` },
+  { symbol:'MANA', name:'Decentraland', chain:'Ethereum', color:'#ff2d55', coingeckoId:'decentraland', logo:`${TW_BASE}/ethereum/assets/0x0F5D2fB29fb7d3CFeE444a200298f468908cC942/logo.png` },
+  { symbol:'CRO', name:'Cronos', chain:'Cronos', color:'#002d74', coingeckoId:'crypto-com-chain', logo:`${TW_BASE}/cryptoorgchain/info/logo.png` },
+  { symbol:'FTM', name:'Fantom', chain:'Fantom', color:'#1969ff', coingeckoId:'fantom', logo:`${TW_BASE}/fantom/info/logo.png` },
+  { symbol:'EGLD', name:'MultiversX', chain:'MultiversX', color:'#000000', coingeckoId:'elrond-erd-2', logo:`${TW_BASE}/elrond/info/logo.png` },
+  { symbol:'THETA', name:'Theta', chain:'Theta', color:'#2ab8e6', coingeckoId:'theta-token', logo:`${TW_BASE}/theta/info/logo.png` },
+  { symbol:'XTZ', name:'Tezos', chain:'Tezos', color:'#2c7df7', coingeckoId:'tezos', logo:`${TW_BASE}/tezos/info/logo.png` },
+  { symbol:'FLOW', name:'Flow', chain:'Flow', color:'#00ef8b', coingeckoId:'flow', logo:`${TW_BASE}/flow/info/logo.png` },
+  { symbol:'CHZ', name:'Chiliz', chain:'Chiliz', color:'#cd0124', coingeckoId:'chiliz', logo:`${TW_BASE}/ethereum/assets/0x3506424F91fD33084466F402d5D97f05F8e3b4AF/logo.png` },
+  { symbol:'EOS', name:'EOS', chain:'EOS', color:'#000000', coingeckoId:'eos', logo:`${TW_BASE}/eos/info/logo.png` },
+  { symbol:'CAKE', name:'PancakeSwap', chain:'BSC', color:'#d1884f', coingeckoId:'pancakeswap-token', logo:`${TW_BASE}/smartchain/assets/0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82/logo.png` },
+  // COFC — direct URLs from cofc.io
+  { symbol:'CASH', name:'COFC CASH', chain:'BSC', color:'#F6EE25', coingeckoId:null, logo:`${CDN_BASE}/cash.png`, local:true },
+  { symbol:'TIME', name:'TIME Protocol', chain:'TIME', color:'#0891b2', coingeckoId:null, logo:`${CDN_BASE}/time.png` },
+  { symbol:'KEY', name:'KEY Hardware', chain:'WebHID', color:'#ffd700', coingeckoId:null, logo:`${CDN_BASE}/key.png` },
+  { symbol:'GEM', name:'GEM', chain:'Consciousness', color:'#7c3aed', coingeckoId:null, logo:`${CDN_BASE}/gem.png` },
+  { symbol:'GOLD', name:'Sovereign GOLD', chain:'Vault', color:'#ffd700', coingeckoId:null, logo:`${CDN_BASE}/gold.png` },
+  { symbol:'IDR', name:'Indian Digital Rupee', chain:'GPOE', color:'#ff9933', coingeckoId:null, logo:`${CDN_BASE}/idr.png` },
+  { symbol:'CBDC', name:'Transcendental CBDC', chain:'Quantum', color:'#00c8ff', coingeckoId:null, logo:`${CDN_BASE}/cbdc.png` }
 ];
 const COINS_BY_SYMBOL = Object.fromEntries(COINS_DB.map(c => [c.symbol, c]));
 
 /* ============================================================
-   COIN LOGOS — with preloading + smart fallback
+   COIN LOGOS
    ============================================================ */
 const CoinLogos = {
-  cache: new Map(),
-  CACHE_MAX: 200,
-  _preloaded: new Set(),
-  
+  cache: new Map(), CACHE_MAX: 200, _preloaded: new Set(),
   makeFallback(symbol, color) {
     const letter = symbol.substring(0, 2);
     const fs = letter.length === 1 ? 52 : 40;
@@ -1649,72 +2089,45 @@ const CoinLogos = {
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="g" cx="35%" cy="30%"><stop offset="0%" stop-color="${light}"/><stop offset="100%" stop-color="${dark}"/></radialGradient></defs><circle cx="50" cy="50" r="48" fill="url(#g)"/><text x="50" y="50" font-family="-apple-system,sans-serif" font-size="${fs}" font-weight="900" fill="white" text-anchor="middle" dominant-baseline="central" letter-spacing="-1">${letter}</text></svg>`;
     return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg).replace(/'/g, '%27');
   },
-  
-  hexRgb(h) { h = h.replace('#',''); if (h.length === 3) h = h.split('').map(c=>c+c).join(''); const n = parseInt(h,16); return {r:(n>>16)&255,g:(n>>8)&255,b:n&255}; },
+  hexRgb(h) { h = h.replace('#',''); if (h.length === 3) h = h.split('').map(c=>c+c).join(''); const n = parseInt(h,16); return { r:(n>>16)&255, g:(n>>8)&255, b:n&255 }; },
   lighten(h, p) { const {r,g,b} = this.hexRgb(h); return `rgb(${Math.min(255,Math.round(r+(255-r)*p/100))},${Math.min(255,Math.round(g+(255-g)*p/100))},${Math.min(255,Math.round(b+(255-b)*p/100))})`; },
   darken(h, p) { const {r,g,b} = this.hexRgb(h); return `rgb(${Math.max(0,Math.round(r*(1-p/100)))},${Math.max(0,Math.round(g*(1-p/100)))},${Math.max(0,Math.round(b*(1-p/100)))})`; },
-  
   get(symbol, color) {
     const key = symbol + '_' + (color || '');
     if (this.cache.has(key)) return this.cache.get(key);
     const coin = COINS_BY_SYMBOL[symbol];
     let url;
-    if (coin && coin.logo && (coin.logo.startsWith('http') || coin.logo.startsWith('images/'))) {
-      url = coin.logo;
-    } else {
-      url = this.makeFallback(symbol, color || '#464650');
-    }
-    if (this.cache.size >= this.CACHE_MAX) {
-      const firstKey = this.cache.keys().next().value;
-      this.cache.delete(firstKey);
-    }
+    if (coin && coin.logo && coin.logo.startsWith('http')) url = coin.logo;
+    else url = this.makeFallback(symbol, color || '#464650');
+    if (this.cache.size >= this.CACHE_MAX) { const f = this.cache.keys().next().value; this.cache.delete(f); }
     this.cache.set(key, url);
     return url;
   },
-  
-  // Preload images for instant display
   async preload(symbols) {
     const promises = symbols.map(sym => {
       if (this._preloaded.has(sym)) return Promise.resolve();
       const coin = COINS_BY_SYMBOL[sym];
-      if (!coin || !coin.logo || coin.logo.startsWith('images/')) return Promise.resolve();
-      return new Promise(resolve => {
+      if (!coin || !coin.logo) return Promise.resolve();
+      return new Promise(res => {
         const img = new Image();
-        img.onload = () => { this._preloaded.add(sym); resolve(); };
-        img.onerror = () => {
-          // Fallback on error
-          this.cache.set(sym + '_' + coin.color, this.makeFallback(sym, coin.color));
-          this._preloaded.add(sym);
-          resolve();
-        };
+        img.onload = () => { this._preloaded.add(sym); res(); };
+        img.onerror = () => { this.cache.set(sym + '_' + coin.color, this.makeFallback(sym, coin.color)); this._preloaded.add(sym); res(); };
         img.src = coin.logo;
-        setTimeout(resolve, 5000);
+        setTimeout(res, 5000);
       });
     });
     return Promise.all(promises);
-  },
-  
-  render(symbol, color, size) {
-    size = size || 44;
-    const url = this.get(symbol, color);
-    const isData = url.startsWith('data:');
-    if (isData) {
-      return `<img src="${url}" alt="${symbol}" style="width:100%;height:100%;object-fit:cover;display:block;">`;
-    }
-    return `<img src="${url}" alt="${symbol}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:contain;padding:${Math.round(size*0.13)}px;display:block;" onerror="this.style.display='none';this.nextElementSibling&&(this.nextElementSibling.style.display='flex');"><div class="coin-logo-fallback" style="display:none;background:linear-gradient(135deg,${color},${this.darken(color,25)});font-size:${Math.round(size*0.4)}px;">${symbol[0]}</div>`;
   }
 };
 
 /* ============================================================
-   LIVE PRICES — with caching + rate limit
+   LIVE PRICES
    ============================================================ */
 const LivePrices = {
-  cache: {}, cacheTime: 0, CACHE_TTL: 60000,
-  _fetchPromise: null,
-  _lastSuccess: 0, _lastFail: 0,
-  displayCurrency: 'usd',
-  symbols: { usd:'$', eur:'€', jpy:'¥', gbp:'£', ils:'₪' },
-  
+  cache:{}, cacheTime:0, CACHE_TTL:60000,
+  _fetchPromise:null, _lastSuccess:0, _lastFail:0,
+  displayCurrency:'usd',
+  symbols:{ usd:'$', eur:'€', jpy:'¥', gbp:'£', ils:'₪' },
   async fetch(symbols) {
     if (this._fetchPromise) { try { return await this._fetchPromise; } catch(e){} }
     this._fetchPromise = this._doFetch(symbols);
@@ -1728,7 +2141,7 @@ const LivePrices = {
     if (!ids) return this.cache;
     try {
       const ctrl = AbortSignal.timeout ? AbortSignal.timeout(8000) : undefined;
-      const r = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd,eur,jpy,gbp,ils&include_24hr_change=true`, { headers:{'Accept':'application/json'}, signal: ctrl });
+      const r = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd,eur,jpy,gbp,ils&include_24hr_change=true`, { headers:{'Accept':'application/json'}, signal:ctrl });
       if (r.status === 429) { this._lastFail = now; return this.cache; }
       if (!r.ok) throw new Error('HTTP ' + r.status);
       const d = await r.json();
@@ -1738,7 +2151,7 @@ const LivePrices = {
       });
       this.cacheTime = now; this._lastSuccess = now; this._lastFail = 0;
       return this.cache;
-    } catch (e) { this._lastFail = now; return this.cache; }
+    } catch(e) { this._lastFail = now; return this.cache; }
   },
   getPrice(symbol) {
     const c = this.cache[symbol];
@@ -1749,32 +2162,28 @@ const LivePrices = {
     return fb[symbol] * (rates[this.displayCurrency] || 1);
   },
   getChange(symbol) {
-    const c = this.cache[symbol];
-    if (!c) return null;
+    const c = this.cache[symbol]; if (!c) return null;
     const k = this.displayCurrency + '_24h_change';
     return typeof c[k] === 'number' ? c[k] : null;
   },
-  setCurrency(curr) { if (!this.symbols[curr]) curr = 'usd'; this.displayCurrency = curr; try { localStorage.setItem('cofc_v11_curr', curr); } catch(e){} },
+  setCurrency(curr) { if (!this.symbols[curr]) curr = 'usd'; this.displayCurrency = curr; try { localStorage.setItem('cofc_v12_curr', curr); } catch(e){} },
   symbol() { return this.symbols[this.displayCurrency] || '$'; },
   format(amount, symbol) {
-    const p = this.getPrice(symbol);
-    if (p === null) return '—';
-    const a = Number(amount) || 0;
-    const t = a * p;
+    const p = this.getPrice(symbol); if (p === null) return '—';
+    const a = Number(amount) || 0; const t = a * p;
     if (!Number.isFinite(t)) return '—';
     const s = this.symbol();
     if (t < 0.01) return s + t.toFixed(4);
     if (t < 1000) return s + t.toFixed(2);
-    return s + t.toLocaleString('en-US', { maximumFractionDigits: 2 });
+    return s + t.toLocaleString('en-US', { maximumFractionDigits:2 });
   },
   formatPrice(symbol) {
-    const p = this.getPrice(symbol);
-    if (p === null) return '—';
+    const p = this.getPrice(symbol); if (p === null) return '—';
     const s = this.symbol();
     if (p < 0.01) return s + p.toFixed(6);
     if (p < 1) return s + p.toFixed(4);
     if (p < 1000) return s + p.toFixed(2);
-    return s + p.toLocaleString('en-US', { maximumFractionDigits: 2 });
+    return s + p.toLocaleString('en-US', { maximumFractionDigits:2 });
   }
 };
 
@@ -1787,9 +2196,8 @@ class SecureMemoryPool {
   wipe() { for (const b of this.buffers) { try { crypto.getRandomValues(b); b.fill(0); } catch(e){} } this.buffers.clear(); }
   reset() {}
 }
-
 const EncryptedStorage = {
-  PREFIX: 'cofc_v11_', _key: null, _cache: {},
+  PREFIX:'cofc_v12_', _key:null, _cache:{},
   setKey(k) { this._key = k; this._cache = {}; },
   async set(key, value) {
     const ks = this._key;
@@ -1797,9 +2205,9 @@ const EncryptedStorage = {
       const json = JSON.stringify(value);
       if (!ks) { localStorage.setItem(this.PREFIX + key, json); this._cache[key] = value; return true; }
       const iv = crypto.getRandomValues(new Uint8Array(12));
-      const ck = await crypto.subtle.importKey('raw', ks, { name: 'AES-GCM', length: 256 }, false, ['encrypt']);
-      const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv, tagLength: 128 }, ck, new TextEncoder().encode(json));
-      const w = { v: 11, iv: Array.from(iv), ct: Array.from(new Uint8Array(ct)) };
+      const ck = await crypto.subtle.importKey('raw', ks, { name:'AES-GCM', length:256 }, false, ['encrypt']);
+      const ct = await crypto.subtle.encrypt({ name:'AES-GCM', iv, tagLength:128 }, ck, new TextEncoder().encode(json));
+      const w = { v:12, iv:Array.from(iv), ct:Array.from(new Uint8Array(ct)) };
       localStorage.setItem(this.PREFIX + key, JSON.stringify(w));
       this._cache[key] = value;
       return true;
@@ -1808,27 +2216,22 @@ const EncryptedStorage = {
   async get(key, fallback = null) {
     if (this._cache[key] !== undefined) return this._cache[key];
     try {
-      const raw = localStorage.getItem(this.PREFIX + key);
-      if (!raw) return fallback;
-      let w;
-      try { w = JSON.parse(raw); } catch(e) { localStorage.removeItem(this.PREFIX + key); return fallback; }
+      const raw = localStorage.getItem(this.PREFIX + key); if (!raw) return fallback;
+      let w; try { w = JSON.parse(raw); } catch(e) { localStorage.removeItem(this.PREFIX + key); return fallback; }
       if (!w.v || !w.iv || !w.ct) { this._cache[key] = w; return w; }
       if (!this._key) return fallback;
-      const iv = new Uint8Array(w.iv);
-      const ct = new Uint8Array(w.ct);
-      const ck = await crypto.subtle.importKey('raw', this._key, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
-      const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv, tagLength: 128 }, ck, ct);
+      const iv = new Uint8Array(w.iv); const ct = new Uint8Array(w.ct);
+      const ck = await crypto.subtle.importKey('raw', this._key, { name:'AES-GCM', length:256 }, false, ['decrypt']);
+      const pt = await crypto.subtle.decrypt({ name:'AES-GCM', iv, tagLength:128 }, ck, ct);
       const result = JSON.parse(new TextDecoder().decode(pt));
-      this._cache[key] = result;
-      return result;
+      this._cache[key] = result; return result;
     } catch(e) { return fallback; }
   },
   remove(k) { localStorage.removeItem(this.PREFIX + k); delete this._cache[k]; },
   clearCache() { this._cache = {}; }
 };
-
 const Storage = {
-  PREFIX: 'cofc_v11_plain_',
+  PREFIX:'cofc_v12_plain_',
   get(key, fb = null) { try { const v = localStorage.getItem(this.PREFIX + key); return v ? JSON.parse(v) : fb; } catch(e) { return fb; } },
   set(key, value) { try { localStorage.setItem(this.PREFIX + key, JSON.stringify(value)); return true; } catch(e) { return false; } },
   remove(key) { localStorage.removeItem(this.PREFIX + key); }
@@ -1838,20 +2241,20 @@ const Storage = {
    SETTINGS
    ============================================================ */
 const Settings = {
-  data: { fingerprint2FA:false, biometricLogin:true, autoClearClipboard:true, autoLock:true, autoLockMinutes:3 },
+  data:{ fingerprint2FA:false, biometricLogin:true, autoClearClipboard:true, autoLock:true, autoLockMinutes:3 },
   async init() {
     const w = Storage.get('settings');
     if (w && w.data && w.hash) {
       const actual = await NativeHash.sha256(new TextEncoder().encode(JSON.stringify(w.data)));
       const ah = Array.from(actual).map(b => b.toString(16).padStart(2, '0')).join('');
       if (ah === w.hash) this.data = { ...this.data, ...w.data };
-    } else if (w && w.data) { this.data = { ...this.data, ...w.data }; }
+    } else if (w && w.data) this.data = { ...this.data, ...w.data };
     this.render();
   },
   async save() {
     const h = await NativeHash.sha256(new TextEncoder().encode(JSON.stringify(this.data)));
     const hh = Array.from(h).map(b => b.toString(16).padStart(2, '0')).join('');
-    Storage.set('settings', { data: this.data, hash: hh });
+    Storage.set('settings', { data:this.data, hash:hh });
   },
   render() {
     const fp = document.getElementById('toggle-fingerprint-2fa');
@@ -1869,10 +2272,7 @@ const Settings = {
     if (!this.data.fingerprint2FA) {
       if (!window.PublicKeyCredential) { vault.toast('Fingerprint not supported', 'error'); return; }
       if (!window.isSecureContext) { vault.toast('HTTPS required for 2FA', 'error'); return; }
-      try {
-        const a = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
-        if (!a) { vault.toast('No fingerprint sensor found', 'error'); return; }
-      } catch(e) { vault.toast('Cannot verify support', 'error'); return; }
+      try { const a = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable(); if (!a) { vault.toast('No fingerprint sensor found', 'error'); return; } } catch(e) { vault.toast('Cannot verify support', 'error'); return; }
     }
     this.data.fingerprint2FA = !this.data.fingerprint2FA;
     await this.save(); this.render();
@@ -1909,49 +2309,40 @@ const Settings = {
 class CofcVault {
   constructor() {
     this.memoryPool = new SecureMemoryPool();
-    this.volatileMasterSeed = null;
-    this.signingKey = null;
-    this.encryptionKey = null;
+    this.volatileMasterSeed = null; this.signingKey = null; this.encryptionKey = null;
     this.autoWipeTimer = null; this.uiTimerInterval = null; this.graceTimer = null; this._modalTimer = null;
     this.pendingTimeouts = new Set();
     this.inactivityLimit = 180000; this.gracePeriod = 5000; this.maxLogEntries = 60;
-    this.prfSalt = new TextEncoder().encode('cofc-v11-prf');
+    this.prfSalt = new TextEncoder().encode('cofc-v12-prf');
     this.isLoggedIn = false;
   }
   log(msg, type = 'info') {
-    const d = document.getElementById('audit-log');
-    if (!d) return;
+    const d = document.getElementById('audit-log'); if (!d) return;
     const time = new Date().toISOString().substr(11, 8);
-    const e = document.createElement('div');
-    e.className = 'log-entry ' + type;
+    const e = document.createElement('div'); e.className = 'log-entry ' + type;
     const t = document.createElement('span'); t.className = 'log-time'; t.textContent = '[' + time + ']';
     const m = document.createElement('span'); m.textContent = ' ' + String(msg).substring(0, 200);
     e.appendChild(t); e.appendChild(m); d.prepend(e);
     while (d.children.length > this.maxLogEntries) d.removeChild(d.lastChild);
   }
   toast(msg, type = 'info') {
-    const c = document.getElementById('toast-container');
-    if (!c) return;
-    const t = document.createElement('div');
-    t.className = 'toast ' + type;
+    const c = document.getElementById('toast-container'); if (!c) return;
+    const t = document.createElement('div'); t.className = 'toast ' + type;
     t.textContent = String(msg).substring(0, 300);
     c.appendChild(t);
     const dur = /iPhone|Android/.test(navigator.userAgent) ? 4000 : 3400;
-    this.setTimeout(() => {
-      t.style.opacity = '0'; t.style.transform = 'translateY(-16px)'; t.style.transition = 'all 0.3s ease';
-      this.setTimeout(() => t.remove(), 300);
-    }, dur);
+    this.setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateY(-16px)'; t.style.transition = 'all 0.3s ease'; this.setTimeout(() => t.remove(), 300); }, dur);
   }
   setTimeout(fn, ms) { const id = setTimeout(() => { this.pendingTimeouts.delete(id); fn(); }, ms); this.pendingTimeouts.add(id); return id; }
   clearAllTimeouts() { this.pendingTimeouts.forEach(id => clearTimeout(id)); this.pendingTimeouts.clear(); }
   async deriveKeysInRAM(entropy) {
     this.memoryPool.reset();
     const info = new TextEncoder();
-    this.volatileMasterSeed = await NativeHKDF.derive(entropy, this.prfSalt, info.encode('cofc-master-v11'), 64);
+    this.volatileMasterSeed = await NativeHKDF.derive(entropy, this.prfSalt, info.encode('cofc-master-v12'), 64);
     this.memoryPool.track(this.volatileMasterSeed); this.memoryPool.track(entropy);
-    this.signingKey = await NativeHKDF.derive(this.volatileMasterSeed, new Uint8Array(0), info.encode('cofc-sign-v11'), 32);
+    this.signingKey = await NativeHKDF.derive(this.volatileMasterSeed, new Uint8Array(0), info.encode('cofc-sign-v12'), 32);
     this.memoryPool.track(this.signingKey);
-    this.encryptionKey = await NativeHKDF.derive(this.volatileMasterSeed, new Uint8Array(0), info.encode('cofc-enc-v11'), 32);
+    this.encryptionKey = await NativeHKDF.derive(this.volatileMasterSeed, new Uint8Array(0), info.encode('cofc-enc-v12'), 32);
     this.memoryPool.track(this.encryptionKey);
     EncryptedStorage.setKey(this.encryptionKey);
     this.isLoggedIn = true;
@@ -1976,14 +2367,8 @@ class CofcVault {
         if (cur && cur.length > 20) await navigator.clipboard.writeText('');
       }
     } catch(e){}
-    ['send-to','send-amount'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) { el.value = ''; el.classList.remove('valid','error'); }
-    });
-    ['send-to-hint','send-amount-hint'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) { el.textContent = ''; el.className = 'form-input-hint'; }
-    });
+    ['send-to','send-amount'].forEach(id => { const el = document.getElementById(id); if (el) { el.value = ''; el.classList.remove('valid','error'); } });
+    ['send-to-hint','send-amount-hint'].forEach(id => { const el = document.getElementById(id); if (el) { el.textContent = ''; el.className = 'form-input-hint'; } });
     const app = document.getElementById('app-screen');
     const login = document.getElementById('login-screen');
     const ph = document.getElementById('profile-header');
@@ -1992,19 +2377,11 @@ class CofcVault {
     if (login) login.style.display = 'flex';
     if (ph) ph.classList.remove('visible');
     if (hu) hu.classList.remove('visible');
-    const st = document.getElementById('login-status');
-    if (st) { st.textContent = I18N.t('tap_start'); st.className = 'login-status'; }
-    const sc = document.getElementById('face-scanner');
-    if (sc) sc.classList.remove('success','error','scanning','disabled','camera-active');
-    const pc = document.getElementById('progress-circle');
-    if (pc) pc.style.strokeDashoffset = 1005;
-    ['chip-blink','chip-turn','chip-smile'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.classList.remove('active','done');
-    });
-    // CRITICAL: Reset login lock
-    LoginFlow._state = 'idle';
-    LoginFlow._mutex = false;
+    const st = document.getElementById('login-status'); if (st) { st.textContent = I18N.t('tap_start'); st.className = 'login-status'; }
+    const sc = document.getElementById('face-scanner'); if (sc) sc.classList.remove('success','error','scanning','disabled','camera-active');
+    const pc = document.getElementById('progress-circle'); if (pc) pc.style.strokeDashoffset = 1005;
+    ['chip-blink','chip-turn','chip-smile'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('active','done'); });
+    LoginFlow._state = 'idle'; LoginFlow._mutex = false;
     FaceLiveness.stop();
     this.toast('🔒 Vault locked', 'warn');
   }
@@ -2051,7 +2428,8 @@ const FaceLiveness = {
     if (!window.isSecureContext) throw new Error('HTTPS required');
     try {
       this.stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode:'user', width:{ideal:640,max:1280}, height:{ideal:480,max:720}, frameRate:{ideal:24,max:30} }, audio:false
+        video:{ facingMode:'user', width:{ideal:640,max:1280}, height:{ideal:480,max:720}, frameRate:{ideal:24,max:30} },
+        audio:false
       });
       this.video.srcObject = this.stream;
       this.video.setAttribute('playsinline','true');
@@ -2063,7 +2441,7 @@ const FaceLiveness = {
       });
       this.active = true;
       return true;
-    } catch (e) {
+    } catch(e) {
       if (this.stream) { this.stream.getTracks().forEach(t => t.stop()); this.stream = null; }
       let msg = 'Camera error';
       if (e.name === 'NotAllowedError') msg = I18N.t('scan_camera_error') + ' — permission denied';
@@ -2081,8 +2459,7 @@ const FaceLiveness = {
   async capture() {
     if (!this.video || !this.active) return null;
     if (this.video.paused || this.video.ended) { try { await this.video.play(); } catch(e) { return null; } }
-    try { this.ctx.drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height); return this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height); }
-    catch(e) { return null; }
+    try { this.ctx.drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height); return this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height); } catch(e) { return null; }
   },
   brightness(img, x1, y1, x2, y2) {
     const d = img.data, w = img.width, h = img.height;
@@ -2090,9 +2467,7 @@ const FaceLiveness = {
     let sum = 0, cnt = 0;
     for (let y = y1p; y < y2p; y += 2) for (let x = x1p; x < x2p; x += 2) {
       if (y < 0 || y >= h || x < 0 || x >= w) continue;
-      const i = (y*w + x)*4;
-      sum += d[i]*0.299 + d[i+1]*0.587 + d[i+2]*0.114;
-      cnt++;
+      const i = (y*w + x)*4; sum += d[i]*0.299 + d[i+1]*0.587 + d[i+2]*0.114; cnt++;
     }
     return cnt > 0 ? sum / cnt : 0;
   },
@@ -2110,9 +2485,7 @@ const FaceLiveness = {
     const r = this.brightness(f, 0.5, 0.3, 0.9, 0.7);
     return Math.abs(l - r) > 18;
   },
-  detectSmile(f) {
-    return this.brightness(f, 0.35, 0.65, 0.65, 0.85) > 105;
-  },
+  detectSmile(f) { return this.brightness(f, 0.35, 0.65, 0.65, 0.85) > 105; },
   antiSpoof(f) {
     const d = f.data, w = f.width, h = f.height;
     let sum = 0, cnt = 0;
@@ -2152,8 +2525,7 @@ const FaceLiveness = {
       const allFrames = [baseline];
       for (let i = 0; i < steps.length; i++) {
         if (!this.running) throw new Error('Cancelled');
-        const s = steps[i];
-        const ss = Date.now();
+        const s = steps[i]; const ss = Date.now();
         let detected = false, detections = 0;
         onProgress({ step:s.step, hint:s.hint, completed:i });
         while (Date.now() - ss < s.duration) {
@@ -2175,8 +2547,7 @@ const FaceLiveness = {
         for (let j = 0; j < 128; j++) eb.push(f.data[(j*7 + idx*13) % f.data.length]);
       });
       const c = new Uint8Array(eb.length + 32);
-      c.set(eb, 0);
-      c.set(secureRandomBytes(32), eb.length);
+      c.set(eb, 0); c.set(secureRandomBytes(32), eb.length);
       const h = await NativeHash.sha512(c);
       try { c.fill(0); } catch(e){}
       return h;
@@ -2190,11 +2561,9 @@ const FaceLiveness = {
 const Identity = {
   async authenticate() {
     if (!window.isSecureContext) throw new Error('HTTPS required');
-    const fp = Storage.get('identity_fp');
-    const cid = Storage.get('cred_id');
+    const fp = Storage.get('identity_fp'); const cid = Storage.get('cred_id');
     if (fp && cid) {
-      try { const b = this.b64ToBuf(cid); if (b.byteLength > 0) return { isNew:false, fingerprint:fp }; }
-      catch(e) { Storage.remove('cred_id'); }
+      try { const b = this.b64ToBuf(cid); if (b.byteLength > 0) return { isNew:false, fingerprint:fp }; } catch(e) { Storage.remove('cred_id'); }
     }
     const nfp = await this.generateNew();
     return { isNew:true, fingerprint:nfp };
@@ -2205,28 +2574,25 @@ const Identity = {
         const ch = secureRandomBytes(32), uid = secureRandomBytes(16);
         const cred = await navigator.credentials.create({
           publicKey: {
-            challenge: ch,
-            rp: { name:'COFC GATE', id: window.location.hostname },
-            user: { id:uid, name:'sovereign@cofc.io', displayName:'Sovereign User' },
-            pubKeyCredParams: [{ alg:-7, type:'public-key' }, { alg:-257, type:'public-key' }],
-            authenticatorSelection: { authenticatorAttachment:'platform', userVerification:'required', residentKey:'preferred' },
-            timeout: 60000, attestation: 'none'
+            challenge:ch, rp:{ name:'COFC GATE', id:window.location.hostname },
+            user:{ id:uid, name:'sovereign@cofc.io', displayName:'Sovereign User' },
+            pubKeyCredParams:[{ alg:-7, type:'public-key' }, { alg:-257, type:'public-key' }],
+            authenticatorSelection:{ authenticatorAttachment:'platform', userVerification:'required', residentKey:'preferred' },
+            timeout:60000, attestation:'none'
           }
         });
         Storage.set('cred_id', this.bufToB64(cred.rawId));
         const seed = await NativeHash.sha512(new Uint8Array(cred.rawId));
         const h = await NativeHash.sha256(seed);
         const fp = Base58.encode(h.slice(0, 20));
-        Storage.set('identity_fp', fp);
-        return fp;
+        Storage.set('identity_fp', fp); return fp;
       } catch(e) {}
     }
     let seed = Storage.get('fallback_seed');
     if (!seed) { seed = Array.from(secureRandomBytes(32)).map(b => b.toString(16).padStart(2, '0')).join(''); Storage.set('fallback_seed', seed); }
     const h = await NativeHash.sha256(new TextEncoder().encode(seed));
     const fp = Base58.encode(h.slice(0, 20));
-    Storage.set('identity_fp', fp);
-    return fp;
+    Storage.set('identity_fp', fp); return fp;
   },
   b64ToBuf(b) { const bin = atob(b); const a = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i); return a.buffer; },
   bufToB64(buf) { const b = new Uint8Array(buf); let s = ''; for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i+0x8000)); return btoa(s); }
@@ -2236,14 +2602,13 @@ const Identity = {
    WALLETS
    ============================================================ */
 const Wallets = {
-  all: {}, currentSymbol:null, currentAccountId:null,
+  all:{}, currentSymbol:null, currentAccountId:null,
   _saveTimer:null, _portfolioTimer:null,
   async init() {
     const s = await EncryptedStorage.get('wallets');
     if (s && typeof s === 'object') this.all = s;
     await this.ensureDefaults();
     await LivePrices.fetch(['BTC','ETH','SOL','BNB','XRP','CASH','ADA','DOGE','AVAX','DOT']);
-    // Preload logos in background for instant display
     setTimeout(() => CoinLogos.preload(Object.keys(this.all)), 100);
   },
   async ensureDefaults() {
@@ -2253,13 +2618,12 @@ const Wallets = {
       { symbol:'IDR', balance:5000000 }, { symbol:'CBDC', balance:100000 }
     ];
     for (const d of defaults) {
-      const c = COINS_BY_SYMBOL[d.symbol];
-      if (!c) continue;
+      const c = COINS_BY_SYMBOL[d.symbol]; if (!c) continue;
       if (!this.all[c.symbol]) {
         this.all[c.symbol] = {
           symbol:c.symbol, name:c.name, chain:c.chain, color:c.color,
           coingeckoId:c.coingeckoId, logo:c.logo, local:c.local,
-          accounts: [await this.genAccount(c, d.balance, 'Main')]
+          accounts:[await this.genAccount(c, d.balance, 'Main')]
         };
       }
     }
@@ -2267,8 +2631,7 @@ const Wallets = {
   },
   async genAccount(coin, balance = 0, label = 'Wallet') {
     const r = secureRandomBytes(32);
-    let address;
-    const s = coin.symbol;
+    let address; const s = coin.symbol;
     if (s === 'BTC') address = 'bc1q' + Base58.encode(r).substring(0, 38).toLowerCase();
     else if (['CASH','TIME','GEM','USDT','USDC','BNB','MATIC','LINK','AAVE','UNI','ARB','OP'].includes(s))
       address = '0x' + Array.from(r).map(b => b.toString(16).padStart(2, '0')).join('').substring(0, 40);
@@ -2285,23 +2648,18 @@ const Wallets = {
     let sb = Number(balance);
     if (!Number.isFinite(sb) || sb < 0) sb = 0;
     if (sb > 1e20) sb = 0;
-    return {
-      id: 'acc_' + Base58.encode(secureRandomBytes(12)),
-      label, address, balance: sb, secret, seedPhrase: sw.join(' '),
-      createdAt: Date.now(), txs: []
-    };
+    return { id:'acc_' + Base58.encode(secureRandomBytes(12)), label, address, balance:sb, secret, seedPhrase:sw.join(' '), createdAt:Date.now(), txs:[] };
   },
   getCoinLogo(w) { return CoinLogos.get(w.symbol, w.color); },
   async addCoin(symbol) {
-    const c = COINS_BY_SYMBOL[symbol];
-    if (!c) return false;
+    const c = COINS_BY_SYMBOL[symbol]; if (!c) return false;
     if (this.all[symbol]) { vault.toast(symbol + ' already added', 'warn'); return false; }
     return new Promise(res => {
       TwoFA.request(async () => {
         this.all[symbol] = {
           symbol:c.symbol, name:c.name, chain:c.chain, color:c.color,
           coingeckoId:c.coingeckoId, logo:c.logo, local:c.local,
-          accounts: [await this.genAccount(c, 0, 'Main')]
+          accounts:[await this.genAccount(c, 0, 'Main')]
         };
         await this.save();
         await this.render();
@@ -2317,23 +2675,19 @@ const Wallets = {
   },
   async createNewAccount() {
     if (!this.currentSymbol) return;
-    const s = this.currentSymbol;
-    const c = COINS_BY_SYMBOL[s];
+    const s = this.currentSymbol; const c = COINS_BY_SYMBOL[s];
     if (!c || !this.all[s]) return;
     const n = this.all[s].accounts.length + 1;
     const a = await this.genAccount(c, 0, 'Wallet ' + n);
     this.all[s].accounts.push(a);
-    await this.save();
-    await this.renderDetails(s);
+    await this.save(); await this.renderDetails(s);
     vault.toast('✓ New ' + s + ' wallet created', 'success');
   },
   async deleteAccount(s, id) {
     if (!this.all[s]) return;
     if (this.all[s].accounts.length <= 1) { vault.toast('Cannot delete the only wallet', 'error'); return; }
     this.all[s].accounts = this.all[s].accounts.filter(a => a.id !== id);
-    await this.save();
-    await this.renderDetails(s);
-    await this.render();
+    await this.save(); await this.renderDetails(s); await this.render();
     vault.toast('✓ Wallet deleted', 'success');
   },
   async save() {
@@ -2341,17 +2695,12 @@ const Wallets = {
     this._saveTimer = setTimeout(async () => { await EncryptedStorage.set('wallets', this.all); }, 300);
   },
   async render() {
-    const list = document.getElementById('wallet-list');
-    if (!list) return;
-    if (Object.keys(this.all).length === 0) {
-      list.innerHTML = '<li class="empty-state"><div class="empty-state-title">No wallets</div></li>';
-      return;
-    }
-    const html = Object.values(this.all).map(w => {
+    const list = document.getElementById('wallet-list'); if (!list) return;
+    if (Object.keys(this.all).length === 0) { list.innerHTML = '<li class="empty-state"><div class="empty-state-title">No wallets</div></li>'; return; }
+    list.innerHTML = Object.values(this.all).map(w => {
       const bal = w.accounts.reduce((s, a) => s + (Number(a.balance) || 0), 0);
       const usd = LivePrices.format(bal, w.symbol);
       const logo = CoinLogos.get(w.symbol, w.color);
-      const hasImg = logo && !logo.startsWith('data:') || logo.startsWith('data:');
       return `
         <li class="wallet-item" onclick="Wallets.openDetails('${w.symbol}')" role="button" tabindex="0">
           <div class="wallet-icon" style="background:${w.color}20;">
@@ -2368,17 +2717,14 @@ const Wallets = {
           </div>
         </li>`;
     }).join('');
-    list.innerHTML = html;
     const cnt = document.getElementById('profile-wallet-count');
     if (cnt) cnt.textContent = this.totalCount() + ' wallets';
     if (this._portfolioTimer) clearTimeout(this._portfolioTimer);
     this._portfolioTimer = setTimeout(() => this.renderPortfolio(), 100);
   },
   renderPortfolio() {
-    const c = document.getElementById('portfolio-summary');
-    if (!c) return;
-    let tot = 0;
-    const bd = [];
+    const c = document.getElementById('portfolio-summary'); if (!c) return;
+    let tot = 0; const bd = [];
     for (const w of Object.values(this.all)) {
       const b = w.accounts.reduce((s, a) => s + (Number(a.balance) || 0), 0);
       const p = LivePrices.getPrice(w.symbol);
@@ -2414,13 +2760,11 @@ const Wallets = {
     `;
   },
   async renderTicker() {
-    const t = document.getElementById('price-ticker');
-    if (!t) return;
+    const t = document.getElementById('price-ticker'); if (!t) return;
     const syms = ['BTC','ETH','SOL','BNB','XRP','ADA','DOGE','CASH','AVAX','DOT'];
     await LivePrices.fetch(syms);
     t.innerHTML = syms.map(s => {
-      const c = COINS_BY_SYMBOL[s];
-      if (!c) return '';
+      const c = COINS_BY_SYMBOL[s]; if (!c) return '';
       const p = LivePrices.formatPrice(s);
       const ch = LivePrices.getChange(s);
       const cls = ch >= 0 ? 'up' : 'down';
@@ -2451,8 +2795,7 @@ const Wallets = {
   totalCount() { let c = 0; Object.values(this.all).forEach(w => c += w.accounts.length); return c; },
   openAddCoin() { UI.openModal('modal-add-coin'); this.renderGrid(''); },
   renderGrid(filter) {
-    const g = document.getElementById('coin-grid');
-    if (!g) return;
+    const g = document.getElementById('coin-grid'); if (!g) return;
     const f = (filter || '').toLowerCase().trim();
     const list = COINS_DB.filter(c => !f || c.symbol.toLowerCase().includes(f) || c.name.toLowerCase().includes(f) || c.chain.toLowerCase().includes(f));
     if (!list.length) { g.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="empty-state-title">No results</div></div>'; return; }
@@ -2477,20 +2820,14 @@ const Wallets = {
   async showQR() {
     const w = this.all[this.currentSymbol]; if (!w) return;
     const a = w.accounts.find(x => x.id === this.currentAccountId) || w.accounts[0];
-    const ic = document.getElementById('receive-icon');
-    ic.style.background = w.color + '20';
+    const ic = document.getElementById('receive-icon'); ic.style.background = w.color + '20';
     const l = CoinLogos.get(w.symbol, w.color);
     ic.innerHTML = `<img src="${l}" style="width:100%;height:100%;object-fit:contain;padding:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="wallet-detail-icon-fallback" style="background:${w.color};display:none;">${w.symbol[0]}</div>`;
     document.getElementById('receive-name').textContent = w.name + ' — ' + a.label;
     document.getElementById('receive-address').textContent = a.address;
     const cv = QRCode.generate(a.address, 256);
     const wrap = document.querySelector('#modal-receive .qr-canvas-wrap');
-    if (wrap && cv) {
-      const ex = wrap.querySelector('canvas');
-      cv.id = 'qr-canvas';
-      if (ex) ex.replaceWith(cv); else wrap.insertBefore(cv, wrap.firstChild);
-      this._lastQr = cv;
-    }
+    if (wrap && cv) { const ex = wrap.querySelector('canvas'); cv.id = 'qr-canvas'; if (ex) ex.replaceWith(cv); else wrap.insertBefore(cv, wrap.firstChild); this._lastQr = cv; }
     UI.openModal('modal-receive');
   },
   copyCurrentAddress() { const w = this.all[this.currentSymbol]; if (!w) return; const a = w.accounts.find(x => x.id === this.currentAccountId) || w.accounts[0]; this.copyAddr(a.address); },
@@ -2500,8 +2837,7 @@ const Wallets = {
     const usd = LivePrices.format(bal, s);
     const l = CoinLogos.get(w.symbol, w.color);
     document.getElementById('wallet-details-symbol').textContent = s;
-    const ic = document.getElementById('wallet-detail-icon');
-    ic.style.background = w.color + '20';
+    const ic = document.getElementById('wallet-detail-icon'); ic.style.background = w.color + '20';
     ic.innerHTML = `<img src="${l}" style="width:100%;height:100%;object-fit:contain;padding:8px;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="wallet-detail-icon-fallback" style="background:${w.color};display:none;">${w.symbol[0]}</div>`;
     document.getElementById('wallet-detail-name').textContent = w.name;
     document.getElementById('wallet-detail-balance').textContent = this.fmtBal(bal) + ' ' + s;
@@ -2586,10 +2922,8 @@ const MIN_SWAP_USD = 1;
 const Swap = {
   fromSymbol:'CASH', toSymbol:'BTC', selectedDex:'uniswap', _pickTarget:null,
   renderCoinButtons() {
-    const fI = document.getElementById('swap-from-icon');
-    const fS = document.getElementById('swap-from-symbol');
-    const tI = document.getElementById('swap-to-icon');
-    const tS = document.getElementById('swap-to-symbol');
+    const fI = document.getElementById('swap-from-icon'), fS = document.getElementById('swap-from-symbol');
+    const tI = document.getElementById('swap-to-icon'), tS = document.getElementById('swap-to-symbol');
     const ri = (sym, el) => {
       const c = COINS_BY_SYMBOL[sym]; if (!c) return;
       const l = CoinLogos.get(sym, c.color);
@@ -2684,11 +3018,7 @@ const Swap = {
     if (!p || !d) return 0.5;
     const v = amount * p;
     let s = 0.5;
-    if (v < 100) s = 0.1;
-    else if (v < 1000) s = 0.3;
-    else if (v < 10000) s = 0.5;
-    else if (v < 100000) s = 1.0;
-    else s = 2.0;
+    if (v < 100) s = 0.1; else if (v < 1000) s = 0.3; else if (v < 10000) s = 0.5; else if (v < 100000) s = 1.0; else s = 2.0;
     return s + d.fee * 100 * 0.5;
   },
   calculate() {
@@ -2700,12 +3030,10 @@ const Swap = {
       document.getElementById('swap-slippage').textContent = '0.5%';
       return;
     }
-    const sp = this.slippage(a);
-    const sf = 1 - (sp / 100);
+    const sp = this.slippage(a); const sf = 1 - (sp / 100);
     const gross = a * r * sf;
     if (!Number.isFinite(gross)) return;
-    const fee = gross * PLATFORM_FEE;
-    const net = gross - fee;
+    const fee = gross * PLATFORM_FEE; const net = gross - fee;
     const fmt = net < 0.0001 ? net.toFixed(10) : net.toFixed(8);
     document.getElementById('swap-to-amount').value = fmt;
     document.getElementById('swap-rate').textContent = '1 ' + this.fromSymbol + ' = ' + r.toFixed(8) + ' ' + this.toSymbol;
@@ -2721,8 +3049,7 @@ const Swap = {
     if (p && a * p < MIN_SWAP_USD) { vault.toast('Minimum swap: $' + MIN_SWAP_USD, 'error'); return; }
     const r = this.rate(this.selectedDex);
     if (!r || !Number.isFinite(r) || r <= 0) { vault.toast('Rate unavailable — try another DEX', 'error'); return; }
-    const fW = Wallets.all[this.fromSymbol];
-    if (!fW) { vault.toast('Source wallet not found', 'error'); return; }
+    const fW = Wallets.all[this.fromSymbol]; if (!fW) { vault.toast('Source wallet not found', 'error'); return; }
     const b = fW.accounts.reduce((s, x) => s + (Number(x.balance) || 0), 0);
     if (b < a) { vault.toast(I18N.t('insufficient_balance'), 'error'); return; }
     TwoFA.request(async () => {
@@ -2730,11 +3057,8 @@ const Swap = {
       if (cb < a) { vault.toast('Balance changed — try again', 'error'); return; }
       const acc = fW.accounts.find(x => (Number(x.balance) || 0) >= a);
       if (!acc) { vault.toast('No account with sufficient balance', 'error'); return; }
-      const sp = this.slippage(a);
-      const sf = 1 - (sp / 100);
-      const gross = a * r * sf;
-      const fee = gross * PLATFORM_FEE;
-      const net = gross - fee;
+      const sp = this.slippage(a); const sf = 1 - (sp / 100);
+      const gross = a * r * sf; const fee = gross * PLATFORM_FEE; const net = gross - fee;
       acc.balance = Number(acc.balance) - a;
       acc.txs = acc.txs || [];
       const hash = 'swap_' + Date.now().toString(36) + '_' + Base58.encode(secureRandomBytes(4));
@@ -2794,22 +3118,15 @@ const History = {
   getAll() {
     const a = [];
     Object.values(Wallets.all).forEach(w => {
-      w.accounts.forEach(acc => {
-        (acc.txs || []).forEach(tx => a.push({ ...tx, symbol:w.symbol, accountLabel:acc.label }));
-      });
+      w.accounts.forEach(acc => { (acc.txs || []).forEach(tx => a.push({ ...tx, symbol:w.symbol, accountLabel:acc.label })); });
     });
-    a.sort((x, y) => y.timestamp - x.timestamp);
-    return a;
+    a.sort((x, y) => y.timestamp - x.timestamp); return a;
   },
   render() {
     const c = document.getElementById('tx-history-container'); if (!c) return;
     let txs = this.getAll();
     if (this.currentFilter !== 'all') txs = txs.filter(tx => tx.direction === this.currentFilter);
-    if (!txs.length) {
-      c.innerHTML = '<div class="empty-state"><div class="empty-state-title">No transactions</div><div class="empty-state-text">Your history will appear here</div></div>';
-      this._lastSig = null;
-      return;
-    }
+    if (!txs.length) { c.innerHTML = '<div class="empty-state"><div class="empty-state-title">No transactions</div><div class="empty-state-text">Your history will appear here</div></div>'; this._lastSig = null; return; }
     const vis = txs.slice(0, 100);
     const sig = vis.slice(0, 20).map(t => t.hash || t.timestamp).join('|');
     if (this._lastSig === sig && c.children.length > 0) return;
@@ -2871,11 +3188,7 @@ const Send = {
     this.method = m;
     document.querySelectorAll('.send-tab').forEach(t => t.classList.toggle('active', t.dataset.method === m));
     const i = document.getElementById('send-to');
-    if (i) {
-      if (m === 'username') i.placeholder = '@username';
-      else if (m === 'phone') i.placeholder = '501234567';
-      else i.placeholder = '0x... / bc1...';
-    }
+    if (i) { if (m === 'username') i.placeholder = '@username'; else if (m === 'phone') i.placeholder = '501234567'; else i.placeholder = '0x... / bc1...'; }
     const h = document.getElementById('send-to-hint'); if (h) { h.textContent = ''; h.className = 'form-input-hint'; }
     if (i) i.classList.remove('valid', 'error');
   },
@@ -2907,14 +3220,11 @@ const Send = {
   validate() {
     const i = document.getElementById('send-to'); const h = document.getElementById('send-to-hint');
     if (!i || !h) return;
-    const v = i.value.trim();
-    i.classList.remove('valid', 'error');
-    h.textContent = ''; h.className = 'form-input-hint';
+    const v = i.value.trim(); i.classList.remove('valid', 'error'); h.textContent = ''; h.className = 'form-input-hint';
     if (!v) return;
     if (this.method === 'username') {
-      if (/^[a-z0-9_\u0590-\u05FF\u0600-\u06FF]{3,30}$/i.test(v.replace(/^@/, ''))) {
-        i.classList.add('valid'); h.textContent = '✓ Valid'; h.className = 'form-input-hint valid';
-      } else { i.classList.add('error'); h.textContent = '✗ 3-30 chars'; h.className = 'form-input-hint error'; }
+      if (/^[a-z0-9_\u0590-\u05FF\u0600-\u06FF]{3,30}$/i.test(v.replace(/^@/, ''))) { i.classList.add('valid'); h.textContent = '✓ Valid'; h.className = 'form-input-hint valid'; }
+      else { i.classList.add('error'); h.textContent = '✗ 3-30 chars'; h.className = 'form-input-hint error'; }
     } else if (this.method === 'phone') {
       const d = this.normDigits(v);
       if (d.length >= 7 && d.length <= 15) { i.classList.add('valid'); h.textContent = '✓ Valid'; h.className = 'form-input-hint valid'; }
@@ -2941,8 +3251,7 @@ const Send = {
     if (!aC.valid) { vault.toast(aC.error || 'Invalid amount', 'error'); return; }
     const a = aC.value;
     const s = this.selectedCoin;
-    const w = Wallets.all[s];
-    if (!w) { vault.toast('Coin not found', 'error'); return; }
+    const w = Wallets.all[s]; if (!w) { vault.toast('Coin not found', 'error'); return; }
     const b = w.accounts.reduce((sum, x) => sum + (Number(x.balance) || 0), 0);
     if (!Number.isFinite(b) || b < a) { vault.toast(I18N.t('insufficient_balance'), 'error'); return; }
     vault.armAutoScrubber();
@@ -2953,11 +3262,7 @@ const Send = {
       if (!acc) { vault.toast('No account with sufficient balance', 'error'); return; }
       acc.balance = Number(acc.balance) - a;
       acc.txs = acc.txs || [];
-      acc.txs.unshift({
-        direction:'out', amount:a, counterparty:to, method:this.method,
-        timestamp:Date.now(), hash:'tx_' + Date.now().toString(36) + '_' + Base58.encode(secureRandomBytes(4)),
-        recipientPhone: this.method === 'phone' ? to : null
-      });
+      acc.txs.unshift({ direction:'out', amount:a, counterparty:to, method:this.method, timestamp:Date.now(), hash:'tx_' + Date.now().toString(36) + '_' + Base58.encode(secureRandomBytes(4)), recipientPhone: this.method === 'phone' ? to : null });
       if (this.method === 'phone') {
         const n = this.normDigits(to);
         const cc = (Profile.data.countryCode || '').replace('+', '');
@@ -2968,11 +3273,8 @@ const Send = {
         if (idx[np].length > 100) idx[np] = idx[np].slice(-100);
         Storage.set('phone_index', idx);
       }
-      await Wallets.save();
-      await Wallets.render();
-      await Wallets.renderDetails(s);
-      History._lastSig = null;
-      History.render();
+      await Wallets.save(); await Wallets.render(); await Wallets.renderDetails(s);
+      History._lastSig = null; History.render();
       vault.log('Sent ' + a + ' ' + s, 'success');
       vault.toast('✓ ' + I18N.t('sent_success'), 'success');
       document.getElementById('send-to').value = '';
@@ -2999,14 +3301,11 @@ const PhoneLookup = {
     const mine = [];
     Object.values(Wallets.all).forEach(w => {
       w.accounts.forEach(acc => {
-        (acc.txs || []).forEach(tx => {
-          if (tx.recipientPhone === p || tx.recipientPhone === np || tx.counterparty === np || tx.counterparty === p) mine.push({ ...tx, symbol:w.symbol });
-        });
+        (acc.txs || []).forEach(tx => { if (tx.recipientPhone === p || tx.recipientPhone === np || tx.counterparty === np || tx.counterparty === p) mine.push({ ...tx, symbol:w.symbol }); });
       });
     });
     const all = [...inc, ...mine].sort((x, y) => y.timestamp - x.timestamp);
-    const uniq = [];
-    const seen = new Set();
+    const uniq = []; const seen = new Set();
     for (const tx of all) { const k = tx.hash || tx.timestamp + '_' + tx.amount; if (!seen.has(k)) { seen.add(k); uniq.push(tx); } }
     const c = document.getElementById('phone-lookup-results');
     if (!uniq.length) { c.innerHTML = '<div class="empty-state" style="padding:20px;"><div class="empty-state-text">' + I18N.t('no_transfers') + '</div></div>'; return; }
@@ -3030,8 +3329,7 @@ const PhoneLookup = {
    ============================================================ */
 const QR = {
   download() {
-    const c = Wallets._lastQr;
-    if (!c) { vault.toast('QR not ready', 'error'); return; }
+    const c = Wallets._lastQr; if (!c) { vault.toast('QR not ready', 'error'); return; }
     const w = Wallets.all[Wallets.currentSymbol];
     const a = w?.accounts.find(x => x.id === Wallets.currentAccountId) || w?.accounts[0];
     const l = document.createElement('a');
@@ -3043,7 +3341,7 @@ const QR = {
 };
 
 /* ============================================================
-   2FA — FIXED double-execution
+   2FA
    ============================================================ */
 const TwoFA = {
   pendingCallback:null, _verifying:false, _autoTriggered:false,
@@ -3054,10 +3352,7 @@ const TwoFA = {
     this._autoTriggered = false;
     UI.openModal('modal-2fa');
     setTimeout(() => {
-      if (this.pendingCallback && !this._verifying && !this._autoTriggered) {
-        this._autoTriggered = true;
-        this.verify();
-      }
+      if (this.pendingCallback && !this._verifying && !this._autoTriggered) { this._autoTriggered = true; this.verify(); }
     }, 500);
   },
   async verify() {
@@ -3071,8 +3366,7 @@ const TwoFA = {
     } catch(e) {
       if (this.pendingCallback) { const cb = this.pendingCallback; this.pendingCallback = null; UI.closeModal('modal-2fa'); await cb(); }
     } finally {
-      this._verifying = false;
-      this._autoTriggered = false;
+      this._verifying = false; this._autoTriggered = false;
       if (btn) { btn.disabled = false; btn.classList.remove('loading'); }
     }
   },
@@ -3082,7 +3376,7 @@ const TwoFA = {
     if (!cid) { await new Promise(r => setTimeout(r, 600)); return; }
     try {
       const ch = secureRandomBytes(32);
-      await navigator.credentials.get({ publicKey: { challenge:ch, rpId:window.location.hostname, allowCredentials:[{ id:Identity.b64ToBuf(cid), type:'public-key', transports:['internal'] }], userVerification:'required', timeout:30000 } });
+      await navigator.credentials.get({ publicKey:{ challenge:ch, rpId:window.location.hostname, allowCredentials:[{ id:Identity.b64ToBuf(cid), type:'public-key', transports:['internal'] }], userVerification:'required', timeout:30000 } });
     } catch(e) {}
   },
   cancel() { this.pendingCallback = null; this._verifying = false; this._autoTriggered = false; }
@@ -3131,7 +3425,7 @@ const Profile = {
     st.textContent = 'Checking...'; st.className = 'form-input-hint';
     clearTimeout(this._timer);
     this._timer = setTimeout(() => {
-      const taken = ['admin', 'root', 'cofc', 'cash', 'test', 'user'].includes(s);
+      const taken = ['admin','root','cofc','cash','test','user'].includes(s);
       if (taken) { st.textContent = '✗ Taken'; st.className = 'form-input-hint error'; }
       else { st.textContent = '✓ Available'; st.className = 'form-input-hint valid'; }
     }, 500);
@@ -3207,8 +3501,7 @@ const UI = {
     if (vault.isLoggedIn) vault.armAutoScrubber();
   },
   closeModal(id) {
-    const m = document.getElementById(id);
-    if (!m) return;
+    const m = document.getElementById(id); if (!m) return;
     m.classList.remove('active');
     this.release(m);
   },
@@ -3235,47 +3528,34 @@ const UI = {
 };
 
 /* ============================================================
-   LOGIN FLOW — TRIPLE LOCK (FIX #155)
+   LOGIN FLOW — TRIPLE LOCK
    ============================================================ */
 const LoginFlow = {
-  _mutex: false,
-  _state: 'idle',
-  
+  _mutex:false, _state:'idle',
   async start() {
-    // LOCK 1: mutex
     if (this._mutex) return;
-    // LOCK 2: state must be idle or error
     if (this._state !== 'idle' && this._state !== 'error') return;
     this._mutex = true;
     this._state = 'scanning';
-    
     const scanner = document.getElementById('face-scanner');
     const statusEl = document.getElementById('login-status');
     const pc = document.getElementById('progress-circle');
     const chips = { blink:document.getElementById('chip-blink'), turn:document.getElementById('chip-turn'), smile:document.getElementById('chip-smile') };
-    
-    // CRITICAL: Reset ALL state
     Object.values(chips).forEach(c => c.classList.remove('active','done'));
     if (pc) pc.style.strokeDashoffset = 1005;
     scanner.classList.remove('success','error');
     scanner.classList.add('scanning','disabled');
     statusEl.textContent = I18N.t('scan_starting');
     statusEl.className = 'login-status active';
-    
     let entropy = null;
     let livenessOK = false;
-    
     try {
-      // PRE-CHECK
       if (!window.isSecureContext) throw new Error('HTTPS required');
-      
-      // STEP 1: Camera + Liveness
       try {
         await FaceLiveness.start();
         scanner.classList.add('camera-active');
         statusEl.textContent = I18N.t('scan_position');
         await new Promise(r => setTimeout(r, 1500));
-        
         entropy = await FaceLiveness.runCheck((p) => {
           if (this._state !== 'scanning') return;
           Object.values(chips).forEach(c => c.classList.remove('active','done'));
@@ -3288,11 +3568,8 @@ const LoginFlow = {
           statusEl.textContent = p.hint;
           if (pc) pc.style.strokeDashoffset = 1005 * (1 - (p.completed + 0.5) / 3);
         });
-        
-        // LOCK 3: Verify entropy
         if (!entropy || !(entropy instanceof Uint8Array) || entropy.length !== 64) throw new Error('Invalid biometric data');
         livenessOK = true;
-        
         Object.values(chips).forEach(c => { c.classList.remove('active'); c.classList.add('done'); });
         if (pc) pc.style.strokeDashoffset = 0;
         statusEl.textContent = I18N.t('scan_done');
@@ -3301,21 +3578,14 @@ const LoginFlow = {
         FaceLiveness.stop();
         scanner.classList.remove('camera-active','scanning');
       }
-      
       if (!livenessOK || !entropy) throw new Error('Liveness incomplete');
-      
-      // STEP 2: Identity
       this._state = 'verifying';
       scanner.classList.add('success');
       statusEl.textContent = 'Verifying identity...';
       statusEl.className = 'login-status active';
-      
       const ident = await Identity.authenticate();
       if (!ident || !ident.fingerprint) throw new Error('Identity verification failed');
-      
       await vault.deriveKeysInRAM(entropy);
-      
-      // STEP 3: Load profile
       const exProf = Storage.get('profile');
       if (ident.isNew && !exProf) {
         const sfx = Math.floor(Math.random() * 9000) + 1000;
@@ -3327,8 +3597,6 @@ const LoginFlow = {
         await Profile.init();
         vault.toast('👋 Welcome back', 'success');
       }
-      
-      // STEP 4: Load Wallets BEFORE showing dashboard
       this._state = 'opening';
       await Wallets.init();
       await Wallets.render();
@@ -3336,19 +3604,13 @@ const LoginFlow = {
       Send.renderCoinSelector();
       History._lastSig = null;
       History.render();
-      
-      // STEP 5: Wait for UI
       await new Promise(r => setTimeout(r, 700));
-      
-      // STEP 6: Show dashboard ONLY NOW
       document.getElementById('login-screen').style.display = 'none';
       document.getElementById('app-screen').classList.add('visible');
       document.getElementById('profile-header').classList.add('visible');
       document.getElementById('header-user').classList.add('visible');
-      
       this._state = 'idle';
       vault.log('System ready', 'info');
-      
     } catch(e) {
       this._state = 'error';
       FaceLiveness.stop();
@@ -3376,35 +3638,28 @@ const LoginFlow = {
 /* ============================================================
    BOOTSTRAP
    ============================================================ */
-function onReady(fn) {
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
-  else fn();
-}
+function onReady(fn) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn(); }
 
 onReady(async () => {
   I18N.init();
   await Settings.init();
   await FaceLiveness.init();
   await Profile.init();
-  
   let curr = 'usd';
-  try { curr = localStorage.getItem('cofc_v11_curr') || 'usd'; } catch(e){}
+  try { curr = localStorage.getItem('cofc_v12_curr') || 'usd'; } catch(e){}
   LivePrices.setCurrency(curr);
-  
   const hf = Storage.get('history_filter');
   if (hf) { History.currentFilter = hf; document.querySelectorAll('.tx-filter').forEach(el => el.classList.toggle('active', el.dataset.filter === hf)); }
-  
   const lc = document.getElementById('lookup-country');
   if (lc) lc.innerHTML = COUNTRY_CODES.map(c => '<option value="' + c.code + '">' + c.flag + ' ' + c.code + '</option>').join('');
-  
-  // Loading
+
   const overlay = document.getElementById('loading-overlay');
   const fill = document.getElementById('loading-bar-fill');
   const status = document.getElementById('loading-status');
   const steps = [
     { pct:20, msg:'Initializing WebCrypto...' },
     { pct:40, msg:'Loading 48 coins...' },
-    { pct:60, msg:'Preloading TrustWallet logos...' },
+    { pct:60, msg:'Preloading logos from cofc.io...' },
     { pct:80, msg:'Connecting live prices...' },
     { pct:100, msg:'Ready ✓' }
   ];
@@ -3419,20 +3674,17 @@ onReady(async () => {
   };
   step();
   setTimeout(() => { if (overlay && !overlay.classList.contains('hidden')) overlay.classList.add('hidden'); }, 8000);
-  
-  // Start logo preload in background
   CoinLogos.preload(['BTC','ETH','SOL','BNB','XRP','ADA','DOGE','CASH','AVAX','DOT']);
-  
-  // Login
+
   const scanner = document.getElementById('face-scanner');
   const start = () => LoginFlow.start();
   scanner.addEventListener('click', start);
   scanner.addEventListener('touchend', (e) => { e.preventDefault(); start(); }, { passive:false });
   scanner.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); start(); } });
-  
+
   document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => UI.switchTab(b.dataset.tab)));
   document.addEventListener('keydown', (e) => { if (e.target.matches('input, textarea')) return; if (['1','2','3','4','5'].includes(e.key)) UI.switchTab(['wallets','swap','send','history','lookup'][parseInt(e.key)-1]); });
-  
+
   const sendTo = document.getElementById('send-to'); if (sendTo) sendTo.addEventListener('input', () => Send.validate());
   const sendAmount = document.getElementById('send-amount');
   if (sendAmount) sendAmount.addEventListener('input', () => {
@@ -3444,41 +3696,38 @@ onReady(async () => {
   });
   const btnSend = document.getElementById('btn-send');
   if (btnSend) btnSend.addEventListener('click', async () => { if (btnSend.classList.contains('loading')) return; btnSend.disabled = true; btnSend.classList.add('loading'); try { await Send.execute(); } finally { btnSend.disabled = false; btnSend.classList.remove('loading'); } });
-  
+
   const swapFrom = document.getElementById('swap-from-amount'); if (swapFrom) swapFrom.addEventListener('input', () => Swap.calculate());
   const btnSwap = document.getElementById('btn-swap-execute');
   if (btnSwap) btnSwap.addEventListener('click', async () => { if (btnSwap.classList.contains('loading')) return; btnSwap.disabled = true; btnSwap.classList.add('loading'); try { await Swap.execute(); } finally { btnSwap.disabled = false; btnSwap.classList.remove('loading'); } });
   const ps = document.getElementById('picker-search-input'); if (ps) ps.addEventListener('input', function() { Swap.renderPicker(this.value); });
-  
+
   document.querySelectorAll('.tx-filter').forEach(f => f.addEventListener('click', () => History.setFilter(f.dataset.filter)));
-  
+
   const btnLookup = document.getElementById('btn-lookup');
   if (btnLookup) btnLookup.addEventListener('click', async () => { if (btnLookup.classList.contains('loading')) return; btnLookup.disabled = true; btnLookup.classList.add('loading'); try { await PhoneLookup.lookup(); } finally { btnLookup.disabled = false; btnLookup.classList.remove('loading'); } });
-  
+
   const btnLock = document.getElementById('btn-lock'); if (btnLock) btnLock.addEventListener('click', () => vault.zeroizeMemory());
-  
   const btn2fa = document.getElementById('btn-2fa-verify'); if (btn2fa) btn2fa.addEventListener('click', () => TwoFA.verify());
   const btn2faC = document.getElementById('btn-2fa-cancel'); if (btn2faC) btn2faC.addEventListener('click', () => { UI.closeModal('modal-2fa'); TwoFA.cancel(); });
-  
+
   const av = document.getElementById('avatar-upload-input');
   if (av) av.addEventListener('change', async e => { const f = e.target.files[0]; if (f) await Profile.uploadAvatar(f); av.value = ''; });
-  
   const cs = document.getElementById('coin-search-input'); if (cs) cs.addEventListener('input', function() { Wallets.filterCoins(this.value); });
-  
   const btnSP = document.getElementById('btn-save-profile');
   if (btnSP) btnSP.addEventListener('click', async () => { btnSP.disabled = true; btnSP.classList.add('loading'); try { Profile.saveProfile(); } finally { btnSP.disabled = false; btnSP.classList.remove('loading'); } });
-  
+
   document.querySelectorAll('.modal').forEach(m => {
     let mdt = null;
     m.addEventListener('mousedown', e => { mdt = e.target; });
     m.addEventListener('click', e => { if (e.target === m && mdt === m) UI.closeModal(m.id); });
   });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { const a = document.querySelector('.modal.active'); if (a) UI.closeModal(a.id); } });
-  
+
   let at = null;
   const ra = () => { if (!vault.isLoggedIn) return; if (at) return; at = setTimeout(() => { vault.armAutoScrubber(); at = null; }, 500); };
   ['mousemove','keypress','touchstart','click','scroll'].forEach(e => document.addEventListener(e, ra, { passive:true }));
-  
+
   document.addEventListener('visibilitychange', () => {
     if (LoginFlow._mutex) return;
     if (document.hidden && vault.isLoggedIn) {
@@ -3487,7 +3736,7 @@ onReady(async () => {
     } else if (!document.hidden && vault.graceTimer) { clearTimeout(vault.graceTimer); vault.graceTimer = null; vault.armAutoScrubber(); }
     if (!document.hidden && FaceLiveness.active && FaceLiveness.video) FaceLiveness.video.play().catch(() => {});
   });
-  
+
   window.addEventListener('beforeunload', () => vault.zeroizeMemory());
 });
 
@@ -3497,4 +3746,4 @@ window.TwoFA = TwoFA; window.I18N = I18N; window.Swap = Swap; window.Settings = 
 })();
 </script>
 </body>
-  </html>
+           </html>
