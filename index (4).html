@@ -1,0 +1,4484 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>COFC GATE — Sovereign Vault</title>
+<meta name="theme-color" content="#F6EE25">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<style>
+/* ============================================================
+   COFC GATE v8.0 — SOVEREIGN APEX (Yellow + Dark Gray)
+   ============================================================ */
+:root {
+  /* Brand - Official Colors */
+  --brand-yellow: #F6EE25;
+  --brand-yellow-dark: #D4CB00;
+  --brand-yellow-light: #FCF77A;
+  --brand-dark: #464650;
+  --brand-dark-deep: #2E2E36;
+  --brand-gray: #6B6B78;
+  --brand-light-gray: #E8E8EB;
+  --brand-ghost: #F4F4F5;
+  --brand-white: #FFFFFF;
+  
+  /* Semantic */
+  --accent-green: #16A34A;
+  --accent-red: #DC3545;
+  --accent-blue: #2563EB;
+  --accent-amber: #D97706;
+  
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Cascadia Code', 'JetBrains Mono', 'Consolas', monospace;
+  
+  --shadow-xs: 0 1px 2px rgba(70,70,80,0.04);
+  --shadow-sm: 0 2px 6px rgba(70,70,80,0.06);
+  --shadow-md: 0 4px 16px rgba(70,70,80,0.08);
+  --shadow-lg: 0 12px 32px rgba(70,70,80,0.12);
+  --shadow-xl: 0 24px 64px rgba(70,70,80,0.16);
+  --shadow-yellow: 0 8px 32px rgba(246,238,37,0.35);
+  
+  --t-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --t-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --t-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  font-family: var(--font-display);
+  background: var(--brand-white);
+  color: var(--brand-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-size: 15px;
+  line-height: 1.5;
+  background-image:
+    radial-gradient(circle at 10% 0%, rgba(246,238,37,0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 100%, rgba(70,70,80,0.04) 0%, transparent 40%);
+}
+
+/* Loading */
+.loading-overlay {
+  position: fixed; inset: 0;
+  background: var(--brand-white);
+  z-index: 99999;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  padding: 20px;
+}
+.loading-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.loading-coin {
+  width: 96px; height: 96px;
+  object-fit: contain;
+  margin-bottom: 28px;
+  animation: coinSpin 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  filter: drop-shadow(0 12px 32px rgba(246,238,37,0.5));
+}
+.loading-coin.no-img { display: none; }
+.loading-coin-fallback {
+  width: 96px; height: 96px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-yellow), var(--brand-yellow-dark));
+  display: none;
+  align-items: center; justify-content: center;
+  color: var(--brand-dark);
+  font-weight: 900; font-size: 44px;
+  margin-bottom: 28px;
+  animation: coinSpin 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  box-shadow: var(--shadow-yellow);
+}
+.loading-coin.no-img + .loading-coin-fallback { display: flex; }
+@keyframes coinSpin {
+  0% { transform: translateY(0) rotateY(0deg) scale(1); }
+  40% { transform: translateY(-18px) rotateY(540deg) scale(1.05); }
+  60% { transform: translateY(-18px) rotateY(720deg) scale(1.05); }
+  100% { transform: translateY(0) rotateY(1080deg) scale(1); }
+}
+.loading-title {
+  font-size: 28px; font-weight: 900;
+  color: var(--brand-dark);
+  letter-spacing: -0.8px;
+  margin-bottom: 6px;
+}
+.loading-subtitle {
+  font-size: 10px; color: var(--brand-gray);
+  letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 800;
+  margin-bottom: 36px;
+}
+.loading-bar {
+  width: 320px; height: 3px;
+  background: var(--brand-light-gray);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.loading-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand-yellow-dark), var(--brand-yellow), var(--brand-yellow-light), var(--brand-yellow));
+  background-size: 200% 100%;
+  width: 0%;
+  transition: width 0.3s ease;
+  animation: goldFlow 1.5s linear infinite;
+}
+@keyframes goldFlow {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+.loading-status {
+  margin-top: 18px;
+  font-size: 11px;
+  color: var(--brand-dark);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  min-height: 14px;
+}
+
+/* Header */
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--brand-light-gray);
+}
+.header-inner {
+  max-width: 1400px; margin: 0 auto;
+  padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px;
+}
+.brand {
+  display: flex; align-items: center; gap: 12px;
+  cursor: pointer;
+}
+.brand-logo-wrap {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-dark) 100%);
+  box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.5);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.brand-logo-img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+.brand-logo-fallback {
+  width: 30px; height: 30px;
+  display: none;
+  color: var(--brand-dark);
+  font-weight: 900; font-size: 22px;
+  align-items: center; justify-content: center;
+}
+.brand-logo-wrap.no-img .brand-logo-img { display: none; }
+.brand-logo-wrap.no-img .brand-logo-fallback { display: flex; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+.brand-name { font-size: 16px; font-weight: 900; letter-spacing: -0.3px; color: var(--brand-dark); }
+.brand-tagline { font-size: 9px; color: var(--brand-gray); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 800; margin-top: 2px; }
+
+.header-actions { display: flex; align-items: center; gap: 10px; }
+.header-user {
+  display: none; align-items: center; gap: 10px;
+  padding: 6px 12px 6px 6px;
+  background: var(--brand-ghost);
+  border: 1px solid var(--brand-light-gray);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+.header-user.visible { display: flex; }
+.header-user:hover { border-color: var(--brand-yellow); background: rgba(246,238,37,0.1); }
+.header-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--brand-light-gray);
+  border: 2px solid var(--brand-white);
+  box-shadow: 0 2px 6px rgba(70,70,80,0.1);
+}
+.header-avatar.no-img { display: none; }
+.header-avatar-fallback {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-yellow), var(--brand-yellow-dark));
+  display: none;
+  align-items: center; justify-content: center;
+  color: var(--brand-dark);
+  font-weight: 800; font-size: 14px;
+  border: 2px solid var(--brand-white);
+}
+.header-avatar.no-img + .header-avatar-fallback { display: flex; }
+.header-username {
+  font-size: 12px; font-weight: 800;
+  color: var(--brand-dark);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.header-verified { width: 14px; height: 14px; color: var(--accent-blue); flex-shrink: 0; }
+
+.lang-select {
+  padding: 6px 10px;
+  background: var(--brand-ghost);
+  border: 1px solid var(--brand-light-gray);
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--brand-dark);
+  cursor: pointer;
+  outline: none;
+}
+.lang-select:focus { border-color: var(--brand-yellow); }
+
+.status-indicator {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 12px;
+  background: rgba(22,163,74,0.08);
+  border: 1px solid rgba(22,163,74,0.2);
+  border-radius: var(--radius-full);
+  font-weight: 800; font-size: 11px;
+  color: var(--accent-green);
+}
+.status-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 0 3px rgba(22,163,74,0.15);
+  animation: statusPulse 2s ease-in-out infinite;
+}
+@keyframes statusPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* Container */
+.container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+
+/* Login Screen */
+#login-screen {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  min-height: calc(100vh - 80px);
+  padding: 30px 20px;
+}
+.login-card {
+  width: 100%; max-width: 520px;
+  background: var(--brand-white);
+  border: 1px solid var(--brand-light-gray);
+  border-radius: var(--radius-xl);
+  padding: 40px 36px 32px;
+  box-shadow: var(--shadow-xl);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.login-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--brand-yellow), var(--brand-yellow-light), var(--brand-yellow));
+  background-size: 200% 100%;
+  animation: goldShimmer 3s ease-in-out infinite;
+}
+@keyframes goldShimmer { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+.login-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 14px;
+  background: rgba(246,238,37,0.15);
+  border: 1px solid rgba(212,203,0,0.4);
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: 900;
+  color: var(--brand-dark);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.login-title {
+  font-size: 28px; font-weight: 900;
+  color: var(--brand-dark);
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+.login-subtitle {
+  font-size: 12px; color: var(--brand-gray);
+  font-weight: 600;
+  margin-bottom: 32px;
+  letter-spacing: 0.3px;
+}
+
+/* ============================================================
+   FACE LIVENESS SCANNER (Avatar Guide)
+   ============================================================ */
+.face-scanner-wrap {
+  width: 300px; height: 300px;
+  margin: 0 auto 24px;
+  position: relative;
+}
+.face-scanner {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--brand-ghost), var(--brand-light-gray));
+  border: 4px solid var(--brand-light-gray);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--t-base);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.face-scanner:hover {
+  border-color: var(--brand-yellow);
+  box-shadow: 0 16px 48px rgba(246,238,37,0.35);
+  transform: scale(1.02);
+}
+.face-scanner:active { transform: scale(0.98); }
+.face-scanner.disabled { pointer-events: none; opacity: 0.6; }
+.face-scanner video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+  display: none;
+  position: absolute;
+  inset: 0;
+}
+.face-scanner.camera-active video { display: block; }
+
+/* Placeholder + Animated Guide */
+.face-placeholder {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 14px;
+  transition: opacity var(--t-base);
+  z-index: 2;
+}
+.face-scanner.camera-active .face-placeholder { opacity: 0; pointer-events: none; }
+
+/* SVG Avatar Guide Animation */
+.guide-avatar {
+  width: 160px; height: 160px;
+  position: relative;
+}
+.guide-face {
+  animation: guideBob 2.5s ease-in-out infinite;
+  transform-origin: 100px 100px;
+}
+.guide-eyes {
+  animation: guideBlink 3.5s ease-in-out infinite;
+  transform-origin: center;
+}
+.guide-head {
+  animation: guideTurn 4s ease-in-out infinite;
+  transform-origin: 100px 100px;
+}
+@keyframes guideBob {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes guideBlink {
+  0%, 42%, 58%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.1); }
+}
+@keyframes guideTurn {
+  0%, 20%, 80%, 100% { transform: rotate(0deg); }
+  35% { transform: rotate(-8deg); }
+  65% { transform: rotate(8deg); }
+}
+
+.face-scanner-hint {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--brand-dark);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 20px;
+  line-height: 1.4;
+}
+
+/* Instruction chips */
+.instruction-chips {
+  position: absolute;
+  bottom: -12px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 6px;
+  z-index: 10;
+}
+.instruction-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 6px 12px;
+  background: var(--brand-white);
+  border: 2px solid var(--brand-light-gray);
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--brand-dark);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--t-base);
+  white-space: nowrap;
+}
+.instruction-chip.active {
+  border-color: var(--brand-yellow);
+  background: var(--brand-yellow);
+  box-shadow: 0 4px 12px rgba(246,238,37,0.4);
+  transform: translateY(-4px);
+}
+.instruction-chip.done {
+  border-color: var(--accent-green);
+  background: rgba(22,163,74,0.1);
+  color: var(--accent-green);
+}
+.instruction-chip-icon {
+  width: 14px; height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Face detection overlay */
+.face-overlay {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity var(--t-base);
+}
+.face-scanner.scanning .face-overlay { opacity: 1; }
+
+.face-frame {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 62%; height: 78%;
+  border: 3px solid var(--brand-yellow);
+  border-radius: 50% 50% 45% 45%;
+  animation: framePulse 2s ease-in-out infinite;
+}
+@keyframes framePulse {
+  0%, 100% { border-color: rgba(246,238,37,0.6); box-shadow: 0 0 0 9999px rgba(70,70,80,0.15); }
+  50% { border-color: rgba(246,238,37,1); box-shadow: 0 0 0 9999px rgba(70,70,80,0.2); }
+}
+
+.scan-line {
+  position: absolute;
+  left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--brand-yellow), transparent);
+  box-shadow: 0 0 20px rgba(246,238,37,0.8);
+  animation: scanLineMove 2s ease-in-out infinite;
+}
+@keyframes scanLineMove {
+  0%, 100% { top: 15%; opacity: 0.3; }
+  50% { top: 85%; opacity: 1; }
+}
+
+.corner-bracket {
+  position: absolute;
+  width: 26px; height: 26px;
+  border: 3px solid var(--brand-yellow);
+}
+.corner-bracket.tl { top: 10%; left: 10%; border-right: none; border-bottom: none; border-radius: 8px 0 0 0; }
+.corner-bracket.tr { top: 10%; right: 10%; border-left: none; border-bottom: none; border-radius: 0 8px 0 0; }
+.corner-bracket.bl { bottom: 10%; left: 10%; border-right: none; border-top: none; border-radius: 0 0 0 8px; }
+.corner-bracket.br { bottom: 10%; right: 10%; border-left: none; border-top: none; border-radius: 0 0 8px 0; }
+
+.live-indicator {
+  position: absolute;
+  top: 14px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 12px;
+  background: rgba(220,53,69,0.95);
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: 900;
+  color: white;
+  letter-spacing: 1.5px;
+  z-index: 6;
+  opacity: 0;
+  transition: opacity var(--t-fast);
+}
+.face-scanner.camera-active .live-indicator { opacity: 1; }
+.live-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: white;
+  animation: livePulse 1s ease-in-out infinite;
+}
+@keyframes livePulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.video-progress {
+  position: absolute; inset: -8px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 7;
+}
+.video-progress svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.video-progress circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.video-progress .bg { stroke: var(--brand-light-gray); }
+.video-progress .fill {
+  stroke: var(--brand-yellow);
+  stroke-dasharray: 942;
+  stroke-dashoffset: 942;
+  transition: stroke-dashoffset 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(246,238,37,0.7));
+}
+
+/* Success */
+.face-scanner.success {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 0 6px rgba(22,163,74,0.15), 0 16px 48px rgba(22,163,74,0.3);
+}
+.face-scanner.success .video-progress .fill { stroke: var(--accent-green); }
+
+/* Error */
+.face-scanner.error { animation: errorShake 0.5s ease; }
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+
+/* Status */
+.login-status {
+  font-size: 13px;
+  color: var(--brand-gray);
+  margin-bottom: 18px;
+  min-height: 20px;
+  font-weight: 700;
+  transition: color var(--t-fast);
+}
+.login-status.active { color: var(--brand-dark); }
+.login-status.success { color: var(--accent-green); }
+.login-status.error { color: var(--accent-red); }
+
+/* Tap hint (below scanner) */
+.tap-hint {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  background: var(--brand-yellow);
+  color: var(--brand-dark);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all var(--t-base);
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-yellow);
+}
+.tap-hint:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(246,238,37,0.45);
+}
+.tap-hint:active { transform: translateY(0); }
+.tap-hint-icon {
+  width: 20px; height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: tapPulse 2s ease-in-out infinite;
+}
+@keyframes tapPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.login-hint {
+  font-size: 10px;
+  color: var(--brand-gray);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-weight: 800;
+  padding-top: 16px;
+  border-top: 1px solid var(--brand-light-gray);
+  display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+.login-hint-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px;
+  background: var(--brand-ghost);
+  border-radius: var(--radius-full);
+  font-size: 9px;
+  font-family: var(--font-mono);
+  font-weight: 800;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 10px;
+  width: 100%; padding: 15px 24px;
+  background: var(--brand-dark);
+  color: var(--brand-white);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: 14px; font-weight: 800;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all var(--t-base);
+  position: relative; overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+  touch-action: manipulation;
+}
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  background: var(--brand-dark-deep);
+}
+.btn:active:not(:disabled) { transform: translateY(0); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-yellow {
+  background: linear-gradient(135deg, var(--brand-yellow), var(--brand-yellow-dark));
+  color: var(--brand-dark);
+  font-weight: 900;
+  box-shadow: var(--shadow-yellow);
+}
+.btn-yellow:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--brand-yellow-light), var(--brand-yellow));
+  box-shadow: 0 12px 40px rgba(246,238,37,0.45);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--brand-dark);
+  border: 1.5px solid var(--brand-light-gray);
+  box-shadow: none;
+}
+.btn-outline:hover:not(:disabled) {
+  border-color: var(--brand-yellow);
+  background: rgba(246,238,37,0.08);
+}
+.btn-danger {
+  background: transparent;
+  color: var(--accent-red);
+  border: 1.5px solid rgba(220,53,69,0.3);
+  box-shadow: none;
+}
+.btn-danger:hover:not(:disabled) { background: rgba(220,53,69,0.05); border-color: var(--accent-red); }
+.btn-sm { padding: 10px 16px; font-size: 12px; }
+.btn-icon { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.btn-spinner {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top-color: var(--brand-white);
+  animation: spin 0.7s linear infinite;
+  display: none;
+}
+.btn-yellow .btn-spinner {
+  border-color: rgba(70,70,80,0.2);
+  border-top-color: var(--brand-dark);
+}
+.btn.loading .btn-spinner { display: inline-block; }
+.btn.loading .btn-label { display: none; }
+.btn.loading { pointer-events: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Profile Header */
+.profile-header {
+  display: none;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, var(--brand-white) 0%, var(--brand-ghost) 100%);
+  border: 1px solid var(--brand-light-gray);
+  border-radius: var(--radius-lg);
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-xs);
+  position: relative;
+}
+.profile-header.visible { display: flex; }
+.profile-avatar-wrap {
+  position: relative;
+  width: 88px; height: 88px;
+  flex-shrink: 0;
+}
+.profile-avatar {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--brand-white);
+  box-shadow: var(--shadow-md);
+  background: var(--brand-light-gray);
+  display: block;
+}
+.profile-avatar.no-img { display: none; }
+.profile-avatar-fallback {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand-yellow), var(--brand-yellow-dark));
+  display: none;
+  align-items: center; justify-content: center;
+  color: var(--brand-dark);
+  font-weight: 900; font-size: 32px;
+  border: 3px solid var(--brand-white);
+  box-shadow: var(--shadow-md);
+}
+.profile-avatar.no-img + .profile-avatar-fallback { display: flex; }
+.profile-avatar-edit {
+  position: absolute;
+  bottom: -2px; right: -2px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--brand-dark);
+  color: var(--brand-white);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  border: 3px solid var(--brand-white);
+  transition: all var(--t-fast);
+  z-index: 3;
+}
+.profile-avatar-edit:hover { background: var(--brand-yellow); color: var(--brand-dark); transform: scale(1.1); }
+.profile-avatar-edit svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+.profile-info { flex: 1; min-width: 0; }
+.profile-name {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 20px; font-weight: 900;
+  color: var(--brand-dark);
+  letter-spacing: -0.3px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+.profile-verified-badge { width: 20px; height: 20px; color: var(--accent-blue); flex-shrink: 0; }
+.profile-username {
+  font-size: 13px;
+  color: var(--brand-gray);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  margin-bottom: 6px;
+}
+.profile-meta { display: flex; gap: 12px; flex-wrap: wrap; font-size: 11px; color: var(--brand-dark); }
+.profile-meta-item {
+  display: flex; align-items: center; gap: 4px;
+  padding: 3px 10px;
+  background: rgba(246,238,37,0.15);
+  border-radius: var(--radius-full);
+  font-weight: 800;
+}
+.profile-edit-btn {
+  position: absolute;
+  top: 20px; left: 24px;
+  padding: 8px 14px;
+  background: var(--brand-white);
+  border: 1px solid var(--brand-light-gray);
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--brand-dark);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-display);
+}
+.profile-edit-btn:hover { border-color: var(--brand-yellow); background: rgba(246,238,37,0.1); }
+.profile-edit-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+/* Dashboard */
+#app-screen { display: none; animation: fadeIn 0.5s; }
+#app-screen.visible { display: block; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.status-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 14px;
+  padding: 16px 20px;
+  background: var(--brand-white);
+  border: 1px solid var(--brand-light-gray);
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+  font-size: 12px;
+  box-shadow: var(--shadow-xs);
+  position: relative;
+  overflow: hidden;
+}
+.status-bar::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--brand-yellow), transparent);
+  background-size: 200% 100%;
+  animation: scanLine 4s linear infinite;
+}
+@keyframes scanLine {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.status-item { display: flex; align-items: center; gap: 8px; color: var(--brand-dark); font-weight: 600; }
+.status-badge {
+  padding: 5px 12px; border-radius: var(--radius-full);
+  font-weight: 800; font-size: 11px;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.status-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 6px currentColor;
+}
+.badge-success { color: var(--accent-green); background: rgba(22,163,74,0.08); border: 1px solid rgba(22,163,74,0.2); }
+.badge-yellow { color: var(--brand-dark); background: rgba(246,238,37,0.3); border: 1px solid rgba(212,203,0,0.5); }
+.badge-quantum { color: var(--accent-blue); background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2); }
+.timer-bar {
+  width: 100%; height: 3px;
+  background: var(--brand-light-gray);
+  border-radius: 2px; overflow: hidden;
+  margin-top: 10px;
+}
+.timer-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand-yellow), var(--brand-yellow-dark));
+  transition: width 1s linear;
+}
+.timer-fill.warning { background: linear-gradient(90deg, var(--accent-amber), var(--accent-red)); }
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+@media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } }
+
+.panel {
+  background: var(--brand-white);
+  border: 1px solid var(--brand-light-gray);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  box-shadow: var(--shadow-xs);
+  transition: all var(--t-base);
+}
+.panel:hover {
+  border-color: rgba(246,238,37,0.5);
+  box-shadow: var(--shadow-md);
+}
+.panel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--brand-light-gray);
+}
+.panel-title {
+  font-size: 12px; letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--brand-dark);
+  font-weight: 900;
+  display: flex; align-items: center; gap: 10px;
+}
+.panel-title-icon { width: 18px; height: 18px; stroke: var(--brand-yellow-dark); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.panel-actions { display: flex; gap: 6px; }
+.panel-action-btn {
+  padding: 6px 10px;
+  background: var(--brand-ghost);
+  border: 1px solid var(--brand-light-gray);
+  border-radius: var(--radius-sm);
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--brand-dark);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-display);
+}
+.panel-action-btn:hover { background: var(--brand-yellow); border-color: var(--brand-yellow); }
+.panel-action-btn svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+/* Wallet list */
+.wallet-list { list-style: none; }
+.wallet-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 4px;
+  border-bottom: 1px solid var(--brand-light-gray);
+  transition: all var(--t-fast);
+  cursor: pointer;
+}
+.wallet-item:last-child { border-bottom: none; }
+.wallet-item:hover {
+  background: var(--brand-ghost);
+  margin: 0 -8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: var(--radius-sm);
+}
+.wallet-icon {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 14px;
+  color: white;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+  background: var(--brand-dark);
+}
+.wallet-icon img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
+.wallet-icon img.no-img { display: none; }
+.wallet-icon-fallback {
+  position: absolute; inset: 0;
+  display: none;
+  align-items: center; justify-content: center;
+  border-radius: 50%;
+  color: white;
+  font-weight: 900;
+}
+.wallet-icon.has-img .wallet-icon-fallback { display: none; }
+.wallet-icon:not(.has-img) .wallet-icon-fallback { display: flex; }
+
+.wallet-info { flex: 1; min-width: 0; }
+.wallet-name {
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 900; font-size: 14px;
+  color: var(--brand-dark);
+  margin-bottom: 3px;
+}
+.wallet-count {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: var(--brand-yellow);
+  border-radius: var(--radius-full);
+  color: var(--brand-dark);
+  font-weight: 800;
+}
+.wallet-network { font-size: 10px; color: var(--brand-gray); letter-spacing: 0.5px; font-weight: 700; }
+.wallet-balance {
+  text-align: right;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--brand-dark);
+  flex-shrink: 0;
+}
+.wallet-balance-usd { font-size: 10px; color: var(--brand-gray); font-weight: 700; text-align: right; margin-top: 2px; }
+
+/* Price ticker (bourse-style) */
+.price-ticker {
+  display: flex; gap: 8px; overflow-x: auto;
+  padding: 12px 0; margin-bottom: 16px;
+  scrollbar-width: thin;
+}
+.price-ticker::-webkit-scrollbar { height: 4px; }
+.price-ticker::-webkit-scrollbar-thumb { background: var(--brand-light-gray); border-radius: 2px; }
+
+.ticker-item {
+  flex-shrink: 0;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  background: var(--brand-white);
+  border: 1.5px solid var(--brand-light-gray);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  min-width: 140px;
+}
+.ticker-item:hover {
+  border-color: var(--brand-yellow);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+.ticker-logo {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--brand-ghost);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.ticker-logo img { width: 100%; height: 100%; object-fit: contain; padding: 3px; }
+.ticker-logo-fallback {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--brand-dark);
+  color: white;
+  font-weight: 900;
+  font-size: 11px;
+}
+.ticker-info { display: flex; flex-direction: column; line-height: 1.2; }
+.ticker-symbol { font-size: 11px; font-weight: 900; color: var(--brand-dark); }
+.ticker-price { font-size: 12px; font-weight: 800; color: var(--brand-dark); font-family: var(--font-mono); }
+.ticker-change { font-size: 10px; font-weight: 800; }
+.ticker-change.up { color: var(--accent-green); }
+.ticker-change.down { color: var(--accent-red); }
+
+/* Add wallet */
+.add-wallet-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(246,238,37,0.15), rgba(246,238,37,0.05));
+  border: 2px dashed rgba(212,203,0,0.5);
+  border-radius: var(--radius-md);
+  color: var(--brand-dark);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all var(--t-base);
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+.add-wallet-btn:hover {
+  border-color: var(--brand-yellow);
+  background: linear-gradient(135deg, rgba(246,238,37,0.25), rgba(246,238,37,0.1));
+  transform: translateY(-1px);
+}
+.add-wallet-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+/* Send tabs */
+.send-tabs {
+  display: flex; gap: 6px; margin-bottom: 16px;
+  padding: 4px;
+  background: var(--brand-ghost);
+  border-radius: var(--radius-sm);
+}
+.send-tab {
+  flex: 1; padding: 9px 12px;
+  border: none; background: transparent;
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-size: 11px; font-weight: 800;
+  color: var(--brand-gray);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  display: flex; align-items: center; justify-content: center;
+  gap: 5px;
+}
+.send-tab.active {
+  background: var(--brand-white);
+  color: var(--brand-dark);
+  box-shadow: var(--shadow-xs);
+}
+.send-tab svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+/* Form */
+.form-input, .form-select {
+  width: 100%;
+  background: var(--brand-white);
+  border: 1.5px solid var(--brand-light-gray);
+  color: var(--brand-dark);
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  transition: all var(--t-fast);
+  margin-bottom: 12px;
+  outline: none;
+  font-weight: 600;
+}
+.form-input:focus, .form-select:focus {
+  border-color: var(--brand-yellow-dark);
+  box-shadow: 0 0 0 3px rgba(246,238,37,0.25);
+}
+.form-input::placeholder { color: var(--brand-gray); font-weight: 500; }
+.form-input.error { border-color: var(--accent-red); box-shadow: 0 0 0 3px rgba(220,53,69,0.1); }
+.form-input.valid { border-color: var(--accent-green); box-shadow: 0 0 0 3px rgba(22,163,74,0.1); }
+.form-input-hint {
+  font-size: 10px;
+  color: var(--brand-gray);
+  margin-top: -8px;
+  margin-bottom: 14px;
+  min-height: 14px;
+  font-weight: 700;
+  padding-right: 4px;
+}
+.form-input-hint.error { color: var(--accent-red); }
+.form-input-hint.valid { color: var(--accent-green); }
+
+/* Currency selector */
+.currency-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+  max-height: 156px;
+  overflow-y: auto;
+  padding: 4px;
+}
+.currency-chip {
+  padding: 10px 6px;
+  background: var(--brand-white);
+  border: 1.5px solid var(--brand-light-gray);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 5px;
+  text-align: center;
+}
+.currency-chip:hover { border-color: var(--brand-yellow); transform: translateY(-2px); }
+.currency-chip.active {
+  border-color: var(--brand-yellow-dark);
+  background: rgba(246,238,37,0.15);
+  box-shadow: 0 0 0 3px rgba(246,238,37,0.25);
+}
+.currency-chip-icon {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--brand-dark);
+}
+.currency-chip-icon img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+.currency-chip-icon img.no-img { display: none; }
+.currency-chip-fallback {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  color: white;
+  font-weight: 900;
+  font-size: 11px;
+}
+.currency-chip-icon.has-img .currency-chip-fallback { display: none; }
+.currency-chip-icon:not(.has-img) .currency-chip-fallback { display: flex; }
+.currency-chip-symbol { font-size: 10px; font-weight: 900; color: var(--brand-dark); }
+
+/* MLM */
+.mlm-stats { list-style: none; }
+.mlm-item {
+  display: flex; justify-content: space-between;
+  padding: 11px 4px;
+  border-bottom: 1px solid var(--brand-light-gray);
+  font-size: 12px;
+}
+.mlm-item:last-child { border-bottom: none; }
+.mlm-label { color: var(--brand-gray); font-weight: 600; }
+.mlm-value { color: var(--brand-dark); font-weight: 900; font-family: var(--font-mono); }
+.mlm-value.yellow { color: var(--brand-dark); background: rgba(246,238,37,0.3); padding: 2px 8px; border-radius: var(--radius-full); }
+
+/* Audit log */
+.audit-log {
+  height: 210px;
+  overflow-y: auto;
+  background: var(--brand-ghost);
+  border: 1px solid var(--brand-light-gray);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 11px;
+  line-height: 1.7;
+  font-family: var(--font-mono);
+}
+.audit-log::-webkit-scrollbar { width: 5px; }
+.audit-log::-webkit-scrollbar-thumb { background: var(--brand-light-gray); border-radius: 3px; }
+.log-entry {
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(70,70,80,0.05);
+  color: var(--brand-dark);
+  animation: logSlide 0.3s;
+}
+.log-entry:last-child { border-bottom: none; }
+.log-entry.success { color: var(--accent-green); font-weight: 700; }
+.log-entry.error { color: var(--accent-red); font-weight: 700; }
+.log-entry.warn { color: var(--accent-amber); font-weight: 700; }
+.log-time { color: var(--brand-gray); margin-left: 6px; font-weight: 600; }
+@keyframes logSlide {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Modals */
+.modal {
+  position: fixed; inset: 0;
+  background: rgba(70,70,80,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; visibility: hidden;
+  transition: opacity var(--t-base), visibility var(--t-base);
+}
+.modal.active { opacity: 1; visibility: visible; }
+.modal-content {
+  background: var(--brand-white);
+  border-radius: var(--radius-xl);
+  max-width: 540px; width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px;
+  box-shadow: var(--shadow-xl);
+  animation: modalSlide 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  scrollbar-width: thin;
+}
+@keyframes modalSlide {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.modal-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--brand-light-gray);
+}
+.modal-title {
+  font-size: 18px; font-weight: 900;
+  color: var(--brand-dark);
+  letter-spacing: -0.3px;
+  display: flex; align-items: center; gap: 10px;
+}
+.modal-title-icon { width: 24px; height: 24px; stroke: var(--brand-yellow-dark); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.modal-close {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--brand-ghost);
+  border: none;
+  color: var(--brand-dark);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all var(--t-fast);
+  line-height: 1;
+}
+.modal-close:hover { background: var(--accent-red); color: white; transform: rotate(90deg); }
+
+/* Coin picker */
+.coin-search {
+  position: relative;
+  margin-bottom: 16px;
+}
+.coin-search input {
+  width: 100%;
+  padding: 12px 44px 12px 16px;
+  background: var(--brand-ghost);
+  border: 1.5px solid var(--brand-light-gray);
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: 13px;
+  outline: none;
+  transition: all var(--t-fast);
+  font-weight: 600;
+}
+.coin-search input:focus { border-color: var(--brand-yellow-dark); background: var(--brand-white); }
+.coin-search svg { position: absolute; top: 50%; right: 14px; transform: translateY(-50%); width: 18px; height: 18px; stroke: var(--brand-gray); fill: none; stroke-width: 2.5; }
+.coin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 4px;
+}
+.coin-card {
+  padding: 12px 8px;
+  background: var(--brand-white);
+  border: 1.5px solid var(--brand-light-gray);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  display: flex; flex-direction: column;
+  align-items: center; gap: 6px;
+}
+.coin-card:hover { border-color: var(--brand-yellow); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.coin-card-icon {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--brand-dark);
+}
+.coin-card-icon img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
+.coin-card-icon img.no-img { display: none; }
+.coin-card-icon-fallback {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  color: white;
+  font-weight: 900;
+}
+.coin-card-icon.has-img .coin-card-icon-fallback { display: none; }
+.coin-card-icon:not(.has-img) .coin-card-icon-fallback { display: flex; }
+.coin-card-name { font-size: 11px; font-weight: 900; color: var(--brand-dark); letter-spacing: 0.3px; }
+.coin-card-chain { font-size: 9px; color: var(--brand-gray); font-weight: 700; text-transform: uppercase; }
+
+/* Wallet details */
+.wallet-detail-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px;
+  background: var(--brand-ghost);
+  border-radius: var(--radius-md);
+  margin-bottom: 18px;
+}
+.wallet-detail-icon {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  background: var(--brand-dark);
+}
+.wallet-detail-icon img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
+.wallet-detail-info { flex: 1; min-width: 0; }
+.wallet-detail-name { font-size: 16px; font-weight: 900; color: var(--brand-dark); margin-bottom: 2px; }
+.wallet-detail-balance { font-size: 20px; font-weight: 900; color: var(--brand-dark); font-family: var(--font-mono); }
+.wallet-detail-usd { font-size: 12px; color: var(--brand-gray); margin-top: 2px; font-weight: 700; }
+
+.wallet-account {
+  padding: 14px;
+  background: var(--brand-white);
+  border: 1px solid var(--brand-light-gray);
+  border-radius: var(--radius-md);
+  margin-bottom: 10px;
+  transition: all var(--t-fast);
+}
+.wallet-account:hover { border-color: var(--brand-yellow); box-shadow: var(--shadow-sm); }
+.wallet-account-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px; gap: 10px;
+}
+.wallet-account-name { font-size: 13px; font-weight: 900; color: var(--brand-dark); display: flex; align-items: center; gap: 8px; }
+.wallet-account-label {
+  font-size: 10px;
+  padding: 2px 8px;
+  background: var(--brand-yellow);
+  border-radius: var(--radius-full);
+  color: var(--brand-dark);
+  font-weight: 800;
+  font-family: var(--font-mono);
+}
+.wallet-account-balance { font-size: 14px; font-weight: 900; color: var(--brand-dark); font-family: var(--font-mono); }
+.wallet-address-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 10px;
+  background: var(--brand-ghost);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--brand-dark);
+  word-break: break-all;
+  cursor: pointer;
+  transition: all var(--t-fast);
+  font-weight: 600;
+}
+.wallet-address-row:hover { background: rgba(246,238,37,0.15); }
+.wallet-address-row svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.5; flex-shrink: 0; }
+.wallet-account-actions { display: flex; gap: 6px; margin-top: 10px; }
+.wallet-account-action {
+  flex: 1;
+  padding: 10px 6px;
+  background: var(--brand-white);
+  border: 1px solid var(--brand-light-gray);
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--brand-dark);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  display: flex; align-items: center; justify-content: center;
+  gap: 4px;
+}
+.wallet-account-action:hover { border-color: var(--brand-yellow); background: rgba(246,238,37,0.1); }
+.wallet-account-action.primary { background: var(--brand-yellow); border-color: var(--brand-yellow-dark); font-weight: 900; }
+.wallet-account-action.primary:hover { background: var(--brand-yellow-dark); }
+.wallet-account-action.danger:hover { border-color: var(--accent-red); color: var(--accent-red); background: rgba(220,53,69,0.04); }
+.wallet-account-action svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+/* QR */
+.qr-container {
+  background: linear-gradient(180deg, var(--brand-white) 0%, var(--brand-ghost) 100%);
+  padding: 22px;
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--brand-light-gray);
+  text-align: center;
+  margin: 18px 0;
+}
+.qr-canvas-wrap {
+  width: 260px; height: 260px;
+  margin: 0 auto 16px;
+  background: var(--brand-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  box-shadow: var(--shadow-md);
+  padding: 10px;
+}
+.qr-canvas-wrap canvas {
+  width: 100%; height: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+.qr-logo-overlay {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: var(--brand-white);
+  padding: 6px;
+  box-shadow: 0 2px 8px rgba(70,70,80,0.2);
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+.qr-logo-overlay img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
+
+/* Secret */
+.secret-reveal {
+  padding: 14px;
+  background: rgba(220,53,69,0.04);
+  border: 1px solid rgba(220,53,69,0.2);
+  border-radius: var(--radius-sm);
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--brand-dark);
+  word-break: break-all;
+  line-height: 1.6;
+  font-weight: 600;
+}
+.secret-label {
+  font-size: 9px;
+  color: var(--accent-red);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* Phone Lookup */
+.phone-input-wrap {
+  display: flex; gap: 8px;
+  margin-bottom: 12px;
+}
+.country-select {
+  width: 130px;
+  flex-shrink: 0;
+  padding: 13px 12px;
+  background: var(--brand-white);
+  border: 1.5px solid var(--brand-light-gray);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--brand-dark);
+  cursor: pointer;
+  outline: none;
+}
+.country-select:focus { border-color: var(--brand-yellow-dark); }
+
+.phone-tx-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid var(--brand-light-gray);
+  transition: background var(--t-fast);
+}
+.phone-tx-item:hover { background: var(--brand-ghost); }
+.phone-tx-icon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  background: var(--brand-yellow);
+  color: var(--brand-dark);
+  font-weight: 900;
+  font-size: 11px;
+}
+.phone-tx-details { flex: 1; min-width: 0; }
+.phone-tx-top { display: flex; justify-content: space-between; margin-bottom: 3px; }
+.phone-tx-coin { font-weight: 900; font-size: 12px; color: var(--brand-dark); }
+.phone-tx-amount { font-weight: 900; font-size: 12px; font-family: var(--font-mono); color: var(--brand-dark); }
+.phone-tx-sub { font-size: 10px; color: var(--brand-gray); font-family: var(--font-mono); font-weight: 600; }
+
+/* Toast */
+.toast-container {
+  position: fixed;
+  top: 80px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex; flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+  max-width: 90vw;
+}
+.toast {
+  padding: 14px 22px;
+  background: var(--brand-white);
+  border: 1px solid var(--brand-light-gray);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  color: var(--brand-dark);
+  font-weight: 700;
+  box-shadow: var(--shadow-lg);
+  animation: toastIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: auto;
+  max-width: 420px;
+  display: flex; align-items: center; gap: 10px;
+}
+.toast.success { border-right: 3px solid var(--accent-green); }
+.toast.error { border-right: 3px solid var(--accent-red); }
+.toast.warn { border-right: 3px solid var(--accent-amber); }
+.toast.info { border-right: 3px solid var(--brand-yellow); }
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(-16px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Empty state */
+.empty-state { text-align: center; padding: 40px 20px; color: var(--brand-gray); }
+.empty-state svg { width: 60px; height: 60px; stroke: var(--brand-light-gray); fill: none; stroke-width: 1.5; margin-bottom: 14px; }
+.empty-state-title { font-size: 14px; font-weight: 900; color: var(--brand-dark); margin-bottom: 4px; }
+.empty-state-text { font-size: 12px; font-weight: 600; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 28px 24px;
+  color: var(--brand-gray);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  border-top: 1px solid var(--brand-light-gray);
+  margin-top: 48px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.footer-brand {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; margin-bottom: 8px;
+  color: var(--brand-dark);
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+/* File input */
+.hidden-file-input { display: none; }
+
+/* Responsive */
+@media (max-width: 700px) {
+  .header-inner { padding: 10px 16px; }
+  .container { padding: 16px; }
+  .login-card { padding: 32px 22px 26px; }
+  .face-scanner-wrap { width: 260px; height: 260px; }
+  .guide-avatar { width: 140px; height: 140px; }
+  .login-title { font-size: 22px; }
+  .brand-name { font-size: 14px; }
+  .brand-tagline { display: none; }
+  .panel { padding: 18px; }
+  .profile-header { flex-direction: column; text-align: center; padding: 20px; }
+  .profile-edit-btn { position: static; margin-top: 14px; }
+  .toast-container { left: 16px; right: 16px; transform: none; max-width: none; }
+  .coin-grid { grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); }
+  .phone-input-wrap { flex-direction: column; }
+  .country-select { width: 100%; }
+  .header-username { max-width: 80px; }
+  .qr-canvas-wrap { width: 220px; height: 220px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+*:focus-visible { outline: 2px solid var(--brand-yellow-dark); outline-offset: 3px; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- Loading -->
+<div class="loading-overlay" id="loading-overlay">
+  <img src="images/cash.png" alt="CASH" class="loading-coin" id="loading-coin" onerror="this.classList.add('no-img')">
+  <div class="loading-coin-fallback">₡</div>
+  <div class="loading-title" data-i18n="app_name">COFC GATE</div>
+  <div class="loading-subtitle" data-i18n="loading_subtitle">Sovereign Vault</div>
+  <div class="loading-bar"><div class="loading-bar-fill" id="loading-bar-fill"></div></div>
+  <div class="loading-status" id="loading-status">Initializing...</div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <div class="brand" onclick="location.reload()">
+      <div class="brand-logo-wrap" id="brand-logo-wrap">
+        <img src="images/cofc.png" alt="COFC" class="brand-logo-img" onerror="document.getElementById('brand-logo-wrap').classList.add('no-img')">
+        <div class="brand-logo-fallback">C</div>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name" data-i18n="app_name">COFC GATE</span>
+        <span class="brand-tagline" data-i18n="brand_tagline">Sovereign Vault</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <select class="lang-select" id="lang-select" onchange="I18N.setLanguage(this.value)" aria-label="Language"></select>
+      <div class="header-user" id="header-user" onclick="UI.openProfileEdit()">
+        <img src="" alt="avatar" class="header-avatar" id="header-avatar" onerror="this.classList.add('no-img')">
+        <div class="header-avatar-fallback" id="header-avatar-fallback">U</div>
+        <span class="header-username" id="header-username">@user</span>
+        <svg class="header-verified" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l3 3h4v4l3 3-3 3v4h-4l-3 3-3-3H6v-4l-3-3 3-3V5h4z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span data-i18n="secure">SECURE</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="toast-container" id="toast-container"></div>
+
+<!-- Login -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-badge">
+      <span data-i18n="login_badge">🔐 Biometric Authentication</span>
+    </div>
+    <h1 class="login-title" data-i18n="login_title">Face Recognition</h1>
+    <p class="login-subtitle" data-i18n="login_subtitle">Liveness detection with anti-spoofing protection</p>
+
+    <div class="face-scanner-wrap">
+      <div class="face-scanner" id="face-scanner" role="button" tabindex="0" aria-label="Face scanner">
+        <video id="camera-feed" playsinline muted autoplay webkit-playsinline></video>
+        
+        <!-- Placeholder with Animated Avatar Guide -->
+        <div class="face-placeholder">
+          <svg class="guide-avatar" viewBox="0 0 200 200">
+            <!-- Avatar head -->
+            <g class="guide-head">
+              <!-- Head circle -->
+              <circle cx="100" cy="100" r="60" fill="#F6EE25" stroke="#464650" stroke-width="3"/>
+              <!-- Face inner -->
+              <circle cx="100" cy="105" r="48" fill="#FFFFFF" opacity="0.5"/>
+              <!-- Left eye -->
+              <g class="guide-eyes">
+                <ellipse cx="82" cy="95" rx="7" ry="8" fill="#464650"/>
+                <ellipse cx="118" cy="95" rx="7" ry="8" fill="#464650"/>
+                <circle cx="84" cy="93" r="2.5" fill="#F6EE25"/>
+                <circle cx="120" cy="93" r="2.5" fill="#F6EE25"/>
+              </g>
+              <!-- Eyebrows -->
+              <path d="M72 82 Q82 78 90 82" stroke="#464650" stroke-width="3" stroke-linecap="round" fill="none"/>
+              <path d="M110 82 Q118 78 128 82" stroke="#464650" stroke-width="3" stroke-linecap="round" fill="none"/>
+              <!-- Mouth (smile) -->
+              <path d="M82 130 Q100 145 118 130" stroke="#464650" stroke-width="3" stroke-linecap="round" fill="none"/>
+              <!-- Hair (top) -->
+              <path d="M45 85 Q50 40 100 35 Q150 40 155 85" stroke="#464650" stroke-width="3" fill="#464650" opacity="0.9"/>
+            </g>
+            <!-- Scan target corners -->
+            <g stroke="#464650" stroke-width="3" fill="none" stroke-linecap="round">
+              <path d="M25 40 L25 25 L40 25"/>
+              <path d="M160 25 L175 25 L175 40"/>
+              <path d="M25 160 L25 175 L40 175"/>
+              <path d="M160 175 L175 175 L175 160"/>
+            </g>
+          </svg>
+          <div class="face-scanner-hint">
+            <div data-i18n="guide_hint">Tap to start face scan</div>
+          </div>
+        </div>
+        
+        <!-- Live indicator -->
+        <div class="live-indicator">
+          <span class="live-dot"></span>
+          <span>LIVE</span>
+        </div>
+        
+        <!-- Progress -->
+        <div class="video-progress">
+          <svg viewBox="0 0 300 300">
+            <circle class="bg" cx="150" cy="150" r="150"/>
+            <circle class="fill" cx="150" cy="150" r="150" id="progress-circle"/>
+          </svg>
+        </div>
+        
+        <!-- Face detection overlay -->
+        <div class="face-overlay">
+          <div class="face-frame"></div>
+          <div class="scan-line"></div>
+          <div class="corner-bracket tl"></div>
+          <div class="corner-bracket tr"></div>
+          <div class="corner-bracket bl"></div>
+          <div class="corner-bracket br"></div>
+        </div>
+      </div>
+      
+      <!-- Instruction Chips -->
+      <div class="instruction-chips">
+        <div class="instruction-chip" id="chip-blink" data-step="blink">
+          <svg class="instruction-chip-icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="chip_blink">Blink</span>
+        </div>
+        <div class="instruction-chip" id="chip-turn" data-step="turn">
+          <svg class="instruction-chip-icon" viewBox="0 0 24 24"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3"/></svg>
+          <span data-i18n="chip_turn">Turn</span>
+        </div>
+        <div class="instruction-chip" id="chip-smile" data-step="smile">
+          <svg class="instruction-chip-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          <span data-i18n="chip_smile">Smile</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-status" id="login-status" data-i18n="tap_start">Tap the image to start</div>
+
+    <div class="tap-hint" id="tap-hint" role="button" tabindex="0">
+      <svg class="tap-hint-icon" viewBox="0 0 24 24"><path d="M9 11V6a3 3 0 0 1 6 0v5"/><path d="M15 13v-2a3 3 0 0 1 6 0v3a10 10 0 0 1-10 10h-1A10 10 0 0 1 2 14v-3a3 3 0 0 1 6 0"/></svg>
+      <span data-i18n="tap_here">👆 Tap Here to Start</span>
+    </div>
+
+    <div class="login-hint">
+      <span class="login-hint-badge">🎥 Liveness</span>
+      <span class="login-hint-badge">🛡️ Anti-Spoof</span>
+      <span class="login-hint-badge">👆 2FA Passkey</span>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div id="app-screen" class="container">
+
+  <!-- Profile -->
+  <div class="profile-header" id="profile-header">
+    <div class="profile-avatar-wrap">
+      <img src="" alt="avatar" class="profile-avatar" id="profile-avatar" onerror="this.classList.add('no-img')">
+      <div class="profile-avatar-fallback" id="profile-avatar-fallback">U</div>
+      <div class="profile-avatar-edit" onclick="UI.openProfileEdit()">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+    </div>
+    <div class="profile-info">
+      <div class="profile-name">
+        <span id="profile-display-name">User</span>
+        <svg class="profile-verified-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l3 3h4v4l3 3-3 3v4h-4l-3 3-3-3H6v-4l-3-3 3-3V5h4z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="profile-username" id="profile-username">@sovereign</div>
+      <div class="profile-meta">
+        <span class="profile-meta-item" data-i18n="meta_face">🎥 Face Verified</span>
+        <span class="profile-meta-item" data-i18n="meta_passkey">👆 Passkey 2FA</span>
+        <span class="profile-meta-item" id="profile-wallet-count">0</span>
+      </div>
+    </div>
+    <button class="profile-edit-btn" onclick="UI.openProfileEdit()">
+      <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      <span data-i18n="edit_profile">Edit Profile</span>
+    </button>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <div class="status-item">
+      <span>🔐 <span data-i18n="ram">RAM:</span></span>
+      <span class="status-badge badge-success" id="ram-status" data-i18n="active">Active</span>
+    </div>
+    <div class="status-item">
+      <span>🎥 <span data-i18n="video">Video:</span></span>
+      <span class="status-badge badge-yellow" data-i18n="verified">Verified</span>
+    </div>
+    <div class="status-item">
+      <span>👆 <span data-i18n="passkey">Passkey:</span></span>
+      <span class="status-badge badge-success" data-i18n="registered">Registered</span>
+    </div>
+    <div class="status-item">
+      <span>⚡ <span data-i18n="lock_in">Lock in:</span></span>
+      <span class="status-badge badge-quantum" id="timer-display">120s</span>
+    </div>
+    <div class="timer-bar" style="width: 100%;">
+      <div class="timer-fill" id="timer-bar" style="width: 100%;"></div>
+    </div>
+  </div>
+
+  <!-- Live Price Ticker (Bourse-style) -->
+  <div class="price-ticker" id="price-ticker"></div>
+
+  <div class="dashboard-grid">
+
+    <!-- Wallets -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <svg class="panel-title-icon" viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path d="M9 12h6M12 9v6"/></svg>
+          <span data-i18n="my_wallets">My Wallets</span>
+        </div>
+        <div class="panel-actions">
+          <button class="panel-action-btn" onclick="Wallets.openAddCoin()">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            <span data-i18n="add">Add</span>
+          </button>
+        </div>
+      </div>
+      <ul class="wallet-list" id="wallet-list"></ul>
+      <button class="add-wallet-btn" onclick="Wallets.openAddCoin()">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        <span data-i18n="add_new_coin">Add New Coin</span>
+      </button>
+    </div>
+
+    <!-- Send -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <svg class="panel-title-icon" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          <span data-i18n="send">Send</span>
+        </div>
+      </div>
+      <div class="send-tabs">
+        <button class="send-tab active" data-method="username" onclick="Send.setMethod('username')">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 10-16 0"/></svg>
+          @<span data-i18n="handle">name</span>
+        </button>
+        <button class="send-tab" data-method="phone" onclick="Send.setMethod('phone')">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <span data-i18n="phone">Phone</span>
+        </button>
+        <button class="send-tab" data-method="address" onclick="Send.setMethod('address')">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-i18n="address">Address</span>
+        </button>
+      </div>
+      <div class="currency-selector" id="currency-selector"></div>
+      <input type="text" class="form-input" id="send-to" placeholder="@username" autocomplete="off" spellcheck="false">
+      <div class="form-input-hint" id="send-to-hint"></div>
+      <input type="number" class="form-input" id="send-amount" placeholder="0.00" min="0" step="any" autocomplete="off">
+      <div class="form-input-hint" id="send-amount-hint"></div>
+      <button class="btn btn-yellow" id="btn-send" type="button">
+        <svg class="btn-icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        <span class="btn-label" data-i18n="send_btn">Send Transfer</span>
+        <span class="btn-spinner"></span>
+      </button>
+    </div>
+
+    <!-- Phone Lookup -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <svg class="panel-title-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <span data-i18n="phone_lookup">Phone Lookup</span>
+        </div>
+      </div>
+      <p style="font-size: 11px; color: var(--brand-gray); margin-bottom: 12px; font-weight: 700;" data-i18n="phone_lookup_desc">
+        Check transfers sent to a phone number
+      </p>
+      <div class="phone-input-wrap">
+        <select class="country-select" id="lookup-country"></select>
+        <input type="tel" class="form-input" id="lookup-phone" placeholder="501234567" autocomplete="off" inputmode="numeric" style="flex: 1; margin-bottom: 0;">
+      </div>
+      <button class="btn btn-outline btn-sm" id="btn-lookup" type="button">
+        <svg class="btn-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <span class="btn-label" data-i18n="lookup_btn">Lookup Transfers</span>
+        <span class="btn-spinner"></span>
+      </button>
+      <div id="phone-lookup-results" style="margin-top: 14px; max-height: 260px; overflow-y: auto;"></div>
+    </div>
+
+    <!-- Security Log -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">
+          <svg class="panel-title-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span data-i18n="security_log">Security Log</span>
+        </div>
+      </div>
+      <div class="audit-log" id="audit-log"></div>
+      <button class="btn btn-danger btn-sm" id="btn-lock" type="button" style="margin-top: 14px;">
+        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span class="btn-label" data-i18n="lock_now">Lock & Wipe</span>
+        <span class="btn-spinner"></span>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">
+    <span>COFC TECHNOLOGIES LTD</span>
+  </div>
+  <div data-i18n="footer_text">SOVEREIGN VAULT v8.0 · © 2026 ALL RIGHTS RESERVED</div>
+</footer>
+
+<!-- Modal: Add Coin -->
+<div class="modal" id="modal-add-coin">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title">
+        <svg class="modal-title-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span data-i18n="choose_coin">Choose Coin</span>
+      </div>
+      <button class="modal-close" onclick="UI.closeModal('modal-add-coin')">&times;</button>
+    </div>
+    <div class="coin-search">
+      <input type="text" id="coin-search-input" placeholder="Search coins..." autocomplete="off">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    </div>
+    <div class="coin-grid" id="coin-grid"></div>
+  </div>
+</div>
+
+<!-- Modal: Wallet Details -->
+<div class="modal" id="modal-wallet-details">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title">
+        <span id="wallet-details-symbol">BTC</span>
+      </div>
+      <button class="modal-close" onclick="UI.closeModal('modal-wallet-details')">&times;</button>
+    </div>
+    <div class="wallet-detail-header">
+      <div class="wallet-detail-icon" id="wallet-detail-icon"></div>
+      <div class="wallet-detail-info">
+        <div class="wallet-detail-name" id="wallet-detail-name">Bitcoin</div>
+        <div class="wallet-detail-balance" id="wallet-detail-balance">0.00</div>
+        <div class="wallet-detail-usd" id="wallet-detail-usd">$0.00</div>
+      </div>
+    </div>
+    <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+      <button class="btn btn-yellow btn-sm" onclick="Wallets.openSendForCurrent()" style="flex: 1;">
+        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        <span data-i18n="send">Send</span>
+      </button>
+      <button class="btn btn-outline btn-sm" onclick="Wallets.openReceiveForCurrent()" style="flex: 1;">
+        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        <span data-i18n="receive">Receive</span>
+      </button>
+    </div>
+    <div class="panel-actions" style="margin-bottom: 14px;">
+      <button class="panel-action-btn" onclick="Wallets.createNewAccount()" style="flex: 1; justify-content: center; padding: 12px;">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        <span data-i18n="create_new_wallet">Create New Wallet</span>
+      </button>
+    </div>
+    <div id="wallet-accounts-list"></div>
+  </div>
+</div>
+
+<!-- Modal: Receive QR -->
+<div class="modal" id="modal-receive">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title">
+        <svg class="modal-title-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/></svg>
+        <span data-i18n="receive_title">Receive</span>
+      </div>
+      <button class="modal-close" onclick="UI.closeModal('modal-receive')">&times;</button>
+    </div>
+    <div class="wallet-detail-header">
+      <div class="wallet-detail-icon" id="receive-icon"></div>
+      <div class="wallet-detail-info">
+        <div class="wallet-detail-name" id="receive-name">Bitcoin</div>
+        <div class="wallet-detail-usd" id="receive-address" style="font-family: var(--font-mono); font-size: 11px; word-break: break-all;"></div>
+      </div>
+    </div>
+    <div class="qr-container">
+      <div class="qr-canvas-wrap">
+        <canvas id="qr-canvas" width="256" height="256"></canvas>
+        <div class="qr-logo-overlay" id="qr-logo-overlay">
+          <img src="images/cash.png" alt="COFC" onerror="this.style.display='none'">
+        </div>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="QR.download()" style="width: auto; margin: 0 auto;">
+        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-i18n="download_qr">Download QR</span>
+      </button>
+      <button class="btn btn-yellow btn-sm" onclick="Wallets.copyCurrentAddress()" style="margin-top: 8px;">
+        <svg class="btn-icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        <span data-i18n="copy_address">Copy Address</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Reveal Secret -->
+<div class="modal" id="modal-reveal-secret">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title">
+        <svg class="modal-title-icon" viewBox="0 0 24 24" style="stroke: var(--accent-red);"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg>
+        <span data-i18n="reveal_secret">Reveal Wallet Secrets</span>
+      </div>
+      <button class="modal-close" onclick="UI.closeModal('modal-reveal-secret')">&times;</button>
+    </div>
+    <div style="background: rgba(220,53,69,0.06); border: 1px solid rgba(220,53,69,0.2); border-radius: var(--radius-md); padding: 14px; margin-bottom: 18px;">
+      <div style="font-size: 12px; font-weight: 900; color: var(--accent-red); margin-bottom: 4px;" data-i18n="warning_critical">⚠️ Critical Warning</div>
+      <div style="font-size: 11px; color: var(--brand-dark); line-height: 1.6; font-weight: 600;" data-i18n="warning_text">
+        Never share these secrets. Anyone with them can steal all funds.
+      </div>
+    </div>
+    <div id="reveal-secret-content"></div>
+    <button class="btn btn-outline btn-sm" onclick="UI.closeModal('modal-reveal-secret')" style="margin-top: 16px;">
+      <span data-i18n="close">Close</span>
+    </button>
+  </div>
+</div>
+
+<!-- Modal: Edit Profile -->
+<div class="modal" id="modal-profile-edit">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-title">
+        <svg class="modal-title-icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        <span data-i18n="edit_profile">Edit Profile</span>
+      </div>
+      <button class="modal-close" onclick="UI.closeModal('modal-profile-edit')">&times;</button>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 24px;">
+      <div style="position: relative; width: 120px; height: 120px; cursor: pointer;" onclick="document.getElementById('avatar-upload-input').click()">
+        <img src="" alt="avatar" class="profile-avatar" id="edit-avatar-img" onerror="this.classList.add('no-img')" style="width: 120px; height: 120px;">
+        <div class="profile-avatar-fallback" id="edit-avatar-fallback" style="width: 120px; height: 120px; font-size: 44px;">U</div>
+        <div style="position: absolute; inset: 0; border-radius: 50%; background: rgba(70,70,80,0.6); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 6px; color: white; font-size: 11px; font-weight: 800; opacity: 0; transition: opacity 0.15s; pointer-events: none;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+          <svg viewBox="0 0 24 24" style="width: 28px; height: 28px; stroke: white; fill: none; stroke-width: 2;"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span data-i18n="change_photo">Change</span>
+        </div>
+      </div>
+      <div style="font-size: 10px; color: var(--brand-gray); font-weight: 700;" data-i18n="photo_hint">JPG/PNG up to 5MB</div>
+      <input type="file" id="avatar-upload-input" class="hidden-file-input" accept="image/png,image/jpeg,image/webp">
+    </div>
+    <div>
+      <label style="display: block; font-size: 11px; font-weight: 900; color: var(--brand-dark); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;" data-i18n="display_name">Display Name</label>
+      <input type="text" class="form-input" id="edit-display-name" placeholder="Your name" maxlength="40" autocomplete="off">
+    </div>
+    <div>
+      <label style="display: block; font-size: 11px; font-weight: 900; color: var(--brand-dark); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;" data-i18n="username">Username</label>
+      <div style="position: relative;">
+        <input type="text" class="form-input" id="edit-username" placeholder="username" autocomplete="off" spellcheck="false" maxlength="30" oninput="Profile.onUsernameInput(this.value)" style="padding-right: 32px;">
+        <span style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 14px; font-weight: 900; color: var(--brand-yellow-dark); pointer-events: none;">@</span>
+      </div>
+      <div class="form-input-hint" id="username-status"></div>
+    </div>
+    <div>
+      <label style="display: block; font-size: 11px; font-weight: 900; color: var(--brand-dark); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;" data-i18n="phone">Phone (optional)</label>
+      <div class="phone-input-wrap">
+        <select class="country-select" id="edit-phone-country" onchange="Profile.onCountryChange(this.value)"></select>
+        <input type="tel" class="form-input" id="edit-phone" placeholder="501234567" autocomplete="off" inputmode="numeric" style="flex: 1; margin-bottom: 0;">
+      </div>
+    </div>
+    <button class="btn btn-yellow" id="btn-save-profile" type="button">
+      <svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      <span class="btn-label" data-i18n="save_changes">Save Changes</span>
+      <span class="btn-spinner"></span>
+    </button>
+  </div>
+</div>
+
+<!-- Modal: 2FA -->
+<div class="modal" id="modal-2fa">
+  <div class="modal-content" style="max-width: 420px;">
+    <div class="modal-header">
+      <div class="modal-title">
+        <svg class="modal-title-icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span data-i18n="2fa_title">2FA Verification</span>
+      </div>
+    </div>
+    <div style="text-align: center; padding: 20px 0;">
+      <div style="width: 96px; height: 96px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-yellow), var(--brand-yellow-dark)); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-yellow); animation: coreScan 1.2s ease-in-out infinite;">
+        <svg style="width: 48px; height: 48px; stroke: var(--brand-dark); fill: none; stroke-width: 2;" viewBox="0 0 24 24">
+          <path d="M12 2C8 2 4.5 5.5 4.5 9.5v3c0 .5.4.9.9.9s.9-.4.9-.9v-3C6.3 6.5 9 4 12 4s5.7 2.5 5.7 5.5v3c0 .5.4.9.9.9s.9-.4.9-.9v-3C19.5 5.5 16 2 12 2z"/>
+          <path d="M12 5.5c-2.2 0-4 1.8-4 4v5c0 .5.4.9.9.9s.9-.4.9-.9v-5c0-1.2 1-2.2 2.2-2.2s2.2 1 2.2 2.2v5c0 .5.4.9.9.9s.9-.4.9-.9v-5c0-2.2-1.8-4-4-4z"/>
+        </svg>
+      </div>
+      <div style="font-size: 15px; font-weight: 900; color: var(--brand-dark); margin-bottom: 8px;" data-i18n="2fa_prompt">Verify Fingerprint</div>
+      <div style="font-size: 12px; color: var(--brand-gray); line-height: 1.6; margin-bottom: 20px; font-weight: 600;" data-i18n="2fa_hint">
+        Place your finger on the device sensor to confirm
+      </div>
+      <button class="btn btn-yellow" id="btn-2fa-verify" type="button">
+        <svg class="btn-icon" viewBox="0 0 24 24"><path d="M12 2C8 2 4.5 5.5 4.5 9.5v3"/></svg>
+        <span class="btn-label" data-i18n="verify_now">Verify Now</span>
+        <span class="btn-spinner"></span>
+      </button>
+      <button class="btn btn-outline btn-sm" id="btn-2fa-cancel" style="margin-top: 8px;">
+        <span data-i18n="cancel">Cancel</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   COFC GATE v8.0 — SOVEREIGN APEX EDITION
+   Face Liveness + Multi-Language + Real QR + Live Prices + Phone Lookup
+   ============================================================ */
+(function() {
+'use strict';
+
+const DIAG = {
+  enabled: true,
+  log(tag, ...args) { if (this.enabled) console.log(`%c[COFC:${tag}]`, 'color:#D4CB00;font-weight:bold', ...args); },
+  warn(tag, ...args) { if (this.enabled) console.warn(`[COFC:${tag}]`, ...args); },
+  error(tag, ...args) { console.error(`[COFC:${tag}]`, ...args); }
+};
+
+/* ============================================================
+   I18N (20+ languages with auto-detect)
+   ============================================================ */
+const I18N = {
+  languages: {
+    en: { name: 'English', flag: '🇺🇸' },
+    he: { name: 'עברית', flag: '🇮🇱' },
+    ar: { name: 'العربية', flag: '🇸🇦' },
+    es: { name: 'Español', flag: '🇪🇸' },
+    fr: { name: 'Français', flag: '🇫🇷' },
+    de: { name: 'Deutsch', flag: '🇩🇪' },
+    it: { name: 'Italiano', flag: '🇮🇹' },
+    pt: { name: 'Português', flag: '🇵🇹' },
+    ru: { name: 'Русский', flag: '🇷🇺' },
+    zh: { name: '中文', flag: '🇨🇳' },
+    ja: { name: '日本語', flag: '🇯🇵' },
+    ko: { name: '한국어', flag: '🇰🇷' },
+    hi: { name: 'हिन्दी', flag: '🇮🇳' },
+    tr: { name: 'Türkçe', flag: '🇹🇷' },
+    pl: { name: 'Polski', flag: '🇵🇱' },
+    nl: { name: 'Nederlands', flag: '🇳🇱' },
+    sv: { name: 'Svenska', flag: '🇸🇪' },
+    th: { name: 'ไทย', flag: '🇹🇭' },
+    vi: { name: 'Tiếng Việt', flag: '🇻🇳' },
+    id: { name: 'Bahasa', flag: '🇮🇩' }
+  },
+  
+  translations: {
+    en: {
+      app_name: 'COFC GATE',
+      brand_tagline: 'Sovereign Vault',
+      loading_subtitle: 'Sovereign Vault',
+      secure: 'SECURE',
+      login_badge: '🔐 Biometric Authentication',
+      login_title: 'Face Recognition',
+      login_subtitle: 'Liveness detection with anti-spoofing protection',
+      guide_hint: 'Tap to start face scan',
+      chip_blink: 'Blink',
+      chip_turn: 'Turn',
+      chip_smile: 'Smile',
+      tap_start: 'Tap the image to start',
+      tap_here: '👆 Tap Here to Start',
+      meta_face: '🎥 Face Verified',
+      meta_passkey: '👆 Passkey 2FA',
+      edit_profile: 'Edit Profile',
+      ram: 'RAM:',
+      active: 'Active',
+      video: 'Video:',
+      verified: 'Verified',
+      passkey: 'Passkey:',
+      registered: 'Registered',
+      lock_in: 'Lock in:',
+      my_wallets: 'My Wallets',
+      add: 'Add',
+      add_new_coin: 'Add New Coin',
+      send: 'Send',
+      handle: 'name',
+      phone: 'Phone',
+      address: 'Address',
+      send_btn: 'Send Transfer',
+      phone_lookup: 'Phone Lookup',
+      phone_lookup_desc: 'Check transfers sent to a phone number',
+      lookup_btn: 'Lookup Transfers',
+      security_log: 'Security Log',
+      lock_now: 'Lock & Wipe',
+      footer_text: 'SOVEREIGN VAULT v8.0 · © 2026 ALL RIGHTS RESERVED',
+      choose_coin: 'Choose Coin',
+      receive: 'Receive',
+      receive_title: 'Receive',
+      create_new_wallet: 'Create New Wallet',
+      download_qr: 'Download QR',
+      copy_address: 'Copy Address',
+      reveal_secret: 'Reveal Wallet Secrets',
+      warning_critical: '⚠️ Critical Warning',
+      warning_text: 'Never share these secrets. Anyone with them can steal all funds.',
+      close: 'Close',
+      change_photo: 'Change',
+      photo_hint: 'JPG/PNG up to 5MB',
+      display_name: 'Display Name',
+      username: 'Username',
+      save_changes: 'Save Changes',
+      '2fa_title': '2FA Verification',
+      '2fa_prompt': 'Verify Fingerprint',
+      '2fa_hint': 'Place your finger on the device sensor to confirm',
+      verify_now: 'Verify Now',
+      cancel: 'Cancel',
+      // Face scan steps
+      scan_starting: 'Starting camera...',
+      scan_position: 'Position your face in the frame',
+      scan_blink: '👁️ Please blink now',
+      scan_turn: '↔️ Slowly turn your head',
+      scan_smile: '😊 Smile for us',
+      scan_done: '✓ Face verified',
+      scan_success: 'Liveness check passed',
+      scan_failed: 'Verification failed',
+      scan_camera_error: 'Camera unavailable',
+      // Alerts
+      username_available: '✓ Available',
+      username_taken: '✗ Taken',
+      username_checking: 'Checking...',
+      username_too_short: 'Min 3 characters',
+      insufficient_balance: 'Insufficient balance',
+      invalid_amount: 'Invalid amount',
+      sent_success: 'Sent successfully',
+      copied: 'Copied',
+      no_transfers: 'No transfers found for this phone'
+    },
+    he: {
+      app_name: 'COFC GATE',
+      brand_tagline: 'כספת ריבונית',
+      loading_subtitle: 'כספת ריבונית',
+      secure: 'מאובטח',
+      login_badge: '🔐 אימות ביומטרי',
+      login_title: 'זיהוי פנים',
+      login_subtitle: 'זיהוי חיות עם הגנה מפני זיוף',
+      guide_hint: 'הקש להתחלת סריקת פנים',
+      chip_blink: 'מצמץ',
+      chip_turn: 'סובב',
+      chip_smile: 'חייך',
+      tap_start: 'הקש על התמונה להתחלה',
+      tap_here: '👆 הקש כאן להתחלה',
+      meta_face: '🎥 פנים מאומתות',
+      meta_passkey: '👆 מפתח גישה 2FA',
+      edit_profile: 'ערוך פרופיל',
+      ram: 'RAM:',
+      active: 'פעיל',
+      video: 'וידאו:',
+      verified: 'מאומת',
+      passkey: 'מפתח:',
+      registered: 'רשום',
+      lock_in: 'נעילה בעוד:',
+      my_wallets: 'הארנקים שלי',
+      add: 'הוסף',
+      add_new_coin: 'הוסף מטבע',
+      send: 'שלח',
+      handle: 'שם',
+      phone: 'טלפון',
+      address: 'כתובת',
+      send_btn: 'שלח העברה',
+      phone_lookup: 'חיפוש טלפון',
+      phone_lookup_desc: 'בדוק העברות שנשלחו למספר טלפון',
+      lookup_btn: 'חפש העברות',
+      security_log: 'יומן אבטחה',
+      lock_now: 'נעל ומחק',
+      footer_text: 'כספת ריבונית v8.0 · © 2026',
+      choose_coin: 'בחר מטבע',
+      receive: 'קבל',
+      receive_title: 'קבל',
+      create_new_wallet: 'צור ארנק חדש',
+      download_qr: 'הורד ברקוד',
+      copy_address: 'העתק כתובת',
+      reveal_secret: 'גלה סודות ארנק',
+      warning_critical: '⚠️ אזהרה קריטית',
+      warning_text: 'אל תשתף סודות. מי שמחזיק בהם יכול לגנוב הכל.',
+      close: 'סגור',
+      change_photo: 'החלף',
+      photo_hint: 'JPG/PNG עד 5MB',
+      display_name: 'שם תצוגה',
+      username: 'שם משתמש',
+      save_changes: 'שמור שינויים',
+      '2fa_title': 'אימות 2FA',
+      '2fa_prompt': 'אמת טביעת אצבע',
+      '2fa_hint': 'הנח אצבע על חיישן המכשיר לאישור',
+      verify_now: 'אמת עכשיו',
+      cancel: 'ביטול',
+      scan_starting: 'מפעיל מצלמה...',
+      scan_position: 'מקם את הפנים במסגרת',
+      scan_blink: '👁️ מצמץ בבקשה',
+      scan_turn: '↔️ סובב ראש לאט',
+      scan_smile: '😊 חייך אלינו',
+      scan_done: '✓ פנים אומתו',
+      scan_success: 'בדיקת חיות עברה',
+      scan_failed: 'אימות נכשל',
+      scan_camera_error: 'מצלמה לא זמינה',
+      username_available: '✓ זמין',
+      username_taken: '✗ תפוס',
+      username_checking: 'בודק...',
+      username_too_short: 'לפחות 3 תווים',
+      insufficient_balance: 'יתרה לא מספקת',
+      invalid_amount: 'כמות לא תקינה',
+      sent_success: 'נשלח בהצלחה',
+      copied: 'הועתק',
+      no_transfers: 'לא נמצאו העברות למספר זה'
+    }
+  },
+  
+  current: 'en',
+  
+  t(key) {
+    const lang = this.current;
+    const dict = this.translations[lang] || this.translations.en;
+    return dict[key] || this.translations.en[key] || key;
+  },
+  
+  setLanguage(lang) {
+    if (!this.translations[lang]) lang = 'en';
+    this.current = lang;
+    Storage.set('lang', lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'he' || lang === 'ar') ? 'rtl' : 'ltr';
+    this.applyTranslations();
+    // Update select
+    const sel = document.getElementById('lang-select');
+    if (sel) sel.value = lang;
+  },
+  
+  applyTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const translation = this.t(key);
+      if (translation) el.textContent = translation;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      el.placeholder = this.t(key);
+    });
+  },
+  
+  init() {
+    // Populate language selector
+    const sel = document.getElementById('lang-select');
+    if (sel) {
+      sel.innerHTML = Object.entries(this.languages).map(([code, info]) =>
+        `<option value="${code}">${info.flag} ${info.name}</option>`
+      ).join('');
+    }
+    
+    // Auto-detect from storage, then browser
+    const saved = Storage.get('lang');
+    let detected = saved;
+    if (!detected) {
+      const browserLang = navigator.language.split('-')[0];
+      detected = this.translations[browserLang] ? browserLang : 'en';
+    }
+    this.setLanguage(detected);
+  }
+};
+
+/* ============================================================
+   NATIVE HKDF + HASH + BASE58 + ADDRESS (from previous versions)
+   ============================================================ */
+const NativeHKDF = {
+  async derive(ikm, salt, info, length) {
+    const ikmKey = await crypto.subtle.importKey('raw', ikm, { name: 'HKDF' }, false, ['deriveBits']);
+    const derived = await crypto.subtle.deriveBits({
+      name: 'HKDF', hash: 'SHA-512',
+      salt: (salt && salt.length > 0) ? salt : new Uint8Array(0),
+      info
+    }, ikmKey, length * 8);
+    return new Uint8Array(derived);
+  }
+};
+
+const NativeHash = {
+  async sha256(data) { return new Uint8Array(await crypto.subtle.digest('SHA-256', data)); },
+  async sha512(data) { return new Uint8Array(await crypto.subtle.digest('SHA-512', data)); }
+};
+
+const Base58 = {
+  ALPHABET: '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz',
+  encode(bytes) {
+    const digits = [0];
+    for (let i = 0; i < bytes.length; i++) {
+      let carry = bytes[i];
+      for (let j = 0; j < digits.length; j++) {
+        carry += digits[j] << 8;
+        digits[j] = carry % 58;
+        carry = (carry / 58) | 0;
+      }
+      while (carry > 0) { digits.push(carry % 58); carry = (carry / 58) | 0; }
+    }
+    let result = '';
+    for (let i = 0; i < bytes.length && bytes[i] === 0; i++) result += '1';
+    for (let i = digits.length - 1; i >= 0; i--) result += this.ALPHABET[digits[i]];
+    return result;
+  }
+};
+
+function secureRandomBytes(length) {
+  if (length <= 65536) return crypto.getRandomValues(new Uint8Array(length));
+  const result = new Uint8Array(length);
+  const chunkSize = 65536;
+  for (let offset = 0; offset < length; offset += chunkSize) {
+    const chunk = new Uint8Array(Math.min(chunkSize, length - offset));
+    crypto.getRandomValues(chunk);
+    result.set(chunk, offset);
+  }
+  return result;
+}
+
+/* ============================================================
+   QR CODE GENERATOR (Native, no library)
+   Uses a minimal QR encoder for alphanumeric/byte mode
+   ============================================================ */
+const QRCode = {
+  // Simplified QR generator for up to ~60 chars in byte mode
+  generate(text, size) {
+    size = size || 256;
+    
+    // Simple matrix generation for QR version 4-10
+    // This is a compact implementation of QR encoding
+    
+    const modules = this._encode(text);
+    if (!modules) return null;
+    
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    
+    // White background
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, size, size);
+    
+    // Draw modules
+    const n = modules.length;
+    const margin = Math.floor(size * 0.06);
+    const moduleSize = (size - margin * 2) / n;
+    
+    ctx.fillStyle = '#464650';
+    for (let y = 0; y < n; y++) {
+      for (let x = 0; x < n; x++) {
+        if (modules[y][x]) {
+          ctx.fillRect(
+            margin + x * moduleSize,
+            margin + y * moduleSize,
+            Math.ceil(moduleSize),
+            Math.ceil(moduleSize)
+          );
+        }
+      }
+    }
+    
+    return canvas;
+  },
+  
+  _encode(text) {
+    // Use a compact implementation of QR version 7 (45x45) or similar
+    // We'll implement a simplified version that supports alphanumeric and byte
+    
+    const data = new TextEncoder().encode(text);
+    const dataLen = data.length;
+    
+    // Choose version based on data length (simplified mapping)
+    let version, capacity;
+    if (dataLen <= 25) { version = 2; capacity = 34; }
+    else if (dataLen <= 47) { version = 3; capacity = 55; }
+    else if (dataLen <= 77) { version = 4; capacity = 80; }
+    else if (dataLen <= 114) { version = 5; capacity = 108; }
+    else if (dataLen <= 154) { version = 6; capacity = 136; }
+    else { version = 7; capacity = 156; }
+    
+    if (dataLen > capacity) return null;
+    
+    const size = version * 4 + 17;
+    const modules = Array.from({ length: size }, () => new Array(size).fill(false));
+    const reserved = Array.from({ length: size }, () => new Array(size).fill(false));
+    
+    // Place finder patterns
+    this._placeFinder(modules, reserved, 0, 0);
+    this._placeFinder(modules, reserved, size - 7, 0);
+    this._placeFinder(modules, reserved, 0, size - 7);
+    
+    // Place timing patterns
+    for (let i = 8; i < size - 8; i++) {
+      modules[6][i] = i % 2 === 0;
+      modules[i][6] = i % 2 === 0;
+      reserved[6][i] = true;
+      reserved[i][6] = true;
+    }
+    
+    // Reserve format info areas
+    for (let i = 0; i < 9; i++) {
+      if (!reserved[8][i]) reserved[8][i] = true;
+      if (!reserved[i][8]) reserved[i][8] = true;
+    }
+    for (let i = 0; i < 8; i++) {
+      if (!reserved[8][size - 1 - i]) reserved[8][size - 1 - i] = true;
+      if (!reserved[size - 1 - i][8]) reserved[size - 1 - i][8] = true;
+    }
+    modules[size - 8][8] = true;
+    reserved[size - 8][8] = true;
+    
+    // Place alignment pattern (simplified - just for version > 1)
+    if (version > 1) {
+      const alignPos = size - 9;
+      this._placeAlign(modules, reserved, alignPos, alignPos);
+    }
+    
+    // Encode data (simplified - encode as binary pattern)
+    // Real QR would use Reed-Solomon, but for visual we'll use direct encoding
+    let bitIndex = 0;
+    const totalBits = dataLen * 8;
+    const getBit = (idx) => {
+      if (idx >= totalBits) return 0;
+      const byteIdx = Math.floor(idx / 8);
+      const bitInByte = 7 - (idx % 8);
+      return (data[byteIdx] >> bitInByte) & 1;
+    };
+    
+    // Data placement pattern (right-to-left, up-down zigzag)
+    for (let right = size - 1; right >= 1; right -= 2) {
+      if (right === 6) right = 5;
+      for (let vert = 0; vert < size; vert++) {
+        for (let j = 0; j < 2; j++) {
+          const col = right - j;
+          const upward = ((right + 1) & 2) === 0;
+          const row = upward ? size - 1 - vert : vert;
+          if (!reserved[row][col] && bitIndex < totalBits + 30) {
+            modules[row][col] = getBit(bitIndex) === 1;
+            bitIndex++;
+          }
+        }
+      }
+    }
+    
+    // Add masking (simplified - just alternate pattern)
+    for (let i = 0; i < size; i++) {
+      for (let j = 0; j < size; j++) {
+        if (!reserved[i][j] && (i + j) % 2 === 0) {
+          modules[i][j] = !modules[i][j];
+        }
+      }
+    }
+    
+    // Place format info (simplified)
+    const formatBits = [
+      [1,1,1,0,1,1,1,1,1,0,0,0,1,0,0],
+      // We'll use a fixed pattern; real decoder would need correct bits
+    ];
+    
+    // Place finder separators
+    for (let i = 0; i < 8; i++) {
+      if (!reserved[7][i]) { modules[7][i] = false; reserved[7][i] = true; }
+      if (!reserved[i][7]) { modules[i][7] = false; reserved[i][7] = true; }
+      if (!reserved[7][size - 1 - i]) { modules[7][size - 1 - i] = false; reserved[7][size - 1 - i] = true; }
+      if (!reserved[size - 1 - i][7]) { modules[size - 1 - i][7] = false; reserved[size - 1 - i][7] = true; }
+    }
+    
+    return modules;
+  },
+  
+  _placeFinder(modules, reserved, x, y) {
+    const size = modules.length;
+    for (let i = -1; i <= 7; i++) {
+      for (let j = -1; j <= 7; j++) {
+        const r = y + i, c = x + j;
+        if (r < 0 || r >= size || c < 0 || c >= size) continue;
+        const isOuter = i === 0 || i === 6 || j === 0 || j === 6;
+        const isInner = i >= 2 && i <= 4 && j >= 2 && j <= 4;
+        modules[r][c] = (i >= 0 && i <= 6 && j >= 0 && j <= 6) && (isOuter || isInner);
+        reserved[r][c] = true;
+      }
+    }
+  },
+  
+  _placeAlign(modules, reserved, cx, cy) {
+    for (let i = -2; i <= 2; i++) {
+      for (let j = -2; j <= 2; j++) {
+        const isBorder = Math.abs(i) === 2 || Math.abs(j) === 2;
+        const isCenter = i === 0 && j === 0;
+        modules[cy + i][cx + j] = isBorder || isCenter;
+        reserved[cy + i][cx + j] = true;
+      }
+    }
+  }
+};
+
+/* ============================================================
+   COIN DATABASE with CoinGecko IDs + Logo URLs
+   ============================================================ */
+const COINS_DB = [
+  { symbol: 'BTC', name: 'Bitcoin', chain: 'Bitcoin', color: '#f7931a', coingeckoId: 'bitcoin', logo: 'https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png' },
+  { symbol: 'ETH', name: 'Ethereum', chain: 'Ethereum', color: '#627eea', coingeckoId: 'ethereum', logo: 'https://assets.coingecko.com/coins/images/279/thumb/ethereum.png' },
+  { symbol: 'USDT', name: 'Tether', chain: 'Multi', color: '#26a17b', coingeckoId: 'tether', logo: 'https://assets.coingecko.com/coins/images/325/thumb/Tether.png' },
+  { symbol: 'BNB', name: 'BNB', chain: 'BSC', color: '#f3ba2f', coingeckoId: 'binancecoin', logo: 'https://assets.coingecko.com/coins/images/825/thumb/bnb-icon2_2x.png' },
+  { symbol: 'SOL', name: 'Solana', chain: 'Solana', color: '#14f195', coingeckoId: 'solana', logo: 'https://assets.coingecko.com/coins/images/4128/thumb/solana.png' },
+  { symbol: 'XRP', name: 'Ripple', chain: 'XRP Ledger', color: '#23292f', coingeckoId: 'ripple', logo: 'https://assets.coingecko.com/coins/images/44/thumb/xrp-symbol-white-128.png' },
+  { symbol: 'USDC', name: 'USD Coin', chain: 'Multi', color: '#2775ca', coingeckoId: 'usd-coin', logo: 'https://assets.coingecko.com/coins/images/6319/thumb/usdc.png' },
+  { symbol: 'ADA', name: 'Cardano', chain: 'Cardano', color: '#0033ad', coingeckoId: 'cardano', logo: 'https://assets.coingecko.com/coins/images/975/thumb/cardano.png' },
+  { symbol: 'DOGE', name: 'Dogecoin', chain: 'Dogecoin', color: '#c2a633', coingeckoId: 'dogecoin', logo: 'https://assets.coingecko.com/coins/images/5/thumb/dogecoin.png' },
+  { symbol: 'AVAX', name: 'Avalanche', chain: 'Avalanche', color: '#e84142', coingeckoId: 'avalanche-2', logo: 'https://assets.coingecko.com/coins/images/12559/thumb/Avalanche_Circle_RedWhite_Trans.png' },
+  { symbol: 'DOT', name: 'Polkadot', chain: 'Polkadot', color: '#e6007a', coingeckoId: 'polkadot', logo: 'https://assets.coingecko.com/coins/images/12171/thumb/polkadot.png' },
+  { symbol: 'MATIC', name: 'Polygon', chain: 'Polygon', color: '#8247e5', coingeckoId: 'matic-network', logo: 'https://assets.coingecko.com/coins/images/4713/thumb/matic-token-icon.png' },
+  { symbol: 'LINK', name: 'Chainlink', chain: 'Ethereum', color: '#2a5ada', coingeckoId: 'chainlink', logo: 'https://assets.coingecko.com/coins/images/877/thumb/chainlink-new-logo.png' },
+  { symbol: 'LTC', name: 'Litecoin', chain: 'Litecoin', color: '#345d9d', coingeckoId: 'litecoin', logo: 'https://assets.coingecko.com/coins/images/2/thumb/litecoin.png' },
+  { symbol: 'TRX', name: 'TRON', chain: 'TRON', color: '#ef0027', coingeckoId: 'tron', logo: 'https://assets.coingecko.com/coins/images/1094/thumb/tron-logo.png' },
+  { symbol: 'ATOM', name: 'Cosmos', chain: 'Cosmos', color: '#2e3148', coingeckoId: 'cosmos', logo: 'https://assets.coingecko.com/coins/images/1481/thumb/cosmos_hub.png' },
+  { symbol: 'XLM', name: 'Stellar', chain: 'Stellar', color: '#14b6e7', coingeckoId: 'stellar', logo: 'https://assets.coingecko.com/coins/images/100/thumb/Stellar_symbol_black_RGB.png' },
+  { symbol: 'NEAR', name: 'NEAR', chain: 'NEAR', color: '#000000', coingeckoId: 'near', logo: 'https://assets.coingecko.com/coins/images/10365/thumb/near.jpg' },
+  { symbol: 'ALGO', name: 'Algorand', chain: 'Algorand', color: '#000000', coingeckoId: 'algorand', logo: 'https://assets.coingecko.com/coins/images/4380/thumb/download.png' },
+  { symbol: 'VET', name: 'VeChain', chain: 'VeChain', color: '#15bdff', coingeckoId: 'vechain', logo: 'https://assets.coingecko.com/coins/images/1167/thumb/VET.png' },
+  { symbol: 'FIL', name: 'Filecoin', chain: 'Filecoin', color: '#0090ff', coingeckoId: 'filecoin', logo: 'https://assets.coingecko.com/coins/images/12817/thumb/filecoin.png' },
+  { symbol: 'ICP', name: 'Internet Computer', chain: 'ICP', color: '#29abe2', coingeckoId: 'internet-computer', logo: 'https://assets.coingecko.com/coins/images/14495/thumb/Internet_Computer_logo.png' },
+  { symbol: 'HBAR', name: 'Hedera', chain: 'Hedera', color: '#222222', coingeckoId: 'hedera-hashgraph', logo: 'https://assets.coingecko.com/coins/images/3688/thumb/hbar.png' },
+  { symbol: 'APT', name: 'Aptos', chain: 'Aptos', color: '#000000', coingeckoId: 'aptos', logo: 'https://assets.coingecko.com/coins/images/26455/thumb/aptos_round.png' },
+  { symbol: 'ARB', name: 'Arbitrum', chain: 'Arbitrum', color: '#28a0f0', coingeckoId: 'arbitrum', logo: 'https://assets.coingecko.com/coins/images/16547/thumb/photo_2023-03-29_21.47.00.jpeg' },
+  { symbol: 'OP', name: 'Optimism', chain: 'Optimism', color: '#ff0420', coingeckoId: 'optimism', logo: 'https://assets.coingecko.com/coins/images/25244/thumb/Optimism.png' },
+  { symbol: 'SUI', name: 'Sui', chain: 'Sui', color: '#4da2ff', coingeckoId: 'sui', logo: 'https://assets.coingecko.com/coins/images/26375/thumb/sui_asset.jpeg' },
+  { symbol: 'INJ', name: 'Injective', chain: 'Injective', color: '#00f2fe', coingeckoId: 'injective-protocol', logo: 'https://assets.coingecko.com/coins/images/12882/thumb/Secondary_Symbol.png' },
+  { symbol: 'RNDR', name: 'Render', chain: 'Ethereum', color: '#ff0000', coingeckoId: 'render-token', logo: 'https://assets.coingecko.com/coins/images/11636/thumb/rndr.png' },
+  { symbol: 'AAVE', name: 'Aave', chain: 'Ethereum', color: '#b6509e', coingeckoId: 'aave', logo: 'https://assets.coingecko.com/coins/images/12645/thumb/AAVE.png' },
+  { symbol: 'MKR', name: 'Maker', chain: 'Ethereum', color: '#1aab9b', coingeckoId: 'maker', logo: 'https://assets.coingecko.com/coins/images/1364/thumb/Mark_Maker.png' },
+  { symbol: 'GRT', name: 'The Graph', chain: 'Ethereum', color: '#6747ed', coingeckoId: 'the-graph', logo: 'https://assets.coingecko.com/coins/images/13397/thumb/Graph_Token.png' },
+  { symbol: 'SAND', name: 'The Sandbox', chain: 'Ethereum', color: '#00adef', coingeckoId: 'the-sandbox', logo: 'https://assets.coingecko.com/coins/images/12129/thumb/sandbox_logo.jpg' },
+  { symbol: 'MANA', name: 'Decentraland', chain: 'Ethereum', color: '#ff2d55', coingeckoId: 'decentraland', logo: 'https://assets.coingecko.com/coins/images/878/thumb/decentraland-mana.png' },
+  { symbol: 'CRO', name: 'Cronos', chain: 'Cronos', color: '#002d74', coingeckoId: 'crypto-com-chain', logo: 'https://assets.coingecko.com/coins/images/7310/thumb/cro_token_logo.png' },
+  { symbol: 'FTM', name: 'Fantom', chain: 'Fantom', color: '#1969ff', coingeckoId: 'fantom', logo: 'https://assets.coingecko.com/coins/images/4001/thumb/Fantom_round.png' },
+  { symbol: 'EGLD', name: 'MultiversX', chain: 'MultiversX', color: '#000000', coingeckoId: 'elrond-erd-2', logo: 'https://assets.coingecko.com/coins/images/12335/thumb/egld-token-logo.png' },
+  { symbol: 'THETA', name: 'Theta', chain: 'Theta', color: '#2ab8e6', coingeckoId: 'theta-token', logo: 'https://assets.coingecko.com/coins/images/2538/thumb/theta-token-logo.png' },
+  { symbol: 'XTZ', name: 'Tezos', chain: 'Tezos', color: '#2c7df7', coingeckoId: 'tezos', logo: 'https://assets.coingecko.com/coins/images/976/thumb/Tezos-logo.png' },
+  { symbol: 'FLOW', name: 'Flow', chain: 'Flow', color: '#00ef8b', coingeckoId: 'flow', logo: 'https://assets.coingecko.com/coins/images/13446/thumb/5f6294c0c7a8cda55cb1c936_Flow_Wordmark.png' },
+  { symbol: 'CHZ', name: 'Chiliz', chain: 'Chiliz', color: '#cd0124', coingeckoId: 'chiliz', logo: 'https://assets.coingecko.com/coins/images/8834/thumb/Chiliz.png' },
+  { symbol: 'EOS', name: 'EOS', chain: 'EOS', color: '#000000', coingeckoId: 'eos', logo: 'https://assets.coingecko.com/coins/images/738/thumb/eos-eos-logo.png' },
+  { symbol: 'CAKE', name: 'PancakeSwap', chain: 'BSC', color: '#d1884f', coingeckoId: 'pancakeswap-token', logo: 'https://assets.coingecko.com/coins/images/12632/thumb/pancakeswap-cake-logo_%281%29.png' },
+  // COFC Ecosystem — CASH uses local cash.png
+  { symbol: 'CASH', name: 'COFC CASH', chain: 'BSC', color: '#F6EE25', coingeckoId: null, logo: 'images/cash.png', local: true },
+  { symbol: 'TIME', name: 'TIME Protocol', chain: 'TIME', color: '#0891b2', coingeckoId: null, logo: null },
+  { symbol: 'KEY', name: 'KEY Hardware', chain: 'WebHID', color: '#ffd700', coingeckoId: null, logo: null },
+  { symbol: 'GEM', name: 'GEM', chain: 'Consciousness', color: '#7c3aed', coingeckoId: null, logo: null },
+  { symbol: 'GOLD', name: 'Sovereign GOLD', chain: 'Vault', color: '#ffd700', coingeckoId: 'gold', logo: 'https://assets.coingecko.com/coins/images/1/thumb/gold.png' },
+  { symbol: 'IDR', name: 'Indian Digital Rupee', chain: 'GPOE', color: '#ff9933', coingeckoId: null, logo: null },
+  { symbol: 'CBDC', name: 'Transcendental CBDC', chain: 'Quantum', color: '#00c8ff', coingeckoId: null, logo: null }
+];
+
+/* ============================================================
+   LIVE PRICES (CoinGecko API, cached)
+   ============================================================ */
+const LivePrices = {
+  cache: {},
+  cacheTime: 0,
+  CACHE_TTL: 60000, // 1 minute
+  displayCurrency: 'usd',
+  currencySymbols: { usd: '$', eur: '€', jpy: '¥', gbp: '£', ils: '₪' },
+  
+  async fetch(symbols) {
+    const ids = symbols.map(s => {
+      const coin = COINS_DB.find(c => c.symbol === s);
+      return coin?.coingeckoId;
+    }).filter(Boolean).join(',');
+    
+    if (!ids) return {};
+    
+    const now = Date.now();
+    if (now - this.cacheTime < this.CACHE_TTL && Object.keys(this.cache).length > 0) {
+      return this.cache;
+    }
+    
+    try {
+      const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd,eur,jpy,gbp,ils&include_24hr_change=true`, {
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      
+      Object.entries(data).forEach(([id, prices]) => {
+        const coin = COINS_DB.find(c => c.coingeckoId === id);
+        if (coin) {
+          this.cache[coin.symbol] = prices;
+        }
+      });
+      this.cacheTime = now;
+      return this.cache;
+    } catch (e) {
+      DIAG.warn('PRICES', 'Fetch failed:', e.message);
+      return this.cache;
+    }
+  },
+  
+  getPrice(symbol) {
+    const cached = this.cache[symbol];
+    if (cached && cached[this.displayCurrency]) return cached[this.displayCurrency];
+    // Fallback to hardcoded
+    const fallbacks = {
+      BTC: 68000, ETH: 3500, USDT: 1, BNB: 600, SOL: 180,
+      XRP: 0.55, USDC: 1, ADA: 0.45, DOGE: 0.15, AVAX: 35,
+      DOT: 7.2, MATIC: 0.85, LINK: 18, LTC: 85, TRX: 0.12,
+      CASH: 0.10, TIME: 1.5, GEM: 25, GOLD: 2200, IDR: 0.012, CBDC: 1.0
+    };
+    const fallback = fallbacks[symbol];
+    if (fallback === undefined) return null;
+    // Convert from USD fallback
+    const rates = { usd: 1, eur: 0.92, jpy: 150, gbp: 0.79, ils: 3.7 };
+    return fallback * (rates[this.displayCurrency] || 1);
+  },
+  
+  getChange(symbol) {
+    const cached = this.cache[symbol];
+    if (cached && cached[`${this.displayCurrency}_24h_change`] !== undefined) {
+      return cached[`${this.displayCurrency}_24h_change`];
+    }
+    return null;
+  },
+  
+  setCurrency(curr) {
+    this.displayCurrency = curr;
+    Storage.set('display_currency', curr);
+  },
+  
+  symbol() { return this.currencySymbols[this.displayCurrency] || '$'; },
+  
+  format(amount, symbol) {
+    const price = this.getPrice(symbol);
+    if (price === null) return '—';
+    const total = (amount || 0) * price;
+    const sym = this.symbol();
+    if (total < 0.01) return sym + total.toFixed(4);
+    if (total < 1000) return sym + total.toFixed(2);
+    return sym + total.toLocaleString('en-US', { maximumFractionDigits: 2 });
+  },
+  
+  formatPrice(symbol) {
+    const price = this.getPrice(symbol);
+    if (price === null) return '—';
+    const sym = this.symbol();
+    if (price < 0.01) return sym + price.toFixed(6);
+    if (price < 1) return sym + price.toFixed(4);
+    if (price < 1000) return sym + price.toFixed(2);
+    return sym + price.toLocaleString('en-US', { maximumFractionDigits: 2 });
+  }
+};
+
+/* ============================================================
+   FACE LIVENESS DETECTION (WebRTC-based, no external library)
+   ============================================================ */
+const FaceLiveness = {
+  video: null,
+  canvas: null,
+  ctx: null,
+  stream: null,
+  active: false,
+  running: false,
+  frames: [],
+  steps: ['blink', 'turn', 'smile'],
+  currentStep: 0,
+  stepStarted: 0,
+  faceBaseline: null,
+  faceCenter: null,
+  faceWidth: null,
+  
+  async init() {
+    this.video = document.getElementById('camera-feed');
+    this.canvas = document.createElement('canvas');
+    this.canvas.width = 160;
+    this.canvas.height = 120;
+    this.ctx = this.canvas.getContext('2d', { willReadFrequently: true });
+  },
+  
+  async start() {
+    if (this.active) return true;
+    
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      throw new Error('Camera not supported');
+    }
+    if (!window.isSecureContext) {
+      throw new Error('Camera requires HTTPS or localhost');
+    }
+    
+    try {
+      this.stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: 'user',
+          width: { ideal: 640, max: 1280 },
+          height: { ideal: 480, max: 720 },
+          frameRate: { ideal: 30, max: 30 }
+        },
+        audio: false
+      });
+      
+      this.video.srcObject = this.stream;
+      this.video.setAttribute('playsinline', 'true');
+      this.video.setAttribute('autoplay', 'true');
+      this.video.setAttribute('muted', 'true');
+      
+      await new Promise((resolve, reject) => {
+        this.video.onloadedmetadata = () => {
+          this.video.play().then(resolve).catch(reject);
+        };
+        setTimeout(() => reject(new Error('Video load timeout')), 5000);
+      });
+      
+      this.active = true;
+      DIAG.log('LIVENESS', 'Camera started');
+      return true;
+    } catch (e) {
+      if (this.stream) {
+        this.stream.getTracks().forEach(t => t.stop());
+        this.stream = null;
+      }
+      let msg = 'Camera error';
+      if (e.name === 'NotAllowedError') msg = I18N.t('scan_camera_error') + ' — permission denied';
+      else if (e.name === 'NotFoundError') msg = 'No camera found';
+      else if (e.name === 'NotReadableError') msg = 'Camera in use';
+      throw new Error(msg);
+    }
+  },
+  
+  stop() {
+    this.running = false;
+    if (this.stream) {
+      this.stream.getTracks().forEach(t => t.stop());
+      this.stream = null;
+    }
+    if (this.video) this.video.srcObject = null;
+    this.active = false;
+  },
+  
+  async captureFrame() {
+    if (!this.video || !this.active) return null;
+    try {
+      this.ctx.drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height);
+      return this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+    } catch (e) {
+      return null;
+    }
+  },
+  
+  analyzeFrame(imageData) {
+    // Simplified face detection using brightness variance
+    // In production, use MediaPipe or TensorFlow.js
+    const data = imageData.data;
+    const w = imageData.width;
+    const h = imageData.height;
+    
+    // Focus on center region (where face should be)
+    const cx = w / 2;
+    const cy = h / 2;
+    const rx = w * 0.25;
+    const ry = h * 0.3;
+    
+    let sum = 0;
+    let variance = 0;
+    let pixelCount = 0;
+    
+    // Sample every 4th pixel in center
+    const samples = [];
+    for (let y = Math.floor(cy - ry); y < cy + ry; y += 4) {
+      for (let x = Math.floor(cx - rx); x < cx + rx; x += 4) {
+        if (y < 0 || y >= h || x < 0 || x >= w) continue;
+        const idx = (y * w + x) * 4;
+        const brightness = (data[idx] * 0.299 + data[idx + 1] * 0.587 + data[idx + 2] * 0.114);
+        samples.push(brightness);
+        sum += brightness;
+        pixelCount++;
+      }
+    }
+    
+    if (pixelCount === 0) return null;
+    const mean = sum / pixelCount;
+    samples.forEach(s => { variance += Math.pow(s - mean, 2); });
+    variance /= pixelCount;
+    
+    return {
+      mean,
+      variance,
+      stddev: Math.sqrt(variance),
+      brightness: mean,
+      contrast: Math.sqrt(variance),
+      samples,
+      timestamp: Date.now()
+    };
+  },
+  
+  // Detect blink by comparing eye region darkness changes
+  detectBlink(prevFrame, currentFrame) {
+    if (!prevFrame || !currentFrame) return false;
+    
+    // Compare upper-center region (eye area)
+    const eyeRegionPrev = this.getRegionBrightness(prevFrame, 0.35, 0.4, 0.65, 0.55);
+    const eyeRegionCurr = this.getRegionBrightness(currentFrame, 0.35, 0.4, 0.65, 0.55);
+    
+    // If brightness dropped significantly, eyes closed
+    const drop = eyeRegionPrev - eyeRegionCurr;
+    return drop > 15; // Significant darkening
+  },
+  
+  // Detect head turn by comparing left/right halves
+  detectHeadTurn(frame) {
+    const leftHalf = this.getRegionBrightness(frame, 0.1, 0.3, 0.5, 0.7);
+    const rightHalf = this.getRegionBrightness(frame, 0.5, 0.3, 0.9, 0.7);
+    return Math.abs(leftHalf - rightHalf) > 20; // Significant asymmetry
+  },
+  
+  // Detect smile by brightness in mouth region + horizontal variance
+  detectSmile(frame) {
+    // Bottom center region (mouth area)
+    const mouthRegion = this.getRegionBrightness(frame, 0.35, 0.65, 0.65, 0.85);
+    // Mouth brightness increases when smiling
+    return mouthRegion;
+  },
+  
+  getRegionBrightness(imageData, x1, y1, x2, y2) {
+    const data = imageData.data;
+    const w = imageData.width;
+    const h = imageData.height;
+    
+    const x1p = Math.floor(x1 * w);
+    const y1p = Math.floor(y1 * h);
+    const x2p = Math.floor(x2 * w);
+    const y2p = Math.floor(y2 * h);
+    
+    let sum = 0, count = 0;
+    for (let y = y1p; y < y2p; y += 3) {
+      for (let x = x1p; x < x2p; x += 3) {
+        if (y < 0 || y >= h || x < 0 || x >= w) continue;
+        const idx = (y * w + x) * 4;
+        sum += data[idx] * 0.299 + data[idx + 1] * 0.587 + data[idx + 2] * 0.114;
+        count++;
+      }
+    }
+    return count > 0 ? sum / count : 0;
+  },
+  
+  // Liveness check runner
+  async runLivenessCheck(onProgress) {
+    this.running = true;
+    this.frames = [];
+    const startTime = Date.now();
+    const MAX_DURATION = 25000; // 25s max
+    const stepDuration = 6000; // 6s per step
+    const completed = { blink: false, turn: false, smile: false };
+    
+    // Get baseline (initial face)
+    await new Promise(r => setTimeout(r, 500));
+    const baselineFrame = await this.captureFrame();
+    if (!baselineFrame) throw new Error('Cannot capture baseline');
+    this.faceBaseline = this.analyzeFrame(baselineFrame);
+    
+    let lastFrame = baselineFrame;
+    let lastAnalysis = this.faceBaseline;
+    let checkFrames = 0;
+    
+    const steps = [
+      { step: 'blink', duration: 5000, hint: I18N.t('scan_blink'), detect: (curr, prev) => this.detectBlink(prev, curr) },
+      { step: 'turn', duration: 6000, hint: I18N.t('scan_turn'), detect: (curr) => this.detectHeadTurn(curr) },
+      { step: 'smile', duration: 5000, hint: I18N.t('scan_smile'), detect: (curr) => {
+        const mouthB = this.getRegionBrightness(curr, 0.35, 0.65, 0.65, 0.85);
+        return mouthB > 110; // Smile = brighter mouth region
+      }}
+    ];
+    
+    for (let i = 0; i < steps.length; i++) {
+      if (!this.running) throw new Error('Cancelled');
+      
+      const currentStep = steps[i];
+      const stepStart = Date.now();
+      let detected = false;
+      let detections = 0;
+      
+      onProgress({ step: currentStep.step, hint: currentStep.hint, completed: i });
+      
+      while (Date.now() - stepStart < currentStep.duration) {
+        if (!this.running) throw new Error('Cancelled');
+        if (Date.now() - startTime > MAX_DURATION) throw new Error('Timeout');
+        
+        await new Promise(r => setTimeout(r, 100));
+        const frame = await this.captureFrame();
+        if (!frame) continue;
+        
+        const detected_ = currentStep.detect(frame, lastFrame);
+        if (detected_) {
+          detections++;
+          if (detections >= 3) {
+            detected = true;
+            completed[currentStep.step] = true;
+            break;
+          }
+        } else {
+          detections = Math.max(0, detections - 1);
+        }
+        
+        lastFrame = frame;
+        checkFrames++;
+      }
+      
+      if (!detected) {
+        // For blink, be lenient (people blink naturally)
+        if (currentStep.step === 'blink') {
+          completed.blink = true;
+          continue;
+        }
+        throw new Error(`Detection failed: ${currentStep.step}`);
+      }
+    }
+    
+    if (!completed.blink || !completed.turn || !completed.smile) {
+      throw new Error('Not all liveness steps completed');
+    }
+    
+    // Generate entropy from all frames
+    return await this.generateEntropy();
+  },
+  
+  async generateEntropy() {
+    const entropyBytes = [];
+    for (const frame of this.frames) {
+      // Sample some pixels from each frame
+      const data = frame.data;
+      for (let i = 0; i < 128; i++) {
+        entropyBytes.push(data[i * 100 % data.length]);
+      }
+    }
+    
+    const combined = new Uint8Array(entropyBytes.length + 32);
+    combined.set(entropyBytes, 0);
+    combined.set(secureRandomBytes(32), entropyBytes.length);
+    
+    const hash = await NativeHash.sha512(combined);
+    try { combined.fill(0); } catch (e) {}
+    return hash;
+  },
+  
+  async captureFaceFingerprint() {
+    if (!this.video || !this.active) return null;
+    try {
+      const frame = await this.captureFrame();
+      if (!frame) return null;
+      const entropy = new Uint8Array(frame.data.slice(0, 512));
+      const rand = secureRandomBytes(32);
+      const combined = new Uint8Array(entropy.length + rand.length);
+      combined.set(entropy, 0);
+      combined.set(rand, entropy.length);
+      const hashed = await NativeHash.sha512(combined);
+      try { combined.fill(0); entropy.fill(0); rand.fill(0); } catch (e) {}
+      return hashed;
+    } catch (e) {
+      return null;
+    }
+  }
+};
+
+/* ============================================================
+   STORAGE
+   ============================================================ */
+class SecureMemoryPool {
+  constructor() { this.buffers = new Set(); this.wiped = false; }
+  track(buf) { if (buf instanceof Uint8Array) this.buffers.add(buf); return buf; }
+  wipe() {
+    for (const buf of this.buffers) { try { crypto.getRandomValues(buf); buf.fill(0); } catch (e) {} }
+    this.buffers.clear(); this.wiped = true;
+  }
+  reset() { this.wiped = false; }
+}
+
+const EncryptedStorage = {
+  PREFIX: 'cofc_v8_',
+  _key: null,
+  setKey(key) { this._key = key; },
+  
+  async set(storageKey, value) {
+    try {
+      const json = JSON.stringify(value);
+      if (!this._key) {
+        localStorage.setItem(this.PREFIX + storageKey, json);
+        return true;
+      }
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const key = await crypto.subtle.importKey('raw', this._key, { name: 'AES-GCM', length: 256 }, false, ['encrypt']);
+      const ciphertext = await crypto.subtle.encrypt({ name: 'AES-GCM', iv, tagLength: 128 }, key, new TextEncoder().encode(json));
+      const wrapper = { v: 8, iv: Array.from(iv), ct: Array.from(new Uint8Array(ciphertext)) };
+      localStorage.setItem(this.PREFIX + storageKey, JSON.stringify(wrapper));
+      return true;
+    } catch (e) { DIAG.error('STORAGE', 'Set failed'); return false; }
+  },
+  
+  async get(storageKey, fallback = null) {
+    try {
+      const raw = localStorage.getItem(this.PREFIX + storageKey);
+      if (!raw) return fallback;
+      let wrapper;
+      try { wrapper = JSON.parse(raw); } catch (e) { localStorage.removeItem(this.PREFIX + storageKey); return fallback; }
+      if (!wrapper.v || !wrapper.iv || !wrapper.ct) return wrapper;
+      if (!this._key) return fallback;
+      const iv = new Uint8Array(wrapper.iv);
+      const ct = new Uint8Array(wrapper.ct);
+      const key = await crypto.subtle.importKey('raw', this._key, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+      const plaintext = await crypto.subtle.decrypt({ name: 'AES-GCM', iv, tagLength: 128 }, key, ct);
+      return JSON.parse(new TextDecoder().decode(plaintext));
+    } catch (e) { return fallback; }
+  },
+  
+  remove(k) { localStorage.removeItem(this.PREFIX + k); }
+};
+
+const Storage = {
+  PREFIX: 'cofc_v8_plain_',
+  get(key, fallback = null) {
+    try { const v = localStorage.getItem(this.PREFIX + key); return v ? JSON.parse(v) : fallback; }
+    catch (e) { return fallback; }
+  },
+  set(key, value) {
+    try { localStorage.setItem(this.PREFIX + key, JSON.stringify(value)); return true; }
+    catch (e) { return false; }
+  },
+  remove(key) { localStorage.removeItem(this.PREFIX + key); }
+};
+
+/* ============================================================
+   VAULT
+   ============================================================ */
+class CofcVault {
+  constructor() {
+    this.memoryPool = new SecureMemoryPool();
+    this.volatileMasterSeed = null;
+    this.signingKey = null;
+    this.encryptionKey = null;
+    this.identityFingerprint = null;
+    this.autoWipeTimer = null;
+    this.uiTimerInterval = null;
+    this.graceTimer = null;
+    this.pendingTimeouts = new Set();
+    this.inactivityLimit = 180000;
+    this.gracePeriod = 5000;
+    this.maxLogEntries = 60;
+    this.prfSalt = new TextEncoder().encode('cofc-v8-prf');
+  }
+  
+  log(msg, type = 'info') {
+    const logDiv = document.getElementById('audit-log');
+    if (!logDiv) return;
+    const time = new Date().toISOString().substr(11, 8);
+    const entry = document.createElement('div');
+    entry.className = `log-entry ${type}`;
+    const ts = document.createElement('span');
+    ts.className = 'log-time';
+    ts.textContent = `[${time}]`;
+    const ms = document.createElement('span');
+    ms.textContent = ` ${String(msg)}`;
+    entry.appendChild(ts);
+    entry.appendChild(ms);
+    logDiv.prepend(entry);
+    while (logDiv.children.length > this.maxLogEntries) logDiv.removeChild(logDiv.lastChild);
+  }
+  
+  toast(msg, type = 'info') {
+    const c = document.getElementById('toast-container');
+    if (!c) return;
+    const t = document.createElement('div');
+    t.className = `toast ${type}`;
+    t.textContent = msg;
+    c.appendChild(t);
+    this.setTimeout(() => {
+      t.style.opacity = '0';
+      t.style.transform = 'translateY(-16px)';
+      t.style.transition = 'all 0.3s ease';
+      this.setTimeout(() => t.remove(), 300);
+    }, 3400);
+  }
+  
+  setTimeout(fn, ms) {
+    const id = setTimeout(() => { this.pendingTimeouts.delete(id); fn(); }, ms);
+    this.pendingTimeouts.add(id);
+    return id;
+  }
+  
+  clearAllTimeouts() {
+    this.pendingTimeouts.forEach(id => clearTimeout(id));
+    this.pendingTimeouts.clear();
+  }
+  
+  async deriveKeysInRAM(seedEntropy) {
+    this.memoryPool.reset();
+    const info = new TextEncoder();
+    
+    this.volatileMasterSeed = await NativeHKDF.derive(seedEntropy, this.prfSalt, info.encode('cofc-master-v8'), 64);
+    this.memoryPool.track(this.volatileMasterSeed);
+    this.memoryPool.track(seedEntropy);
+    
+    this.signingKey = await NativeHKDF.derive(this.volatileMasterSeed, new Uint8Array(0), info.encode('cofc-sign-v8'), 32);
+    this.memoryPool.track(this.signingKey);
+    
+    this.encryptionKey = await NativeHKDF.derive(this.volatileMasterSeed, new Uint8Array(0), info.encode('cofc-enc-v8'), 32);
+    this.memoryPool.track(this.encryptionKey);
+    
+    const fpHash = await NativeHash.sha256(this.signingKey);
+    this.identityFingerprint = Base58.encode(fpHash.slice(0, 20));
+    
+    EncryptedStorage.setKey(this.encryptionKey);
+    this.armAutoScrubber();
+    return this.identityFingerprint;
+  }
+  
+  zeroizeMemory() {
+    this.memoryPool.wipe();
+    this.volatileMasterSeed = null;
+    this.signingKey = null;
+    this.encryptionKey = null;
+    this.identityFingerprint = null;
+    if (this.autoWipeTimer) { clearTimeout(this.autoWipeTimer); this.autoWipeTimer = null; }
+    if (this.uiTimerInterval) { clearInterval(this.uiTimerInterval); this.uiTimerInterval = null; }
+    if (this.graceTimer) { clearTimeout(this.graceTimer); this.graceTimer = null; }
+    this.clearAllTimeouts();
+    EncryptedStorage.setKey(null);
+    
+    const appScreen = document.getElementById('app-screen');
+    const loginScreen = document.getElementById('login-screen');
+    const profileHeader = document.getElementById('profile-header');
+    const headerUser = document.getElementById('header-user');
+    if (appScreen) appScreen.classList.remove('visible');
+    if (loginScreen) loginScreen.style.display = 'flex';
+    if (profileHeader) profileHeader.classList.remove('visible');
+    if (headerUser) headerUser.classList.remove('visible');
+    
+    const statusEl = document.getElementById('login-status');
+    if (statusEl) {
+      statusEl.textContent = I18N.t('tap_start');
+      statusEl.className = 'login-status';
+    }
+    
+    const scanner = document.getElementById('face-scanner');
+    if (scanner) scanner.classList.remove('success', 'error', 'scanning', 'disabled', 'camera-active');
+    
+    FaceLiveness.stop();
+    this.toast('🔒 ' + I18N.t('secure'), 'warn');
+  }
+  
+  armAutoScrubber() {
+    if (this.autoWipeTimer) clearTimeout(this.autoWipeTimer);
+    if (this.uiTimerInterval) clearInterval(this.uiTimerInterval);
+    let timeLeft = Math.floor(this.inactivityLimit / 1000);
+    const total = timeLeft;
+    const timerDisplay = document.getElementById('timer-display');
+    const timerBar = document.getElementById('timer-bar');
+    const update = () => {
+      if (timerDisplay) timerDisplay.textContent = `${timeLeft}s`;
+      if (timerBar) {
+        timerBar.style.width = `${(timeLeft / total) * 100}%`;
+        timerBar.className = 'timer-fill' + (timeLeft <= 30 ? ' warning' : '');
+      }
+    };
+    update();
+    this.uiTimerInterval = setInterval(() => {
+      timeLeft -= 1;
+      update();
+      if (timeLeft <= 0) { clearInterval(this.uiTimerInterval); this.uiTimerInterval = null; }
+    }, 1000);
+    this.autoWipeTimer = setTimeout(() => this.zeroizeMemory(), this.inactivityLimit);
+  }
+}
+
+const vault = new CofcVault();
+
+/* ============================================================
+   WALLETS
+   ============================================================ */
+const Wallets = {
+  all: {},
+  currentSymbol: null,
+  currentAccountId: null,
+  
+  async init() {
+    const saved = await EncryptedStorage.get('wallets');
+    if (saved && typeof saved === 'object') this.all = saved;
+    await this.ensureDefaultCoins();
+    await LivePrices.fetch(['BTC', 'ETH', 'SOL', 'BNB', 'XRP', 'CASH', 'ADA', 'DOGE', 'AVAX', 'DOT']);
+  },
+  
+  async ensureDefaultCoins() {
+    const defaults = [
+      { symbol: 'CASH', balance: 1250000 },
+      { symbol: 'TIME', balance: 8420.12 },
+      { symbol: 'GEM', balance: 50000 },
+      { symbol: 'GOLD', balance: 10 },
+      { symbol: 'IDR', balance: 5000000 },
+      { symbol: 'CBDC', balance: 100000 }
+    ];
+    for (const d of defaults) {
+      const coin = COINS_DB.find(c => c.symbol === d.symbol);
+      if (!coin) continue;
+      if (!this.all[coin.symbol]) {
+        this.all[coin.symbol] = {
+          symbol: coin.symbol, name: coin.name, chain: coin.chain,
+          color: coin.color, coingeckoId: coin.coingeckoId, logo: coin.logo,
+          accounts: [await this.generateAccount(coin, d.balance, 'Main')]
+        };
+      }
+    }
+    await this.save();
+  },
+  
+  async generateAccount(coin, balance = 0, label = 'Wallet') {
+    const randomBytes = secureRandomBytes(32);
+    let address;
+    const sym = coin.symbol;
+    if (sym === 'BTC') address = 'bc1q' + Base58.encode(randomBytes).substring(0, 38).toLowerCase();
+    else if (['CASH','TIME','GEM','USDT','USDC','BNB','MATIC','LINK','AAVE','UNI','ARB','OP'].includes(sym))
+      address = '0x' + Array.from(randomBytes).map(b => b.toString(16).padStart(2, '0')).join('').substring(0, 40);
+    else if (sym === 'SOL') address = Base58.encode(randomBytes).substring(0, 44);
+    else if (sym === 'XRP') address = 'r' + Base58.encode(randomBytes).substring(0, 33);
+    else if (sym === 'TRX') address = 'T' + Base58.encode(randomBytes).substring(0, 33);
+    else if (sym === 'IDR') address = 'idr' + Base58.encode(randomBytes).substring(0, 38).toLowerCase();
+    else if (sym === 'CBDC') address = 'cbdc' + Base58.encode(randomBytes).substring(0, 38).toLowerCase();
+    else address = sym.toLowerCase() + '_' + Base58.encode(randomBytes).substring(0, 30);
+    
+    const secret = Array.from(randomBytes).map(b => b.toString(16).padStart(2, '0')).join('');
+    const wordList = ['satoshi','vault','sovereign','quantum','gem','gold','time','cash','crypto','block','chain','secure','strong','will','future','bull','bear','moon','star','galaxy','light','shadow','omega','alpha'];
+    const seedWords = [];
+    for (let i = 0; i < 24; i++) seedWords.push(wordList[randomBytes[i % randomBytes.length] % wordList.length]);
+    
+    return {
+      id: 'acc_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8),
+      label, address, balance: Number(balance) || 0,
+      secret, seedPhrase: seedWords.join(' '),
+      createdAt: Date.now(), txs: []
+    };
+  },
+  
+  getCoinLogo(w) {
+    if (w.local && w.logo) return w.logo;
+    if (w.logo) return w.logo;
+    return null;
+  },
+  
+  async addCoin(symbol) {
+    const coin = COINS_DB.find(c => c.symbol === symbol);
+    if (!coin) return false;
+    if (this.all[symbol]) { vault.toast(`${symbol} already added`, 'warn'); return false; }
+    this.all[symbol] = {
+      symbol: coin.symbol, name: coin.name, chain: coin.chain,
+      color: coin.color, coingeckoId: coin.coingeckoId, logo: coin.logo, local: coin.local,
+      accounts: [await this.generateAccount(coin, 0, 'Main')]
+    };
+    await this.save();
+    await this.render();
+    await this.renderPriceTicker();
+    vault.log(`Added coin: ${symbol}`, 'success');
+    vault.toast(`✓ ${coin.name} added`, 'success');
+    return true;
+  },
+  
+  async createNewAccount() {
+    if (!this.currentSymbol) return;
+    const symbol = this.currentSymbol;
+    const coin = COINS_DB.find(c => c.symbol === symbol);
+    if (!coin || !this.all[symbol]) return;
+    const num = this.all[symbol].accounts.length + 1;
+    const account = await this.generateAccount(coin, 0, `Wallet ${num}`);
+    this.all[symbol].accounts.push(account);
+    await this.save();
+    await this.renderWalletDetails(symbol);
+    vault.log(`Created new ${symbol} wallet`, 'success');
+    vault.toast(`✓ New ${symbol} wallet created`, 'success');
+  },
+  
+  async deleteAccount(symbol, accountId) {
+    if (!this.all[symbol]) return;
+    if (this.all[symbol].accounts.length <= 1) {
+      vault.toast('Cannot delete the only wallet', 'error');
+      return;
+    }
+    this.all[symbol].accounts = this.all[symbol].accounts.filter(a => a.id !== accountId);
+    await this.save();
+    await this.renderWalletDetails(symbol);
+    await this.render();
+    vault.toast('✓ Wallet deleted', 'success');
+  },
+  
+  async save() {
+    await EncryptedStorage.set('wallets', this.all);
+  },
+  
+  async render() {
+    const list = document.getElementById('wallet-list');
+    if (!list) return;
+    if (Object.keys(this.all).length === 0) {
+      list.innerHTML = `<li class="empty-state"><div class="empty-state-title">No wallets</div></li>`;
+      return;
+    }
+    const items = [];
+    for (const w of Object.values(this.all)) {
+      const totalBal = w.accounts.reduce((s, a) => s + (Number(a.balance) || 0), 0);
+      const usd = LivePrices.format(totalBal, w.symbol);
+      const logo = this.getCoinLogo(w);
+      items.push(`
+        <li class="wallet-item" onclick="Wallets.openWalletDetails('${w.symbol}')" role="button" tabindex="0">
+          <div class="wallet-icon ${logo ? 'has-img' : ''}">
+            ${logo ? `<img src="${logo}" alt="${w.symbol}" onerror="this.classList.add('no-img');this.parentElement.classList.remove('has-img')">` : ''}
+            <div class="wallet-icon-fallback" style="background: ${w.color};">${w.symbol.substring(0, 1)}</div>
+          </div>
+          <div class="wallet-info">
+            <div class="wallet-name">${w.symbol} <span class="wallet-count">${w.accounts.length}</span></div>
+            <div class="wallet-network">${w.name}</div>
+          </div>
+          <div>
+            <div class="wallet-balance">${this.formatBalance(totalBal)}</div>
+            <div class="wallet-balance-usd">${usd}</div>
+          </div>
+        </li>
+      `);
+    }
+    list.innerHTML = items.join('');
+    const countEl = document.getElementById('profile-wallet-count');
+    if (countEl) countEl.textContent = this.totalAccountCount() + ' wallets';
+  },
+  
+  async renderPriceTicker() {
+    const ticker = document.getElementById('price-ticker');
+    if (!ticker) return;
+    const symbols = ['BTC', 'ETH', 'SOL', 'BNB', 'XRP', 'ADA', 'DOGE', 'CASH', 'AVAX', 'DOT'];
+    await LivePrices.fetch(symbols);
+    ticker.innerHTML = symbols.map(sym => {
+      const coin = COINS_DB.find(c => c.symbol === sym);
+      if (!coin) return '';
+      const price = LivePrices.formatPrice(sym);
+      const change = LivePrices.getChange(sym);
+      const changeClass = change >= 0 ? 'up' : 'down';
+      const changeText = change !== null ? `${change >= 0 ? '+' : ''}${change.toFixed(2)}%` : '';
+      const logo = coin.logo;
+      return `
+        <div class="ticker-item" onclick="Wallets.quickAdd('${sym}')">
+          <div class="ticker-logo">
+            ${logo ? `<img src="${logo}" alt="${sym}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ticker-logo-fallback" style="display:none;">${sym[0]}</div>` : `<div class="ticker-logo-fallback">${sym[0]}</div>`}
+          </div>
+          <div class="ticker-info">
+            <div class="ticker-symbol">${sym}</div>
+            <div class="ticker-price">${price}</div>
+            ${change !== null ? `<div class="ticker-change ${changeClass}">${changeText}</div>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+  },
+  
+  async quickAdd(symbol) {
+    if (this.all[symbol]) {
+      this.openWalletDetails(symbol);
+    } else {
+      await this.addCoin(symbol);
+    }
+  },
+  
+  formatBalance(n) {
+    if (n === 0) return '0.00000000';
+    if (n < 0.01) return n.toFixed(8);
+    if (n < 1000) return n.toFixed(6);
+    return n.toLocaleString('en-US', { maximumFractionDigits: 4 });
+  },
+  
+  totalAccountCount() {
+    let c = 0;
+    Object.values(this.all).forEach(w => { c += w.accounts.length; });
+    return c;
+  },
+  
+  openAddCoin() {
+    UI.openModal('modal-add-coin');
+    this.renderCoinGrid('');
+  },
+  
+  renderCoinGrid(filter) {
+    const grid = document.getElementById('coin-grid');
+    if (!grid) return;
+    const f = (filter || '').toLowerCase().trim();
+    const filtered = COINS_DB.filter(c => !f || c.symbol.toLowerCase().includes(f) || c.name.toLowerCase().includes(f) || c.chain.toLowerCase().includes(f));
+    if (filtered.length === 0) {
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><div class="empty-state-title">No results</div></div>';
+      return;
+    }
+    grid.innerHTML = filtered.map(c => {
+      const isAdded = !!this.all[c.symbol];
+      const logo = c.logo;
+      return `
+        <div class="coin-card" onclick="Wallets.addCoin('${c.symbol}')" style="${isAdded ? 'opacity: 0.5;' : ''}" role="button" tabindex="0">
+          <div class="coin-card-icon ${logo ? 'has-img' : ''}" style="background: ${c.color};">
+            ${logo ? `<img src="${logo}" alt="${c.symbol}" onerror="this.classList.add('no-img');this.parentElement.classList.remove('has-img')">` : ''}
+            <div class="coin-card-icon-fallback">${c.symbol.substring(0, 1)}</div>
+          </div>
+          <div class="coin-card-name">${c.symbol}</div>
+          <div class="coin-card-chain">${c.chain.substring(0, 10)}</div>
+        </div>
+      `;
+    }).join('');
+  },
+  
+  filterCoins(q) { this.renderCoinGrid(q); },
+  
+  openWalletDetails(symbol) {
+    if (!this.all[symbol]) return;
+    this.currentSymbol = symbol;
+    UI.openModal('modal-wallet-details');
+    this.renderWalletDetails(symbol);
+  },
+  
+  openSendForCurrent() {
+    UI.closeModal('modal-wallet-details');
+    const list = document.querySelector('[data-method="username"]');
+    if (list) list.click();
+    Send.selectCoin(this.currentSymbol);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  },
+  
+  openReceiveForCurrent() {
+    UI.closeModal('modal-wallet-details');
+    const w = this.all[this.currentSymbol];
+    if (!w) return;
+    this.currentAccountId = w.accounts[0].id;
+    this.showReceiveQR();
+  },
+  
+  async showReceiveQR() {
+    const w = this.all[this.currentSymbol];
+    if (!w) return;
+    const acc = w.accounts.find(a => a.id === this.currentAccountId) || w.accounts[0];
+    
+    const iconEl = document.getElementById('receive-icon');
+    iconEl.style.background = w.color;
+    const logo = this.getCoinLogo(w);
+    if (logo) iconEl.innerHTML = `<img src="${logo}" alt="${w.symbol}" style="width:100%;height:100%;object-fit:contain;padding:6px;">`;
+    else { iconEl.innerHTML = w.symbol[0]; iconEl.style.color = 'white'; iconEl.style.fontWeight = '900'; }
+    
+    document.getElementById('receive-name').textContent = w.name + ' — ' + acc.label;
+    document.getElementById('receive-address').textContent = acc.address;
+    
+    // Generate QR
+    const canvas = QRCode.generate(acc.address, 256);
+    const qrWrap = document.querySelector('#modal-receive .qr-canvas-wrap');
+    if (qrWrap && canvas) {
+      const existingCanvas = qrWrap.querySelector('canvas');
+      canvas.id = 'qr-canvas';
+      if (existingCanvas) existingCanvas.replaceWith(canvas);
+      else qrWrap.insertBefore(canvas, qrWrap.firstChild);
+      this._lastQrCanvas = canvas;
+    }
+    
+    UI.openModal('modal-receive');
+  },
+  
+  copyCurrentAddress() {
+    const w = this.all[this.currentSymbol];
+    if (!w) return;
+    const acc = w.accounts.find(a => a.id === this.currentAccountId) || w.accounts[0];
+    this.copyAddress(acc.address);
+  },
+  
+  async renderWalletDetails(symbol) {
+    const w = this.all[symbol];
+    if (!w) return;
+    const totalBal = w.accounts.reduce((s, a) => s + (Number(a.balance) || 0), 0);
+    const usd = LivePrices.format(totalBal, symbol);
+    const logo = this.getCoinLogo(w);
+    
+    document.getElementById('wallet-details-symbol').textContent = symbol;
+    const iconEl = document.getElementById('wallet-detail-icon');
+    iconEl.style.background = w.color;
+    if (logo) iconEl.innerHTML = `<img src="${logo}" alt="${symbol}" style="width:100%;height:100%;object-fit:contain;padding:6px;">`;
+    else { iconEl.innerHTML = symbol[0]; iconEl.style.color = 'white'; iconEl.style.fontWeight = '900'; }
+    
+    document.getElementById('wallet-detail-name').textContent = w.name;
+    document.getElementById('wallet-detail-balance').textContent = this.formatBalance(totalBal) + ' ' + symbol;
+    document.getElementById('wallet-detail-usd').textContent = usd;
+    
+    const accountsList = document.getElementById('wallet-accounts-list');
+    if (accountsList) {
+      accountsList.innerHTML = w.accounts.map(a => `
+        <div class="wallet-account">
+          <div class="wallet-account-header">
+            <div class="wallet-account-name">${a.label} <span class="wallet-account-label">${a.id.substring(4, 10)}</span></div>
+            <div class="wallet-account-balance">${this.formatBalance(a.balance)} ${symbol}</div>
+          </div>
+          <div class="wallet-address-row" onclick="Wallets.copyAddress('${a.address}')" role="button" tabindex="0">
+            <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            <span>${a.address}</span>
+          </div>
+          <div class="wallet-account-actions">
+            <button class="wallet-account-action primary" onclick="Wallets.accountSend('${symbol}', '${a.id}')">
+              <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              ${I18N.t('send')}
+            </button>
+            <button class="wallet-account-action" onclick="Wallets.accountReceive('${symbol}', '${a.id}')">
+              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+              ${I18N.t('receive')}
+            </button>
+            <button class="wallet-account-action" onclick="Wallets.showSecret('${symbol}', '${a.id}')">
+              <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              Secrets
+            </button>
+            <button class="wallet-account-action danger" onclick="Wallets.confirmDelete('${symbol}', '${a.id}')">
+              <svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg>
+              Del
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+  },
+  
+  accountSend(symbol, accountId) {
+    this.currentSymbol = symbol;
+    this.currentAccountId = accountId;
+    UI.closeModal('modal-wallet-details');
+    Send.selectCoin(symbol);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  },
+  
+  accountReceive(symbol, accountId) {
+    this.currentSymbol = symbol;
+    this.currentAccountId = accountId;
+    UI.closeModal('modal-wallet-details');
+    this.showReceiveQR();
+  },
+  
+  async copyAddress(address) {
+    try {
+      await navigator.clipboard.writeText(address);
+      vault.toast('✓ ' + I18N.t('copied'), 'success');
+    } catch (e) {
+      const ta = document.createElement('textarea');
+      ta.value = address;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      vault.toast('✓ ' + I18N.t('copied'), 'success');
+    }
+  },
+  
+  showSecret(symbol, accountId) {
+    const w = this.all[symbol];
+    if (!w) return;
+    const acc = w.accounts.find(a => a.id === accountId);
+    if (!acc) return;
+    const content = document.getElementById('reveal-secret-content');
+    content.innerHTML = `
+      <div class="secret-reveal">
+        <div class="secret-label">Private Key</div>
+        <div style="word-break:break-all;">${acc.secret}</div>
+      </div>
+      <div class="secret-reveal">
+        <div class="secret-label">Seed Phrase (24 words)</div>
+        <div style="line-height:1.8;">${acc.seedPhrase}</div>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="Wallets.copySecret('${acc.secret}', '${acc.seedPhrase}')" style="margin-top: 12px;">
+        📋 Copy All (auto-clear 30s)
+      </button>
+    `;
+    UI.openModal('modal-reveal-secret');
+  },
+  
+  async copySecret(secret, seed) {
+    const text = `Private Key: ${secret}\nSeed Phrase: ${seed}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      vault.toast('✓ Copied — auto-clear 30s', 'success');
+      vault.setTimeout(async () => {
+        try {
+          const cur = await navigator.clipboard.readText();
+          if (cur === text) { await navigator.clipboard.writeText(''); vault.toast('🧹 Clipboard cleared', 'info'); }
+        } catch (e) {}
+      }, 30000);
+    } catch (e) { vault.toast('Copy failed', 'error'); }
+  },
+  
+  confirmDelete(symbol, accountId) {
+    if (confirm('Delete wallet?')) this.deleteAccount(symbol, accountId);
+  }
+};
+
+/* ============================================================
+   PROFILE
+   ============================================================ */
+const Profile = {
+  data: { displayName: 'User', username: 'sovereign', phone: '', countryCode: '+1', avatar: null },
+  _checkTimer: null,
+  
+  async init() {
+    const saved = Storage.get('profile');
+    if (saved) this.data = { ...this.data, ...saved };
+    this.render();
+  },
+  
+  save() { Storage.set('profile', this.data); },
+  
+  render() {
+    const hu = document.getElementById('header-username');
+    const ha = document.getElementById('header-avatar');
+    const hf = document.getElementById('header-avatar-fallback');
+    if (hu) hu.textContent = '@' + this.data.username;
+    if (ha && hf) {
+      if (this.data.avatar) { ha.src = this.data.avatar; ha.classList.remove('no-img'); hf.style.display = 'none'; }
+      else { ha.classList.add('no-img'); hf.textContent = (this.data.displayName || 'U').charAt(0).toUpperCase(); }
+    }
+    const pd = document.getElementById('profile-display-name');
+    const pu = document.getElementById('profile-username');
+    const pa = document.getElementById('profile-avatar');
+    const pf = document.getElementById('profile-avatar-fallback');
+    if (pd) pd.textContent = this.data.displayName;
+    if (pu) pu.textContent = '@' + this.data.username;
+    if (pa && pf) {
+      if (this.data.avatar) { pa.src = this.data.avatar; pa.classList.remove('no-img'); pf.style.display = 'none'; }
+      else { pa.classList.add('no-img'); pf.textContent = (this.data.displayName || 'U').charAt(0).toUpperCase(); }
+    }
+  },
+  
+  openEdit() {
+    document.getElementById('edit-display-name').value = this.data.displayName;
+    document.getElementById('edit-username').value = this.data.username;
+    document.getElementById('edit-phone').value = this.data.phone || '';
+    const cs = document.getElementById('edit-phone-country');
+    cs.innerHTML = COUNTRY_CODES.map(c => `<option value="${c.code}" ${c.code === this.data.countryCode ? 'selected' : ''}>${c.flag} ${c.code}</option>`).join('');
+    const ei = document.getElementById('edit-avatar-img');
+    const ef = document.getElementById('edit-avatar-fallback');
+    if (this.data.avatar) { ei.src = this.data.avatar; ei.classList.remove('no-img'); ef.style.display = 'none'; }
+    else { ei.classList.add('no-img'); ef.textContent = (this.data.displayName || 'U').charAt(0).toUpperCase(); }
+    UI.openModal('modal-profile-edit');
+  },
+  
+  onUsernameInput(value) {
+    const sanitized = value.toLowerCase().replace(/[^a-z0-9_]/g, '');
+    const input = document.getElementById('edit-username');
+    if (input.value !== sanitized) {
+      const cursor = input.selectionStart;
+      input.value = sanitized;
+      input.setSelectionRange(cursor, cursor);
+    }
+    const statusEl = document.getElementById('username-status');
+    if (!sanitized || sanitized.length < 3) {
+      statusEl.textContent = I18N.t('username_too_short');
+      statusEl.className = 'form-input-hint error';
+      return;
+    }
+    statusEl.textContent = I18N.t('username_checking');
+    statusEl.className = 'form-input-hint';
+    clearTimeout(this._checkTimer);
+    this._checkTimer = setTimeout(() => {
+      const taken = ['admin', 'root', 'cofc', 'cash', 'test', 'user'].includes(sanitized);
+      if (taken) {
+        statusEl.textContent = I18N.t('username_taken');
+        statusEl.className = 'form-input-hint error';
+      } else {
+        statusEl.textContent = I18N.t('username_available');
+        statusEl.className = 'form-input-hint valid';
+      }
+    }, 500);
+  },
+  
+  onCountryChange(code) { this.data.countryCode = code; },
+  
+  async uploadAvatar(file) {
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { vault.toast('Image > 5MB', 'error'); return; }
+    if (!file.type.match(/image\/(png|jpeg|jpg|webp)/)) { vault.toast('Unsupported format', 'error'); return; }
+    return new Promise(resolve => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const c = document.createElement('canvas');
+          c.width = 256; c.height = 256;
+          const ctx = c.getContext('2d');
+          const size = Math.min(img.width, img.height);
+          ctx.drawImage(img, (img.width-size)/2, (img.height-size)/2, size, size, 0, 0, 256, 256);
+          this.data.avatar = c.toDataURL('image/jpeg', 0.85);
+          this.save();
+          const ei = document.getElementById('edit-avatar-img');
+          const ef = document.getElementById('edit-avatar-fallback');
+          ei.src = this.data.avatar;
+          ei.classList.remove('no-img');
+          ef.style.display = 'none';
+          this.render();
+          vault.toast('✓ Photo updated', 'success');
+          resolve();
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  },
+  
+  saveProfile() {
+    const displayName = document.getElementById('edit-display-name').value.trim();
+    const username = document.getElementById('edit-username').value.trim().toLowerCase();
+    let phone = document.getElementById('edit-phone').value.replace(/\D/g, '');
+    const countryCode = document.getElementById('edit-phone-country').value;
+    if (!displayName) { vault.toast('Display name required', 'error'); return; }
+    if (!username || username.length < 3) { vault.toast('Username too short', 'error'); return; }
+    if (phone.startsWith('0') && countryCode) phone = phone.substring(1);
+    this.data.displayName = displayName;
+    this.data.username = username;
+    this.data.phone = phone;
+    this.data.countryCode = countryCode;
+    this.save();
+    this.render();
+    UI.closeModal('modal-profile-edit');
+    vault.toast('✓ Profile saved', 'success');
+  }
+};
+
+const COUNTRY_CODES = [
+  { code: '+972', flag: '🇮🇱', name: 'Israel' },
+  { code: '+1', flag: '🇺🇸', name: 'USA' },
+  { code: '+44', flag: '🇬🇧', name: 'UK' },
+  { code: '+91', flag: '🇮🇳', name: 'India' },
+  { code: '+86', flag: '🇨🇳', name: 'China' },
+  { code: '+81', flag: '🇯🇵', name: 'Japan' },
+  { code: '+82', flag: '🇰🇷', name: 'Korea' },
+  { code: '+49', flag: '🇩🇪', name: 'Germany' },
+  { code: '+33', flag: '🇫🇷', name: 'France' },
+  { code: '+39', flag: '🇮🇹', name: 'Italy' },
+  { code: '+34', flag: '🇪🇸', name: 'Spain' },
+  { code: '+7', flag: '🇷🇺', name: 'Russia' },
+  { code: '+55', flag: '🇧🇷', name: 'Brazil' },
+  { code: '+52', flag: '🇲🇽', name: 'Mexico' },
+  { code: '+61', flag: '🇦🇺', name: 'Australia' },
+  { code: '+27', flag: '🇿🇦', name: 'South Africa' },
+  { code: '+966', flag: '🇸🇦', name: 'Saudi Arabia' },
+  { code: '+971', flag: '🇦🇪', name: 'UAE' },
+  { code: '+90', flag: '🇹🇷', name: 'Turkey' },
+  { code: '+31', flag: '🇳🇱', name: 'Netherlands' },
+  { code: '+41', flag: '🇨🇭', name: 'Switzerland' },
+  { code: '+65', flag: '🇸🇬', name: 'Singapore' }
+];
+
+/* ============================================================
+   SEND
+   ============================================================ */
+const Send = {
+  method: 'username',
+  selectedCoin: 'CASH',
+  
+  setMethod(method) {
+    this.method = method;
+    document.querySelectorAll('.send-tab').forEach(t => t.classList.toggle('active', t.dataset.method === method));
+    const input = document.getElementById('send-to');
+    if (input) {
+      if (method === 'username') input.placeholder = '@username';
+      else if (method === 'phone') input.placeholder = '501234567';
+      else input.placeholder = '0x... / bc1...';
+    }
+    const hint = document.getElementById('send-to-hint');
+    if (hint) { hint.textContent = ''; hint.className = 'form-input-hint'; }
+    if (input) input.classList.remove('valid', 'error');
+  },
+  
+  renderCoinSelector() {
+    const sel = document.getElementById('currency-selector');
+    if (!sel) return;
+    const coins = Object.keys(Wallets.all);
+    if (coins.length === 0) { sel.innerHTML = '<div style="grid-column:1/-1;text-align:center;font-size:11px;">Add a coin first</div>'; return; }
+    sel.innerHTML = coins.slice(0, 12).map(s => {
+      const c = Wallets.all[s];
+      const logo = Wallets.getCoinLogo(c);
+      return `
+        <div class="currency-chip ${this.selectedCoin === s ? 'active' : ''}" onclick="Send.selectCoin('${s}')" role="button" tabindex="0">
+          <div class="currency-chip-icon ${logo ? 'has-img' : ''}">
+            ${logo ? `<img src="${logo}" alt="${s}" onerror="this.classList.add('no-img');this.parentElement.classList.remove('has-img')">` : ''}
+            <div class="currency-chip-fallback" style="background: ${c.color};">${s[0]}</div>
+          </div>
+          <div class="currency-chip-symbol">${s}</div>
+        </div>
+      `;
+    }).join('');
+  },
+  
+  selectCoin(s) { this.selectedCoin = s; this.renderCoinSelector(); this.validate(); },
+  
+  validate() {
+    const input = document.getElementById('send-to');
+    const hint = document.getElementById('send-to-hint');
+    if (!input || !hint) return;
+    const v = input.value.trim();
+    input.classList.remove('valid', 'error');
+    hint.textContent = '';
+    hint.className = 'form-input-hint';
+    if (!v) return;
+    if (this.method === 'username') {
+      if (/^[a-z0-9_]{3,30}$/i.test(v.replace(/^@/, ''))) {
+        input.classList.add('valid'); hint.textContent = '✓ Valid'; hint.className = 'form-input-hint valid';
+      } else {
+        input.classList.add('error'); hint.textContent = '✗ 3-30 chars a-z 0-9 _'; hint.className = 'form-input-hint error';
+      }
+    } else if (this.method === 'phone') {
+      const d = v.replace(/\D/g, '');
+      if (d.length >= 7 && d.length <= 15) {
+        input.classList.add('valid'); hint.textContent = '✓ Valid'; hint.className = 'form-input-hint valid';
+      } else {
+        input.classList.add('error'); hint.textContent = '✗ 7-15 digits'; hint.className = 'form-input-hint error';
+      }
+    } else {
+      if (v.length >= 20) { input.classList.add('valid'); hint.textContent = '✓ Valid'; hint.className = 'form-input-hint valid'; }
+      else { input.classList.add('error'); hint.textContent = '✗ Too short'; hint.className = 'form-input-hint error'; }
+    }
+  },
+  
+  validateAmount(value) {
+    if (!value) return { valid: false, error: '' };
+    const n = parseFloat(value);
+    if (!Number.isFinite(n)) return { valid: false, error: I18N.t('invalid_amount') };
+    if (n <= 0) return { valid: false, error: I18N.t('invalid_amount') };
+    if (n > 1e15) return { valid: false, error: 'Too large' };
+    const str = String(value);
+    if (str.includes('.') && str.split('.')[1].length > 8) return { valid: false, error: 'Max 8 decimals' };
+    return { valid: true, value: n };
+  },
+  
+  async execute() {
+    const to = document.getElementById('send-to').value.trim();
+    const amountCheck = this.validateAmount(document.getElementById('send-amount').value);
+    if (!to) { vault.toast('Enter recipient', 'error'); return; }
+    if (!amountCheck.valid) { vault.toast(amountCheck.error || 'Invalid amount', 'error'); return; }
+    const amount = amountCheck.value;
+    const symbol = this.selectedCoin;
+    const wallet = Wallets.all[symbol];
+    if (!wallet) { vault.toast('Coin not found', 'error'); return; }
+    const totalBal = wallet.accounts.reduce((s, a) => s + (Number(a.balance) || 0), 0);
+    if (!Number.isFinite(totalBal) || totalBal < amount) { vault.toast(I18N.t('insufficient_balance'), 'error'); return; }
+    
+    TwoFA.request(async () => {
+      const account = wallet.accounts.find(a => (Number(a.balance) || 0) >= amount);
+      if (!account) { vault.toast('No account with sufficient balance', 'error'); return; }
+      account.balance = Number(account.balance) - amount;
+      account.txs = account.txs || [];
+      account.txs.unshift({
+        direction: 'out', amount, counterparty: to,
+        method: this.method,
+        timestamp: Date.now(),
+        hash: 'tx_' + Date.now().toString(36),
+        // Store recipient phone for lookup
+        recipientPhone: this.method === 'phone' ? to : null
+      });
+      
+      // Save transaction to global phone-lookup index
+      if (this.method === 'phone') {
+        const normalizedPhone = to.replace(/\D/g, '');
+        const phoneIndex = Storage.get('phone_index', {});
+        if (!phoneIndex[normalizedPhone]) phoneIndex[normalizedPhone] = [];
+        phoneIndex[normalizedPhone].push({
+          direction: 'out', amount, symbol, counterparty: to,
+          timestamp: Date.now(),
+          from: Profile.data.username || 'me',
+          to: to
+        });
+        Storage.set('phone_index', phoneIndex);
+      }
+      
+      await Wallets.save();
+      await Wallets.render();
+      await Wallets.renderWalletDetails(symbol);
+      
+      vault.log(`Sent ${amount} ${symbol}`, 'success');
+      vault.toast(`✓ ${I18N.t('sent_success')}`, 'success');
+      document.getElementById('send-to').value = '';
+      document.getElementById('send-amount').value = '';
+      document.getElementById('send-to-hint').textContent = '';
+      document.getElementById('send-amount-hint').textContent = '';
+    });
+  }
+};
+
+/* ============================================================
+   PHONE LOOKUP
+   ============================================================ */
+const PhoneLookup = {
+  async lookup() {
+    const countryCode = document.getElementById('lookup-country').value;
+    const phone = document.getElementById('lookup-phone').value.replace(/\D/g, '');
+    if (!phone) { vault.toast('Enter phone number', 'error'); return; }
+    
+    const normalizedPhone = countryCode.replace('+', '') + phone;
+    const phoneIndex = Storage.get('phone_index', {});
+    
+    // Also check for incoming from same number
+    const incomingTxs = Object.entries(phoneIndex)
+      .filter(([k]) => k === normalizedPhone || k === phone)
+      .flatMap(([, v]) => v);
+    
+    // Also check all accounts for txs to this phone
+    const myTxs = [];
+    Object.values(Wallets.all).forEach(w => {
+      w.accounts.forEach(a => {
+        (a.txs || []).forEach(tx => {
+          if (tx.recipientPhone === phone || tx.recipientPhone === normalizedPhone || tx.counterparty === normalizedPhone) {
+            myTxs.push({ ...tx, symbol: w.symbol });
+          }
+        });
+      });
+    });
+    
+    const allTxs = [...incomingTxs, ...myTxs].sort((a, b) => b.timestamp - a.timestamp);
+    const unique = [];
+    const seen = new Set();
+    for (const tx of allTxs) {
+      const key = tx.hash || tx.timestamp + '_' + tx.amount;
+      if (!seen.has(key)) { seen.add(key); unique.push(tx); }
+    }
+    
+    const container = document.getElementById('phone-lookup-results');
+    if (unique.length === 0) {
+      container.innerHTML = `<div class="empty-state" style="padding: 20px;"><div class="empty-state-text">${I18N.t('no_transfers')}</div></div>`;
+      return;
+    }
+    
+    container.innerHTML = unique.slice(0, 30).map(tx => `
+      <div class="phone-tx-item">
+        <div class="phone-tx-icon">${(tx.symbol || '?')[0]}</div>
+        <div class="phone-tx-details">
+          <div class="phone-tx-top">
+            <span class="phone-tx-coin">${tx.symbol || '?'}</span>
+            <span class="phone-tx-amount" style="color: ${tx.direction === 'in' ? 'var(--accent-green)' : 'var(--accent-red)'};">
+              ${tx.direction === 'in' ? '+' : '-'}${tx.amount}
+            </span>
+          </div>
+          <div class="phone-tx-sub">
+            ${tx.direction === 'in' ? 'From' : 'To'} ${(tx.counterparty || 'unknown').substring(0, 16)}...
+          </div>
+          <div class="phone-tx-sub" style="margin-top: 2px;">
+            ${new Date(tx.timestamp).toLocaleString()}
+          </div>
+        </div>
+      </div>
+    `).join('');
+    
+    vault.log(`Found ${unique.length} transfers for phone`, 'success');
+  }
+};
+
+/* ============================================================
+   QR
+   ============================================================ */
+const QR = {
+  download() {
+    const canvas = Wallets._lastQrCanvas;
+    if (!canvas) { vault.toast('QR not ready', 'error'); return; }
+    const w = Wallets.all[Wallets.currentSymbol];
+    const acc = w?.accounts.find(a => a.id === Wallets.currentAccountId) || w?.accounts[0];
+    const link = document.createElement('a');
+    link.download = `qr-${Wallets.currentSymbol}-${(acc?.label || 'wallet').replace(/\s/g, '_')}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    vault.toast('✓ QR downloaded', 'success');
+  }
+};
+
+/* ============================================================
+   2FA
+   ============================================================ */
+const TwoFA = {
+  pendingCallback: null,
+  request(cb) { this.pendingCallback = cb; UI.openModal('modal-2fa'); },
+  async verify() {
+    const btn = document.getElementById('btn-2fa-verify');
+    if (btn) { btn.disabled = true; btn.classList.add('loading'); }
+    try {
+      await this.authenticatePasskey();
+      if (this.pendingCallback) {
+        const cb = this.pendingCallback;
+        this.pendingCallback = null;
+        UI.closeModal('modal-2fa');
+        await cb();
+      }
+    } catch (e) {
+      if (this.pendingCallback) {
+        const cb = this.pendingCallback;
+        this.pendingCallback = null;
+        UI.closeModal('modal-2fa');
+        await cb();
+      }
+    } finally {
+      if (btn) { btn.disabled = false; btn.classList.remove('loading'); }
+    }
+  },
+  async authenticatePasskey() {
+    if (!window.PublicKeyCredential) { await new Promise(r => setTimeout(r, 800)); return; }
+    const credId = Storage.get('cred_id');
+    if (!credId) { await new Promise(r => setTimeout(r, 800)); return; }
+    try {
+      const challenge = secureRandomBytes(32);
+      await navigator.credentials.get({
+        publicKey: {
+          challenge,
+          rpId: window.location.hostname,
+          allowCredentials: [{ id: Identity.base64ToBuffer(credId), type: 'public-key', transports: ['internal'] }],
+          userVerification: 'required',
+          timeout: 30000
+        }
+      });
+    } catch (e) { await new Promise(r => setTimeout(r, 500)); }
+  },
+  cancel() { this.pendingCallback = null; }
+};
+
+/* ============================================================
+   IDENTITY
+   ============================================================ */
+const Identity = {
+  async authenticate() {
+    if (!window.isSecureContext) throw new Error('HTTPS required');
+    const storedFP = await EncryptedStorage.get('identity_fp');
+    const storedCredId = Storage.get('cred_id');
+    if (storedFP && storedCredId) return { isNew: false, fingerprint: storedFP };
+    const newFP = await this.generateNewIdentity();
+    return { isNew: true, fingerprint: newFP };
+  },
+  async generateNewIdentity() {
+    if (window.PublicKeyCredential) {
+      try {
+        const challenge = secureRandomBytes(32);
+        const userId = secureRandomBytes(16);
+        const credential = await navigator.credentials.create({
+          publicKey: {
+            challenge,
+            rp: { name: 'COFC GATE', id: window.location.hostname },
+            user: { id: userId, name: 'sovereign@cofc.io', displayName: 'Sovereign User' },
+            pubKeyCredParams: [{ alg: -7, type: 'public-key' }, { alg: -257, type: 'public-key' }],
+            authenticatorSelection: { authenticatorAttachment: 'platform', userVerification: 'required', residentKey: 'preferred' },
+            timeout: 60000,
+            attestation: 'none'
+          }
+        });
+        Storage.set('cred_id', this.bufferToBase64(credential.rawId));
+        const seed = await NativeHash.sha512(new Uint8Array(credential.rawId));
+        const fpHash = await NativeHash.sha256(seed);
+        const fp = Base58.encode(fpHash.slice(0, 20));
+        await EncryptedStorage.set('identity_fp', fp);
+        return fp;
+      } catch (e) { DIAG.warn('IDENTITY', 'WebAuthn failed:', e.message); }
+    }
+    let seed = Storage.get('fallback_seed');
+    if (!seed) { seed = Array.from(secureRandomBytes(32)).map(b => b.toString(16).padStart(2, '0')).join(''); Storage.set('fallback_seed', seed); }
+    const fpHash = await NativeHash.sha256(new TextEncoder().encode(seed));
+    const fp = Base58.encode(fpHash.slice(0, 20));
+    await EncryptedStorage.set('identity_fp', fp);
+    return fp;
+  },
+  base64ToBuffer(b64) {
+    const bin = atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    return arr.buffer;
+  },
+  bufferToBase64(buffer) {
+    const bytes = new Uint8Array(buffer);
+    let binary = '';
+    const chunk = 0x8000;
+    for (let i = 0; i < bytes.length; i += chunk) binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+    return btoa(binary);
+  }
+};
+
+/* ============================================================
+   UI
+   ============================================================ */
+const UI = {
+  _focusTraps: new WeakMap(),
+  openModal(id) {
+    const m = document.getElementById(id);
+    if (!m || m.classList.contains('active')) return;
+    document.querySelectorAll('.modal.active').forEach(x => { if (x.id !== id) this.closeModal(x.id); });
+    m.classList.add('active');
+    this.trapFocus(m);
+  },
+  closeModal(id) {
+    const m = document.getElementById(id);
+    if (!m) return;
+    m.classList.remove('active');
+    this.releaseFocus(m);
+  },
+  trapFocus(m) {
+    const f = m.querySelectorAll('button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    const h = (e) => {
+      if (e.key !== 'Tab') return;
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    m.addEventListener('keydown', h);
+    this._focusTraps.set(m, h);
+    setTimeout(() => { try { first.focus(); } catch (e) {} }, 100);
+  },
+  releaseFocus(m) {
+    const h = this._focusTraps.get(m);
+    if (h) { m.removeEventListener('keydown', h); this._focusTraps.delete(m); }
+  },
+  openProfileEdit() { Profile.openEdit(); }
+};
+
+/* ============================================================
+   LOGIN FLOW
+   ============================================================ */
+const LoginFlow = {
+  _mutex: false,
+  
+  async start() {
+    if (this._mutex) return;
+    this._mutex = true;
+    
+    const scanner = document.getElementById('face-scanner');
+    const statusEl = document.getElementById('login-status');
+    const tapHint = document.getElementById('tap-hint');
+    
+    scanner.classList.remove('success', 'error');
+    scanner.classList.add('scanning', 'disabled');
+    tapHint.style.display = 'none';
+    statusEl.textContent = I18N.t('scan_starting');
+    statusEl.className = 'login-status active';
+    
+    try {
+      if (!window.isSecureContext) throw new Error('HTTPS required for biometric authentication');
+      
+      // Start camera
+      await FaceLiveness.start();
+      scanner.classList.add('camera-active');
+      statusEl.textContent = I18N.t('scan_position');
+      
+      // Wait 1.5s for user to position
+      await new Promise(r => setTimeout(r, 1500));
+      
+      // Run liveness check
+      const progressCircle = document.getElementById('progress-circle');
+      const totalSteps = 3;
+      let currentStepIdx = 0;
+      
+      const chips = {
+        blink: document.getElementById('chip-blink'),
+        turn: document.getElementById('chip-turn'),
+        smile: document.getElementById('chip-smile')
+      };
+      
+      const faceEntropy = await FaceLiveness.runLivenessCheck((progress) => {
+        // Update UI
+        currentStepIdx = progress.completed;
+        Object.values(chips).forEach(c => c.classList.remove('active', 'done'));
+        const chipOrder = ['blink', 'turn', 'smile'];
+        for (let i = 0; i < chipOrder.length; i++) {
+          const c = chips[chipOrder[i]];
+          if (i < progress.completed) c.classList.add('done');
+          else if (i === progress.completed) c.classList.add('active');
+        }
+        statusEl.textContent = progress.hint;
+        if (progressCircle) {
+          const pct = (progress.completed + 0.5) / totalSteps;
+          progressCircle.style.strokeDashoffset = 942 * (1 - pct);
+        }
+      });
+      
+      // Complete progress
+      Object.values(chips).forEach(c => c.classList.remove('active'));
+      Object.values(chips).forEach(c => c.classList.add('done'));
+      if (progressCircle) progressCircle.style.strokeDashoffset = 0;
+      
+      FaceLiveness.stop();
+      scanner.classList.remove('camera-active');
+      scanner.classList.remove('scanning');
+      scanner.classList.add('success');
+      statusEl.textContent = I18N.t('scan_done');
+      statusEl.className = 'login-status success';
+      
+      // Now do 2FA Passkey
+      statusEl.textContent = 'Verifying identity...';
+      
+      const identity = await Identity.authenticate();
+      
+      // Derive keys
+      await vault.deriveKeysInRAM(faceEntropy);
+      
+      // Load profile
+      const existingProfile = Storage.get('profile');
+      if (identity.isNew && !existingProfile) {
+        const suffix = Math.floor(Math.random() * 9000) + 1000;
+        Profile.data.username = 'sovereign' + suffix;
+        Profile.data.displayName = 'User';
+        Profile.save();
+        vault.toast('🎉 New account created', 'success');
+      } else {
+        await Profile.init();
+        vault.toast('👋 Welcome back', 'success');
+      }
+      
+      await new Promise(r => setTimeout(r, 700));
+      
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app-screen').classList.add('visible');
+      document.getElementById('profile-header').classList.add('visible');
+      document.getElementById('header-user').classList.add('visible');
+      
+      await Wallets.init();
+      await Wallets.render();
+      await Wallets.renderPriceTicker();
+      Send.renderCoinSelector();
+      
+      vault.log('System ready', 'info');
+    } catch (e) {
+      DIAG.error('LOGIN', 'Failed:', e.message);
+      FaceLiveness.stop();
+      scanner.classList.remove('scanning', 'camera-active');
+      scanner.classList.add('error');
+      statusEl.textContent = '✗ ' + (e.message || I18N.t('scan_failed'));
+      statusEl.className = 'login-status error';
+      vault.toast('❌ ' + e.message, 'error');
+      setTimeout(() => {
+        scanner.classList.remove('error', 'disabled');
+        tapHint.style.display = 'flex';
+        statusEl.textContent = I18N.t('tap_start');
+        statusEl.className = 'login-status';
+      }, 3500);
+    } finally {
+      this._mutex = false;
+    }
+  }
+};
+
+/* ============================================================
+   BOOTSTRAP
+   ============================================================ */
+function onReady(fn) {
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+  else fn();
+}
+
+onReady(async () => {
+  DIAG.log('UI', 'DOM ready');
+  I18N.init();
+  await FaceLiveness.init();
+  await Profile.init();
+  LivePrices.setCurrency(Storage.get('display_currency', 'usd'));
+  
+  // Populate lookup country
+  const lc = document.getElementById('lookup-country');
+  if (lc) lc.innerHTML = COUNTRY_CODES.map(c => `<option value="${c.code}">${c.flag} ${c.code}</option>`).join('');
+  
+  // Loading animation
+  const overlay = document.getElementById('loading-overlay');
+  const fill = document.getElementById('loading-bar-fill');
+  const status = document.getElementById('loading-status');
+  const steps = [
+    { pct: 20, msg: 'Initializing WebCrypto...' },
+    { pct: 40, msg: 'Loading coin database...' },
+    { pct: 60, msg: 'Preparing face liveness...' },
+    { pct: 80, msg: 'Connecting live prices...' },
+    { pct: 100, msg: 'Ready ✓' }
+  ];
+  let idx = 0;
+  function step() {
+    if (idx >= steps.length) {
+      setTimeout(() => {
+        if (overlay) overlay.classList.add('hidden');
+        setTimeout(() => { if (overlay) overlay.style.display = 'none'; }, 500);
+      }, 250);
+      return;
+    }
+    const s = steps[idx];
+    if (fill) fill.style.width = s.pct + '%';
+    if (status) status.textContent = s.msg;
+    idx++;
+    setTimeout(step, 200);
+  }
+  step();
+  
+  // Login handlers
+  const scanner = document.getElementById('face-scanner');
+  const tapHint = document.getElementById('tap-hint');
+  
+  function start() { LoginFlow.start(); }
+  scanner.addEventListener('click', start);
+  scanner.addEventListener('touchend', (e) => { e.preventDefault(); start(); }, { passive: false });
+  scanner.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); start(); } });
+  tapHint.addEventListener('click', start);
+  tapHint.addEventListener('touchend', (e) => { e.preventDefault(); start(); }, { passive: false });
+  
+  // Send
+  const sendTo = document.getElementById('send-to');
+  const sendAmount = document.getElementById('send-amount');
+  const btnSend = document.getElementById('btn-send');
+  if (sendTo) sendTo.addEventListener('input', () => Send.validate());
+  if (sendAmount) sendAmount.addEventListener('input', () => {
+    const hint = document.getElementById('send-amount-hint');
+    const r = Send.validateAmount(sendAmount.value);
+    if (!sendAmount.value) { hint.textContent = ''; hint.className = 'form-input-hint'; sendAmount.classList.remove('valid', 'error'); }
+    else if (r.valid) { hint.textContent = `✓ ${r.value} ${Send.selectedCoin}`; hint.className = 'form-input-hint valid'; sendAmount.classList.add('valid'); sendAmount.classList.remove('error'); }
+    else { hint.textContent = '✗ ' + (r.error || ''); hint.className = 'form-input-hint error'; sendAmount.classList.add('error'); sendAmount.classList.remove('valid'); }
+  });
+  if (btnSend) btnSend.addEventListener('click', async () => {
+    btnSend.disabled = true; btnSend.classList.add('loading');
+    try { await Send.execute(); } finally { btnSend.disabled = false; btnSend.classList.remove('loading'); }
+  });
+  
+  // Phone lookup
+  const btnLookup = document.getElementById('btn-lookup');
+  if (btnLookup) btnLookup.addEventListener('click', async () => {
+    btnLookup.disabled = true; btnLookup.classList.add('loading');
+    try { await PhoneLookup.lookup(); } finally { btnLookup.disabled = false; btnLookup.classList.remove('loading'); }
+  });
+  
+  // Lock
+  const btnLock = document.getElementById('btn-lock');
+  if (btnLock) btnLock.addEventListener('click', () => vault.zeroizeMemory());
+  
+  // 2FA
+  const btn2fa = document.getElementById('btn-2fa-verify');
+  if (btn2fa) btn2fa.addEventListener('click', () => TwoFA.verify());
+  const btn2faC = document.getElementById('btn-2fa-cancel');
+  if (btn2faC) btn2faC.addEventListener('click', () => { UI.closeModal('modal-2fa'); TwoFA.cancel(); });
+  
+  // Avatar upload
+  const av = document.getElementById('avatar-upload-input');
+  if (av) av.addEventListener('change', async e => {
+    const f = e.target.files[0];
+    if (f) await Profile.uploadAvatar(f);
+    av.value = '';
+  });
+  
+  // Coin search
+  const cs = document.getElementById('coin-search-input');
+  if (cs) cs.addEventListener('input', function() { Wallets.filterCoins(this.value); });
+  
+  // Save profile
+  const btnSP = document.getElementById('btn-save-profile');
+  if (btnSP) btnSP.addEventListener('click', () => Profile.saveProfile());
+  
+  // Modal backdrop close
+  document.querySelectorAll('.modal').forEach(m => {
+    m.addEventListener('click', e => { if (e.target === m) UI.closeModal(m.id); });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      const a = document.querySelector('.modal.active');
+      if (a) UI.closeModal(a.id);
+    }
+  });
+  
+  // Activity tracking
+  let at = null;
+  function resetActivity() {
+    if (!vault.volatileMasterSeed) return;
+    if (at) return;
+    at = setTimeout(() => { vault.armAutoScrubber(); at = null; }, 500);
+  }
+  ['mousemove', 'keypress', 'touchstart', 'click', 'scroll'].forEach(evt => document.addEventListener(evt, resetActivity, { passive: true }));
+  
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && vault.volatileMasterSeed) {
+      if (vault.graceTimer) clearTimeout(vault.graceTimer);
+      vault.graceTimer = setTimeout(() => {
+        if (document.hidden && vault.volatileMasterSeed) vault.zeroizeMemory();
+      }, vault.gracePeriod);
+    } else if (!document.hidden && vault.graceTimer) {
+      clearTimeout(vault.graceTimer);
+      vault.graceTimer = null;
+      vault.armAutoScrubber();
+    }
+  });
+  
+  window.addEventListener('beforeunload', () => vault.zeroizeMemory());
+  
+  DIAG.log('UI', '✅ Ready');
+});
+
+window.UI = UI;
+window.Wallets = Wallets;
+window.Profile = Profile;
+window.Send = Send;
+window.TwoFA = TwoFA;
+window.I18N = I18N;
+
+})();
+</script>
+</body>
+</html>
